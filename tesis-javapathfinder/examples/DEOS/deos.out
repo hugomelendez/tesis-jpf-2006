@@ -1,0 +1,23 @@
+/home/wvisser/jpf:.
+JAVA - DEOS
+
+Starting main thread
+main created
+Thread created status = 0
+user1 created
+Thread created status = 0
+user2 created
+Starting idle thread
+All threads started
+idle created
+idle interrupted by system tick
+main waiting until next period
+user1 waiting until next period
+user2 waiting until next period
+idle interrupted by system tick
+main waiting until next period
+idle interrupted by system tick
+main waiting until next period
+idle interrupted by system tick
+main waiting until next period
+user1 deleting

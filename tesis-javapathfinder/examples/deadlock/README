@@ -1,0 +1,151 @@
+README
+------
+
+The Deadlock program is a simple program that, as its name suggests,
+demonstrates how a deadlock may occur. You can run it by issuing the following
+command at the prompt:
+
+    java deadlock.Deadlock
+    
+NOTE that the deadlock behaviour may or may not always manifest itself.
+
+In order to run the model checker on it you can issue the following command at
+the prompt:
+
+    jpf deadlock.Deadlock
+
+The model checker quickly identifies the potential for a deadlock.
+The output should look something like the this:
+
+------------------------------------------------------------------------------
+
+Java Pathfinder Model Checker v3 - (C) 1999,2003 RIACS/NASA Ames Research Center
+A cycle start
+B.foo() was called
+A cycle end
+A cycle start
+B.foo() was called
+A cycle end
+A cycle start
+B cycle start
+A cycle start
+B.foo() was called
+A cycle end
+A cycle start
+Deadlock
+
+=================================== path to error (44 steps):
+Step #0 Thread #0
+Step #1 Thread #0
+  deadlock\Deadlock.java:38 		Deadlock o1 = new Deadlock("A");
+Step #2 Thread #0
+  deadlock\Deadlock.java:18   public Deadlock ( String name ){
+Step #3 Thread #0
+  deadlock\Deadlock.java:19 		this.name = name;
+  deadlock\Deadlock.java:20 	}
+Step #4 Thread #0
+  deadlock\Deadlock.java:38 		Deadlock o1 = new Deadlock("A");
+Step #5 Thread #0
+  deadlock\Deadlock.java:39 		Deadlock o2 = new Deadlock("B");
+Step #6 Thread #0
+  deadlock\Deadlock.java:18   public Deadlock ( String name ){
+Step #7 Thread #0
+  deadlock\Deadlock.java:19 		this.name = name;
+  deadlock\Deadlock.java:20 	}
+Step #8 Thread #0
+  deadlock\Deadlock.java:39 		Deadlock o2 = new Deadlock("B");
+Step #9 Thread #0
+  deadlock\Deadlock.java:41 		o1.other = o2;
+Step #10 Thread #0
+  deadlock\Deadlock.java:42 		o2.other = o1;
+Step #11 Thread #0
+  deadlock\Deadlock.java:44 		Thread t1 = new Thread( o1);
+Step #12 Thread #0
+  deadlock\Deadlock.java:45 		Thread t2 = new Thread( o2);
+Step #13 Thread #0
+  deadlock\Deadlock.java:47 		t1.start();
+Step #14 Thread #0
+  deadlock\Deadlock.java:48 		t2.start();
+  deadlock\Deadlock.java:49 	}
+Step #15 Thread #1
+  deadlock\Deadlock.java:27 		while ( true ){
+Step #16 Thread #1
+  deadlock\Deadlock.java:28 			System.out.println( name + " cycle start");
+Step #17 Thread #1
+  deadlock\Deadlock.java:29 			synchronized( this){
+Step #18 Thread #1
+  deadlock\Deadlock.java:30 				other.foo();
+Step #19 Thread #1
+  deadlock\Deadlock.java:23     System.out.println(name+".foo() was called");
+  deadlock\Deadlock.java:24 	}
+Step #20 Thread #1
+  deadlock\Deadlock.java:31 			}
+Step #21 Thread #1
+  deadlock\Deadlock.java:32 			System.out.println( name + " cycle end");
+Step #22 Thread #1
+  deadlock\Deadlock.java:27 		while ( true ){
+Step #23 Thread #1
+  deadlock\Deadlock.java:28 			System.out.println( name + " cycle start");
+Step #24 Thread #2
+  deadlock\Deadlock.java:27 		while ( true ){
+Step #25 Thread #1
+  deadlock\Deadlock.java:29 			synchronized( this){
+Step #26 Thread #1
+  deadlock\Deadlock.java:30 				other.foo();
+Step #27 Thread #1
+  deadlock\Deadlock.java:23     System.out.println(name+".foo() was called");
+  deadlock\Deadlock.java:24 	}
+Step #28 Thread #1
+  deadlock\Deadlock.java:31 			}
+Step #29 Thread #1
+  deadlock\Deadlock.java:32 			System.out.println( name + " cycle end");
+Step #30 Thread #1
+  deadlock\Deadlock.java:27 		while ( true ){
+Step #31 Thread #2
+  deadlock\Deadlock.java:28 			System.out.println( name + " cycle start");
+Step #32 Thread #1
+  deadlock\Deadlock.java:28 			System.out.println( name + " cycle start");
+Step #33 Thread #1
+  deadlock\Deadlock.java:29 			synchronized( this){
+Step #34 Thread #1
+  deadlock\Deadlock.java:30 				other.foo();
+Step #35 Thread #1
+  deadlock\Deadlock.java:23     System.out.println(name+".foo() was called");
+  deadlock\Deadlock.java:24 	}
+Step #36 Thread #1
+  deadlock\Deadlock.java:31 			}
+Step #37 Thread #1
+  deadlock\Deadlock.java:32 			System.out.println( name + " cycle end");
+Step #38 Thread #2
+  deadlock\Deadlock.java:29 			synchronized( this){
+Step #39 Thread #1
+  deadlock\Deadlock.java:27 		while ( true ){
+Step #40 Thread #1
+  deadlock\Deadlock.java:28 			System.out.println( name + " cycle start");
+Step #41 Thread #1
+  deadlock\Deadlock.java:29 			synchronized( this){
+Step #42 Thread #1
+  deadlock\Deadlock.java:30 				other.foo();
+Step #43 Thread #2
+  deadlock\Deadlock.java:30 				other.foo();
+
+
+
+===================================
+  1 Error Found: Deadlock
+===================================
+
+-----------------------------------
+States visited       : 44
+Transitions executed : 46
+Instructions executed: 2,935
+Maximum stack depth  : 41
+Intermediate steps   : 0
+Memory used          : 2.16MB
+Memory used after gc : 1.84MB
+Storage memory       : 29.02kB
+Collected objects    : 76
+Mark and sweep runs  : 41
+Execution time       : 1.843s
+Speed                : 24tr/s
+-----------------------------------
