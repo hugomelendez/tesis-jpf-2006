@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+# unix shell script to run LTL2Buchi
+#
+
+LTL2Buchi_HOME=`dirname $0`/..
+
+_cygwin=false;
+case "`uname`" in
+  CYGWIN*) _cygwin=true;;
+esac
+
+#if we have class files, we probably want to use those first
+CP=$LTL2Buchi_HOME/build/classes
+CP=$CP:$LTL2Buchi_HOME/build/test
+#otherwise, we look for the jar (binary distributions)
+CP=$CP:$LTL2Buchi_HOME/lib/ltl2buchi.jar
+
+#add the global CLASSPATH
+
+if $_cygwin; then
+  CP=`cygpath --path --windows "$CP"`
+  CLASSPATH=`cygpath --path --windows "$CLASSPATH"`
+  CP="$CP;$CLASSPATH"
+  JAVA_HOME=`cygpath --path --windows "$JAVA_HOME"`
+else
+  CP="$CP:$CLASSPATH"
+fi
+
+LTL2Buchi_FLAGS=""
+
+java -classpath "$CP" gov.nasa.ltl.trans.LTL2Buchi $LTL2Buchi_FLAGS $@
