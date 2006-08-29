@@ -1,0 +1,7 @@
+# This is a comment
+#[atomic]
+#<class regex> <method regex> (true|false)
+
+[relevance]
+#<class regex> <method regex> (always|never|runnables|sync)
+#tesis.Modelo.* .* never
