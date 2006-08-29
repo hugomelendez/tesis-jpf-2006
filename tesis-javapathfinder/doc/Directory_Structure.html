@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type"
+        content="text/html; charset=us-ascii" />
+
+  <title>Directory Structure</title>
+  <link rel="stylesheet"
+        type="text/css"
+        media="screen"
+        href="JPF_files/JPF-mod.css" />
+  <base target="_blank" />
+</head>
+
+<body>
+  <h1>Directory Structure</h1>
+
+  <p>The JPF directory tree is divided into two
+  categories: sources and binaries. Sources do not only contain the
+  core JPF classes, but also standard library abstractions used by
+  JPF, this HTML documentation, and a regression test suite. Binaries
+  include the JPF class files, and (optionally) required 3rd party libraries
+  and build-tools.</p>
+
+  <p class="big_diagram"><img src="JPF_files/dir-tree.png" /><br>
+       Figure 1: JPF directory structure</p>
+
+  <p>To enable builds of JPF outside an integrated
+  development environment, the JPF distribution contains an
+  optional directory tree that contains everything that is required
+  to compile JPF sources from a command line. Using these tools, a
+  build directory is created that holds the class files for the
+  three major source directories.</p>
+
+  <p>The lib directory contents are required to run
+  JPF, and need to be in the CLASSPATH if JPF is started directly,
+  i.e. without the provided scripts.</p>
+
+  <p>To ease JPF execution, the bin directory contains
+  scripts to automatically set the CLASSPATH. The script bin/jpf
+  can be used to start JPF from the command line like a normal Java
+  VM (i.e. is a java drop-in replacement).</p>
+</body>
+</html>
