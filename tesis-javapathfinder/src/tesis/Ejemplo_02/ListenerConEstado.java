@@ -1,15 +1,12 @@
 package tesis.Ejemplo_02;
 
 import gov.nasa.jpf.PropertyListenerAdapter;
-import gov.nasa.jpf.Config;
-import gov.nasa.jpf.JPF;
 import gov.nasa.jpf.jvm.JVM;
 import gov.nasa.jpf.jvm.bytecode.Instruction;
-import gov.nasa.jpf.search.DFSearchTesis;
 import gov.nasa.jpf.search.Search;
-import gov.nasa.jpf.search.TesisListener;
+import tesis.extensiones.StateListener;
 
-public class ListenerConEstado extends PropertyListenerAdapter implements TesisListener {
+public class ListenerConEstado extends PropertyListenerAdapter implements StateListener {
 
 	public class Evento{
 		String ev; 
@@ -248,28 +245,6 @@ public class ListenerConEstado extends PropertyListenerAdapter implements TesisL
 	}
 
 	
-	public static void main (String[] args) {
-		ListenerConEstado listener = new ListenerConEstado();
-
-	    Config conf = JPF.createConfig(args);
-	    System.out.println(args.toString());
-
-
-	    // usamos nuestra busqueda
-	    conf.setProperty("search.class","gov.nasa.jpf.search.DFSearchTesis");
-
-	    JPF jpf = new JPF(conf); 
-	    jpf.addSearchListener(listener);
-	    jpf.addVMListener(listener);
-
-	    // agregamos nuestro listener de forma especial para la tesis
-	    ((DFSearchTesis)jpf.search).addTesisListener(listener);
-
-	    System.out.println("---------------- JPF started");
-	    jpf.run();
-	    System.out.println("---------------- JPF terminated");
-
-	}
 	}
 
 

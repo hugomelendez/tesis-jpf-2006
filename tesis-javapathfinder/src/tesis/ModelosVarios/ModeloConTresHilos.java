@@ -1,26 +1,27 @@
 package tesis.ModelosVarios;
 
-public class ModeloConTresHilos {
-	class Hilo implements Runnable {
-		/**
-		 * El nombre del Evento
-		 */
-		String nombreEvento;
 
-		/**
-		 * Referencia al otro Thread
-		 */
-		Hilo other;
+class Hilo implements Runnable {
+	/**
+	 * El nombre del Evento
+	 */
+	String nombreEvento;
 
-		public Hilo(String name) {
-			this.nombreEvento = name;
-		}
+	/**
+	 * Referencia al otro Thread
+	 */
+	Hilo other;
 
-		public void run() {
-			System.out.println("EVENTO " + nombreEvento);
-		}
+	public Hilo(String name) {
+		this.nombreEvento = name;
 	}
 
+	public void run() {
+		System.out.println("EVENTO " + nombreEvento);
+	}
+}
+
+public class ModeloConTresHilos {
 
 	public static void main(String[] args) {
 		Hilo o1 = new Hilo("A");
@@ -37,6 +38,5 @@ public class ModeloConTresHilos {
 		t1.start();
 		t2.start();
 		t3.start();
-
 	}
 }
