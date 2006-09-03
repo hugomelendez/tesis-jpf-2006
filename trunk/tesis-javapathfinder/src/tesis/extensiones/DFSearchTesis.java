@@ -20,7 +20,6 @@ package tesis.extensiones;
 
 import gov.nasa.jpf.Config;
 import gov.nasa.jpf.jvm.JVM;
-import gov.nasa.jpf.search.Search;
 import gov.nasa.jpf.util.Debug;
 
 import java.util.Hashtable;
