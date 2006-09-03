@@ -2,7 +2,6 @@ package tesis.Ejemplo_04;
 
 import gov.nasa.jpf.Config;
 import gov.nasa.jpf.JPF;
-import tesis.extensiones.DFSearchTesis;
 
 public class ejecutarEjemplo {
 	public static void main (String[] args) {
