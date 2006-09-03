@@ -1,8 +1,8 @@
-package tesis.pruebaVerify;
+package tesis.Ejemplo_04;
 
 import gov.nasa.jpf.jvm.Verify;
 
-public class PruebaVerify {
+public class PruebaVerifyBoolean {
 	private static Boolean randomVar = false;
 
 	private static Boolean rndBool() {

@@ -78,21 +78,4 @@ public class ListenerSinEstado extends ListenerAdapter {
 		}
 	}
 
-	public static void main (String[] args) {
-		ListenerSinEstado listener = new ListenerSinEstado();
-
-		    Config conf = JPF.createConfig(args);
-		    System.out.println(args.toString());
-
-		    // add your own args here..
-		    //conf.setProperty("jpf.print_exception_stack","true");
-
-		    JPF jpf = new JPF(conf); 
-		    jpf.addSearchListener(listener);
-		    jpf.addVMListener(listener);
-		    
-		    System.out.println("---------------- JPF started");
-		    jpf.run();
-		    System.out.println("---------------- JPF terminated");
-	  }
 }
