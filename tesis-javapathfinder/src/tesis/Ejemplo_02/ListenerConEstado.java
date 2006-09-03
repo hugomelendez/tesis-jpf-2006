@@ -1,4 +1,4 @@
-package tesis.pruebaListeners;
+package tesis.Ejemplo_02;
 
 import gov.nasa.jpf.PropertyListenerAdapter;
 import gov.nasa.jpf.Config;
@@ -9,7 +9,7 @@ import gov.nasa.jpf.search.DFSearchTesis;
 import gov.nasa.jpf.search.Search;
 import gov.nasa.jpf.search.TesisListener;
 
-public class ListenerThreadsAB extends PropertyListenerAdapter implements TesisListener {
+public class ListenerConEstado extends PropertyListenerAdapter implements TesisListener {
 
 	public class Evento{
 		String ev; 
@@ -208,7 +208,7 @@ public class ListenerThreadsAB extends PropertyListenerAdapter implements TesisL
 	private int cont = 0;
 	private Automata  aut;
 
-	public ListenerThreadsAB (){
+	public ListenerConEstado (){
 		aut = new Automata();		
 	}
 	
@@ -249,7 +249,7 @@ public class ListenerThreadsAB extends PropertyListenerAdapter implements TesisL
 
 	
 	public static void main (String[] args) {
-	    ListenerThreadsAB listener = new ListenerThreadsAB();
+		ListenerConEstado listener = new ListenerConEstado();
 
 	    Config conf = JPF.createConfig(args);
 	    System.out.println(args.toString());

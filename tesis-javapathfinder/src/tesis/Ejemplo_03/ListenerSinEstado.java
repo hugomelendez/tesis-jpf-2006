@@ -1,4 +1,4 @@
-package tesis.pruebaListeners;
+package tesis.Ejemplo_03;
 
 import gov.nasa.jpf.Config;
 import gov.nasa.jpf.JPF;
@@ -8,7 +8,7 @@ import gov.nasa.jpf.jvm.MethodInfo;
 import gov.nasa.jpf.jvm.bytecode.Instruction;
 
 
-public class PruebaListener extends ListenerAdapter {
+public class ListenerSinEstado extends ListenerAdapter {
 	private int cont = 0;
 
 	
@@ -52,7 +52,7 @@ public class PruebaListener extends ListenerAdapter {
 
 
 	public static void main (String[] args) {
-		    PruebaListener listener = new PruebaListener();
+			ListenerSinEstado listener = new ListenerSinEstado();
 
 		    Config conf = JPF.createConfig(args);
 		    System.out.println(args.toString());
