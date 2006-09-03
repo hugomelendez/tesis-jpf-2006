@@ -1,6 +1,6 @@
-package tesis.pruebaListeners;
+package tesis.ModelosVarios;
 
-public class Modelo {
+public class ModeloConUnEstado {
 
 	private static int getInt(int a) {
 		return a;

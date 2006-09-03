@@ -1,4 +1,4 @@
-package tesis.pruebaListeners;
+package tesis.Ejemplo_01;
 
 import gov.nasa.jpf.Config;
 import gov.nasa.jpf.JPF;
@@ -8,7 +8,7 @@ import gov.nasa.jpf.jvm.MethodInfo;
 import gov.nasa.jpf.jvm.bytecode.Instruction;
 import gov.nasa.jpf.search.Search;
 
-public class ListenerModeloMasSimple extends ListenerAdapter {
+public class ListenerSinEstado extends ListenerAdapter {
 	private int cont = 0;
 
 	@Override
@@ -79,18 +79,13 @@ public class ListenerModeloMasSimple extends ListenerAdapter {
 	}
 
 	public static void main (String[] args) {
-		    ListenerModeloMasSimple listener = new ListenerModeloMasSimple();
+		ListenerSinEstado listener = new ListenerSinEstado();
 
 		    Config conf = JPF.createConfig(args);
 		    System.out.println(args.toString());
 
 		    // add your own args here..
 		    //conf.setProperty("jpf.print_exception_stack","true");
-
-		    // ESTO NO FUNCIONA!
-		    //conf.setProperty("vm.classpath","build/jpf/tesis");
-		    //conf.setProperty("vm.por.exclude_fields","java.lang.");
-		    //vm.por.include_fields=
 
 		    JPF jpf = new JPF(conf); 
 		    jpf.addSearchListener(listener);
