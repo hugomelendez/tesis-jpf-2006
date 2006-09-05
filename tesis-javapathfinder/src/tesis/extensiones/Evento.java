@@ -18,18 +18,9 @@
 //
 package tesis.extensiones;
 
-import gov.nasa.jpf.JPFListener;
-
 /**
- * interface to register for notification by the Search object.
- * Observer role in same-name pattern
+ * Interface utilizada para definir los eventos de un Autómata de Verificación
+ * 
  */
-public interface StateListener extends JPFListener {
-  
-  /**
-   * Devuelve el Estado Interno del Listener
-   */
-  int getEstadoActual ();
-  void irAEstado (int i);
+public interface Evento {
 }
-

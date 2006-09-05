@@ -6,7 +6,8 @@ import tesis.extensiones.DFSearchTesis;
 
 public class ejecutarEjemplo {
 	public static void main (String[] args) {
-		ListenerConEstado listener = new ListenerConEstado();
+		Automata aut = new Automata();
+		ListenerConEstado listener = new ListenerConEstado(aut);
 
 		String[] a = new String[1];
 		a[0] = "tesis.ModelosVarios.ModeloConTresHilos";
@@ -15,10 +16,7 @@ public class ejecutarEjemplo {
 	    // usamos nuestra busqueda
 	    conf.setProperty("search.class","tesis.extensiones.DFSearchTesis");
 
-	    // add your own args here..
-	    //conf.setProperty("jpf.print_exception_stack","true");
-
-	    JPF jpf = new JPF(conf); 
+	    JPF jpf = new JPF(conf);
 	    jpf.addSearchListener(listener);
 	    jpf.addVMListener(listener);
 	    
