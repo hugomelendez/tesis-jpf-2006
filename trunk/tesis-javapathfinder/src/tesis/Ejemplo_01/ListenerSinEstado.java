@@ -60,17 +60,10 @@ public class ListenerSinEstado extends ListenerAdapter {
 		
 		try {
 			Instruction lI = vm.getLastInstruction();
-			MethodInfo limi = lI.getMethod();
 
-			//if (vm.getLastInstruction().getSourceLocation().contains("ModeloThreadsSimple.java")) {
-				s += "threadNum: " + vm.getThreadNumber() + " - ";
-				//s += "  li: " + instEj(lI) + " - ";
-				s += "  li: " + lI + " - ";
-				//s += "  limi: " + limi.getName() + " - ";
-				//s += "  linea: " + lI.getPosition() + " - ";
-				//s += "  li: " + vm.getLastInstruction().getSourceLocation();
-				//System.out.println(s);
-			//}
+			s += "threadNum: " + vm.getThreadNumber() + " - ";
+			s += "  li: " + lI + " - ";
+			System.out.println(s);
 		}
 		catch (NullPointerException e) {
 		}

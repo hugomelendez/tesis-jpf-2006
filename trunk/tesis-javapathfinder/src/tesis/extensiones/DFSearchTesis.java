@@ -29,9 +29,9 @@ import java.util.Stack;
  * standard depth first model checking (but can be bounded by search depth
  * and/or explicit Verify.ignoreIf)
  */
-public class DFSearchTesis extends gov.nasa.jpf.search.DFSearch {
+public class DFSearchTesis extends gov.nasa.jpf.search.Search {
   
-StateListener lsnr;
+Listener lsnr;
 private Hashtable htEstadoListener = new Hashtable();
 private Stack<Object> stackCaminoLsnr = new Stack();
 
@@ -125,7 +125,7 @@ public void search () {
    * Helper method para agregar listener que trabajan para nosotros
    * @param l listener especial para la tesis
    */
-  public void addTesisListener(StateListener l) {
+  public void addTesisListener(Listener l) {
 	  lsnr = l;
   }
 
