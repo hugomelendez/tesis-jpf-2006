@@ -1,6 +1,5 @@
 package tesis.Ejemplo_02;
 
-import gov.nasa.jpf.jvm.bytecode.Instruction;
 import tesis.extensiones.AutomataVerificacion;
 import tesis.extensiones.Evento;
 
