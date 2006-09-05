@@ -35,6 +35,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import com.sun.java_cup.internal.production;
+
 /**
  * the mother of all search classes. Mostly takes care of listeners, keeping
  * track of state attributes and errors. This class mainly keeps the
@@ -371,7 +373,7 @@ public abstract class Search {
    * (with a threshold amount left) so that we can report something useful, and not just die silently
    * with a OutOfMemoryError (which isn't handled too gracefully by most VMs)
    */
-  boolean checkStateSpaceLimit () {
+  protected boolean checkStateSpaceLimit () {
     Runtime rt = Runtime.getRuntime();
     
     long avail = rt.freeMemory();
