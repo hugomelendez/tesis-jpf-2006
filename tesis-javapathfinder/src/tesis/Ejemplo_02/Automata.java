@@ -3,23 +3,12 @@ package tesis.Ejemplo_02;
 import tesis.extensiones.AutomataVerificacion;
 import tesis.extensiones.Evento;
 
-public class Automata implements AutomataVerificacion {
-	private int estadoActual;
-	private boolean blnEstadoFinal = false;
+public class Automata extends AutomataVerificacion {
 	
 	public Automata (){
-		estadoActual = 0;
+		super();
 	}
 	
-	public void irAEstado(int est){
-		System.out.println(" Aut bktrk estado " + est);
-		estadoActual = est;
-	}
-
-	public boolean estadoFinal(){
-		return blnEstadoFinal;
-	}
-
 	public void hlpFwd(int est) {
 		System.out.println(" Aut fwd estado " + est);
 		
@@ -137,7 +126,4 @@ public class Automata implements AutomataVerificacion {
 		}
 	}
 
-	public int getEstadoActual(){
-		return estadoActual;
-	}
 }
