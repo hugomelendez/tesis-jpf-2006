@@ -1,4 +1,4 @@
-package tesis.Ejemplo_02;
+package tesis.Ejemplo_03;
 
 import gov.nasa.jpf.Config;
 import gov.nasa.jpf.JPF;
@@ -10,7 +10,7 @@ public class ejecutarEjemplo {
 		ListenerConEstado listener = new ListenerConEstado(aut);
 
 		String[] a = new String[1];
-		a[0] = "tesis.ModelosVarios.ModeloConTresHilos";
+		a[0] = "tesis.Ejemplo_03.ModeloOpenClose";
 	    Config conf = JPF.createConfig(a);
 
 	    // usamos nuestra busqueda

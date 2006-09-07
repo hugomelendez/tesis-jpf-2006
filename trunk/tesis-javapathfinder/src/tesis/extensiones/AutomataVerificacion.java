@@ -19,12 +19,29 @@
 package tesis.extensiones;
 
 /**
- * Interface utilizada para definir Autómatas de verificación
+ * Clase abstracta utilizada para definir AutÃ³matas de verificaciï¿½n
  * 
  */
-public interface AutomataVerificacion {
-	public int getEstadoActual ();
-	public void irAEstado (int i);
-	public boolean estadoFinal();
-	public void consumir (Evento e);
+public abstract class AutomataVerificacion {
+	protected int estadoActual;
+	protected boolean blnEstadoFinal = false;
+	
+	public AutomataVerificacion (){
+		estadoActual = 0;
+	}
+	
+	public final void irAEstado(int est){
+		System.out.println(" Aut bktrk estado " + est);
+		estadoActual = est;
+	}
+
+	public final boolean estadoFinal() {
+		return blnEstadoFinal;
+	}
+
+	public abstract void consumir (Evento e);
+
+	public final int getEstadoActual() {
+		return estadoActual;
+	}
 }
