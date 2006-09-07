@@ -11,9 +11,9 @@
 	<classpathentry kind="src" path="extensions/symbolic/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/bcel.jar"/>
-	<classpathentry kind="lib" path="build-tools/lib/junit-4.1.jar"/>
 	<classpathentry kind="lib" path="extensions/symbolic/lib/cream.jar"/>
 	<classpathentry kind="lib" path="extensions/symbolic/lib/de.jar"/>
 	<classpathentry kind="lib" path="extensions/symbolic/lib/solver.jar"/>
+	<classpathentry sourcepath="build-tools/junit/junit-4.1-src.jar" kind="lib" path="build-tools/lib/junit-4.1.jar"/>
 	<classpathentry kind="output" path="build/jpf"/>
 </classpath>
