@@ -9,7 +9,7 @@ public class ejecutarEjemplo {
 		ListenerSinEstado listener = new ListenerSinEstado();
 
 		String[] a = new String[1];
-		a[0] = "tesis.ModelosVarios.ModeloConTresHilos";
+		a[0] = "tesis.Ejemplo_01.ModeloDosHilos";
 	    Config conf = JPF.createConfig(a);
 
 	    // add your own args here..

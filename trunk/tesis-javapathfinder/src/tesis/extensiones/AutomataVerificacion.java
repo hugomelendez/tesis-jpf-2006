@@ -31,7 +31,7 @@ public abstract class AutomataVerificacion {
 	}
 	
 	public final void irAEstado(int est){
-		System.out.println(" Aut bktrk estado " + est);
+		System.out.println("Autómata BACKTRACK al estado " + est);
 		estadoActual = est;
 	}
 
