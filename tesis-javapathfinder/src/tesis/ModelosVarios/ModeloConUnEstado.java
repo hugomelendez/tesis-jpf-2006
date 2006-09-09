@@ -13,5 +13,4 @@ public class ModeloConUnEstado {
 	  a = new Integer(10);
 	  System.out.println(getInt(a));
 	}
-
 }

@@ -1,5 +1,4 @@
-package tesis.ModelosVarios;
-
+package tesis.Ejemplo_02;
 
 class Hilo implements Runnable {
 	/**
