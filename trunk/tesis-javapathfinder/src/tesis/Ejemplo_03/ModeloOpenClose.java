@@ -7,9 +7,10 @@ public class ModeloOpenClose {
 	static void close() {}
 	
 	public static void main(String[] args) {
-		open();
+//		open();
+//		open();
 		while (true) {
-			boolean bln = Verify.randomBool();
+			boolean bln = Verify.getBoolean();
 			
 			if (bln)
 				open();
