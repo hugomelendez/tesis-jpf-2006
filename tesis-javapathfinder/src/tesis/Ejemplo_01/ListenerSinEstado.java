@@ -2,7 +2,6 @@ package tesis.Ejemplo_01;
 
 import gov.nasa.jpf.ListenerAdapter;
 import gov.nasa.jpf.jvm.JVM;
-import gov.nasa.jpf.jvm.MethodInfo;
 import gov.nasa.jpf.jvm.bytecode.Instruction;
 import gov.nasa.jpf.search.Search;
 

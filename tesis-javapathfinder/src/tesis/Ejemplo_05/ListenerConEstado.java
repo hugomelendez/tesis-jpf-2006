@@ -3,7 +3,6 @@ package tesis.Ejemplo_05;
 import gov.nasa.jpf.jvm.JVM;
 import gov.nasa.jpf.jvm.bytecode.Instruction;
 import gov.nasa.jpf.search.Search;
-import tesis.Ejemplo_02.EventoDeEjemplo2;
 import tesis.extensiones.AutomataVerificacion;
 import tesis.extensiones.Listener;
 
