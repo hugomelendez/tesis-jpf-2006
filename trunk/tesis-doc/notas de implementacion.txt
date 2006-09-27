@@ -1,0 +1,4 @@
+Las siguientes modificaciones fueron realizadas en el source del JPF
+- Se modifico la declaracion del metodo gov.nasa.jpf.search.Search::checkStateSpaceLimit por:
+	protected boolean checkStateSpaceLimit
+  con el fin de poder subclasear Search desde fuera del package jpf
