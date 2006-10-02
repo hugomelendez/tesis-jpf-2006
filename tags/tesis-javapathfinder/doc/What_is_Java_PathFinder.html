@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type"
+        content="text/html; charset=us-ascii" />
+
+  <title>What is Java PathFinder</title>
+  <link rel="stylesheet"
+        type="text/css"
+        media="screen"
+        href="JPF_files/JPF-mod.css" />
+  <base target="_blank" />
+</head>
+
+<body>
+  <h1>What is Java PathFinder</h1>
+
+  <p>The answer used to be simple: "JPF is an explicit
+  state software model checker for Java bytecode". Today, JPF is a
+  swiss army knife for all sort of runtime based verification
+  purposes.</p>
+
+  <p>If you are not familiar with formal methods, this
+  basically means JPF is a Java virtual machine that executes your
+  program not just once (like a normal VM), but theoretically in
+  all possible ways, checking for property violations like
+  deadlocks or unhandled exceptions along all potential execution
+  paths. If it finds an error, JPF reports the whole execution that
+  leads to it. Unlike a normal debugger, JPF keeps track of every
+  step how it got to the defect.</p>
+  
+  <p class="big_diagram"><img src="JPF_files/jpf-intro.png"/><br>
+       Figure 1: JPF model of operation</p>
+  
+  <p>If that sounds too good to be true, it probably is - 
+  with growing application size, software model checking faces serious
+  scalability challenges. JPF does not shy away from this. Our answer
+  to scalability is to increase JPF's flexibility to be adapted to the
+  needs of a particular application. Albeit useful in its standard form
+  of distribution, you can think of JPF as a general framework for a variety
+  of Java bytecode runtime verification techniques, providing a rich set of
+  configuration and abstraction mechanisms.</p>
+
+</body>
+</html>

@@ -1,0 +1,254 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type"
+        content="text/html; charset=us-ascii" />
+
+  <title>ChoiceGenerators</title>
+  <link rel="stylesheet"
+        type="text/css"
+        media="screen"
+        href="JPF_files/JPF-mod.css" />
+  <base target="_blank" />
+</head>
+
+<body>
+  <h1>ChoiceGenerators</h1>
+
+  <p>Software model checking is all about doing the right choices, to reach the
+  interesting system states within the resource constraints of the tool and 
+  execution environment. We refer to the mechanism used by JPF to systematically
+  explore the state space as <em>ChoiceGenerators</em>.
+  
+  <p>ChoiceGenerators can be approached from an application perspective, or
+  from the JPF implementation perspective. We will do both.</p>
+  
+  <h2>Motivation</h2>
+  
+  <p>While most of the choices during JPF application are related to thread
+  scheduling, the example that obviously justifies our implementation approach
+  is from the non-deterministic data acquisition branch. Support for "random"
+  data acquisition (using the <tt>gov.nasa.jpf.jvm.Verify</tt> interface) has
+  been in JPF since a long time</p>
+  
+  <p class="code">...
+boolean b = Verify.getBoolean(); // evaluated by JPF for both 'true' and 'false'
+...
+</p>
+
+  <p>This worked nicely for small sets of choice values (like <tt>{true,false}</tt>
+  for boolean), but the mechanism for enumerating all choices from a type specific
+  interval becomes already questionable for large intervals (e.g. 
+  <tt>Verify.getInt(0,10000)</tt>), and fails completely if the data type does
+  not allow finite choice sets at all (like floating point types):</p>
+
+  <p class="big_diagram"><img src="JPF_files/cg-motivation.png" /><br>
+   Figure 1: ChoiceGenerator Motivation</p>
+
+  <p>To handle this case, we have to leave the ideal world of model checking
+  (that considers all possible choices), and make use of what we know about the
+  real world - we have to use <em>heuristics</em> to make the set of choices
+  finite and manageable. However, heuristics are application and domain specific,
+  and it would be a bad idea to hardcode them into the test drivers we give JPF to
+  analyze. This leads to a number of requirements for the JPF choice mechanism:</p>
+  
+  <ol>
+    <li>choice mechanisms have to be decoupled (i.e. thread choices should be
+    indpendent of data choices, double choices from int choices etc.)</li>
+    
+    <li>choice sets and enumeration should be encapsulated in dedicated, type
+    specific objects. The VM should only know about the most basic types, and
+    otherwise use a generic interface to obtain choices</li>
+    
+    <li>selection of classes representing (domain specific) heuristics, and
+    parametrization of ChoiceGenerator instances should be possible at runtime,
+    i.e. via JPF's configuration mechanism (properties)</li>
+  </ol>
+  
+  <p>The diagram shown above depicts this with an example that uses a
+  "randomly" chosen velocity value of type double. As an example heuristic we use
+  a threshold model, i.e. we want to know how the system reacts below, at, and
+  above a certain application specific value (threshold). We reduce an
+  infinite set of choices to only three "interesting" ones. Of course,
+  "interesting" is quite subjective, and we probably want to play with the
+  values (delta, threshold, or even used heuristic) efficiently, without
+  having to rebuild the application each time we run JPF.</p>
+
+  <p>The code example does not mention the used ChoiceGenerator class 
+  (<tt>DoubleThresholdGenerator</tt>) at all, it just specifies a symbolic name
+  <tt>"velocity"</tt>, which JPF uses to look up an associated class name from its
+  configuration data (initialized via property files or the command line - see
+  <a href="Configuring_JPF_Runtime_Options.html" target="content">Configuring
+  JPF Runtime Options</a>). But it doesn't stop there. Most heuristics need
+  further parameterization (e.g. threshold, delta), and we provide that by
+  passing the JPF configuration data into the ChoiceGenerator constructors (e.g.
+  the <tt>'velocity.threshold'</tt> property). Each ChoiceGenerator instance
+  knows its symbolic name (e.g. "velocity"), and can use this name to look up
+  whatever parameters it needs.</p>
+  
+  <h2>The JPF Perspective</h2>
+   
+  <p>Having such a mechanism is nice for avoiding test driver modification. But it
+  would be much nicer to consistently use the same mechanism not just for
+  data acquisition choices, but also scheduling choices (i.e. functionality
+  that is not controlled by the test application). JPF's ChoiceGenerator
+  mechanism does just this, but in order to understand it from an implementation
+  perspective we have to take one step back and look at JPF terminology:</p>
+  
+  <p class="big_diagram"><img src="JPF_files/cg-ontology.png" /><br>
+   Figure 2: States, Transitions and Choices</p>
+   
+  <p><b>State</b> is a snapshot of the current execution status of the application
+  (mostly thread and heap states), plus the execution history (path) that lead
+  to this state. Every state has a unique id number. JPF-internally, State is
+  encapsulated in the <tt>SystemState</tt> instance (almost, there is some
+  execution history which is just kept by the JVM object). This includes three
+  components:
+  <ul>
+  <li>KernelState - the application snapshot (threads, heap)</li>
+  <li>trail - the last <em>Transition</em> (execution history)</li>
+  <li>current and next ChoiceGenerator - the objects encapsulating the choice
+  enumeration that produces different transitions (but not necessarily new states)</li>
+  </ul>
+  <p><b>Transition</b> is the sequence of instructions that leads from one state
+  to the next. There is no context switch within a transition, it's all in the same
+  thread. There can be multiple transitions leading out of one state (but not
+  necessarily to a new state).
+  </ul></p>
+  
+  <p><b>Choice</b> is what starts a new transition. This can be a different thread
+  (i.e. scheduling choice), or different "random" data value.</p>
+  
+  <p>In other words, possible existence of Choices is what terminates the last
+  Transition, and selection of a Choice value precludes the next Transition. The
+  first condition corresponds to creating a new ChoiceGenerator, and letting
+  the SystemState know about it. The second condition means to query the next
+  choice value from this ChoiceGenerator (either internally within the JVM, or
+  in an instruction or native method).</p>
+   
+  <h2>How it comes to Life</h2>
+   
+  <p>With this terminology, we are ready to have a look at how it all works. Let's
+  assume we are in a Transition that executes a <tt>get_field</tt> bytecode
+  instruction (remember, JPF executes Java bytecode), and the corresponding
+  object that owns this field is shared between threads. For simplicity's sake,
+  let's further assume there is no synchronization when accessing this object, (or
+  we have turned vm.sync_detection off). Let's also assume there are other runnable
+  threads at this point. Then we have a choice - the outcome of the execution
+  might depend on the order in which we schedule threads, and hence access this
+  field. There might be a data race.</p>
+  
+  <p class="big_diagram"><img src="JPF_files/cg-sequence.png" /><br><br>
+   Figure 3: ChoiceGenerator Sequence</p>
+
+  <p>Consequently, when JPF executes this <tt>get_field</tt> instruction, the
+  <tt>gov.nasa.jpf.jvm.bytecode.GET_FIELD.execute()</tt> method does three
+  things:
+  <ol>
+  <li>create a new ChoiceGenerator (ThreadChoiceGenerator in this case), that
+  has all runnable threads at this point as possible choices</li>
+  <li>registers this ChoiceGenerator via calling
+      <tt>SystemState.setNextChoiceGenerator()</tt></li>
+  <li>schedules itself for reexecution (just returns itself as the next
+  instruction to execute within the currently running thread)</li>
+  </ol></p>
+   
+  <p>At this point, JPF ends this Transition (which is basically a loop inside
+  <tt>ThreadInfo.executeStep()</tt>), stores a snapshot of the current State, and
+  then starts the next Transition (let's ignore the Search and possible backtracks
+  for a moment). The ChoiceGenerator created and registered at the end of the
+  previous Transition becomes the new current ChoiceGenerator. Every State has
+  exactly one current ChoiceGenerator object that is associated with it, and every
+  Transition has exactly one choice value of this ChoiceGenerator that kicks
+  it off. Every Transition ends in an Instruction that produces the next
+  ChoiceGenerator.</p>
+  
+  <p>The new Transition is started by the SystemState by setting the previously
+  registered ChoiceGenerator as the current one, and calling its
+  <tt>ChoiceGenerator.advance()</tt> method to position it on its next choice.
+  Then the SystemState checks if the current ChoiceGenerator is a
+  <tt>SchedulingPoint</tt> (just a <tt>ThreadChoiceGenerator</tt> that is meant
+  to be used for scheduling purposes), and if it is, gets the next thread
+  to execute from it (i.e. the SystemState itself consumes the choice). Then it
+  starts the next Transition by calling <tt>ThreadInfo.executeStep()</tt> on it.</p>
+  
+  <p>The <tt>ThreadInfo.executeStep()</tt> basically loops until an
+  <tt>Instruction.execute()</tt> returns itself, i.e. has scheduled itself
+  for reexecution with a new ChoiceGenerator. When a subsequent
+  <tt>ThreadInfo.executeStep()</tt> reexecutes this instruction
+  (e.g. <tt>GET_FIELD.execute()</tt>), the instruction notices that it is the
+  first instruction in a new Transition, and hence does not have to create
+  a ChoiceGenerator but proceeds with it's normal operations.</p>
+  
+  <p>If there is no next instruction, or the Search determins that
+  the state has been seen before, the VM backtracks. The SystemState is restored
+  to the old state, and checks for not-yet-explored choices of its associated
+  ChoiceGenerator by calling <tt>ChoiceGenerator.hasMoreChoices()</tt>. If there
+  are more choices, it positions the ChoiceGenerator on the next one by calling
+  <tt>ChoiceGenerator.advance()</tt>. If all choices have been processed, the
+  system backtracks again (until it's first ChoiceGenerator is done, at which
+  point we terminate the search).
+  
+  <p class="big_diagram"><img src="JPF_files/cg-impl.png" /><br>
+   Figure 4: ChoiceGenerator Implementation Aspects</p>
+   
+  <p>The methods that create ChoiceGenerators have a particular structure,
+  dividing their bodies into two parts:
+  <ul>
+  <li><b>top half</b> - (potentially) creates and registers a new
+  ChoiceGenerator</li>
+
+  <li><b>bottom half</b> - which does the real work, and might depend on
+  acquiring a new choice value</li>
+  </ul></p>
+  
+  <p>The only difference between scheduling choices and data acqusition choices
+  is that the first ones are handled internally by the JVM (more specifically:
+  used by the <tt>SystemState</tt> to determine the next Thread to execute),
+  and the data acqusition is handled in the bottom half of an
+  <tt>Instruction.execute()</tt>, native method, or Listener callback method
+  (in which case it has to acquire the current ChoiceGenerator from the
+  SystemState, and then explicitly call <tt>ChoiceGenerator.getNextChoice()</tt>
+  to obtain the choice value). For a real example, look at the
+  <tt>JPF.gov_nasa_jpf_jvm_Verify.getBoolean()</tt> implementation.</p>
+   
+  <p>As an implementation detail, creation of SchedulingPoints are delegated
+  to a <tt>SchedulerFactory</tt> object, which encalsulates a scheduling
+  policy by providing a consistent set of ThreadChoiceGenerators for the fixed
+  number of instructions that are scheduling relevant (<tt>monitor_enter</tt>,
+  synchronized method calls, <tt>Object.wait()</tt> etc.). Clients of this
+  SchedulerFactory therefore have to be aware of that the policy object might
+  not return a new ChoiceGenerator, in which case the client directly proceeds
+  with the bottom half execution, and does not break the current Transition.</p>
+  
+  <p>The standard classes and interfaces for the ChoiceGenerator mechanism can
+  be found in package <tt>gov.nasa.jpf.jvm</tt>, and include:
+  <ul>
+  <li>ChoiceGenerator</li>
+  <li>BooleanChoiceGenerator</li>
+  <li>IntChoiceGenerator</li>
+  <li>DoublechoiceGenerator</li>
+  <li>ThreadChoiceGenerator</li>
+  <li>SchedulingPoint</li>
+  <li>SchedulerFactory</li>
+  <li>DefaultSchedulerFactory</li>
+  </ul></p>
+  
+  <p>Concrete implementations can be found in package <tt>gov.nasa.jpf.jvm.choice</tt>,
+  and include classes like:
+  <ul>
+  <li>IntIntervalGenerator</li>
+  <li>IntChoiceFromSet</li>
+  <li>DoubleChoiceFromSet</li>
+  <li>DoubleThresholdGenerator</li>
+  <li>SchedulingChoiceFromSet</li>
+  </ul></p>
+  
+  <p>As the number of useful generic heuristics increases, we expect this
+  package to be populated and changed.</p>
+  
+</body>
+</html>
