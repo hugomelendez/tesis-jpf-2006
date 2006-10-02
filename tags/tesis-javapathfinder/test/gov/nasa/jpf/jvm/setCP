@@ -1,4 +1,0 @@
-BLD_DIR=../../../../../build
-LIB_DIR=../../../../../lib
-
-export CLASSPATH=$BLD_DIR:$BLD_DIR/env/jpf:$BLD_DIR/env/jvm:$BLD_DIR/test:$LIB_DIR/bcel.jar:$LIB_DIR/xercesImpl.jar:$LIB_DIR/xmlParserAPIs.jar:$LIB_DIR/de.jar:$LIB_DIR/scale.jar
