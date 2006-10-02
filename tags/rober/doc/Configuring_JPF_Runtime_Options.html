@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type"
+        content="text/html; charset=us-ascii" />
+
+  <title>Configuring JPF Runtime Options</title>
+  <link rel="stylesheet"
+        type="text/css"
+        media="screen"
+        href="JPF_files/JPF-mod.css" />
+  <base target="_blank" />
+</head>
+
+<body>
+  <h1>Configuring JPF Runtime Options</h1>
+
+  <p>Since JPF is an open system that can be
+  parameterized and extended in a variety of ways, there is a
+  strong need for a general configuration mechanism. The challenge
+  for this mechanism is that many of the parts which are subject to
+  parameterization are configured themselves (i.e. classes
+  instantiated via classname parameters).</p>
+  
+  <p>This effectively prohibits the use of a configuration object that
+  contains concrete fields to hold configuration data, since this class
+  would be a central "design bottleneck" for a potentially open
+  number of concrete JPF components like Search, Heuristic and
+  Scheduler implementations.</p>
+  
+  The goal is to have a configuration object that 
+  <ul>
+      <li>is based on symbolic values</li>
+      <li>can be extended at will</li>
+      <li>is passed down in a hierarchical initialization
+      process so that every component extracts only its own
+      parameters.</li>
+  </ul>
+
+  <p class="big_diagram"><img src="JPF_files/jpf-config.png" /><br>
+       Figure 1: JPF configuration</p>
+
+  <p>The JPF configuration process uses a
+  java.util.Property subclass to achieve this. This property
+  instance is initialized in three steps:</p>
+
+  <ol>
+    <li>Default Properties are taken from a
+    default.properties file residing in the JPF root directory, or
+    - if there is no such file - from a resource loaded via the
+    gov.nasa.jpf.JPF class itself. This is usually the biggest
+    file/resource, and contains many settings that are seldom
+    changed for normal usage</li>
+    
+    <li>Mode Properties are taken from a
+    jpf.properties file in the JPF root directory, or a
+    correspoding resource loaded via gov.nasa.jpf.JPF if the file
+    is non-existent. A mode property file can also be explicitly
+    specified via the -c &lt;config-file&gt; command line option.
+    Mode properties are usually small, mainly containing the
+    classnames of specialized Search and Heuristics classes and
+    their respective parameters</li>
+    
+    <li>Command Line Properties are overlayed on
+    top of the mode properties, to conveniently modify single
+    parameters without the need to change default or mode property
+    files. Command line properties are specified using a
+    +&lt;key&gt;=&lt;value&gt; notation, and are mostly used during
+    development and testing of new components</li>
+  </ol>
+
+  <p>The resulting property object only holds
+  key/value pairs with String values. It is an instance of
+  gov.nasa.jpf.Config, a utility class that especially contains
+  methods to conveniently instantiate objects from String values,
+  and has separate accessors for optional and mandatory entries. In
+  case of instantiation errors or missing mandatory entries, a
+  gov.nasa.jpf.Config.Exception is thrown.</p>
+
+  
+  <p>The Config object instantiates configured classes
+  with the following constructor lookup scheme</p>
+
+  <ol>
+    <li>using parameter types and values that were
+    explicitly specified in the instance request</li>
+
+    <li>if no such constructor is found, or no
+    parameters were specified, it looks up a
+    &lt;classname&gt;(Config) constructor, and passes itself as
+    parameter</li>
+
+    <li>if no such constructor is found, it uses a
+    default constructor</li>
+
+    <li>if no default constructor is found, a
+    Config.Exception is raised</li>
+  </ol>
+
+  <p>The method to request a configured instance can
+  also use an optional type parameter to guarantee type conformance
+  of the created instance, and raise a Config.Exception in case the
+  instance does not satisfy this type constraint.</p>
+
+  <p>In some cases, it is not sufficient to get back an object of
+  a specific type. If object identity is required, the lookup key can be
+  augmented with an <tt>"..@&lt;id&gt;"</tt> suffix:
+  
+  <p class="code">MyObject mySharedObject = 
+                      config.getInstance("myproperty<u>@singleton</u>", MyObject.class);</p>
+  
+  In this case, Config first checks if it has an entry stored under
+  <tt>&lt;id&gt;</tt> in an internal hashtable, and if it does, returns this
+  instance (subject to the same type checks). If there is no entry yet, it
+  creates an object according to the rules stated above and stores it under
+  the <tt>&lt;id&gt;</tt> key. This mechanism is particularly useful to
+  implement singletons, i.e. objects that are shared by several clients so that
+  the object can store state across all client requests.<p>
+  
+  <p>The Config object itself is created by
+  gov.nasa.jpf.JPF (the main application class), and - by using its
+  API to instantiate configured classes - is passed down in a
+  hierarchical initialization process so that every class that is
+  instantiated has access to it. Instantiated objects can then
+  retrieve their corresponding parameters, and optionally transform
+  and store them in more specialized representations (e.g. int or
+  boolean fields).</p>
+
+  <p>For a detailed description of standard
+  properties, see the comments in jpf.properties. The following
+  keys stand out as being application and program property
+  specific:</p>
+
+  <p><b>vm.classpath</b> - colon separated list
+  of directories that are used by JPF to load classes required by
+  the application under test. If a class is not found there, the
+  standard CLASSPATH is searched too.</p>
+
+  <p><b>vm.sourcepath</b> - corresponding list of
+  directories that are searched for sources (in case JPF reports an
+  error)</p>
+
+  <p><b>search.class</b> - fully qualified class
+  name of the Search class to use</p>
+
+  <p><b>jpf.listener</b> - colon separated list
+  of classnames that are used to instantiate Search- and
+  VMListeners</p>
+  
+</body>
+</html>

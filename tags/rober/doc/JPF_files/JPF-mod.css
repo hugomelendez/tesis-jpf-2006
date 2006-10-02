@@ -1,0 +1,257 @@
+.code {
+    background: #e3e3e3;
+    color: #0000ff;
+    font-family: 'Courier', 'Courier';
+    font-size: 9.00pt;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    letter-spacing: 0;
+    line-height: 1.22;
+    margin-bottom: 8.0pt;
+    margin-left: 8.0pt;
+    margin-right: 8.0pt;
+    margin-top: 8.0pt;
+    padding-bottom: 4.0pt;
+    padding-top: 4.0pt;
+    padding-left: 8.0pt;
+    padding-right: 8pt;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 0.00pt;
+    text-transform: none;
+    vertical-align: 0.000000em;
+    white-space: pre;
+}
+
+.news {
+    color:      #0000ff;
+    border:     1px solid #0000ff;
+    background: #aaaaff;
+    background-color: #ddddff;
+}
+
+.NavList_Body {
+    color: #000000;
+    font-family: arial, sans-serif;
+    font-size: 9.00pt;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    letter-spacing: 0;
+    line-height: 1.22;
+    margin-bottom: 0.000000pt;
+    margin-left: 0.00pt;
+    margin-right: 0.00pt;
+    margin-top: 0.000000pt;
+    padding-bottom: 2.000000pt;
+    padding-top: 0.000000pt;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 0.00pt;
+    text-transform: none;
+    vertical-align: 0.000000em;
+}
+
+h1 {
+    color: #000000;
+    font-family: 'TimesNewRomanPS-BoldMT', 'Times New Roman';
+    font-size: 16.00pt;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 1.17;
+    margin-bottom: 0.000000pt;
+    margin-left: 3pt;
+    margin-right: 3.00pt;
+    margin-top: 0.000000pt;
+    padding-bottom: 4.000000pt;
+    padding-top: 12.000000pt;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 0.00pt;
+    text-transform: none;
+    vertical-align: 0.000000em;
+}
+
+h2 {
+    color: #000000;
+    font-family: 'TimesNewRomanPS-BoldMT', 'Times New Roman';
+    font-size: 13.00pt;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 1.23;
+    margin-bottom: 0.000000pt;
+    margin-left: 3.00pt;
+    margin-right: 3.00pt;
+    margin-top: 0.000000pt;
+    padding-bottom: 2.000000pt;
+    padding-top: 8.000000pt;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 0.00pt;
+    text-transform: none;
+    vertical-align: 0.000000em;
+}
+
+body {
+    color: #000000;
+    font-family: 'TimesNewRomanPSMT', 'Times New Roman';
+    font-size: 11.00pt;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    letter-spacing: 0;
+    line-height: 1.09;
+    margin-bottom: 3.00pt;
+    margin-left: 3.00pt;
+    margin-right: 3.00pt;
+    margin-top: 3.00pt;
+    padding-bottom: 0.000000pt;
+    padding-top: 0.000000pt;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 0.00pt;
+    text-transform: none;
+    vertical-align: 0.000000em;
+}
+
+tt {
+    color: #0000aa;
+    font-size: 10.00pt;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+}  
+
+.comment {
+    color: #a00000;
+    font-family: 'TimesNewRomanPSMT', 'Times New Roman';
+    font-size: 10.00pt;
+    font-style: oblique;
+    border: thin solid #a00000;
+    padding: 5pt;
+}
+
+.big_diagram {
+    color: #000000;
+    font-family: 'TimesNewRomanPSMT', 'Times New Roman';
+    font-size: 11.00pt;
+    font-style: italic;
+    font-variant: normal;
+    font-weight: normal;
+    letter-spacing: 0;
+    line-height: 1.09;
+    margin-bottom: 0.000000pt;
+    margin-left: 0.00pt;
+    margin-right: 0.00pt;
+    margin-top: 0.000000pt;
+    padding-bottom: 12.000000pt;
+    padding-top: 0.000000pt;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0.00pt;
+    text-transform: none;
+    vertical-align: 0.000000em;
+}
+
+ul {
+    list-style: disc;
+    list-style-position: outside;
+    margin-top: 0.000000pt;
+    margin-bottom: 12.000000pt;
+    margin-left: 30.0pt;
+    margin-right: 3.00pt;
+    margin-top: 0.000000pt;
+    padding: 0pt;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 0.00pt;
+    text-transform: none;
+}
+
+li {
+    margin-top: 4pt;
+    margin-bottom: 4pt;
+}
+
+ol {
+    list-style: decimal;
+    list-style-position: outside;
+    margin-bottom: 0.000000pt;
+    margin-left: 30.000000pt;
+    margin-right: 3pt;
+    margin-top: 0.000000pt;
+    padding-left: 0pt;
+    text-indent: 0.000000pt;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    caption-side: bottom;
+}
+
+th {
+    color: #0f0808;
+    /*background: #e3e3e3;*/
+    font-family: 'TimesNewRomanPSMT', 'Times New Roman';
+    font-size: 10.00pt;
+    font-style: oblique;
+    padding: 5pt;
+}
+
+td.num {
+    text-align: right;
+    font-family: 'Courier', 'Courier';
+    font-size: 10.00pt;
+    padding-left: 20.0pt;
+}
+
+caption {
+    font-family: 'TimesNewRomanPSMT', 'Times New Roman';
+    font-size: 10.00pt;
+    font-style: oblique;
+}
+
+.NavList {
+    list-style: disc;
+    font-family: arial, sans-serif;
+    font-size: 9.00pt;
+    margin-bottom: 0.000000pt;
+    margin-left: 5.000000pt;
+    margin-top: 0.000000pt;
+    padding-left: 8pt;
+    text-indent: 0.000000pt;
+    text-decoration: none;
+}
+.NavList a:link {
+ text-decoration: none;
+}
+.NavList a:hover {
+ color: #ff0000;
+ text-decoration: underline;
+}
+
+
+.NavTop {
+    font-family: arial, sans-serif;
+    font-size: 10.00pt;
+    font-weight: normal;
+    background: #f5f5f5;
+    color: #0000ff;
+    border-top:    1px solid #a0a0ff; 
+    border-bottom: 1px solid #a0a0ff;
+    border-left:   1px solid #a0a0ff; 
+    border-right:  1px solid #a0a0ff;
+}
+.NavTop a:link {
+ text-decoration: none;
+}
+.NavTop a:hover {
+ color: #ff0000;
+ text-decoration: underline;
+}

@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type"
+        content="text/html; charset=us-ascii" />
+
+  <title>JPF and Eclipse</title>
+  <link rel="stylesheet"
+        type="text/css"
+        media="screen"
+        href="JPF_files/JPF-mod.css" />
+  <base target="_blank" />
+</head>
+
+<body>
+  <h1>JPF and Eclipse</h1>
+
+  <p>JPF4 compiles and runs nicely inside of the <a href=
+  "http://www.eclipse.org">Eclipse IDE</a>.  Do NOT use "New Java Project"
+  or "New Java Project from Existing Ant Buildfile".  These are difficult
+  to get working for JPF.  Instead, if you have already checked out or
+  downloaded JPF, use "Import..." "Existing Projects into Workspace"
+  selecting the JPF root directory.  The project named
+  "javapathfinder-trunk" should be available.</p>
+
+  <p>With Subclipse installed
+  (<a href="http://subclipse.tigris.org/">http://subclipse.tigris.org/</a>)
+  one can download JPF inside of Eclipse using "Import..." "Checkout Projects
+  from SVN".  The repository URL is
+  <tt>https://svn.sourceforge.net/svnroot/javapathfinder</tt> and the
+  folder to check out is "<tt>trunk</tt>".  It's about that easy.</p>
+
+  <p>The Compiler settings in either the project or
+  the workspace Properties dialog should have the "JDK Compliance"
+  (tab "Compliance and Classfiles", settings "compiler compliance
+  level" "generated class files compatibility" and "source
+  compatibility") set to "5.0".</p>
+
+  <p>Beyond this, the only caveat for building and running JPF is
+  the inclusion/exclusion of the env/jpf source directory. Classes compiled
+  from this location are MJI model classes of standard Java library
+  components that are only meant to be seen by JPF, not the host
+  VM, and some problems can arise from this directory appearing in the
+  Eclipse source path.  Specifically, Eclipse compiles the rest of the
+  classes considering these model classes as global replacements for
+  the standard Java conterparts, including classes such as java.lang.Class
+  and java.lang.Thread.  For building, the model classes do
+  not yet contain all the functions of the standard library classes, and
+  for execution, the functionality is quite different: tailored to execution
+  inside JPF.  On some machines and Eclipse versions (esp. under Windows),
+  this might cause the Eclipse internal builder to abort silently!</p>
+  
+  <p>There are two solutions to this problem:</p>
+
+  <ul>
+    <li>remove env/jpf as a source directory in the build path.
+    (this makes the model class sources unavailable when
+    editing/compiling their native peer counterparts in env/jvm.)</li>
+
+    <li>add missing model class methods and fields,
+    so that Eclipse can build the JPF classes using these features.
+    This may or may not break execution of JPF from within Eclipse, but
+    it can be fixed with an explicit classpath for execution.
+    Also, keep in mind that all JPF classes other than env/jpf will be
+    executed by the host VM, and not JPF.</li>
+  </ul>
+
+  <p>To run JPF from inside Eclipse, specify gov.nasa.jpf.JPF
+  (RunJPF not recommended inside Eclipse) as the Main class
+  inside the Run dialog (tab
+  "Main"), use the default working directory (tab "Arguments"),
+  specify the target application main class as the program
+  argument, and make sure to include the project's default classpath
+  (or a custom one to remove build/env/jpf)
+  under user entries (tab "Classpath"). If the application under
+  test resides outside the jpf directory tree, its class files of
+  course have to be added to the user entries of the Classpath
+  dialog tab.</p>
+</body>
+</html>
