@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>ToDo</title>
+    <link rel="stylesheet" type="text/css"
+    media="screen" href="JPF_files/JPF-mod.css" />
+    <base target="_blank">
+</head>
+<body>
+
+<h1>To Do List</h1>
+
+<p>JavaPathFinder is still a moving target. This is a list of things
+that are in the works, or should be from our point of view. Feel free to
+add suggestions (via the mailing list), or grab one of the topics and do
+it. Let us know (via the
+<a href="mailto:javapathfinder-devel@lists.sourceforge.net"> developer
+mailing list</a>), so that we can publish this here and avoid
+re-inventing the wheel.</p>
+
+<ul>
+<li><b>refactor, refactor, refactor</b> - This is mainly about
+getting a minimal sense of encapsulation into the core classes, which still
+have way too many leftover (chained) direct field accesses<br>
+[Peter &lt;sigh&gt;]</li>
+
+<li><b>Eclipse integration</b> - this is in the works, and we will
+soon have a basic Eclipse plugin extension. However, developing a suitable
+user interface for JPF is definitely a topic that will stay with us for
+a long time.</li>
+
+<li><b>library abstractions</b> - we need to abstract the standard
+libraries, esp. java.io and java.net. This is an MJI application</li>
+
+<li><b>Debug replacement</b> - there already is a java.util.logging based
+infrastructure in place that should be used to replace all references of
+the deprecated java.util.Debug. There are a lot of references though..<br>
+[Peter &lt;sigh&gt;]</li>
+
+<li><b>state management streamlining</b> - separation of SystemState /
+KernelState really doesn't make much sense anymore, once the Scheduler
+is externalized. There are also too many places referring to various
+parts of JPFs internal state (path, backtrack stack etc.). This is now
+in the works as an extension</li>
+
+<li><b>symbolic execution framework</b> - was almost there, but we have
+to replace a proprietary library</li>
+
+</ul>
+
+</body>
+</html>
