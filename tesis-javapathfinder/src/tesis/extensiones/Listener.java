@@ -10,25 +10,19 @@ import gov.nasa.jpf.search.Search;
  * 
  */
 public abstract class Listener extends PropertyListenerAdapter implements JPFListener {
-	protected AutomataVerificacion  aut;
+	protected Coordinador coord;
 
-	public Listener (AutomataVerificacion afd) {
-		aut = afd;		
-	}
-	
-	public final int getEstadoActual() {
-		return aut.getEstadoActual();
+	public Listener (Coordinador c) {
+		coord = c;
 	}
 
-	public final void irAEstado(int i) {
-		aut.irAEstado(i);		
+	@Override
+	public void instructionExecuted(JVM vm) {
+		coord.ocurrioInstruccion(vm.getLastInstruction());
 	}
 
 	@Override
 	public final boolean check(Search search, JVM vm) {
-		//System.out.println(" Aut chk estado " + getEstadoActual());
-		return (!aut.estadoFinal());
-		//return true;
+		return (!coord.propiedadViolada());
 	}
 }
-

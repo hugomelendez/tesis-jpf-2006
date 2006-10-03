@@ -30,103 +30,103 @@ import java.util.Stack;
  * and/or explicit Verify.ignoreIf)
  */
 public class DFSearchTesis extends gov.nasa.jpf.search.Search {
-  
-Listener lsnr;
-private Hashtable htEstadoListener = new Hashtable();
-private Stack<Object> stackCaminoLsnr = new Stack();
+	Coordinador coord;
 
-  public DFSearchTesis (Config config, JVM vm) {
-  	super(config,vm);
-  	
-    Debug.println(Debug.MESSAGE, "MC Search");  	
-  }
-  
-  /**
-   * state model of the search
-   *    next new  -> action
-   *     T    T      forward
-   *     T    F      backtrack, forward
-   *     F    T      backtrack, forward
-   *     F    F      backtrack, forward
-   *
-   * end condition
-   *    backtrack failed (no saved states)
-   *  | property violation (currently only checked in new states)
-   *  | search constraint (depth or memory or time)
-   *
-   * <2do> we could split the properties into forward and backtrack properties,
-   * the latter ones being usable for liveness properties that are basically
-   * condition accumulators for sub-paths of the state space, to be checked when
-   * we backtrack to the state where they were introduced. I think that could be
-   * actually much simpler (to implement) and more powerful than our currently
-   * broken LTL based scheme.
-   * But then again - at some point the properties and the searches will probably
-   * be unified into VM listeners, anyway
-   */
-public void search () {
-    int maxDepth = getMaxSearchDepth();
-    
-    depth = 0;
-    
-    notifySearchStarted();
-    while (!done) {
-    	// Si el par <estado VM, estado Listener> es conocido O estado VM es final 
-    	// --> backtrack
-    	if ( ( !isNewState && htEstadoListener.containsKey(vm.getStateId() + ";" + lsnr.getEstadoActual()) )
-    		  || isEndState) {
+	private Hashtable htEstadoListener = new Hashtable();
 
-      	  if (!backtrack()) { // backtrack not possible, done
-	          break;
-	        }
-	        
-	        depth--;
-	        //assert depth == vm.getPath().length();
-	
-	        stackCaminoLsnr.pop();
-	      	lsnr.irAEstado((Integer)stackCaminoLsnr.peek());
+	private Stack<Object> stackCaminoLsnr = new Stack();
 
-	        notifyStateBacktracked();
-      }
-      
-  	  htEstadoListener.put(vm.getStateId() + ";" + lsnr.getEstadoActual(), 0);
-      if (forward()) {
-    	  stackCaminoLsnr.push(lsnr.getEstadoActual());
-    	  
-    	  notifyStateAdvanced();
-        
-	        if (hasPropertyTermination()) {
-	          break;
-	        }
-	
-	        depth++;
-	        //assert depth == vm.getPath().length();
+	public DFSearchTesis(Config config, JVM vm) {
+		super(config, vm);
 
-        if (isNewState) {                    
-          if (depth >= maxDepth) {
-            isEndState = true;
-            notifySearchConstraintHit(QUEUE_CONSTRAINT);
-          }
-          
-          if (!checkStateSpaceLimit()) {
-            notifySearchConstraintHit(SIZE_CONSTRAINT);
-            // can't go on, we exhausted our memory
-            break;
-          }
-        }
-      } else { // state was processed
-        notifyStateProcessed();
-      }
-    }
-    
-    notifySearchFinished();
-  }
+		Debug.println(Debug.MESSAGE, "MC Search");
+	}
 
-  /**
-   * Helper method para agregar listener que trabajan para nosotros
-   * @param l listener especial para la tesis
-   */
-  public void addTesisListener(Listener l) {
-	  lsnr = l;
-  }
+	/**
+	 * state model of the search
+	 *    next new  -> action
+	 *     T    T      forward
+	 *     T    F      backtrack, forward
+	 *     F    T      backtrack, forward
+	 *     F    F      backtrack, forward
+	 *
+	 * end condition
+	 *    backtrack failed (no saved states)
+	 *  | property violation (currently only checked in new states)
+	 *  | search constraint (depth or memory or time)
+	 *
+	 * <2do> we could split the properties into forward and backtrack properties,
+	 * the latter ones being usable for liveness properties that are basically
+	 * condition accumulators for sub-paths of the state space, to be checked when
+	 * we backtrack to the state where they were introduced. I think that could be
+	 * actually much simpler (to implement) and more powerful than our currently
+	 * broken LTL based scheme.
+	 * But then again - at some point the properties and the searches will probably
+	 * be unified into VM listeners, anyway
+	 */
+	public void search() {
+		int maxDepth = getMaxSearchDepth();
 
+		depth = 0;
+
+		notifySearchStarted();
+		while (!done) {
+			// Si el par <estado VM, estado Listener> es conocido O estado VM es final 
+			// --> backtrack
+			if ((!isNewState && htEstadoListener.containsKey(coord.estadoActual())
+					|| isEndState) {
+
+				if (!backtrack()) { // backtrack not possible, done
+					break;
+				}
+
+				depth--;
+				//assert depth == vm.getPath().length();
+
+				stackCaminoLsnr.pop();
+				lsnr.irAEstado((Integer) stackCaminoLsnr.peek());
+
+				notifyStateBacktracked();
+			}
+
+			htEstadoListener.put(coord.estadoActual(), 0);
+			if (forward()) {
+				stackCaminoLsnr.push(lsnr.getEstadoActual());
+
+				notifyStateAdvanced();
+
+				if (hasPropertyTermination()) {
+					break;
+				}
+
+				depth++;
+				//assert depth == vm.getPath().length();
+
+				if (isNewState) {
+					if (depth >= maxDepth) {
+						isEndState = true;
+						notifySearchConstraintHit(QUEUE_CONSTRAINT);
+					}
+
+					if (!checkStateSpaceLimit()) {
+						notifySearchConstraintHit(SIZE_CONSTRAINT);
+						// can't go on, we exhausted our memory
+						break;
+					}
+				}
+			} else { // state was processed
+				notifyStateProcessed();
+			}
+		}
+
+		notifySearchFinished();
+	}
+
+	/**
+	 * Helper method para agregar listener que trabajan para nosotros
+	 * @param l listener especial para la tesis
+	 */
+	public void setCoordinador(Coordinador c) {
+		coord = c;
+	}
 }
