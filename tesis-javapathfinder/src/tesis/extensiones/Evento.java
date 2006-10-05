@@ -19,8 +19,21 @@
 package tesis.extensiones;
 
 /**
- * Interface utilizada para definir los eventos de un Autómata de Verificación
- * 
+ * Clase para instanciar objetos de tipo Evento
+ * Lo único que interesa de un Evento es su nombre 
  */
-public interface Evento {
+public class Evento {
+	private String nm;
+	
+	public Evento (String nom) {
+		nm = nom;
+	}
+
+	/**
+	 * Determina si el Evento corresponde al nombre pasado como parámetro
+	 * @return
+	 */
+	public boolean sos(String nombre) {
+		return nm.equals(nombre);
+	}
 }

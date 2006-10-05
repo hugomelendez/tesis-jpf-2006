@@ -6,10 +6,11 @@ import gov.nasa.jpf.jvm.JVM;
 import gov.nasa.jpf.search.Search;
 
 /**
- * Clase abstracta para extender en los Listeners de Verificación
- * 
+ * Clase Listener de Verificación
+ * Se encarga de lo básico: cada vez que ocurre instrucción, notifica al Coordinador
+ * Podría llegar a extenderse, habría que ver si el método instructionExecuted sería final o no
  */
-public abstract class Listener extends PropertyListenerAdapter implements JPFListener {
+public class Listener extends PropertyListenerAdapter implements JPFListener {
 	protected Coordinador coord;
 
 	public Listener (Coordinador c) {
@@ -17,7 +18,7 @@ public abstract class Listener extends PropertyListenerAdapter implements JPFLis
 	}
 
 	@Override
-	public void instructionExecuted(JVM vm) {
+	public final void instructionExecuted(JVM vm) {
 		coord.ocurrioInstruccion(vm.getLastInstruction());
 	}
 
