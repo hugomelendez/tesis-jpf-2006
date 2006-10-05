@@ -2,13 +2,23 @@ package tesis.Ejemplo_03;
 
 import gov.nasa.jpf.Config;
 import gov.nasa.jpf.JPF;
-import tesis.extensiones.DFSearchTesis;
+import tesis.extensiones.*;
 
 public class ejecutarEjemplo {
 	public static void main (String[] args) {
-		Automata aut = new Automata();
-		ListenerConEstado listener = new ListenerConEstado(aut);
+		Coordinador c = new Coordinador();
 
+		PreambuloEjemplo03 pre = new PreambuloEjemplo03();
+		c.setPreambulo(pre);
+		
+		Automata aut = new Automata();
+		c.setAfd(aut);
+
+		EventBuilderEjemplo03 eb = new EventBuilderEjemplo03();
+		c.setEvb(eb);
+
+		Listener listener = new Listener(c);
+		
 		String[] a = new String[1];
 		a[0] = "tesis.Ejemplo_03.ModeloOpenClose";
 	    Config conf = JPF.createConfig(a);
@@ -19,10 +29,9 @@ public class ejecutarEjemplo {
 	    JPF jpf = new JPF(conf);
 	    jpf.addSearchListener(listener);
 	    jpf.addVMListener(listener);
-
-	    // agregamos nuestro listener de forma especial para la tesis
-	    ((DFSearchTesis)jpf.search).addTesisListener(listener);
-
+	    
+	    ((DFSearchTesis)jpf.search).setCoordinador(c);
+	    
 	    System.out.println("---------------- JPF started");
 	    jpf.run();
 	    System.out.println("---------------- JPF terminated");
