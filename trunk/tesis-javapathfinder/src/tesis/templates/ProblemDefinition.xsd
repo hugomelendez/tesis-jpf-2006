@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="ProblemDefinition" type="definitiontype" />
+	<xs:complexType name="definitiontype">
+		<xs:sequence>
+			<xs:element name="events" type="eventlisttype" />
+			<xs:element name="eventsObservables" type="labeleventlisttype" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="eventlisttype">
+		<xs:sequence>
+			<xs:element name="event" type="eventtype" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="labeleventlisttype">
+		<xs:sequence>
+			<xs:element name="event" type="labeleventtype" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="eventtype">
+        <xs:sequence>
+			<xs:element name="label" type="xs:string" />
+			<xs:element name="instruction" type="instructiontype" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="labeleventtype">
+        <xs:sequence>
+			<xs:element name="label" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="instructiontype">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="invoke" />
+			<xs:enumeration value="return" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
