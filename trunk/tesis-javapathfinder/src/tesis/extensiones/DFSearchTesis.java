@@ -34,8 +34,6 @@ public class DFSearchTesis extends gov.nasa.jpf.search.Search {
 
 	private Hashtable htEstadoListener = new Hashtable();
 
-	private Stack<Object> stackCaminoLsnr = new Stack();
-
 	public DFSearchTesis(Config config, JVM vm) {
 		super(config, vm);
 
@@ -71,10 +69,9 @@ public class DFSearchTesis extends gov.nasa.jpf.search.Search {
 
 		notifySearchStarted();
 		while (!done) {
-			// Si el par <estado VM, estado Listener> es conocido O estado VM es final 
+			// Si el par <estado VM, estado Listener> es conocido || estado VM es final 
 			// --> backtrack
-			if ((!isNewState && htEstadoListener.containsKey(coord.estadoActual())
-					|| isEndState) {
+			if ( (!isNewState && htEstadoListener.containsKey(coord.estadoActual())) || isEndState) {
 
 				if (!backtrack()) { // backtrack not possible, done
 					break;
@@ -83,16 +80,15 @@ public class DFSearchTesis extends gov.nasa.jpf.search.Search {
 				depth--;
 				//assert depth == vm.getPath().length();
 
-				stackCaminoLsnr.pop();
-				lsnr.irAEstado((Integer) stackCaminoLsnr.peek());
-
+				coord.stateBacktracked();
+				
 				notifyStateBacktracked();
 			}
 
 			htEstadoListener.put(coord.estadoActual(), 0);
 			if (forward()) {
-				stackCaminoLsnr.push(lsnr.getEstadoActual());
-
+				coord.stateAdvanced();
+				
 				notifyStateAdvanced();
 
 				if (hasPropertyTermination()) {
@@ -128,5 +124,6 @@ public class DFSearchTesis extends gov.nasa.jpf.search.Search {
 	 */
 	public void setCoordinador(Coordinador c) {
 		coord = c;
+		c.setSearch(this);
 	}
 }
