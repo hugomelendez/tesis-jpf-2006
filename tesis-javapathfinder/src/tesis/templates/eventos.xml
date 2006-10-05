@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
+	<eventos>
+		<evento>
+			<label>A</label>
+			<instruction>
+				<type>invoke</type>
+				<name>open</name>
+			</instruction>
+		</evento>
+		<evento>
+			<label>B</label>
+			<instruction>
+				<type>invoke</type>
+				<name>close</name>
+			</instruction>
+		</evento>
+	</eventos>
+	<eventosObservables>
+		<evento>A</evento>
+		<evento>B</evento>
+	</eventosObservables>
+</ProblemDefinition>
