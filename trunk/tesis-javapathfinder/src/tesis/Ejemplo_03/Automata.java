@@ -3,27 +3,28 @@ import tesis.extensiones.AutomataVerificacion;
 import tesis.extensiones.Evento;
 
 public class Automata extends AutomataVerificacion {
+	final String OPEN = "OPEN";
+	final String CLOSE = "CLOSE";
+	
 	public Automata (){
 		super();
 	}
 	
 	public void consumir (Evento e) {
-		EventoOpenClose eventoOC = (EventoOpenClose) e;
-		
 		switch (estadoActual) {
 			case 0:
-				if (eventoOC.esOPEN()) {
+				if (e.sos(OPEN)) {
 					estadoActual = 1;
-				} else if (eventoOC.esCLOSE()) {
+				} else if (e.sos(CLOSE)) {
 					estadoActual = 2;
 					blnEstadoFinal = true;
 				}
 				break;
 			case 1:
-				if (eventoOC.esOPEN()) {
+				if (e.sos(OPEN)) {
 					estadoActual = 3;
 					blnEstadoFinal = true;
-				} else if (eventoOC.esCLOSE()) {
+				} else if (e.sos(CLOSE)) {
 					estadoActual = 0;
 				}
 				break;
