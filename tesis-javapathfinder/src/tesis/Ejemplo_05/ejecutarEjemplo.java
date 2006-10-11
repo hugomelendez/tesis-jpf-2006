@@ -7,14 +7,16 @@ import tesis.extensiones.*;
 public class ejecutarEjemplo {
 	public static void main (String[] args) {
 		Coordinador c = new Coordinador();
-
+		
 		PreambuloEjemplo05 pre = new PreambuloEjemplo05();
 		c.setPreambulo(pre);
 		
-		Automata aut = new Automata();
+		XMLAFDReader xmlafd = new XMLAFDReader("pepito.xml"); 
+		AutomataVerificacion aut = new AutomataVerificacion(xmlafd);
 		c.setAfd(aut);
 
-		EventBuilderEjemplo05 eb = new EventBuilderEjemplo05();
+		XMLEventBuilderReader xmleb = new XMLEventBuilderReader("pepito.xml"); 
+		EventBuilder eb = new EventBuilder(xmleb);
 		c.setEvb(eb);
 
 		Listener listener = new Listener(c);
