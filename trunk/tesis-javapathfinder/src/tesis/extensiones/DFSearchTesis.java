@@ -23,7 +23,6 @@ import gov.nasa.jpf.jvm.JVM;
 import gov.nasa.jpf.util.Debug;
 
 import java.util.Hashtable;
-import java.util.Stack;
 
 /**
  * standard depth first model checking (but can be bounded by search depth
