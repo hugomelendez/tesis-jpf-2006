@@ -20,20 +20,51 @@ package tesis.extensiones;
 
 /**
  * Clase para instanciar objetos de tipo Evento
- * Lo único que interesa de un Evento es su nombre 
+ * Lo ï¿½nico que interesa de un Evento es su nombre 
  */
 public class Evento {
-	private String nm;
+	private String type;
+	private String keyword;
+	private String label;
 	
-	public Evento (String nom) {
-		nm = nom;
+	public Evento () {
+		this.label = "";
 	}
 
+	public Evento (String label) {
+		this.label = label;
+	}
+
+	public Evento (String type, String keyword, String label) {
+		this.type = type;
+		this.keyword = keyword;
+		this.label = label;
+	}
 	/**
-	 * Determina si el Evento corresponde al nombre pasado como parámetro
+	 * Determina si el Evento corresponde al nombre pasado como parï¿½metro
 	 * @return
 	 */
-	public boolean sos(String nombre) {
-		return nm.equals(nombre);
+	public boolean sos(String lbl) {
+		return label.equals(lbl);
+	}
+	
+	public boolean equals(Evento e) {
+		return label.equals(e.label);
+	}
+
+	public boolean esObservable() {
+		return (!label.equals(""));
+	}
+
+	public String keyword() {
+		return keyword;
+	}
+
+	public String label() {
+		return label;
+	}
+
+	public String type() {
+		return type;
 	}
 }

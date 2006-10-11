@@ -69,9 +69,13 @@ public class DFSearchTesis extends gov.nasa.jpf.search.Search {
 
 		notifySearchStarted();
 		while (!done) {
-			// Si el par <estado VM, estado Listener> es conocido || estado VM es final 
+			// Si el par <estado VM, estado Listener> es conocido
+			// || estado VM es final
+			// || el coordinador lo indica (Preambulo no se cumplio)
 			// --> backtrack
-			if ( (!isNewState && htEstadoListener.containsKey(coord.estadoActual())) || isEndState) {
+			if ( (!isNewState && htEstadoListener.containsKey(coord.estadoActual()))
+					|| isEndState
+					|| coord.backtrackear() ) {
 
 				if (!backtrack()) { // backtrack not possible, done
 					break;

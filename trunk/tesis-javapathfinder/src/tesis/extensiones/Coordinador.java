@@ -32,15 +32,18 @@ public class Coordinador implements Mediator {
 	}
 
 	/**
-	 * Se ejecuta cada vez que el Listener escucha una nueva instrucción Avanza
-	 * el Preámbulo o el AFD
+	 * Se ejecuta cada vez que el Listener escucha una nueva instrucciï¿½n Avanza
+	 * el Preï¿½mbulo o el AFD
 	 */
 	public void ocurrioInstruccion(Instruction i) {
-		Evento e = evb.eventoFrom(i);
-		if (!preambulo.cumplido())
-			preambulo.consumir(e);
-		else
-			afd.consumir(e);
+		Evento e = evb.eventFrom(i);
+
+		if (!preambulo.violado() && e.esObservable()) {
+			if (!preambulo.aceptado())
+				preambulo.consumir(e);
+			else
+				afd.consumir(e);
+		}
 	}
 
 	/**
@@ -53,25 +56,25 @@ public class Coordinador implements Mediator {
 	}
 
 	/**
-	 * El Search notifica al coordinador que se backtrackeó el árbol. Indica al
-	 * AFD que regrese al estado corresp. al estado al que se backtrackeó
+	 * El Search notifica al coordinador que se backtrackeï¿½ el ï¿½rbol. Indica al
+	 * AFD que regrese al estado corresp. al estado al que se backtrackeï¿½
 	 */
 	public void stateBacktracked() {
 		stackCaminoAFD.pop();
 		afd.irAEstado((Integer) stackCaminoAFD.peek());
 
-		//TODO Ver si esto se configura con un parámetro (property)
+		//TODO Ver si esto se configura con un parï¿½metro (property)
 		System.out.println("--------------------------------- STATE-BACKTRACKED:" + this.estadoActual() + "--------------------------------");
 	}
 
 	/**
-	 * El Search notifica al coordinador que se avanzó el árbol. Agrega a la pila el estado
+	 * El Search notifica al coordinador que se avanzï¿½ el ï¿½rbol. Agrega a la pila el estado
 	 * en el que se encuentra el AFD
 	 */
 	public void stateAdvanced() {
 		stackCaminoAFD.push(afd.getEstadoActual());
 
-		//TODO Ver si esto se configura con un parámetro (property)
+		//TODO Ver si esto se configura con un parï¿½metro (property)
 		System.out.println("--------------------------------- STATE-ADVANCED: " + this.estadoActual() + "  --------------------------------");
 	}
 
@@ -91,4 +94,7 @@ public class Coordinador implements Mediator {
 		this.search = search;
 	}
 
+	public boolean backtrackear() {
+		return ( preambulo.violado() );
+	}
 }
