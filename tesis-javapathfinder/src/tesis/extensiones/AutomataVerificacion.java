@@ -18,16 +18,25 @@
 //
 package tesis.extensiones;
 
+import java.util.HashSet;
+import java.util.Iterator;
+
 /**
- * Clase abstracta utilizada para definir Autómatas de verificaci�n
+ * Clase para definir Autómatas de verificaci�n (toma los datos de un XML)
  * 
  */
-public abstract class AutomataVerificacion {
+public class AutomataVerificacion {
+	private XMLAFDReader xml;
+	private HashSet<Transicion> setTransiciones;
+	private HashSet<Integer> setEstadosFinales;  
 	protected int estadoActual;
 	protected boolean blnEstadoFinal = false;
 	
-	public AutomataVerificacion (){
-		estadoActual = 0;
+	public AutomataVerificacion (XMLAFDReader xmlafd) {
+		xml = xmlafd;
+		estadoActual = xml.estadoInicial();
+		setTransiciones = xml.transiciones();
+		setEstadosFinales = xml.estadosFinales();
 	}
 	
 	public final void irAEstado(int est){
@@ -36,10 +45,24 @@ public abstract class AutomataVerificacion {
 	}
 
 	public final boolean estadoFinal() {
-		return blnEstadoFinal;
+		return setEstadosFinales.contains(new Integer(estadoActual));
 	}
 
-	public abstract void consumir (Evento e);
+	public void consumir (Evento e) {
+		Transicion tran;
+		Iterator<Transicion> it;
+		
+		it = setTransiciones.iterator();
+		
+		System.out.println("EVENTO: " + e.label());
+		while (it.hasNext()) {
+			tran = it.next();
+			if (tran.estadoDesde() == estadoActual && tran.evento().equals(e)) {
+				estadoActual = tran.estadoHacia();
+				break;
+			}
+		}
+	}
 
 	public final int getEstadoActual() {
 		return estadoActual;
