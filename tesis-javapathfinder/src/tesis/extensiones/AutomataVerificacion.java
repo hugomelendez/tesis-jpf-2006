@@ -54,7 +54,7 @@ public class AutomataVerificacion {
 		
 		it = setTransiciones.iterator();
 		
-		System.out.println("EVENTO: " + e.label());
+		//System.out.println("EVENTO: " + e.label());
 		while (it.hasNext()) {
 			tran = it.next();
 			if (tran.estadoDesde() == estadoActual && tran.evento().equals(e)) {
