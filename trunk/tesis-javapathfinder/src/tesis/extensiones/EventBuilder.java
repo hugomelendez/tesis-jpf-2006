@@ -6,11 +6,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 
-/** 
- * TODO Esta clase la definimos como abstracta por ahora (la implementa cada ejemplo)
- * Cuando implementemos la parte de properties/XMLs, sera
- * concreta y tendra toda la logica
- * La idea es que el usuario no tenga que escribir el codigo, sino los archs de conf.
+/**
+ * Builder de Eventos
+ * 
+ * Conoce un conjunto de eventos definidos en un xml y "construye" 
+ * eventos a partir de instrucciones  
  */
 public class EventBuilder {
 	private XMLEventBuilderReader xml;
@@ -21,6 +21,16 @@ public class EventBuilder {
 		eventos = xml.eventos();
 	}
 	
+	/**
+	 * TODO escribir mejor esto
+	 * 
+	 * Construye Eventos partiendo de Instrucciones
+	 * De los eventos definidos, elige el q corresponde segun type, label y name. 
+	 * El primer evento q contenga un match es el elegido 
+	 * 
+	 * @param i Instruccion utilizada para determinar el tipo de evento
+	 * @return Evento construido a partir de i
+	 */
 	public Evento eventFrom(Instruction i) {
 		Evento ret = new Evento();
 		Evento e;
