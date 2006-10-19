@@ -11,6 +11,7 @@ import gov.nasa.jpf.jvm.bytecode.Instruction;
  * objects. Knows and maintains its colleagues.
  */
 public class Coordinador implements Mediator {
+	private Stack<Object> stackCaminoPreambulo = new Stack();
 	private Stack<Object> stackCaminoAFD = new Stack();
 
 	//Por ahora no es necesario que conozca al Listener
@@ -60,6 +61,9 @@ public class Coordinador implements Mediator {
 	 * AFD que regrese al estado corresp. al estado al que se backtracke�
 	 */
 	public void stateBacktracked() {
+		stackCaminoPreambulo.pop();
+		preambulo.irAEstado((Integer) stackCaminoPreambulo.peek());
+
 		stackCaminoAFD.pop();
 		afd.irAEstado((Integer) stackCaminoAFD.peek());
 
@@ -72,6 +76,7 @@ public class Coordinador implements Mediator {
 	 * en el que se encuentra el AFD
 	 */
 	public void stateAdvanced() {
+		stackCaminoPreambulo.push(preambulo.getEstadoActual());
 		stackCaminoAFD.push(afd.getEstadoActual());
 
 		//TODO Ver si esto se configura con un par�metro (property)
