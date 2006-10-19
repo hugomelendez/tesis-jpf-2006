@@ -11,4 +11,17 @@ public abstract class Preambulo {
 
 	public abstract boolean aceptado();
 
+	public void irAEstado(Integer integer) {
+		
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public final int getEstadoActual() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

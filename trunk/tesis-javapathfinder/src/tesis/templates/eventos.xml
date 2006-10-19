@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
-	<eventos>
+	<eventosObservables>
 		<evento>
 			<label>A</label>
 			<instruction>
@@ -16,9 +16,11 @@
 				<name>close</name>
 			</instruction>
 		</evento>
-	</eventos>
-	<eventosObservables>
-		<evento>A</evento>
-		<evento>B</evento>
 	</eventosObservables>
+	<AFD>
+		<estados>
+		</estados>
+		<transicion>A</transicion>
+		<transicion>B</transicion>
+	</AFD>
 </ProblemDefinition>
