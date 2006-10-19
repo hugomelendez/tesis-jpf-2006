@@ -1,15 +1,23 @@
 package tesis.extensiones;
 
 import java.util.HashSet;
+import java.util.Iterator;
+
+import org.dom4j.Attribute;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
 // TODO Levantar los datos del XML
 public class XMLAFDReader {
 	String nmXML;
+	Document document;
 	
 	public XMLAFDReader(String file) {
 		nmXML = file;
 	}
-	
+
 	public int estadoInicial() {
 		return 0;
 	}
@@ -40,5 +48,45 @@ public class XMLAFDReader {
 		hs.add(new Integer(3));
 		
 		return hs;
+	}
+
+	public void openFile() throws DocumentException {
+		SAXReader reader = new SAXReader();
+        document = reader.read(nmXML);
+	}
+
+	public void bar() throws DocumentException {
+
+        Element root = document.getRootElement();
+
+        // iterate through child elements of root
+		for (Iterator i = root.elementIterator(); i.hasNext();) {
+			Element element = (Element) i.next();
+			System.out.println(element.elementText(""));
+		}
+
+		// iterate through child elements of root with element name "foo"
+		for (Iterator i = root.elementIterator("eventos"); i.hasNext();) {
+			Element foo = (Element) i.next();
+			System.out.println(foo);
+		}
+
+		// iterate through attributes of root 
+		for (Iterator i = root.attributeIterator(); i.hasNext();) {
+			Attribute attribute = (Attribute) i.next();
+			System.out.println(attribute);
+		}
+	}
+
+	public static void main (String[] args) {
+		XMLAFDReader x = new XMLAFDReader("/home/hugo/workspace-java/tesis-javapathfinder/src/tesis/templates/eventos.xml");
+
+		try {
+			x.openFile();
+			x.bar();
+		} catch (DocumentException e) {
+			e.printStackTrace();
+		}
+
 	}
 }

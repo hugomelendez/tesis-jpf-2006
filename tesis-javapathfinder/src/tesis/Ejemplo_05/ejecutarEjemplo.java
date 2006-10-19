@@ -7,11 +7,11 @@ import tesis.extensiones.*;
 public class ejecutarEjemplo {
 	public static void main (String[] args) {
 		Coordinador c = new Coordinador();
-		
+
 		PreambuloEjemplo05 pre = new PreambuloEjemplo05();
 		c.setPreambulo(pre);
-		
-		XMLAFDReader xmlafd = new XMLAFDReader("pepito.xml"); 
+
+		XMLAFDReader xmlafd = new XMLAFDReader("pepito.xml");
 		AutomataVerificacion aut = new AutomataVerificacion(xmlafd);
 		c.setAfd(aut);
 
