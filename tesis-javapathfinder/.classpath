@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry output="build/examples" kind="src" path="examples"/>
-	<classpathentry output="build/test" kind="src" path="test"/>
-	<classpathentry output="build/env/jpf" kind="src" path="env/jpf"/>
-	<classpathentry output="build/env/jvm" kind="src" path="env/jvm"/>
-	<classpathentry output="build-tools/noshell/build" kind="src" path="build-tools/noshell/src"/>
+	<classpathentry kind="src" output="build/examples" path="examples"/>
+	<classpathentry kind="src" output="build/test" path="test"/>
+	<classpathentry kind="src" output="build/env/jpf" path="env/jpf"/>
+	<classpathentry kind="src" output="build/env/jvm" path="env/jvm"/>
+	<classpathentry kind="src" output="build-tools/noshell/build" path="build-tools/noshell/src"/>
 	<classpathentry kind="src" path="extensions/abstraction/src"/>
 	<classpathentry kind="src" path="extensions/LTL2Buchi/src"/>
 	<classpathentry kind="src" path="extensions/symbolic/src"/>
@@ -14,6 +14,7 @@
 	<classpathentry kind="lib" path="extensions/symbolic/lib/cream.jar"/>
 	<classpathentry kind="lib" path="extensions/symbolic/lib/de.jar"/>
 	<classpathentry kind="lib" path="extensions/symbolic/lib/solver.jar"/>
-	<classpathentry sourcepath="build-tools/junit/junit-4.1-src.jar" kind="lib" path="build-tools/lib/junit-4.1.jar"/>
+	<classpathentry kind="lib" path="build-tools/lib/junit-4.1.jar" sourcepath="build-tools/junit/junit-4.1-src.jar"/>
+	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
 	<classpathentry kind="output" path="build/jpf"/>
 </classpath>
