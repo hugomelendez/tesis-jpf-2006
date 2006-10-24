@@ -1,5 +1,6 @@
 package tesis.extensiones;
 
+import java.util.List;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -59,24 +60,32 @@ public class XMLAFDReader {
 	public void bar() throws DocumentException {
 
         Element root = document.getRootElement();
+        
+        System.out.println(root.getName());
 
         // iterate through child elements of root
-		for (Iterator i = root.elementIterator(); i.hasNext();) {
-			Element element = (Element) i.next();
-			System.out.println(element.elementText(""));
-		}
+//		for (Iterator i = root.elementIterator(); i.hasNext();) {
+//			Element element = (Element) i.next();
+//			System.out.println(element.getName());
+//		}
 
 		// iterate through child elements of root with element name "foo"
-		for (Iterator i = root.elementIterator("eventos"); i.hasNext();) {
+//		for (Iterator i = root.elementIterator("event*"); i.hasNext();) {
+//			Element foo = (Element) i.next();
+//			System.out.println(foo);
+//		}
+
+		List l = document.selectNodes("//evento");
+		for (Iterator i = l.iterator(); i.hasNext();) {
 			Element foo = (Element) i.next();
 			System.out.println(foo);
 		}
-
-		// iterate through attributes of root 
-		for (Iterator i = root.attributeIterator(); i.hasNext();) {
-			Attribute attribute = (Attribute) i.next();
-			System.out.println(attribute);
-		}
+		
+//		// iterate through attributes of root 
+//		for (Iterator i = root.attributeIterator(); i.hasNext();) {
+//			Attribute attribute = (Attribute) i.next();
+//			System.out.println(attribute);
+//		}
 	}
 
 	public static void main (String[] args) {

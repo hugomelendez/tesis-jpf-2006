@@ -67,4 +67,12 @@ public class Evento {
 	public String type() {
 		return type;
 	}
+
+	@Override
+	public String toString() {
+		return 
+			"type => " + this.type +
+			"keyword => " + this.keyword +
+			"label => " + this.label;
+	}
 }
