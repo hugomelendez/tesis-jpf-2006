@@ -8,7 +8,8 @@ public class ejecutarEjemplo {
 	public static void main (String[] args) {
 		Coordinador c = new Coordinador();
 
-		PreambuloEjemplo05 pre = new PreambuloEjemplo05();
+		XMLPreambuloReader xmlpre = new XMLPreambuloReader("pepito.xml");
+		Preambulo pre = new Preambulo(xmlpre);
 		c.setPreambulo(pre);
 
 		XMLAFDReader xmlafd = new XMLAFDReader("pepito.xml");

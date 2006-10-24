@@ -39,8 +39,13 @@ public class Coordinador implements Mediator {
 	public void ocurrioInstruccion(Instruction i) {
 		Evento e = evb.eventFrom(i);
 
+		//Solo para DEBUG
+		if (e.esObservable()) {
+			System.out.println("EVENTO: " + e.label());
+		}
+		
 		if (!preambulo.violado() && e.esObservable()) {
-			if (!preambulo.aceptado())
+			if (!preambulo.cumplido())
 				preambulo.consumir(e);
 			else
 				afd.consumir(e);
@@ -68,7 +73,7 @@ public class Coordinador implements Mediator {
 		afd.irAEstado((Integer) stackCaminoAFD.peek());
 
 		//TODO Ver si esto se configura con un par�metro (property)
-		System.out.println("--------------------------------- STATE-BACKTRACKED:" + this.estadoActual() + "--------------------------------");
+		System.out.println("--------------------------------- STATE-BACKTRACKED (PRE=" + preambulo.getEstadoActual() +  "): " + this.estadoActual() + "--------------------------------");
 	}
 
 	/**
@@ -80,7 +85,7 @@ public class Coordinador implements Mediator {
 		stackCaminoAFD.push(afd.getEstadoActual());
 
 		//TODO Ver si esto se configura con un par�metro (property)
-		System.out.println("--------------------------------- STATE-ADVANCED: " + this.estadoActual() + "  --------------------------------");
+		System.out.println("--------------------------------- STATE-ADVANCED (PRE=" + preambulo.getEstadoActual() +  "): " + this.estadoActual() + "  --------------------------------");
 	}
 
 	public void setAfd(AutomataVerificacion afd) {

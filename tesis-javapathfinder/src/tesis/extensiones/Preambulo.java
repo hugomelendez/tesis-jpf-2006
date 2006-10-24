@@ -1,27 +1,67 @@
 package tesis.extensiones;
 
-// TODO Idem EventBuilder 
-public abstract class Preambulo {
+import java.util.HashSet;
+import java.util.Iterator;
 
-	public abstract boolean violado();
-
-	public abstract boolean cumplido();
-
-	public abstract void consumir(Evento e);
-
-	public abstract boolean aceptado();
-
-	public void irAEstado(Integer integer) {
-		
+/**
+ * Clase generica que implementa la logica de los Preambulos
+ * (toma los datos de un XML)
+ * 
+ */
+public class Preambulo {
+	private XMLPreambuloReader xml;
+	private static final int ESTADO_VIOLADO = 999;
+	protected int estadoActual;
+	private int estadoFinal;
+	private HashSet<Transicion> setTransiciones;
+	
+	public Preambulo (XMLPreambuloReader xml) {
+		this.xml = xml;
+		estadoActual = xml.estadoInicial();
+		estadoFinal = xml.estadoFinal();
+		setTransiciones = xml.transiciones();
+	}
+	
+	public final boolean violado() {
+		return (estadoActual==ESTADO_VIOLADO);
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
+	public final boolean cumplido() {
+		return (estadoActual == estadoFinal); 
+	}
+
+	public final void consumir(Evento e) {
+		Transicion tran;
+		Iterator<Transicion> it;
+		
+		it = setTransiciones.iterator();
+		
+		//System.out.println("EVENTO: " + e.label());
+		
+ 		//Avanza/Viola el Preambulo solo si es un evento observable
+		if ( e.esObservable() ) {
+			while (it.hasNext()) {
+				tran = it.next();
+	
+				if (tran.estadoDesde() == estadoActual && tran.evento().equals(e)) {
+					estadoActual = tran.estadoHacia();
+					break;
+				}
+				else if (tran.estadoDesde() == estadoActual && !tran.evento().equals(e)) {
+					estadoActual = ESTADO_VIOLADO;
+					break;
+				}
+			}
+		}
+	}
+
+	public final void irAEstado(Integer est) {
+		System.out.println("Preambulo BACKTRACK al estado " + est);
+		estadoActual = est;
+	}
+
 	public final int getEstadoActual() {
-		// TODO Auto-generated method stub
-		return 0;
+		return estadoActual;
 	}
 
 }
