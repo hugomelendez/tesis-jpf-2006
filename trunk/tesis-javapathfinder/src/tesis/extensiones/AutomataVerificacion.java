@@ -22,7 +22,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 /**
- * Clase para definir Autómatas de verificaci�n (toma los datos de un XML)
+ * Clase generica que implementa la logica de los AFD verificacion 
+ * (toma los datos de un XML)
  * 
  */
 public class AutomataVerificacion {

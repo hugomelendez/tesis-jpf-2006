@@ -20,6 +20,7 @@ public class XMLAFDReader {
 
 	public int estadoInicial() {
 		return 0;
+		//return 2;
 	}
 
 	public HashSet<Transicion> transiciones() {
