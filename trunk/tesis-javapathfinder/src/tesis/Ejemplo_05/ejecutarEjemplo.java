@@ -8,10 +8,11 @@ public class ejecutarEjemplo {
 	public static void main (String[] args) {
 		Coordinador c = new Coordinador();
 
-		XMLPreambuloReader xmlpre = new XMLPreambuloReader("pepito.xml");
-		Preambulo pre = new Preambulo(xmlpre);
-		c.setPreambulo(pre);
-
+		XMLContextoBusquedaReader xmlpre = new XMLContextoBusquedaReader("pepito.xml");
+		ContextoBusqueda pre = new ContextoBusqueda(xmlpre);
+		c.setContexto(pre);
+		c.setModoContexto();
+		
 		XMLAFDReader xmlafd = new XMLAFDReader("pepito.xml");
 		AutomataVerificacion aut = new AutomataVerificacion(xmlafd);
 		c.setAfd(aut);

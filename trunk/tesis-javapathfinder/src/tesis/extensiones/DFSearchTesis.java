@@ -70,7 +70,7 @@ public class DFSearchTesis extends gov.nasa.jpf.search.Search {
 		while (!done) {
 			// Si el par <estado VM, estado Listener> es conocido
 			// || estado VM es final
-			// || el coordinador lo indica (Preambulo no se cumplio)
+			// || el coordinador lo indica (ContextoBusqueda no se cumplio)
 			// --> backtrack
 			if ( (!isNewState && htEstadoCompuesto.containsKey(coord.estadoActual()))
 					|| isEndState

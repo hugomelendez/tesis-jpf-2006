@@ -52,15 +52,16 @@ public class AutomataVerificacion {
 	public void consumir (Evento e) {
 		Transicion tran;
 		Iterator<Transicion> it;
+		boolean transicionValida = false;
 		
 		it = setTransiciones.iterator();
 		
 		//System.out.println("EVENTO: " + e.label());
-		while (it.hasNext()) {
+		while (it.hasNext() && !transicionValida) {
 			tran = it.next();
 			if (tran.estadoDesde() == estadoActual && tran.evento().equals(e)) {
 				estadoActual = tran.estadoHacia();
-				break;
+				transicionValida = true;
 			}
 		}
 	}

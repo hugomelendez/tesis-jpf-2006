@@ -1,4 +1,4 @@
-package tesis.extensiones;
+package tesis.Ejemplo_06;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -9,13 +9,15 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import tesis.extensiones.*;
+
 // TODO Levantar los datos del XML
-public class XMLPreambuloReader {
+public class XMLContextoBusquedaReaderEj06 extends XMLContextoBusquedaReader {
 	String nmXML;
 	Document document;
 	
-	public XMLPreambuloReader(String file) {
-		nmXML = file;
+	public XMLContextoBusquedaReaderEj06(String file) {
+		super(file);
 	}
 
 	public int estadoInicial() {
@@ -26,19 +28,23 @@ public class XMLPreambuloReader {
 		HashSet<Transicion> hs = new HashSet<Transicion>();
 
 		hs.add(new Transicion(0, 1, new Evento("OPEN")));
-		hs.add(new Transicion(1, 2, new Evento("OPEN")));
 		
+		hs.add(new Transicion(1, 2, new Evento("OPEN")));
+		hs.add(new Transicion(1, 0, new Evento("CLOSE")));
+
+		hs.add(new Transicion(2, 1, new Evento("CLOSE")));
+
+		//No me interesa el WRITE (rulo en c/estado)
+		hs.add(new Transicion(0, 0, new Evento("WRITE")));
+		hs.add(new Transicion(1, 1, new Evento("WRITE")));
+		hs.add(new Transicion(2, 2, new Evento("WRITE")));
+
 		return hs;
 	}
 
 	public Integer estadoFinal() {
 		return (new Integer(2));
 		//return (new Integer(0));
-	}
-
-	public void openFile() throws DocumentException {
-		SAXReader reader = new SAXReader();
-        document = reader.read(nmXML);
 	}
 
 }
