@@ -11,17 +11,21 @@ import gov.nasa.jpf.jvm.bytecode.Instruction;
  * objects. Knows and maintains its colleagues.
  */
 public class Coordinador implements Mediator {
-	private Stack<Object> stackCaminoPreambulo = new Stack();
-	private Stack<Object> stackCaminoAFD = new Stack();
+	private Stack<Object> stackCaminoPreambulo = new Stack<Object>();
+	private Stack<Object> stackCaminoAFD = new Stack<Object>();
 
 	//Por ahora no es necesario que conozca al Listener
 	//private Listener lsn;
 
 	private AutomataVerificacion afd;
 	private DFSearchTesis search;
-	private Preambulo preambulo;
+	private ContextoBusqueda contexto;
 	private EventBuilder evb;
 
+	private static final int MODO_PREAMBULO = 0; 
+	private static final int MODO_CONTEXTO = 1;
+	private int modo = MODO_PREAMBULO;
+	
 	/**
 	 * Verifica si el automata llego a un estado final, por lo tanto se cumple
 	 * la antipropiedad
@@ -33,8 +37,8 @@ public class Coordinador implements Mediator {
 	}
 
 	/**
-	 * Se ejecuta cada vez que el Listener escucha una nueva instrucci�n Avanza
-	 * el Pre�mbulo o el AFD
+	 * Se ejecuta cada vez que el Listener escucha una nueva instruccion
+	 * Avanza el ContextoBusqueda y el AFD
 	 */
 	public void ocurrioInstruccion(Instruction i) {
 		Evento e = evb.eventFrom(i);
@@ -44,11 +48,21 @@ public class Coordinador implements Mediator {
 			System.out.println("EVENTO: " + e.label());
 		}
 		
-		if (!preambulo.violado() && e.esObservable()) {
-			if (!preambulo.cumplido())
-				preambulo.consumir(e);
-			else
+		if (!contexto.invalido() && e.esObservable()) {
+			if (modo == MODO_PREAMBULO) {
+				//MODO Preambulo
+				//Antes de avanzar el AFD, verifica que se haya cumplido el Contexto (Preambulo)
+				if (!contexto.cumplido())
+					contexto.consumir(e);
+				else
+					afd.consumir(e);
+			}
+			else if (modo == MODO_CONTEXTO) {
+				//MODO Contexto Busqueda
+				//Avanza el Contexto y el AFD en paralelo
+				contexto.consumir(e);
 				afd.consumir(e);
+			}
 		}
 	}
 
@@ -67,13 +81,13 @@ public class Coordinador implements Mediator {
 	 */
 	public void stateBacktracked() {
 		stackCaminoPreambulo.pop();
-		preambulo.irAEstado((Integer) stackCaminoPreambulo.peek());
+		contexto.irAEstado((Integer) stackCaminoPreambulo.peek());
 
 		stackCaminoAFD.pop();
 		afd.irAEstado((Integer) stackCaminoAFD.peek());
 
 		//TODO Ver si esto se configura con un par�metro (property)
-		System.out.println("--------------------------------- STATE-BACKTRACKED (PRE=" + preambulo.getEstadoActual() +  "): " + this.estadoActual() + "--------------------------------");
+		System.out.println("--------------------------------- STATE-BACKTRACKED (PRE=" + contexto.getEstadoActual() +  "): " + this.estadoActual() + "--------------------------------");
 	}
 
 	/**
@@ -81,11 +95,11 @@ public class Coordinador implements Mediator {
 	 * en el que se encuentra el AFD
 	 */
 	public void stateAdvanced() {
-		stackCaminoPreambulo.push(preambulo.getEstadoActual());
+		stackCaminoPreambulo.push(contexto.getEstadoActual());
 		stackCaminoAFD.push(afd.getEstadoActual());
 
 		//TODO Ver si esto se configura con un par�metro (property)
-		System.out.println("--------------------------------- STATE-ADVANCED (PRE=" + preambulo.getEstadoActual() +  "): " + this.estadoActual() + "  --------------------------------");
+		System.out.println("--------------------------------- STATE-ADVANCED (PRE=" + contexto.getEstadoActual() +  "): " + this.estadoActual() + "  --------------------------------");
 	}
 
 	public void setAfd(AutomataVerificacion afd) {
@@ -96,8 +110,8 @@ public class Coordinador implements Mediator {
 		this.evb = evb;
 	}
 
-	public void setPreambulo(Preambulo preambulo) {
-		this.preambulo = preambulo;
+	public void setContexto(ContextoBusqueda preambulo) {
+		this.contexto = preambulo;
 	}
 
 	public void setSearch(DFSearchTesis search) {
@@ -105,6 +119,14 @@ public class Coordinador implements Mediator {
 	}
 
 	public boolean backtrackear() {
-		return ( preambulo.violado() );
+		return ( contexto.invalido() );
+	}
+	
+	public void setModoPreambulo() {
+		modo = MODO_PREAMBULO;
+	}
+
+	public void setModoContexto() {
+		modo = MODO_CONTEXTO;
 	}
 }

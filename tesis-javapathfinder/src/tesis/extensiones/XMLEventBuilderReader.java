@@ -15,6 +15,7 @@ public class XMLEventBuilderReader {
 
 		hs.add(new Evento("invoke", "open", "OPEN"));
 		hs.add(new Evento("invoke", "close", "CLOSE"));
+		hs.add(new Evento("invoke", "write", "WRITE"));
 
 		return hs;
 	}

@@ -1,4 +1,4 @@
-package tesis.Ejemplo_03;
+package tesis.Ejemplo_06;
 
 import gov.nasa.jpf.Config;
 import gov.nasa.jpf.JPF;
@@ -8,19 +8,23 @@ public class ejecutarEjemplo {
 	public static void main (String[] args) {
 		Coordinador c = new Coordinador();
 
-		PreambuloEjemplo03 pre = new PreambuloEjemplo03();
+		XMLContextoBusquedaReaderEj06 xmlpre = new XMLContextoBusquedaReaderEj06("pepito.xml");
+		ContextoBusqueda pre = new ContextoBusqueda(xmlpre);
 		c.setContexto(pre);
+		c.setModoContexto();
 		
-		Automata aut = new Automata();
+		XMLAFDReaderEj06 xmlafd = new XMLAFDReaderEj06("pepito.xml");
+		AutomataVerificacion aut = new AutomataVerificacion(xmlafd);
 		c.setAfd(aut);
 
-		EventBuilderEjemplo03 eb = new EventBuilderEjemplo03();
+		XMLEventBuilderReader xmleb = new XMLEventBuilderReader("pepito.xml"); 
+		EventBuilder eb = new EventBuilder(xmleb);
 		c.setEvb(eb);
 
 		Listener listener = new Listener(c);
 		
 		String[] a = new String[1];
-		a[0] = "tesis.Ejemplo_03.ModeloOpenClose";
+		a[0] = "tesis.Ejemplo_06.Modelo";
 	    Config conf = JPF.createConfig(a);
 
 	    // usamos nuestra busqueda
