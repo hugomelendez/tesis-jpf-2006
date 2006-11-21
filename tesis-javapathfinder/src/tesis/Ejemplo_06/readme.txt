@@ -1,4 +1,4 @@
-Ejemplo que verifia, usando un AFD y un ContextoBusqueda
+Ejemplo que verifica, usando un AFD y un ContextoBusqueda
 
 * Modelo:
 	Construye 3 Threads que, dentro de un while true, hace un OPEN, WRITE y CLOSE de un Canal compartido
