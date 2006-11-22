@@ -27,9 +27,14 @@ class Hilo implements Runnable {
 		c = canal;
 	}
 
+	void pena() {
+		
+	}
+	
 	public void run() {
 		while (true) {
 			c.open();
+			this.pena();
 			c.write();
 			c.close();
 		}

@@ -99,11 +99,17 @@ public abstract class VirtualInvocation extends InvokeInstruction {
     return mi.execute(ti);
   }
 
-  int getCalleeThis (ThreadInfo ti) {
+  /**
+   * TODO TESIS: Agregamos public para poder referenciarlo desde el Listener
+   */
+  public int getCalleeThis (ThreadInfo ti) {
     return ti.getCalleeThis( getArgSize());
   }
   
-  ClassInfo getCalleeClassInfo (KernelState ks, int objRef) {
+  /**
+   * TODO TESIS: Agregamos public para poder referenciarlo desde el Listener
+   */
+  public ClassInfo getCalleeClassInfo (KernelState ks, int objRef) {
     return ks.da.get(objRef).getClassInfo();
   }
   
