@@ -2,6 +2,8 @@ package tesis.extensiones;
 
 import java.util.Stack;
 
+import gov.nasa.jpf.jvm.JVM;
+import gov.nasa.jpf.jvm.bytecode.INVOKEVIRTUAL;
 import gov.nasa.jpf.jvm.bytecode.Instruction;
 
 /**
@@ -40,10 +42,11 @@ public class Coordinador implements Mediator {
 	 * Se ejecuta cada vez que el Listener escucha una nueva instruccion
 	 * Avanza el ContextoBusqueda y el AFD
 	 */
+	
 	public void ocurrioInstruccion(Instruction i) {
 		Evento e = evb.eventFrom(i);
 
-		//Solo para DEBUG
+		//Solo para LOGUEAR
 		if (e.esObservable()) {
 			System.out.println("EVENTO: " + e.label());
 		}
@@ -87,7 +90,7 @@ public class Coordinador implements Mediator {
 		afd.irAEstado((Integer) stackCaminoAFD.peek());
 
 		//TODO Ver si esto se configura con un par�metro (property)
-		System.out.println("--------------------------------- STATE-BACKTRACKED (PRE=" + contexto.getEstadoActual() +  "): " + this.estadoActual() + "--------------------------------");
+		System.out.println("--------------------------------- STATE-BACKTRACKED (CTX;JVM;AFD) " + contexto.getEstadoActual() +  ";" + this.estadoActual() + "--------------------------------");
 	}
 
 	/**
@@ -99,7 +102,7 @@ public class Coordinador implements Mediator {
 		stackCaminoAFD.push(afd.getEstadoActual());
 
 		//TODO Ver si esto se configura con un par�metro (property)
-		System.out.println("--------------------------------- STATE-ADVANCED (PRE=" + contexto.getEstadoActual() +  "): " + this.estadoActual() + "  --------------------------------");
+		System.out.println("--------------------------------- STATE-ADVANCED (CTX;JVM;AFD) " + contexto.getEstadoActual() +  ";" + this.estadoActual() + "--------------------------------");
 	}
 
 	public void setAfd(AutomataVerificacion afd) {
@@ -128,5 +131,21 @@ public class Coordinador implements Mediator {
 
 	public void setModoContexto() {
 		modo = MODO_CONTEXTO;
+	}
+
+	public void ocurriraInstruccion(JVM vm) {
+		/**
+		 * Esto es para determinar, en caso de una Virtual Invocation el OID y la clase del objeto asociado al metodo
+		 */
+		try {
+			if (vm.getLastInstruction().toString().contains("open") && vm.getLastInstruction().toString().contains("Ejemplo")) {
+				INVOKEVIRTUAL li = (INVOKEVIRTUAL) vm.getLastInstruction();
+				int oid = li.getCalleeThis(vm.getLastThreadInfo());
+				System.out.println("OID invocado = " + oid);
+				System.out.println("CLASE = " + li.getCalleeClassInfo(vm.getKernelState(), oid).getName());
+			}
+		} catch (Exception ex) {
+		}
+
 	}
 }
