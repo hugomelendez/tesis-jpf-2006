@@ -6,6 +6,7 @@ import gov.nasa.jpf.jvm.JVM;
 import gov.nasa.jpf.jvm.bytecode.INVOKEVIRTUAL;
 import gov.nasa.jpf.jvm.bytecode.Instruction;
 import gov.nasa.jpf.jvm.bytecode.InvokeInstruction;
+import gov.nasa.jpf.jvm.bytecode.VirtualInvocation;
 import gov.nasa.jpf.search.Search;
 
 /**
@@ -47,6 +48,14 @@ public class Listener extends PropertyListenerAdapter implements JPFListener {
 	 */
 	@Override
 	public final void instructionExecuted(JVM vm) {
+		//DEBUG
+		/*try {
+			if (vm.getLastInstruction() instanceof VirtualInvocation) {
+				System.out.println("DESPUES");
+			}
+		} catch (Exception ex) {
+		}
+*/
 		coord.ocurrioInstruccion(vm.getLastInstruction());
 	}
 	
@@ -55,6 +64,17 @@ public class Listener extends PropertyListenerAdapter implements JPFListener {
 	 * para poder determinar el OID y la CLASE del objeto sobre el cual se invocara el metodo
 	 */
 	public final void executeInstruction(JVM vm) {
+		//DEBUG
+		/*try {
+			if (vm.getLastInstruction() instanceof VirtualInvocation) {
+				INVOKEVIRTUAL li = (INVOKEVIRTUAL) vm.getLastInstruction();
+				int oid = li.getCalleeThis(vm.getLastThreadInfo());
+				System.out.println("ANTES");
+				System.out.println("                            OID invocado = " + oid + " de TIPO = " + li.getCalleeClassInfo(vm.getKernelState(), oid).getName());
+			}
+		} catch (Exception ex) {
+		}
+*/
 		coord.ocurriraInstruccion(vm);
 	}
 

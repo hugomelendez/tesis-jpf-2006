@@ -15,6 +15,10 @@ import gov.nasa.jpf.jvm.bytecode.Instruction;
  * objects. Knows and maintains its colleagues.
  */
 public class Coordinador implements Mediator {
+	//Contiene los estados visitados hasta el momento
+	//(cada estado es una composición de los estados de la VM y los AFDs)
+	private Hashtable<String, Integer> htEstadosVisitados = new Hashtable<String, Integer>();
+
 	private Stack<Object> stackCaminoPreambulo = new Stack<Object>();
 	private Stack<Object> stackCaminoAFD = new Stack<Object>();
 
@@ -22,10 +26,10 @@ public class Coordinador implements Mediator {
 	//private Listener lsn;
 
 	//Contiene las asociaciones de Clase con XMLAFDReader
-	private Hashtable htClaseAFD = new Hashtable();
+	private Hashtable<String, XMLAFDReader> htClaseAFD = new Hashtable<String, XMLAFDReader>();
 
 	//Contiene las asociaciones de OID con AFD
-	private Hashtable htOIDAFD = new Hashtable();
+	private Hashtable<Integer, AutomataVerificacion> htOIDAFD = new Hashtable<Integer, AutomataVerificacion>();
 	//Es el OID de la última ejecución de un VirtualInvocation de método
 	private int iOIDUltimaEjecucion = -1;
 
@@ -87,6 +91,10 @@ public class Coordinador implements Mediator {
 						if (htOIDAFD.containsKey(iOIDUltimaEjecucion)) {
 							AutomataVerificacion afdOID = (AutomataVerificacion) htOIDAFD.get(iOIDUltimaEjecucion);
 							afdOID.consumir(e);
+							//DEBUG
+							if (afdOID.estadoFinal()) {
+								System.out.println("Propiedad violada en AFD de Instancia (OID=" + iOIDUltimaEjecucion + ")");
+							}
 						}
 						iOIDUltimaEjecucion = -1;
 					}
@@ -105,6 +113,10 @@ public class Coordinador implements Mediator {
 					if (htOIDAFD.containsKey(iOIDUltimaEjecucion)) {
 						AutomataVerificacion afdOID = (AutomataVerificacion) htOIDAFD.get(iOIDUltimaEjecucion);
 						afdOID.consumir(e);
+						//DEBUG
+						if (afdOID.estadoFinal()) {
+							System.out.println("Propiedad violada en AFD de Instancia (OID=" + iOIDUltimaEjecucion + ")");
+						}
 					}
 					iOIDUltimaEjecucion = -1;
 				}
@@ -119,7 +131,20 @@ public class Coordinador implements Mediator {
 	 */
 	public String estadoActual() {
 		//TODO Hay que ver cómo se resuelve el tema del estado con los AFDs de Instancia!!!
-		return search.getVM().getStateId() + ";" + afd.getEstadoActual();
+		String strRes = new String();
+		
+		strRes = search.getVM().getStateId() + ";" + afd.getEstadoActual();
+		
+		if (htOIDAFD.size() > 0) {
+			AutomataVerificacion afdOID;
+			Iterator<AutomataVerificacion> it = htOIDAFD.values().iterator();
+			while (it.hasNext()) {
+				afdOID = it.next();
+				strRes = strRes + ";" + afdOID.getEstadoActual();
+			}
+		}
+		
+		return strRes;
 	}
 
 	/**
@@ -135,7 +160,7 @@ public class Coordinador implements Mediator {
 		afd.irAEstado((Integer) stackCaminoAFD.peek());
 
 		//TODO Ver si esto se configura con un parï¿½metro (property)
-		System.out.println("--------------------------------- STATE-BACKTRACKED (CTX;JVM;AFD) " + contexto.getEstadoActual() +  ";" + this.estadoActual() + "--------------------------------");
+		System.out.println("--------------------------------- STATE-BACKTRACKED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoActual() + "--------------------------------");
 	}
 
 	/**
@@ -148,7 +173,7 @@ public class Coordinador implements Mediator {
 		stackCaminoAFD.push(afd.getEstadoActual());
 
 		//TODO Ver si esto se configura con un parï¿½metro (property)
-		System.out.println("--------------------------------- STATE-ADVANCED (CTX;JVM;AFD) " + contexto.getEstadoActual() +  ";" + this.estadoActual() + "--------------------------------");
+		System.out.println("--------------------------------- STATE-ADVANCED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoActual() + "--------------------------------");
 	}
 
 	public void setAfd(AutomataVerificacion afd) {
@@ -199,8 +224,13 @@ public class Coordinador implements Mediator {
 		this.search = search;
 	}
 
+	/**
+	 * Decide si hay que backtrackear la rama actual de la búsqueda
+	 * en función de si se invalidó el contexto o si es estado actual ya es conocido  
+	 * @return
+	 */
 	public boolean backtrackear() {
-		return ( contexto.invalido() );
+		return ( contexto.invalido() || htEstadosVisitados.containsKey(estadoActual()));
 	}
 	
 	public void setModoPreambulo() {
@@ -212,21 +242,25 @@ public class Coordinador implements Mediator {
 	}
 
 	public void ocurriraInstruccion(JVM vm) {
-		//TODO Adaptar esto
 		/**
 		 * Esto es para determinar, en caso de una Virtual Invocation el OID y la clase del objeto asociado al metodo
 		 */
+		//DEBUG
 		try {
-			if (vm.getLastInstruction().toString().contains("open") && vm.getLastInstruction().toString().contains("Ejemplo")) {
+			if (vm.getLastInstruction().toString().contains("tesis") && vm.getLastInstruction() instanceof INVOKEVIRTUAL) {
 				INVOKEVIRTUAL li = (INVOKEVIRTUAL) vm.getLastInstruction();
 				int oid = li.getCalleeThis(vm.getLastThreadInfo());
-				System.out.println("OID invocado = " + oid);
-				System.out.println("CLASE = " + li.getCalleeClassInfo(vm.getKernelState(), oid).getName());
-				
+				System.out.println("OID invocado = " + oid + " de TIPO = " + li.getCalleeClassInfo(vm.getKernelState(), oid).getName());
+
 				iOIDUltimaEjecucion = oid; 
 			}
 		} catch (Exception ex) {
+			System.out.println(ex);
 		}
 
+	}
+
+	public void registrarEstadoVistado() {
+		htEstadosVisitados.put(estadoActual(), 0);
 	}
 }

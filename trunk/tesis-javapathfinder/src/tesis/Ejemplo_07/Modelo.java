@@ -44,6 +44,7 @@ class Hilo implements Runnable {
 public class Modelo {
 	public static void main(String[] args) {
 		Canal c = new Canal();
+		c.write();
 		
 		//INI Para probar el released de los objetos
 		Canal c2 = new Canal();
