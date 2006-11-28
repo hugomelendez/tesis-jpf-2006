@@ -31,4 +31,11 @@ public class Transicion {
 	public Evento evento() {
 		return evento;
 	}
+
+	@Override
+	public String toString() {
+		return "Trns: " + estadoDesde + " " + estadoHacia + " " + evento;
+	}
+
+	
 }

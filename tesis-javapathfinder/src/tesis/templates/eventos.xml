@@ -1,26 +1,22 @@
 <?xml version="1.0" ?>
 <ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
-	<eventosObservables>
-		<evento>
-			<label>A</label>
-			<instruction>
-				<type>invoke</type>
-				<name>open</name>
-			</instruction>
-		</evento>
-		<evento>
-			<label>B</label>
-			<instruction>
-				<type>invoke</type>
-				<name>close</name>
-			</instruction>
-		</evento>
-	</eventosObservables>
-	<AFD>
-		<estados>
-		</estados>
-		<transicion>A</transicion>
-		<transicion>B</transicion>
-	</AFD>
+	<TypeStateProperty class="tesis.Ejemplo.Canal">
+	    <eventos>
+	        <evento type="invokeInstruction" name="open" label="O" />
+	        <evento type="invokeInstruction" name="write" label="W" />
+	        <evento type="invokeInstruction" name="close" label="C" />
+	    </eventos>
+	    <estados>
+	        <estado label="0" inicial="true" />
+	        <estado label="1" />
+	        <estado label="999" final="true" />
+	    </estados>
+	    <transiciones>
+	        <transicion desde="0" hasta="1" evento="C" />
+	        <transicion desde="1" hasta="0" evento="O" />
+	        <transicion desde="1" hasta="1" evento="C" />
+	        <transicion desde="1" hasta="999" evento="W" />
+	    </transiciones>
+	</TypeStateProperty>
 </ProblemDefinition>
