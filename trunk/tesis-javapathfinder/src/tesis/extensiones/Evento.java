@@ -71,8 +71,8 @@ public class Evento {
 	@Override
 	public String toString() {
 		return 
-			"type => " + this.type +
-			"keyword => " + this.keyword +
+			"Evento: type => " + this.type + " " +
+			"keyword => " + this.keyword + " " +
 			"label => " + this.label;
 	}
 }

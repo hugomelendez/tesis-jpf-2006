@@ -20,7 +20,7 @@ public class EventBuilder {
 		xml = xmlEB;
 		eventos = xml.eventos();
 	}
-	
+
 	/**
 	 * TODO escribir mejor esto
 	 * 
