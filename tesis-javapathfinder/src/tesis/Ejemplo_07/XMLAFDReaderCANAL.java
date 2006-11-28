@@ -26,12 +26,14 @@ public class XMLAFDReaderCANAL extends XMLAFDReader {
 	public HashSet<Transicion> transiciones() {
 		HashSet<Transicion> hs = new HashSet<Transicion>();
 
-		hs.add(new Transicion(0, 1, new Evento("CLOSE")));
+		/*hs.add(new Transicion(0, 1, new Evento("CLOSE")));
 		
 		hs.add(new Transicion(1, 0, new Evento("OPEN")));
 		hs.add(new Transicion(1, 1, new Evento("CLOSE")));
 		hs.add(new Transicion(1, 999, new Evento("WRITE")));
-		
+		*/
+		hs.add(new Transicion(0, 1, new Evento("OPEN")));
+		hs.add(new Transicion(1, 999, new Evento("WRITE")));
 		return hs;
 	}
 

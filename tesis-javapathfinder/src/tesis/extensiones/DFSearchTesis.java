@@ -31,8 +31,6 @@ import java.util.Hashtable;
 public class DFSearchTesis extends gov.nasa.jpf.search.Search {
 	Coordinador coord;
 
-	private Hashtable htEstadoCompuesto = new Hashtable();
-
 	public DFSearchTesis(Config config, JVM vm) {
 		super(config, vm);
 
@@ -72,7 +70,7 @@ public class DFSearchTesis extends gov.nasa.jpf.search.Search {
 			// || estado VM es final
 			// || el coordinador lo indica (ContextoBusqueda no se cumplio)
 			// --> backtrack
-			if ( (!isNewState && htEstadoCompuesto.containsKey(coord.estadoActual()))
+			if ( !isNewState
 					|| isEndState
 					|| coord.backtrackear() ) {
 
@@ -88,7 +86,7 @@ public class DFSearchTesis extends gov.nasa.jpf.search.Search {
 				notifyStateBacktracked();
 			}
 
-			htEstadoCompuesto.put(coord.estadoActual(), 0);
+			coord.registrarEstadoVistado();
 			if (forward()) {
 				coord.stateAdvanced();
 				

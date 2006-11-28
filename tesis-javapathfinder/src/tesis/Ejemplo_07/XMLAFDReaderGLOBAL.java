@@ -23,16 +23,16 @@ public class XMLAFDReaderGLOBAL extends XMLAFDReader {
 		//return 2;
 	}
 
-	//NO HACE NADA ES PARA VERIFICAR QUE SE USEN SOLO LOS DE INSTANCIA!!!
 	public HashSet<Transicion> transiciones() {
 		HashSet<Transicion> hs = new HashSet<Transicion>();
 
-		hs.add(new Transicion(0, 1, new Evento("CLOSE")));
+		//NO HACE NADA ES PARA VERIFICAR QUE SE USEN SOLO LOS DE INSTANCIA!!!
+/*		hs.add(new Transicion(0, 1, new Evento("CLOSE")));
 		
 		hs.add(new Transicion(1, 0, new Evento("OPEN")));
 		hs.add(new Transicion(1, 1, new Evento("CLOSE")));
 		hs.add(new Transicion(1, 999, new Evento("WRITE")));
-
+*/
 		return hs;
 	}
 

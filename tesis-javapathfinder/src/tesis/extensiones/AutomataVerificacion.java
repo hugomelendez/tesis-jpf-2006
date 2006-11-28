@@ -62,6 +62,8 @@ public class AutomataVerificacion {
 			if (tran.estadoDesde() == estadoActual && tran.evento().equals(e)) {
 				estadoActual = tran.estadoHacia();
 				transicionValida = true;
+				//DEBUG
+				System.out.println("AFD avanza: " + tran.estadoDesde() + " -> " + tran.estadoHacia());
 			}
 		}
 	}
