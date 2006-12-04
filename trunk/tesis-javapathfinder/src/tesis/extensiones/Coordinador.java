@@ -1,5 +1,6 @@
 package tesis.extensiones;
 
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Stack;
@@ -30,7 +31,12 @@ public class Coordinador implements Mediator {
 
 	//Contiene las asociaciones de OID con AFD
 	private Hashtable<Integer, AutomataVerificacion> htOIDAFD = new Hashtable<Integer, AutomataVerificacion>();
-	//Es el OID de la última ejecución de un VirtualInvocation de método
+	//Contiene la colección de caminos (stack) de cada AFD de instancia
+	//(para soportar los backtracks de la JVM)
+	private Hashtable<Integer, Stack<Object>> htOIDStack = new Hashtable<Integer, Stack<Object>>();
+
+	//OID de la última ejecución de un VirtualInvocation de método
+	//TODO Tesis: Mejorar el manejo de este id especial 
 	private int iOIDUltimaEjecucion = -1;
 
 	private AutomataVerificacion afd;
@@ -85,7 +91,11 @@ public class Coordinador implements Mediator {
 				else {
 					//AFD GLOBALES
 					afd.consumir(e);
-					
+					//DEBUG
+					if (afd.estadoFinal()) {
+						System.out.println("Propiedad violada en AFD GLOBAL");
+					}
+
 					//AFD de INSTANCIA
 					if (iOIDUltimaEjecucion != -1) {
 						if (htOIDAFD.containsKey(iOIDUltimaEjecucion)) {
@@ -107,6 +117,10 @@ public class Coordinador implements Mediator {
 
 				//AFD GLOBALES
 				afd.consumir(e);
+				//DEBUG
+				if (afd.estadoFinal()) {
+					System.out.println("Propiedad violada en AFD GLOBAL");
+				}
 
 				//AFD de INSTANCIA
 				if (iOIDUltimaEjecucion != -1) {
@@ -125,12 +139,11 @@ public class Coordinador implements Mediator {
 	}
 
 	/**
-	 * Devuelve una representacion del estado combinado del Search y el AFD
+	 * Devuelve una representacion del estado combinado de JVM;AFD(global);AFDs(instancia)
 	 * 
 	 * @return String
 	 */
 	public String estadoActual() {
-		//TODO Hay que ver cómo se resuelve el tema del estado con los AFDs de Instancia!!!
 		String strRes = new String();
 		
 		strRes = search.getVM().getStateId() + ";" + afd.getEstadoActual();
@@ -148,8 +161,9 @@ public class Coordinador implements Mediator {
 	}
 
 	/**
-	 * El Search notifica al coordinador que se backtrackeï¿½ el ï¿½rbol. Indica al
-	 * AFD que regrese al estado corresp. al estado al que se backtrackeï¿½
+	 * El Search notifica al coordinador que se backtrackeo el arbol.
+	 * Backtrackea todos los AFDs (global y los de instancia) para que regresen al estado corresp.
+	 * al estado (JVM) al que se backtrackeo
 	 */
 	public void stateBacktracked() {
 		//TODO Hay que ver de backtrackear también los AFDs de Instancia!!!
@@ -159,20 +173,48 @@ public class Coordinador implements Mediator {
 		stackCaminoAFD.pop();
 		afd.irAEstado((Integer) stackCaminoAFD.peek());
 
-		//TODO Ver si esto se configura con un parï¿½metro (property)
+		//Se backtrackea desde el stack correspondiente, el estado de c/AFD de instancia 
+		if (htOIDAFD.size() > 0) {
+			AutomataVerificacion afdOID;
+
+			Enumeration<Integer> enume = htOIDAFD.keys();
+			while (enume.hasMoreElements()) {
+				int oid = enume.nextElement();
+
+				afdOID = htOIDAFD.get(oid);
+				Stack<Object> stkAfdOid = htOIDStack.get(oid);
+				stkAfdOid.pop();
+				afdOID.irAEstado((Integer) stkAfdOid.peek());
+			}
+		}
+		
+		//TODO Ver si esto se configura con un parametro (property)
 		System.out.println("--------------------------------- STATE-BACKTRACKED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoActual() + "--------------------------------");
 	}
 
 	/**
-	 * El Search notifica al coordinador que se avanzï¿½ el ï¿½rbol. Agrega a la pila el estado
+	 * El Search notifica al coordinador que avanzo el arbol. Agrega a la pila el estado
 	 * en el que se encuentra el AFD
 	 */
 	public void stateAdvanced() {
-		//TODO Hay que ver de mantener los STACKS de los AFDs de Instancia!!!
 		stackCaminoPreambulo.push(contexto.getEstadoActual());
 		stackCaminoAFD.push(afd.getEstadoActual());
 
-		//TODO Ver si esto se configura con un parï¿½metro (property)
+		//Se registran en el stack correspondiente, el estado de c/AFD de instancia 
+		if (htOIDAFD.size() > 0) {
+			AutomataVerificacion afdOID;
+
+			Enumeration<Integer> enume = htOIDAFD.keys();
+			while (enume.hasMoreElements()) {
+				int oid = enume.nextElement();
+
+				afdOID = htOIDAFD.get(oid);
+				Stack<Object> stkAfdOid = htOIDStack.get(oid);
+				stkAfdOid.push(afdOID.getEstadoActual());
+			}
+		}
+		
+		//TODO Ver si esto se configura con un parametro (property)
 		System.out.println("--------------------------------- STATE-ADVANCED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoActual() + "--------------------------------");
 	}
 
@@ -196,8 +238,13 @@ public class Coordinador implements Mediator {
 
 		if (htClaseAFD.containsKey(strClase)) {
 			XMLAFDReader xmlAFD = (XMLAFDReader) htClaseAFD.get(strClase);
+			//Se crea el AFD correspondiente
 			AutomataVerificacion afd = new AutomataVerificacion(xmlAFD);
 			htOIDAFD.put(vm.getLastElementInfo().getIndex(), afd);
+			
+			//Se crea su stack de estados (para backtrack) asociados
+			Stack<Object> stkAfdOid = new Stack<Object>();
+			htOIDStack.put(vm.getLastElementInfo().getIndex(), stkAfdOid);
 		}
 	}
 
@@ -208,7 +255,9 @@ public class Coordinador implements Mediator {
 		int iOID = vm.getLastElementInfo().getIndex();
 
 		if (htOIDAFD.containsKey(iOID)) {
+			//Se elimina el AFD de la colección y su stack de estados asociado
 			htOIDAFD.remove(iOID);
+			htOIDStack.remove(iOID);
 		}
 	}
 
@@ -254,6 +303,7 @@ public class Coordinador implements Mediator {
 
 				iOIDUltimaEjecucion = oid; 
 			}
+			else iOIDUltimaEjecucion = -1;
 		} catch (Exception ex) {
 			System.out.println(ex);
 		}
