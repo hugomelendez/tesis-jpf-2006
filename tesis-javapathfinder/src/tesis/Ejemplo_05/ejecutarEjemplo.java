@@ -2,24 +2,27 @@ package tesis.Ejemplo_05;
 
 import gov.nasa.jpf.Config;
 import gov.nasa.jpf.JPF;
-import tesis.extensiones.*;
+import tesis.extensiones.AutomataVerificacion;
+import tesis.extensiones.ContextoBusqueda;
+import tesis.extensiones.Coordinador;
+import tesis.extensiones.DFSearchTesis;
+import tesis.extensiones.EventBuilder;
+import tesis.extensiones.Listener;
+import tesis.extensiones.XMLAFDReader;
+import tesis.extensiones.XMLContextoBusquedaReader;
+import tesis.extensiones.XMLEventBuilderReader;
 
 public class ejecutarEjemplo {
 	public static void main (String[] args) {
 		Coordinador c = new Coordinador();
 
-		XMLContextoBusquedaReader xmlpre = new XMLContextoBusquedaReader("pepito.xml");
-		ContextoBusqueda pre = new ContextoBusqueda(xmlpre);
-		c.setContexto(pre);
-		c.setModoContexto();
-		
-		XMLAFDReader xmlafd = new XMLAFDReader("pepito.xml");
-		AutomataVerificacion aut = new AutomataVerificacion(xmlafd);
-		c.setAfd(aut);
-
-		XMLEventBuilderReader xmleb = new XMLEventBuilderReader("pepito.xml"); 
-		EventBuilder eb = new EventBuilder(xmleb);
+		EventBuilder eb = new EventBuilder(new XMLEventBuilderReader("Events.xml"));
 		c.setEvb(eb);
+
+		c.setContexto(new ContextoBusqueda(new XMLContextoBusquedaReader("ProblemContext.xml", eb)));
+		c.setModoContexto();
+
+		c.setAfd(new AutomataVerificacion(new XMLAFDReader("ProblemProperty.xml", eb)));
 
 		Listener listener = new Listener(c);
 		

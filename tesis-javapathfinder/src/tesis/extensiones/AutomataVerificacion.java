@@ -27,17 +27,15 @@ import java.util.Iterator;
  * 
  */
 public class AutomataVerificacion {
-	private XMLAFDReader xml;
 	private HashSet<Transicion> setTransiciones;
 	private HashSet<Integer> setEstadosFinales;  
 	protected int estadoActual;
 	protected boolean blnEstadoFinal = false;
 	
 	public AutomataVerificacion (XMLAFDReader xmlafd) {
-		xml = xmlafd;
-		estadoActual = xml.estadoInicial();
-		setTransiciones = xml.transiciones();
-		setEstadosFinales = xml.estadosFinales();
+		estadoActual = xmlafd.estadoInicial();
+		setTransiciones = xmlafd.transiciones();
+		setEstadosFinales = xmlafd.estadosFinales();
 	}
 	
 	public final void irAEstado(int est){
