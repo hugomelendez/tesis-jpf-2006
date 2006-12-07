@@ -5,6 +5,9 @@ import gov.nasa.jpf.jvm.bytecode.Instruction;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import org.dom4j.Attribute;
+import org.dom4j.Element;
+
 
 /**
  * Builder de Eventos
@@ -13,12 +16,10 @@ import java.util.Iterator;
  * eventos a partir de instrucciones  
  */
 public class EventBuilder {
-	private XMLEventBuilderReader xml;
 	private HashSet<Evento> eventos;
-	
+
 	public EventBuilder (XMLEventBuilderReader xmlEB) {
-		xml = xmlEB;
-		eventos = xml.eventos();
+		eventos = xmlEB.eventos();
 	}
 
 	/**
@@ -41,6 +42,34 @@ public class EventBuilder {
 		while (it.hasNext()) {
 			e = it.next();
 			if ( i.toString().contains(e.type()) && i.toString().contains(e.keyword()) ) {
+				ret = e;
+				break;
+			}
+		}
+
+		return ret;
+	}
+
+	/**
+	 * TODO escribir mejor esto
+	 * 
+	 * Construye Eventos partiendo de un label
+	 * De los eventos definidos, elige el q corresponde segun el label (debe ser unico) 
+	 * El primer evento q contenga un match es el elegido 
+	 * 
+	 * @param eventLabel String utilizada para determinar el evento
+	 * @return Evento construido a partir de eventLabel
+	 */
+	public Evento eventFrom(String eventLabel) {
+		Evento ret = new Evento();
+		Evento e;
+		Iterator<Evento> it;
+		
+		it = eventos.iterator();
+		
+		while (it.hasNext()) {
+			e = it.next();
+			if ( e.label() == eventLabel) {
 				ret = e;
 				break;
 			}

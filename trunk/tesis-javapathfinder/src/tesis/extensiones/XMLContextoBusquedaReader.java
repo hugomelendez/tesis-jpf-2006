@@ -1,21 +1,18 @@
 package tesis.extensiones;
 
 import java.util.HashSet;
-import java.util.Iterator;
-
-import org.dom4j.Attribute;
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 // TODO Levantar los datos del XML
-public class XMLContextoBusquedaReader {
-	String nmXML;
-	Document document;
-	
+public class XMLContextoBusquedaReader extends XMLReader {
+	EventBuilder eventBuilder;
+
+	public XMLContextoBusquedaReader(String file, EventBuilder eb) {
+		super(file);
+		eventBuilder = eb;
+	}
+
 	public XMLContextoBusquedaReader(String file) {
-		nmXML = file;
+		super(file);
 	}
 
 	public int estadoInicial() {
@@ -38,11 +35,6 @@ public class XMLContextoBusquedaReader {
 	public Integer estadoFinal() {
 		return (new Integer(2));
 		//return (new Integer(0));
-	}
-
-	public void openFile() throws DocumentException {
-		SAXReader reader = new SAXReader();
-        document = reader.read(nmXML);
 	}
 
 }

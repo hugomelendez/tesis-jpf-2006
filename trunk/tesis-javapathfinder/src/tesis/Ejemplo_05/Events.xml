@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
+	<events>
+	    <event type="invokeInstruction" name="open" label="O" />
+	    <event type="invokeInstruction" name="write" label="W" />
+	    <event type="invokeInstruction" name="close" label="C" />
+	</events>
+</ProblemDefinition>
