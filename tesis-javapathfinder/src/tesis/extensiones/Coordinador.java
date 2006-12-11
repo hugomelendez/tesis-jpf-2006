@@ -296,8 +296,11 @@ public class Coordinador implements Mediator {
 		 */
 		//DEBUG
 		try {
-			if (vm.getLastInstruction().toString().contains("tesis") && vm.getLastInstruction() instanceof INVOKEVIRTUAL) {
+			//if (vm.getLastInstruction().toString().contains("tesis") && vm.getLastInstruction() instanceof INVOKEVIRTUAL) {
+			if (vm.getLastInstruction() instanceof INVOKEVIRTUAL) {
 				INVOKEVIRTUAL li = (INVOKEVIRTUAL) vm.getLastInstruction();
+				//TODO: RS, ver si se puede investigar directamente por el objeto mname 
+				//li.mname.toString()
 				int oid = li.getCalleeThis(vm.getLastThreadInfo());
 				System.out.println("OID invocado = " + oid + " de TIPO = " + li.getCalleeClassInfo(vm.getKernelState(), oid).getName());
 
@@ -307,7 +310,6 @@ public class Coordinador implements Mediator {
 		} catch (Exception ex) {
 			System.out.println(ex);
 		}
-
 	}
 
 	public void registrarEstadoVistado() {
