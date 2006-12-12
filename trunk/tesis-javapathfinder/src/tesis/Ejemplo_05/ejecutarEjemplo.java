@@ -14,15 +14,21 @@ import tesis.extensiones.XMLEventBuilderReader;
 
 public class ejecutarEjemplo {
 	public static void main (String[] args) {
-		Coordinador c = new Coordinador();
+		// Path para acceder a este ejemplo, es el prefijo usado para leer los xmls
+		// WinXP
+		// String path = ".\\src\\tesis\\Ejemplo_05\\";
+		// Linux
+		String path = "./src/tesis/Ejemplo_05/";
 
-		EventBuilder eb = new EventBuilder(new XMLEventBuilderReader("Events.xml"));
+		Coordinador c = new Coordinador();
+		
+		EventBuilder eb = new EventBuilder(new XMLEventBuilderReader(path + "Events.xml"));
 		c.setEvb(eb);
 
-		c.setContexto(new ContextoBusqueda(new XMLContextoBusquedaReader("ProblemContext.xml", eb)));
+		c.setContexto(new ContextoBusqueda(new XMLContextoBusquedaReader(path + "ProblemContext.xml", eb)));
 		c.setModoContexto();
 
-		c.setAfd(new AutomataVerificacion(new XMLAFDReader("ProblemProperty.xml", eb)));
+		c.setAfd(new AutomataVerificacion(new XMLAFDReader(path + "ProblemProperty.xml", eb)));
 
 		Listener listener = new Listener(c);
 		
