@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
-  <events>
-    <event>
-      <label>label</label>
-      <instruction>invoke</instruction>
-    </event>
-  </events>
+	<SearchContext>
+	    <states>
+	        <state label="0" start="true" />
+	        <state label="1" />
+	        <state label="2" final="true" />
+	    </states>
+	    <transitions>
+	        <transition from="0" to="1" labelEvent="O" />
+	        <transition from="1" to="2" labelEvent="O" />
+	        <transition from="1" to="0" labelEvent="C" />
+
+	        <transition from="2" to="1" labelEvent="C" />
+
+			<!-- No me interesa el WRITE (rulo en c/estado) -->
+	        <transition from="0" to="0" labelEvent="W" />
+	        <transition from="1" to="1" labelEvent="W" />
+	        <transition from="2" to="2" labelEvent="W" />
+	    </transitions>
+	</SearchContext>
 </ProblemDefinition>

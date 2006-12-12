@@ -5,9 +5,6 @@ import gov.nasa.jpf.jvm.bytecode.Instruction;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import org.dom4j.Attribute;
-import org.dom4j.Element;
-
 
 /**
  * Builder de Eventos
@@ -69,12 +66,17 @@ public class EventBuilder {
 		
 		while (it.hasNext()) {
 			e = it.next();
-			if ( e.label() == eventLabel) {
+			if ( e.label().equals(eventLabel)) {
 				ret = e;
 				break;
 			}
 		}
 
 		return ret;
+	}
+
+	// DEBUG borrar si no es necesario 
+	public HashSet<Evento> eventos() {
+		return eventos;
 	}
 }

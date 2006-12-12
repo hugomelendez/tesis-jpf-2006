@@ -7,7 +7,6 @@ import java.util.List;
 import org.dom4j.Attribute;
 import org.dom4j.Element;
 
-// TODO Levantar los datos del XML
 public class XMLAFDReader extends XMLReader {
 	final String TYPE_STATE_PROP_TAG = "//TypeStateProperty";
 	final String TYPE_STATE_PROP_TAG_CLASS_ATT = "class";
@@ -78,7 +77,6 @@ public class XMLAFDReader extends XMLReader {
 			Evento e = eventBuilder.eventFrom(((Attribute)foo.attribute(TRANSITION_TAG_LABEL_ATT)).getValue());
 
 			Transicion t = new Transicion(desde, hasta, e);
-			System.out.println(t);
 
 			hs.add(t);
 		}
