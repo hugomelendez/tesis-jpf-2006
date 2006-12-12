@@ -12,11 +12,11 @@ public abstract class XMLReader {
 	 * @param file
 	 */
 	public XMLReader(String file) {
-		try {
-			openFile(file);
-		} catch (DocumentException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			openFile(file);
+//		} catch (DocumentException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	/**
