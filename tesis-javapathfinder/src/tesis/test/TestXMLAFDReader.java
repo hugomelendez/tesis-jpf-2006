@@ -8,7 +8,7 @@ public class TestXMLAFDReader {
 
 	public static void main(String[] args) {
 		// WinXP
-		// String path = ".\\src\\tesis\\Ejemplo_05\\";
+//		 String path = ".\\src\\tesis\\Ejemplo_05\\";
 		// Linux
 		String path = "./src/tesis/Ejemplo_05/";
 		EventBuilder eb = new EventBuilder(new XMLEventBuilderReader(path + "Events.xml"));
