@@ -1,13 +1,13 @@
 package tesis.extensiones;
 
+import gov.nasa.jpf.jvm.JVM;
+import gov.nasa.jpf.jvm.bytecode.INVOKEVIRTUAL;
+import gov.nasa.jpf.jvm.bytecode.Instruction;
+
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Stack;
-
-import gov.nasa.jpf.jvm.JVM;
-import gov.nasa.jpf.jvm.bytecode.INVOKEVIRTUAL;
-import gov.nasa.jpf.jvm.bytecode.Instruction;
 
 /**
  * Coordinador entre todos los objetos
@@ -26,8 +26,8 @@ public class Coordinador implements Mediator {
 	//Por ahora no es necesario que conozca al Listener
 	//private Listener lsn;
 
-	//Contiene las asociaciones de Clase con XMLAFDReader
-	private Hashtable<String, XMLAFDReader> htClaseAFD = new Hashtable<String, XMLAFDReader>();
+	//Contiene las asociaciones de Clase con TypeStatePropertyTemplate
+	private Hashtable<String, TypeStatePropertyTemplate> htClaseAFD = new Hashtable<String, TypeStatePropertyTemplate>();
 
 	//Contiene las asociaciones de OID con AFD
 	private Hashtable<Integer, AutomataVerificacion> htOIDAFD = new Hashtable<Integer, AutomataVerificacion>();
@@ -223,11 +223,11 @@ public class Coordinador implements Mediator {
 	}
 
 	/**
-	 * Guarda una asociación de xmlAFDReader con clase
+	 * Guarda una asociación de TypeStatePropertyTemplate con clase
 	 * La utilizará para crear los AFDs para cada instancia de dicha clase
 	 */
-	public void agregarTipoAFD(XMLAFDReader xmlAFD, String clase) {
-		htClaseAFD.put(clase, xmlAFD); 
+	public void agregarTipoAFD(TypeStatePropertyTemplate tpl, String clase) {
+		htClaseAFD.put(clase, tpl); 
 	}
 
 	/**
@@ -237,9 +237,9 @@ public class Coordinador implements Mediator {
 		String strClase = vm.getLastElementInfo().getClassInfo().getName();
 
 		if (htClaseAFD.containsKey(strClase)) {
-			XMLAFDReader xmlAFD = (XMLAFDReader) htClaseAFD.get(strClase);
+			TypeStatePropertyTemplate tpl = (TypeStatePropertyTemplate) htClaseAFD.get(strClase);
 			//Se crea el AFD correspondiente
-			AutomataVerificacion afd = new AutomataVerificacion(xmlAFD);
+			AutomataVerificacion afd = new AutomataVerificacion(tpl);
 			htOIDAFD.put(vm.getLastElementInfo().getIndex(), afd);
 			
 			//Se crea su stack de estados (para backtrack) asociados
@@ -314,5 +314,44 @@ public class Coordinador implements Mediator {
 
 	public void registrarEstadoVistado() {
 		htEstadosVisitados.put(estadoActual(), 0);
+	}
+
+	/**
+	 * Carga los 3 XML de configuracion
+	 * TODO: hacer un overload sin searchContext, no siempre es necesario cargar uno
+	 * 
+	 * @param eventsFile
+	 * @param propertiesFile
+	 * @param searchContextFile
+	 */
+	public void loadConfiguration(String eventsFile, String propertiesFile, String searchContextFile) {
+		EventBuilder eb = new EventBuilder(new XMLEventBuilderReader(eventsFile));
+		this.setEvb(eb);
+
+		this.setContexto(new ContextoBusqueda(new XMLContextoBusquedaReader(searchContextFile, eb)));
+		// TODO: esto hay q setearlo en el XML para q sepa si es Preambulo o Contexto
+		this.setModoContexto();
+
+		this.setProperties(new XMLAFDReader(propertiesFile, eb));
+	}
+
+	/**
+	 * Carga todas las propiedades TypeState y las Globals
+	 * @param reader
+	 */
+	private void setProperties(XMLAFDReader reader) {
+		String type;
+		Iterator<String> it;
+
+		// TypeStateProperties
+		it = reader.getClases().iterator();
+		while (it.hasNext()) {
+			type = it.next();
+			TypeStatePropertyTemplate tpl = new TypeStatePropertyTemplate(type, reader);
+			this.agregarTipoAFD(tpl, type);
+		}
+
+		// GlobalProperties
+		this.setAfd(new AutomataVerificacion(reader));
 	}
 }

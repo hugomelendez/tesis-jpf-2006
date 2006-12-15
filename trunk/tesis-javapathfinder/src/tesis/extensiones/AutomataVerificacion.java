@@ -27,24 +27,35 @@ import java.util.Iterator;
  * 
  */
 public class AutomataVerificacion {
-	private HashSet<Transicion> setTransiciones;
-	private HashSet<Integer> setEstadosFinales;  
+	private HashSet<Transicion> transiciones;
+	private HashSet<Integer> estadosFinales;  
 	protected int estadoActual;
 	protected boolean blnEstadoFinal = false;
 	
 	public AutomataVerificacion (XMLAFDReader xmlafd) {
 		estadoActual = xmlafd.estadoInicial();
-		setTransiciones = xmlafd.transiciones();
-		setEstadosFinales = xmlafd.estadosFinales();
+		transiciones = xmlafd.transiciones();
+		estadosFinales = xmlafd.estadosFinales();
 	}
 	
+	/**
+	 * Constructor
+	 * Crea el AFD basandose en la informacion obtenida de un TypeStatePropertyTemplate
+	 * @param tpl
+	 */
+	public AutomataVerificacion(TypeStatePropertyTemplate tpl) {
+		estadoActual = tpl.estadoInicial();
+		transiciones = tpl.transiciones();
+		estadosFinales = tpl.estadosFinales();
+	}
+
 	public final void irAEstado(int est){
 		System.out.println("AFD BACKTRACK al estado " + est);
 		estadoActual = est;
 	}
 
 	public final boolean estadoFinal() {
-		return setEstadosFinales.contains(new Integer(estadoActual));
+		return estadosFinales.contains(new Integer(estadoActual));
 	}
 
 	public void consumir (Evento e) {
@@ -52,7 +63,7 @@ public class AutomataVerificacion {
 		Iterator<Transicion> it;
 		boolean transicionValida = false;
 		
-		it = setTransiciones.iterator();
+		it = transiciones.iterator();
 		
 		//System.out.println("EVENTO: " + e.label());
 		while (it.hasNext() && !transicionValida) {
