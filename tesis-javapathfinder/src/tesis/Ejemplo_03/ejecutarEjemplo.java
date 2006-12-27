@@ -6,16 +6,14 @@ import tesis.extensiones.*;
 
 public class ejecutarEjemplo {
 	public static void main (String[] args) {
+		// Path para acceder a este ejemplo, es el prefijo usado para leer los xmls
+		// WinXP
+//		 String path = ".\\src\\tesis\\Ejemplo_03\\";
+		// Linux
+		String path = "./src/tesis/Ejemplo_03/";
+
 		Coordinador c = new Coordinador();
-
-		PreambuloEjemplo03 pre = new PreambuloEjemplo03();
-		c.setContexto(pre);
-		
-		Automata aut = new Automata();
-		c.setAfd(aut);
-
-		EventBuilderEjemplo03 eb = new EventBuilderEjemplo03();
-		c.setEvb(eb);
+		c.loadConfiguration(path + "Events.xml", path + "ProblemProperty.xml", path + "ProblemContext.xml");
 
 		Listener listener = new Listener(c);
 		

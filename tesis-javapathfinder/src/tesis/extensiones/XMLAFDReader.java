@@ -12,23 +12,29 @@ public class XMLAFDReader extends XMLReader {
 	final String TYPE_STATE_PROP_TAG = "//TypeStateProperty";
 	final String TYPE_STATE_PROP_TAG_CLASS_ATT = "class";
 
+	final String GLOBAL_PROP_TAG = "//GlobalProperty";
+
 	final String STATES_LABEL = "/states";
-	final String STATES_TAG = TYPE_STATE_PROP_TAG + STATES_LABEL;
 	final String STATE_LABEL = "/state";
-	final String STATE_TAG = STATES_TAG + STATE_LABEL;
 	final String STATE_TAG_LABEL_ATT = "label";
 	final String STATE_TAG_START_ATT = "start";
 	final String STATE_TAG_FINAL_ATT = "final";
+
+	final String TP_STATES_TAG = TYPE_STATE_PROP_TAG + STATES_LABEL;
+	final String TP_STATE_TAG = TP_STATES_TAG + STATE_LABEL;
+	final String GP_STATES_TAG = GLOBAL_PROP_TAG + STATES_LABEL;
+	final String GP_STATE_TAG = GP_STATES_TAG + STATE_LABEL;
 	
 	final String TRANSITIONS_LABEL = "/transitions";
-	final String TRANSITIONS_TAG = TYPE_STATE_PROP_TAG + TRANSITIONS_LABEL;
 	final String TRANSITION_LABEL = "/transition";
-	final String TRANSITION_TAG = TRANSITIONS_TAG + TRANSITION_LABEL;
 	final String TRANSITION_TAG_FROM_ATT = "from";
 	final String TRANSITION_TAG_TO_ATT = "to";
 	final String TRANSITION_TAG_LABEL_ATT = "labelEvent";
 
-	final String GLOBAL_PROP_TAG = "//GlobalProperty";
+	final String TP_TRANSITIONS_TAG = TYPE_STATE_PROP_TAG + TRANSITIONS_LABEL;
+	final String TP_TRANSITION_TAG = TP_TRANSITIONS_TAG + TRANSITION_LABEL;
+	final String GP_TRANSITIONS_TAG = GLOBAL_PROP_TAG + TRANSITIONS_LABEL;
+	final String GP_TRANSITION_TAG = GP_TRANSITIONS_TAG + TRANSITION_LABEL;
 
 	EventBuilder eventBuilder;
 
@@ -60,7 +66,7 @@ public class XMLAFDReader extends XMLReader {
 
 	public int estadoInicial() {
 		// Buscamos el estado inicial
-		Element estado = (Element)document.selectSingleNode(STATE_TAG + "[@"+ STATE_TAG_START_ATT +"]");
+		Element estado = (Element)document.selectSingleNode(GP_STATE_TAG + "[@"+ STATE_TAG_START_ATT +"]");
 		String label = ((Attribute)estado.attribute(STATE_TAG_LABEL_ATT)).getValue();
 		Integer i = new Integer(label);
 		return i;
@@ -83,7 +89,7 @@ public class XMLAFDReader extends XMLReader {
 		HashSet<Integer> hs = new HashSet<Integer>();
 
 		// Buscamos los estados finales
-		List l = document.selectNodes(STATE_TAG + "[@"+ STATE_TAG_FINAL_ATT +"]");
+		List l = document.selectNodes(GP_STATE_TAG + "[@"+ STATE_TAG_FINAL_ATT +"]");
 		for (Iterator i = l.iterator(); i.hasNext();) {
 			Element estado = (Element) i.next();
 			hs.add(new Integer(((Attribute)estado.attribute(STATE_TAG_LABEL_ATT)).getValue()));
@@ -117,7 +123,7 @@ public class XMLAFDReader extends XMLReader {
 	public HashSet<Transicion> transiciones() {
 		HashSet<Transicion> hs = new HashSet<Transicion>();
 
-		List lt = document.selectNodes(TRANSITION_TAG);
+		List lt = document.selectNodes(GP_TRANSITION_TAG);
 		for (Iterator i = lt.iterator(); i.hasNext();) {
 			Element foo = (Element) i.next();
 
