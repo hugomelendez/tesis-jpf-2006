@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="extensions/symbolic/lib/solver.jar"/>
 	<classpathentry kind="lib" path="build-tools/lib/junit-4.1.jar" sourcepath="build-tools/junit/junit-4.1-src.jar"/>
 	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/jaxen-1.1-beta-11.jar"/>
 	<classpathentry kind="output" path="build/jpf"/>
 </classpath>
