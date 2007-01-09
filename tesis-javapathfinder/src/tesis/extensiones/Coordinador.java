@@ -28,7 +28,6 @@ public class Coordinador implements Mediator {
 
 	//Contiene las asociaciones de Clase con TypeStatePropertyTemplate
 	private Hashtable<String, TypeStatePropertyTemplate> htClaseAFD = new Hashtable<String, TypeStatePropertyTemplate>();
-
 	//Contiene las asociaciones de OID con AFD
 	private Hashtable<Integer, AutomataVerificacion> htOIDAFD = new Hashtable<Integer, AutomataVerificacion>();
 	//Contiene la colección de caminos (stack) de cada AFD de instancia
