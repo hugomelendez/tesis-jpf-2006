@@ -30,7 +30,7 @@ public class AutomataVerificacion {
 	private HashSet<Transicion> transiciones;
 	private HashSet<Integer> estadosFinales;  
 	protected int estadoActual;
-	protected boolean blnEstadoFinal = false;
+	//protected boolean blnEstadoFinal = false;
 	
 	public AutomataVerificacion (XMLAFDReader xmlafd) {
 		estadoActual = xmlafd.estadoInicial();
