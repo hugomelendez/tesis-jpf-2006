@@ -10,4 +10,3 @@ Las siguientes modificaciones fueron realizadas en el source del JPF
 	packaged gov.nasa.jpf.jvm.bytecode.VirtualInvocation::getCalleeClassInfo (KernelState ks, int objRef) por:
 	public ClassInfo getCalleeClassInfo (KernelState ks, int objRef)
   con el fin de poder obtener desde nuestras clases a que clase pertenece el objeto que nos interesa observar
- 
