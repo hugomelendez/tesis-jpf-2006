@@ -1,7 +1,5 @@
 package tesis.Ejemplo_10_Lider;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.Stack;
 
 class Mensaje {
@@ -48,17 +46,17 @@ class Canal {
 		// TODO 
 		// NOTA1: Ver esto, deberiamos levantar el bloqueo del receive pero esto usa native
 		// NOTA2: probar un lock exclusivo mas casero opero q funque en concurrencia
-		this.notify();
+		//this.notify();
 	}
 
 	public Mensaje receive () {
 		while (mensajes.empty()) {
-			try {
+/*			try {
 				// TODO ver NOTA1 y NOTA2 anteriores 
 				this.wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
+			}*/
 		}
 
 		return mensajes.pop();
@@ -102,7 +100,7 @@ class Nodo implements Runnable {
 
 					if (nrAsInt > this.id) {
 
-						System.out.println(this.id + " LOST");
+						System.out.println("Nodo " + this.id + ": Desactivado");
 						Active = false;
 
 						// Si no sirvo mas soy un dummy node y fwd lo q vino
@@ -111,7 +109,7 @@ class Nodo implements Runnable {
 					} else if (nrAsInt == this.id) {
 
 						chan_out.send(new Mensaje(Mensaje.MSG_WINNER, Integer.toString(this.id)));
-						System.out.println(this.id + " LEADER!!");
+						System.out.println("Nodo " + this.id + ": yo soy el LEADER(1)!!!");
 						break;
 
 					} else if (nrAsInt < this.id) {
@@ -134,13 +132,10 @@ class Nodo implements Runnable {
 			e.printStackTrace();
 		}
 	}
-
-
 }
 
 public class Modelo {
-
-	private static final int CANT_NODOS = 5;
+	private static final int CANT_NODOS = 10;
 
 	public static void main(String[] args) {
 		Nodo[] nodos  = new Nodo[CANT_NODOS];
@@ -156,6 +151,5 @@ public class Modelo {
 			t = new Thread(nodos[i]);
 			t.start();
 		}
-
 	}
 }
