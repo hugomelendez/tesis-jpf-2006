@@ -295,7 +295,6 @@ public class Coordinador implements Mediator {
 		 */
 		//DEBUG
 		try {
-			//if (vm.getLastInstruction().toString().contains("tesis") && vm.getLastInstruction() instanceof INVOKEVIRTUAL) {
 			if (vm.getLastInstruction() instanceof INVOKEVIRTUAL) {
 				INVOKEVIRTUAL li = (INVOKEVIRTUAL) vm.getLastInstruction();
 				//TODO: RS, ver si se puede investigar directamente por el objeto mname 
