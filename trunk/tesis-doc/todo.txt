@@ -1,0 +1,9 @@
+ToDo List
+Codigo:
+ - ContextSearch vacio, q no le pases un archivo y todo funcione
+ - ContextSearch parametrizable para q sea Preambulo
+ - Permitir no definir un globalProperty o TypestateProperty
+
+ - Parametrizar los outputs que se generan
+ 
+ - Crear interface para Estado y parametrizar los objetos hashtables, stacks, en el Coordinador
