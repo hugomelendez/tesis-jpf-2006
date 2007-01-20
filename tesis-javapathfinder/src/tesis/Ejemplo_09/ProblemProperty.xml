@@ -14,7 +14,7 @@
 	        <transition from="1" to="999" labelEvent="WRITE" />
 	    </transitions>
 	</TypeStateProperty>
-	<TypeStateProperty class="java.util.LinkedList$ListItr">
+	<TypeStateProperty class="java.util.Iterator">
 	    <states>
 	        <state label="0" start="true" />
 	        <state label="1" />
