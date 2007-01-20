@@ -2,7 +2,7 @@ package tesis.Ejemplo_11;
 
 public class Modelo {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException {
 		ConcreteChild1 c1 = new ConcreteChild1();
 		ConcreteChild2 c2 = new ConcreteChild2();
 		ConcreteFather f1 = new ConcreteFather();
@@ -16,5 +16,7 @@ public class Modelo {
 		f1.add();
 		System.out.println("f2.add "+ f2.getClass().getName());
 		f2.add();
+		
+		c1.add();
 	}
 }
