@@ -4,10 +4,13 @@ import gov.nasa.jpf.jvm.JVM;
 import gov.nasa.jpf.jvm.bytecode.INVOKEVIRTUAL;
 import gov.nasa.jpf.jvm.bytecode.Instruction;
 
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Stack;
+import java.lang.Class;
 
 /**
  * Coordinador entre todos los objetos
@@ -34,7 +37,10 @@ public class Coordinador implements Mediator {
 	//(para soportar los backtracks de la JVM)
 	private Hashtable<Integer, Stack<Object>> htOIDStack = new Hashtable<Integer, Stack<Object>>();
 
-	//OID de la ï¿½ltima ejecuciï¿½n de un VirtualInvocation de mï¿½todo
+	//Contiene los AFDs que están VIOLADOS
+	private Hashtable<String, AutomataVerificacion> htAFDViolados = new Hashtable<String, AutomataVerificacion>();
+
+	//OID de la última ejecución de un VirtualInvocation de método
 	//TODO Tesis: Mejorar el manejo de este id especial 
 	private int iOIDUltimaEjecucion = -1;
 
@@ -234,19 +240,47 @@ public class Coordinador implements Mediator {
 	 */
 	public void objetoCreado(JVM vm) {
 		String strClase = vm.getLastElementInfo().getClassInfo().getName();
-
-		if (htClaseAFD.containsKey(strClase)) {
-			TypeStatePropertyTemplate tpl = (TypeStatePropertyTemplate) htClaseAFD.get(strClase);
-			//Se crea el AFD correspondiente
-			AutomataVerificacion afd = new AutomataVerificacion(tpl);
-			htOIDAFD.put(vm.getLastElementInfo().getIndex(), afd);
+		Collection padres = padresDeClase(strClase);
+		
+		for (Iterator iter = padres.iterator(); iter.hasNext();) {
+			String element = (String) iter.next();
 			
-			//Se crea su stack de estados (para backtrack) asociados
-			Stack<Object> stkAfdOid = new Stack<Object>();
-			htOIDStack.put(vm.getLastElementInfo().getIndex(), stkAfdOid);
+			strClase = element;
+			if (htClaseAFD.containsKey(strClase)) {
+				TypeStatePropertyTemplate tpl = (TypeStatePropertyTemplate) htClaseAFD.get(strClase);
+				//Se crea el AFD correspondiente
+				AutomataVerificacion afd = new AutomataVerificacion(tpl);
+				htOIDAFD.put(vm.getLastElementInfo().getIndex(), afd);
+				
+				//Se crea su stack de estados (para backtrack) asociados
+				Stack<Object> stkAfdOid = new Stack<Object>();
+				htOIDStack.put(vm.getLastElementInfo().getIndex(), stkAfdOid);
+			}
 		}
 	}
 
+	private Collection<String> padresDeClase(String clase) {
+		Collection<String> list = new LinkedList<String>();
+		try {
+			Class cl;
+
+			cl = Class.forName(clase);
+
+			while (cl != null) {
+				list.add(cl.getName());
+				Class[] ints = cl.getInterfaces();
+				for (int i = 0; i < ints.length; i++) {
+					list.add(ints[i].getName());
+				}
+				
+				cl = cl.getSuperclass();
+			}
+			return list;
+		} catch (ClassNotFoundException e) {
+			return list;
+		}
+	}
+	
 	/**
 	 * Determina si debe destruir un AFD asociado al objeto
 	 */

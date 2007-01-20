@@ -7,24 +7,7 @@
 	        <state label="2" final="true" />
 	    </states>
 	    <transitions>
-	        <transition from="0" to="1" labelEvent="OPEN" />
-	        <transition from="1" to="2" labelEvent="OPEN" />
-	        <transition from="1" to="0" labelEvent="CLOSE" />
-
-	        <transition from="2" to="1" labelEvent="CLOSE" />
-
-			<!-- No me interesa el WRITE (rulo en c/estado) -->
-	        <transition from="0" to="0" labelEvent="WRITE" />
-	        <transition from="1" to="1" labelEvent="WRITE" />
-	        <transition from="2" to="2" labelEvent="WRITE" />
-			<!-- No me interesa el hasNext (rulo en c/estado) -->
-	        <transition from="0" to="0" labelEvent="hasNext" />
-	        <transition from="1" to="1" labelEvent="hasNext" />
-	        <transition from="2" to="2" labelEvent="hasNext" />
-			<!-- No me interesa el next (rulo en c/estado) -->
-	        <transition from="0" to="0" labelEvent="next" />
-	        <transition from="1" to="1" labelEvent="next" />
-	        <transition from="2" to="2" labelEvent="next" />
+	        <transition from="0" to="0" labelEvent="add" />
 	    </transitions>
 	</SearchContext>
 </ProblemDefinition>
