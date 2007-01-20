@@ -1,6 +1,5 @@
 ToDo List
 Codigo:
- - ContextSearch vacio, q no le pases un archivo y todo funcione
  - ContextSearch parametrizable para q sea Preambulo
  - Permitir no definir un globalProperty o TypestateProperty
 
