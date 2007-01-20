@@ -17,7 +17,7 @@ import java.util.Stack;
  */
 public class Coordinador implements Mediator {
 	//Contiene los estados visitados hasta el momento
-	//(cada estado es una composición de los estados de la VM y los AFDs)
+	//(cada estado es una composiciï¿½n de los estados de la VM y los AFDs)
 	private Hashtable<String, Integer> htEstadosVisitados = new Hashtable<String, Integer>();
 
 	private Stack<Object> stackCaminoPreambulo = new Stack<Object>();
@@ -30,11 +30,11 @@ public class Coordinador implements Mediator {
 	private Hashtable<String, TypeStatePropertyTemplate> htClaseAFD = new Hashtable<String, TypeStatePropertyTemplate>();
 	//Contiene las asociaciones de OID con AFD
 	private Hashtable<Integer, AutomataVerificacion> htOIDAFD = new Hashtable<Integer, AutomataVerificacion>();
-	//Contiene la colección de caminos (stack) de cada AFD de instancia
+	//Contiene la colecciï¿½n de caminos (stack) de cada AFD de instancia
 	//(para soportar los backtracks de la JVM)
 	private Hashtable<Integer, Stack<Object>> htOIDStack = new Hashtable<Integer, Stack<Object>>();
 
-	//OID de la última ejecución de un VirtualInvocation de método
+	//OID de la ï¿½ltima ejecuciï¿½n de un VirtualInvocation de mï¿½todo
 	//TODO Tesis: Mejorar el manejo de este id especial 
 	private int iOIDUltimaEjecucion = -1;
 
@@ -165,7 +165,7 @@ public class Coordinador implements Mediator {
 	 * al estado (JVM) al que se backtrackeo
 	 */
 	public void stateBacktracked() {
-		//TODO Hay que ver de backtrackear también los AFDs de Instancia!!!
+		//TODO Hay que ver de backtrackear tambiï¿½n los AFDs de Instancia!!!
 		stackCaminoPreambulo.pop();
 		contexto.irAEstado((Integer) stackCaminoPreambulo.peek());
 
@@ -222,8 +222,8 @@ public class Coordinador implements Mediator {
 	}
 
 	/**
-	 * Guarda una asociación de TypeStatePropertyTemplate con clase
-	 * La utilizará para crear los AFDs para cada instancia de dicha clase
+	 * Guarda una asociaciï¿½n de TypeStatePropertyTemplate con clase
+	 * La utilizarï¿½ para crear los AFDs para cada instancia de dicha clase
 	 */
 	public void agregarTipoAFD(TypeStatePropertyTemplate tpl, String clase) {
 		htClaseAFD.put(clase, tpl); 
@@ -254,7 +254,7 @@ public class Coordinador implements Mediator {
 		int iOID = vm.getLastElementInfo().getIndex();
 
 		if (htOIDAFD.containsKey(iOID)) {
-			//Se elimina el AFD de la colección y su stack de estados asociado
+			//Se elimina el AFD de la colecciï¿½n y su stack de estados asociado
 			htOIDAFD.remove(iOID);
 			htOIDStack.remove(iOID);
 		}
@@ -264,8 +264,8 @@ public class Coordinador implements Mediator {
 		this.evb = evb;
 	}
 
-	public void setContexto(ContextoBusqueda preambulo) {
-		this.contexto = preambulo;
+	public void setContexto(ContextoBusqueda contexto) {
+		this.contexto = contexto;
 	}
 
 	public void setSearch(DFSearchTesis search) {
@@ -273,8 +273,8 @@ public class Coordinador implements Mediator {
 	}
 
 	/**
-	 * Decide si hay que backtrackear la rama actual de la búsqueda
-	 * en función de si se invalidó el contexto o si es estado actual ya es conocido  
+	 * Decide si hay que backtrackear la rama actual de la bï¿½squeda
+	 * en funciï¿½n de si se invalidï¿½ el contexto o si es estado actual ya es conocido  
 	 * @return
 	 */
 	public boolean backtrackear() {
@@ -316,18 +316,30 @@ public class Coordinador implements Mediator {
 
 	/**
 	 * Carga los 3 XML de configuracion
-	 * TODO: hacer un overload sin searchContext, no siempre es necesario cargar uno
 	 * 
 	 * @param eventsFile
 	 * @param propertiesFile
 	 * @param searchContextFile
 	 */
 	public void loadConfiguration(String eventsFile, String propertiesFile, String searchContextFile) {
+		loadConfiguration(eventsFile, propertiesFile);
+
+		this.setContexto(new ContextoBusqueda(new XMLContextoBusquedaReader(searchContextFile, this.evb)));
+		// TODO: esto hay q setearlo en el XML para q sepa si es Preambulo o Contexto
+		this.setModoContexto();
+	}
+
+	/**
+	 * Carga los 2 XML de configuracion
+	 * 
+	 * @param eventsFile
+	 * @param propertiesFile
+	 */
+	public void loadConfiguration(String eventsFile, String propertiesFile) {
 		EventBuilder eb = new EventBuilder(new XMLEventBuilderReader(eventsFile));
 		this.setEvb(eb);
 
-		this.setContexto(new ContextoBusqueda(new XMLContextoBusquedaReader(searchContextFile, eb)));
-		// TODO: esto hay q setearlo en el XML para q sepa si es Preambulo o Contexto
+		this.setContexto(new ContextoValidoBusqueda());
 		this.setModoContexto();
 
 		this.setProperties(new XMLAFDReader(propertiesFile, eb));

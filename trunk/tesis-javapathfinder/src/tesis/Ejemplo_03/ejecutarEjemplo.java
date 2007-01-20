@@ -13,7 +13,7 @@ public class ejecutarEjemplo {
 		String path = "./src/tesis/Ejemplo_03/";
 
 		Coordinador c = new Coordinador();
-		c.loadConfiguration(path + "Events.xml", path + "ProblemProperty.xml", path + "ProblemContext.xml");
+		c.loadConfiguration(path + "Events.xml", path + "ProblemProperty.xml");
 
 		Listener listener = new Listener(c);
 		

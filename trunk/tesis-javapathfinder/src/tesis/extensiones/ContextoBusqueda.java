@@ -11,7 +11,6 @@ import java.util.Iterator;
  * todo momento si es aceptable continuar con la exploracion actual o es necesario 
  * backtrackear
  * 
- * 
  */
 public class ContextoBusqueda {
 	private XMLContextoBusquedaReader xml;
@@ -20,6 +19,14 @@ public class ContextoBusqueda {
 	private int estadoFinal;
 	private HashSet<Transicion> setTransiciones;
 	
+	/**
+	 * Constructor default
+	 * Sirve para la subclase de siempre valida
+	 *
+	 */
+	public ContextoBusqueda () {
+	}
+
 	public ContextoBusqueda (XMLContextoBusquedaReader xml) {
 		this.xml = xml;
 		estadoActual = xml.estadoInicial();
@@ -27,7 +34,7 @@ public class ContextoBusqueda {
 		setTransiciones = xml.transiciones();
 	}
 	
-	public final boolean invalido() {
+	public boolean invalido() {
 		return (estadoActual==ESTADO_INVALIDO);
 	}
 
@@ -36,11 +43,11 @@ public class ContextoBusqueda {
 	 * secuencia de Eventos antes de comenzar a verificar la propiedad en el AFD
 	 * @return
 	 */
-	public final boolean cumplido() {
+	public boolean cumplido() {
 		return (estadoActual == estadoFinal); 
 	}
 
-	public final void consumir(Evento e) {
+	public void consumir(Evento e) {
 		Transicion tran;
 		Iterator<Transicion> it;
 		boolean transicionValida = false;
@@ -65,12 +72,12 @@ public class ContextoBusqueda {
 		}
 	}
 
-	public final void irAEstado(Integer est) {
+	public void irAEstado(Integer est) {
 		System.out.println("ContextoBusqueda BACKTRACK al estado " + est);
 		estadoActual = est;
 	}
 
-	public final int getEstadoActual() {
+	public int getEstadoActual() {
 		return estadoActual;
 	}
 
