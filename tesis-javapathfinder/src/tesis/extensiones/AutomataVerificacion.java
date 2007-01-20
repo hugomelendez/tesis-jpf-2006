@@ -32,7 +32,10 @@ public class AutomataVerificacion {
 	protected int estadoActual;
 	//protected boolean blnEstadoFinal = false;
 	
-	public AutomataVerificacion (XMLAFDReader xmlafd) {
+	public AutomataVerificacion () {
+	}
+
+	public AutomataVerificacion (XMLAFDReader xmlafd) throws XMLException {
 		estadoActual = xmlafd.estadoInicial();
 		transiciones = xmlafd.transiciones();
 		estadosFinales = xmlafd.estadosFinales();
@@ -49,12 +52,12 @@ public class AutomataVerificacion {
 		estadosFinales = tpl.estadosFinales();
 	}
 
-	public final void irAEstado(int est){
+	public void irAEstado(int est){
 		System.out.println("AFD BACKTRACK al estado " + est);
 		estadoActual = est;
 	}
 
-	public final boolean estadoFinal() {
+	public boolean estadoFinal() {
 		return estadosFinales.contains(new Integer(estadoActual));
 	}
 
@@ -77,7 +80,7 @@ public class AutomataVerificacion {
 		}
 	}
 
-	public final int getEstadoActual() {
+	public int getEstadoActual() {
 		return estadoActual;
 	}
 }

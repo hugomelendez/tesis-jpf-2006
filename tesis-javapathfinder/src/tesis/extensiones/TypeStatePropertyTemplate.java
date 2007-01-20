@@ -10,7 +10,7 @@ public class TypeStatePropertyTemplate extends PropertyTemplate {
 	 */
 	String type;
 
-	public TypeStatePropertyTemplate (String type, XMLAFDReader xmlafd) {
+	public TypeStatePropertyTemplate (String type, XMLAFDReader xmlafd) throws XMLException {
 		this.type = type;
 		estadoInicial = xmlafd.estadoInicial(type);
 		transiciones = xmlafd.transiciones(type);
