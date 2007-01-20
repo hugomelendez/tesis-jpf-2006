@@ -37,10 +37,10 @@ public class Coordinador implements Mediator {
 	//(para soportar los backtracks de la JVM)
 	private Hashtable<Integer, Stack<Object>> htOIDStack = new Hashtable<Integer, Stack<Object>>();
 
-	//Contiene los AFDs que están VIOLADOS
+	//Contiene los AFDs que estï¿½n VIOLADOS
 	private Hashtable<String, AutomataVerificacion> htAFDViolados = new Hashtable<String, AutomataVerificacion>();
 
-	//OID de la última ejecución de un VirtualInvocation de método
+	//OID de la ï¿½ltima ejecuciï¿½n de un VirtualInvocation de mï¿½todo
 	//TODO Tesis: Mejorar el manejo de este id especial 
 	private int iOIDUltimaEjecucion = -1;
 
@@ -151,7 +151,8 @@ public class Coordinador implements Mediator {
 	public String estadoActual() {
 		String strRes = new String();
 		
-		strRes = search.getVM().getStateId() + ";" + afd.getEstadoActual();
+		strRes = search.getVM().getStateId() + ";";
+		strRes += afd.getEstadoActual();
 		
 		if (htOIDAFD.size() > 0) {
 			AutomataVerificacion afdOID;
@@ -261,24 +262,22 @@ public class Coordinador implements Mediator {
 
 	private Collection<String> padresDeClase(String clase) {
 		Collection<String> list = new LinkedList<String>();
-		try {
-			Class cl;
-
-			cl = Class.forName(clase);
-
-			while (cl != null) {
-				list.add(cl.getName());
-				Class[] ints = cl.getInterfaces();
-				for (int i = 0; i < ints.length; i++) {
-					list.add(ints[i].getName());
-				}
-				
-				cl = cl.getSuperclass();
-			}
-			return list;
-		} catch (ClassNotFoundException e) {
-			return list;
-		}
+//		try {
+//			Class cl = Class.forName(clase);
+//			while (cl != null) {
+//				list.add(cl.getName());
+//				Class[] ints = cl.getInterfaces();
+//				for (int i = 0; i < ints.length; i++) {
+//					list.add(ints[i].getName());
+//				}
+//
+//				cl = cl.getSuperclass();
+//			}
+//			return list;
+//		} catch (ClassNotFoundException e) {
+//			return list;
+//		}
+		return list;
 	}
 	
 	/**
@@ -354,8 +353,9 @@ public class Coordinador implements Mediator {
 	 * @param eventsFile
 	 * @param propertiesFile
 	 * @param searchContextFile
+	 * @throws XMLException 
 	 */
-	public void loadConfiguration(String eventsFile, String propertiesFile, String searchContextFile) {
+	public void loadConfiguration(String eventsFile, String propertiesFile, String searchContextFile) throws XMLException {
 		loadConfiguration(eventsFile, propertiesFile);
 
 		this.setContexto(new ContextoBusqueda(new XMLContextoBusquedaReader(searchContextFile, this.evb)));
@@ -368,11 +368,13 @@ public class Coordinador implements Mediator {
 	 * 
 	 * @param eventsFile
 	 * @param propertiesFile
+	 * @throws XMLException 
 	 */
-	public void loadConfiguration(String eventsFile, String propertiesFile) {
+	public void loadConfiguration(String eventsFile, String propertiesFile) throws XMLException {
 		EventBuilder eb = new EventBuilder(new XMLEventBuilderReader(eventsFile));
 		this.setEvb(eb);
 
+		// Al no tener un contexto de busqueda debemos crear uno siempre valido
 		this.setContexto(new ContextoValidoBusqueda());
 		this.setModoContexto();
 
@@ -382,20 +384,27 @@ public class Coordinador implements Mediator {
 	/**
 	 * Carga todas las propiedades TypeState y las Globals
 	 * @param reader
+	 * @throws XMLException 
 	 */
-	private void setProperties(XMLAFDReader reader) {
+	private void setProperties(XMLAFDReader reader) throws XMLException {
 		String type;
 		Iterator<String> it;
 
 		// TypeStateProperties
-		it = reader.getClases().iterator();
-		while (it.hasNext()) {
-			type = it.next();
-			TypeStatePropertyTemplate tpl = new TypeStatePropertyTemplate(type, reader);
-			this.agregarTipoAFD(tpl, type);
+		if (reader.hasTypeStateProperties()) {
+			it = reader.getClases().iterator();
+			while (it.hasNext()) {
+				type = it.next();
+				TypeStatePropertyTemplate tpl = new TypeStatePropertyTemplate(type, reader);
+				this.agregarTipoAFD(tpl, type);
+			}
 		}
 
 		// GlobalProperties
-		this.setAfd(new AutomataVerificacion(reader));
+		if (reader.hasGlobalProperties()) {
+			this.setAfd(new AutomataVerificacion(reader));
+		} else {
+			this.setAfd(new AutomataVerificacionVacio());
+		}
 	}
 }

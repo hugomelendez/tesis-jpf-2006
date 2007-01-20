@@ -5,12 +5,12 @@ import gov.nasa.jpf.JPF;
 import tesis.extensiones.*;
 
 public class ejecutarEjemplo {
-	public static void main (String[] args) {
+	public static void main (String[] args) throws XMLException {
 		// Path para acceder a este ejemplo, es el prefijo usado para leer los xmls
 		// WinXP
-		String path = ".\\src\\tesis\\Ejemplo_09\\";
+//		String path = ".\\src\\tesis\\Ejemplo_09\\";
 		// Linux
-		//String path = "./src/tesis/Ejemplo_09/";
+		String path = "./src/tesis/Ejemplo_09/";
 
 		Coordinador c = new Coordinador();
 		c.loadConfiguration(path + "Events.xml", path + "ProblemProperty.xml");

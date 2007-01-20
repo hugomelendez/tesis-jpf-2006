@@ -13,7 +13,7 @@ public class PropertyTemplate {
 	public PropertyTemplate () {
 	}
 
-	public PropertyTemplate (XMLAFDReader xmlafd) {
+	public PropertyTemplate (XMLAFDReader xmlafd) throws XMLException {
 		estadoInicial = xmlafd.estadoInicial();
 		transiciones = xmlafd.transiciones();
 		estadosFinales = xmlafd.estadosFinales();
