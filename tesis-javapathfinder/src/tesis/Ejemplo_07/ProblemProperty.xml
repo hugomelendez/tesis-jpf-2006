@@ -8,10 +8,9 @@
 	        <state label="999" final="true" />
 	    </states>
 	    <transitions>
-	        <transition from="0" to="1" labelEvent="CLOSE" />
-	        <transition from="1" to="0" labelEvent="OPEN" />
-	        <transition from="1" to="1" labelEvent="CLOSE" />
-	        <transition from="1" to="999" labelEvent="WRITE" />
+	        <transition from="0" to="1" labelEvent="OPEN" />
+	        <transition from="1" to="0" labelEvent="CLOSE" />
+	        <transition from="0" to="999" labelEvent="WRITE" />
 	    </transitions>
 	</TypeStateProperty>
 	<GlobalProperty>
