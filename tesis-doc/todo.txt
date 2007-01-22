@@ -6,3 +6,5 @@ Codigo:
  - Parametrizar los outputs que se generan
  
  - Crear interface para Estado y parametrizar los objetos hashtables, stacks, en el Coordinador
+
+- Si los labels de los estados son no numéricos, pincha
