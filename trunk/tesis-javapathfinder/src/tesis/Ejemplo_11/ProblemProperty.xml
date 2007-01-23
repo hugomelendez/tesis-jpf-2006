@@ -12,15 +12,25 @@
 	        <transition from="1" to="999" labelEvent="add" />
 	    </transitions>
 	</TypeStateProperty>
-	<GlobalProperty>
+	<TypeStateProperty class="tesis.Ejemplo_11.ConcreteFather">
 	    <states>
-	        <state label="0" start="true" />
-	        <state label="1" />
-	        <state label="999" final="true" />
+	        <state label="20" start="true" />
+	        <state label="21" />
+	        <state label="2999" final="true" />
 	    </states>
 	    <transitions> 
-	        <transition from="0" to="1" labelEvent="add" />
-	        <transition from="1" to="999" labelEvent="add" />
+	        <transition from="20" to="21" labelEvent="add" />
+	        <transition from="21" to="2999" labelEvent="add" />
+	    </transitions>
+	</TypeStateProperty><GlobalProperty>
+	    <states>
+	        <state label="80" start="true" />
+	        <state label="81" />
+	        <state label="8999" final="true" />
+	    </states>
+	    <transitions> 
+	        <transition from="80" to="81" labelEvent="add" />
+	        <transition from="81" to="8999" labelEvent="add" />
 	    </transitions>
 	</GlobalProperty>
 </ProblemDefinition>

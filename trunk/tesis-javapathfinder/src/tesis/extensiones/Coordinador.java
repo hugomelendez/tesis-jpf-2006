@@ -244,9 +244,8 @@ public class Coordinador implements Mediator {
 		Collection padres = padresDeClase(strClase);
 		
 		for (Iterator iter = padres.iterator(); iter.hasNext();) {
-			String element = (String) iter.next();
+			strClase = (String) iter.next();
 			
-			strClase = element;
 			if (htClaseAFD.containsKey(strClase)) {
 				TypeStatePropertyTemplate tpl = (TypeStatePropertyTemplate) htClaseAFD.get(strClase);
 				//Se crea el AFD correspondiente
@@ -260,24 +259,26 @@ public class Coordinador implements Mediator {
 		}
 	}
 
+	@SuppressWarnings("finally")
 	private Collection<String> padresDeClase(String clase) {
 		Collection<String> list = new LinkedList<String>();
-//		try {
-//			Class cl = Class.forName(clase);
-//			while (cl != null) {
-//				list.add(cl.getName());
-//				Class[] ints = cl.getInterfaces();
-//				for (int i = 0; i < ints.length; i++) {
-//					list.add(ints[i].getName());
-//				}
-//
-//				cl = cl.getSuperclass();
-//			}
-//			return list;
-//		} catch (ClassNotFoundException e) {
-//			return list;
-//		}
-		return list;
+		
+		try {
+			Class cl = Class.forName(clase);
+			while (cl != null) {
+				list.add(cl.getName());
+				Class[] ints = cl.getInterfaces();
+				for (int i = 0; i < ints.length; i++) {
+					list.add(ints[i].getName());
+				}
+
+				cl = cl.getSuperclass();
+			}
+		} catch (ClassNotFoundException e) {
+		}
+		finally {
+			return list;
+		}
 	}
 	
 	/**

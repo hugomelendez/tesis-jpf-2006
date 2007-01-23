@@ -41,7 +41,7 @@ import java.net.URL;
  * Java assertion support
  */
 @SuppressWarnings("unused")  // native peer uses
-public final class Class<T> {
+public class Class<T> {
   private String name;
 
   /**
@@ -150,4 +150,7 @@ public final class Class<T> {
     // not yet implemented
     return null;
   }
+
+  //Agregado TESIS
+  public native Class[] getInterfaces();
 }
