@@ -18,7 +18,7 @@ import java.lang.Class;
  * ConcreteMediator Implements cooperative behavior by coordinating Colleague
  * objects. Knows and maintains its colleagues.
  */
-public class Coordinador implements Mediator {
+public class Coordinador {
 	//Contiene los estados visitados hasta el momento
 	//(cada estado es una composici�n de los estados de la VM y los AFDs)
 	private Hashtable<String, Integer> htEstadosVisitados = new Hashtable<String, Integer>();
