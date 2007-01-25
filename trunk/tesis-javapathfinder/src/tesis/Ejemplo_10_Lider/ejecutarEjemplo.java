@@ -12,8 +12,8 @@ public class ejecutarEjemplo {
 		// Linux
 		String path = "./src/tesis/Ejemplo_10_Lider/";
 
-		 Coordinador c = new Coordinador();
-		 c.loadConfiguration(path + "Events.xml", path + "ProblemProperty.xml", path + "ProblemContext.xml");
+		Coordinador c = new Coordinador();
+		c.loadConfiguration(path + "Events.xml", path + "ProblemProperty.xml");
 
 		Listener listener = new Listener(c);
 		
@@ -21,8 +21,6 @@ public class ejecutarEjemplo {
 		a[0] = "tesis.Ejemplo_10_Lider.Modelo";
 	    Config conf = JPF.createConfig(a);
 
-//	    UnsatisfiedLinkError;
-	    
 	    // usamos nuestra busqueda
 	    conf.setProperty("search.class","tesis.extensiones.DFSearchTesis");
 
