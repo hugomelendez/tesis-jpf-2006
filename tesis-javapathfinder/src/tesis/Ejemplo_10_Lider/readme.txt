@@ -1,3 +1,10 @@
+algunas propiedades a probar
+- siempre hay un ganador
+- no hay mas de un ganador
+
+TODO: buscar mas en los .ltl de leader q estan en los ejemplos de spin
+
+
 /* Dolev, Klawe & Rodeh for leader election in unidirectional ring
  * `An O(n log n) unidirectional distributed algorithm for extrema
  * finding in a circle,'  J. of Algs, Vol 3. (1982), pp. 245-260

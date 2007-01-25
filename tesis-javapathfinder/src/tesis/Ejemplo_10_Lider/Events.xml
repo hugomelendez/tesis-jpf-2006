@@ -2,10 +2,8 @@
 <ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
 	<events>
-	    <event type="invoke" name="open" label="OPEN" />
-	    <event type="invoke" name="write" label="WRITE" />
-	    <event type="invoke" name="close" label="CLOSE" />
-	    <event type="invoke" name="hasNext" label="hasNext" />
-	    <event type="invoke" name="next" label="next" />
+	    <event type="invoke" name="winner" label="W" />
+	    <event type="invoke" name="init" label="INIT" />
+	    <event type="invoke" name="end" label="END" />
 	</events>
 </ProblemDefinition>

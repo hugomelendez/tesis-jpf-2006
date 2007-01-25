@@ -107,9 +107,7 @@ class Nodo implements Runnable {
 						chan_out.send(m);
 
 					} else if (nrAsInt == this.id) {
-
-						chan_out.send(new Mensaje(Mensaje.MSG_WINNER, Integer.toString(this.id)));
-						System.out.println("Nodo " + this.id + ": yo soy el LEADER(1)!!!");
+						winner();
 						break;
 
 					} else if (nrAsInt < this.id) {
@@ -121,6 +119,11 @@ class Nodo implements Runnable {
 				}
 			}
 		}
+	}
+	
+	private void winner() {
+		chan_out.send(new Mensaje(Mensaje.MSG_WINNER, Integer.toString(this.id)));
+		System.out.println("Nodo " + this.id + ": yo soy el LEADER(1)!!!");
 	}
 
 	public void run() {
@@ -137,6 +140,11 @@ class Nodo implements Runnable {
 public class Modelo {
 	private static final int CANT_NODOS = 10;
 
+	private static void init() {
+	}
+	private static void end() {
+	}
+
 	public static void main(String[] args) {
 		Nodo[] nodos  = new Nodo[CANT_NODOS];
 		Canal[] canales = new Canal[CANT_NODOS];
@@ -146,10 +154,16 @@ public class Modelo {
 			canales[i] = new Canal();
 		}
 
+		// marcamos el inicio de la busqueda
+		init();
+		
 		for (int i=0; i<CANT_NODOS; i++) {
 			nodos[i] = new Nodo(i, canales[i % CANT_NODOS], canales[(i+1) % CANT_NODOS]);
 			t = new Thread(nodos[i]);
 			t.start();
 		}
+
+		// marcamos el fin de la busqueda
+		end();
 	}
 }
