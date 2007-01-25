@@ -14,8 +14,8 @@ import java.util.Iterator;
  */
 public class ContextoBusqueda {
 	private XMLContextoBusquedaReader xml;
-	private static final int ESTADO_INVALIDO = 999;
-	protected int estadoActual;
+	private static final int ESTADO_INVALIDO = -9999;
+	private int estadoActual;
 	private int estadoFinal;
 	private HashSet<Transicion> setTransiciones;
 	

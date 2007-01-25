@@ -102,4 +102,11 @@ public class Listener extends PropertyListenerAdapter implements JPFListener {
 	public final boolean check(Search search, JVM vm) {
 		return (!coord.propiedadViolada());
 	}
+
+	@Override
+	public void searchFinished(Search search) {
+		coord.finDeBusqueda();
+	}
+
+
 }
