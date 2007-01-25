@@ -156,7 +156,7 @@ public class Modelo {
 
 		// marcamos el inicio de la busqueda
 		init();
-		
+
 		for (int i=0; i<CANT_NODOS; i++) {
 			nodos[i] = new Nodo(i, canales[i % CANT_NODOS], canales[(i+1) % CANT_NODOS]);
 			t = new Thread(nodos[i]);
