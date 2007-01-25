@@ -10,7 +10,9 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Stack;
-import java.lang.Class;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.*;
 
 /**
  * Coordinador entre todos los objetos
@@ -85,20 +87,26 @@ public class Coordinador {
 		//DEBUG
 		if (e.esObservable()) {
 			System.out.println("EVENTO: " + e.label());
+			escribirLog("");
+			escribirLog("EVENTO: " + e.label());
 		}
 		
 		if (!contexto.invalido() && e.esObservable()) {
 			if (modo == MODO_PREAMBULO) {
 				//MODO Preambulo
 				//Antes de avanzar el AFD, verifica que se haya cumplido el Contexto (Preambulo)
-				if (!contexto.cumplido())
+				if (!contexto.cumplido()) {
+					int estAnt = contexto.getEstadoActual();
 					contexto.consumir(e);
+					escribirLog("Context " + estAnt + " -> " + contexto.getEstadoActual());
+				}
 				else {
 					//AFD GLOBALES
 					afd.consumir(e);
 					//DEBUG
 					if (afd.estadoFinal()) {
 						System.out.println("Propiedad violada en AFD GLOBAL");
+						escribirLog("Propiedad violada en GlobalProperty");
 					}
 
 					//AFD de INSTANCIA
@@ -109,6 +117,7 @@ public class Coordinador {
 							//DEBUG
 							if (afdOID.estadoFinal()) {
 								System.out.println("Propiedad violada en AFD de Instancia (OID=" + iOIDUltimaEjecucion + ")");
+								escribirLog("Propiedad violada en TypeStateProperty (OID=" + iOIDUltimaEjecucion + ")");
 							}
 						}
 						iOIDUltimaEjecucion = -1;
@@ -118,13 +127,16 @@ public class Coordinador {
 			else if (modo == MODO_CONTEXTO) {
 				//MODO Contexto Busqueda
 				//Avanza el Contexto y el AFD en paralelo
+				int estAnt = contexto.getEstadoActual();
 				contexto.consumir(e);
+				escribirLog("Context " + estAnt + " -> " + contexto.getEstadoActual());
 
 				//AFD GLOBALES
 				afd.consumir(e);
 				//DEBUG
 				if (afd.estadoFinal()) {
 					System.out.println("Propiedad violada en AFD GLOBAL");
+					escribirLog("Propiedad violada en GlobalProperty");
 				}
 
 				//AFD de INSTANCIA
@@ -135,6 +147,7 @@ public class Coordinador {
 						//DEBUG
 						if (afdOID.estadoFinal()) {
 							System.out.println("Propiedad violada en AFD de Instancia (OID=" + iOIDUltimaEjecucion + ")");
+							escribirLog("Propiedad violada en TypeStateProperty (OID=" + iOIDUltimaEjecucion + ")");
 						}
 					}
 					iOIDUltimaEjecucion = -1;
@@ -267,10 +280,15 @@ public class Coordinador {
 			Class cl = Class.forName(clase);
 			while (cl != null) {
 				list.add(cl.getName());
-				Class[] ints = cl.getInterfaces();
+				
+				/**
+				 * Open ISSUE: no se incluye el tema de Interfaces
+				 * porque no existe el método en la clase Class de JPF 
+				 */
+				/*Class[] ints = cl.getInterfaces();
 				for (int i = 0; i < ints.length; i++) {
 					list.add(ints[i].getName());
-				}
+				}*/
 
 				cl = cl.getSuperclass();
 			}
@@ -362,6 +380,9 @@ public class Coordinador {
 		this.setContexto(new ContextoBusqueda(new XMLContextoBusquedaReader(searchContextFile, this.evb)));
 		// TODO: esto hay q setearlo en el XML para q sepa si es Preambulo o Contexto
 		this.setModoContexto();
+		
+		escribirLog("************************************************");
+		escribirLog("Inicio Verificación " + now());
 	}
 
 	/**
@@ -407,5 +428,34 @@ public class Coordinador {
 		} else {
 			this.setAfd(new AutomataVerificacionVacio());
 		}
+	}
+
+	public void escribirLog(String msg) {
+	    FileWriter aWriter;
+		try {
+			aWriter = new FileWriter(nombreLog(), true);
+		    aWriter.write(msg + System.getProperty("line.separator"));
+		    aWriter.flush();
+		    aWriter.close();
+		} catch (IOException e) {
+			System.out.println("No se puede escribir en el log");
+			e.printStackTrace();
+		}
+
+	}
+
+	private String nombreLog() {
+		return "log.txt";
+	}
+
+	private String now() {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		java.util.Date date = new java.util.Date();
+		return (dateFormat.format(date));
+	}
+
+	public void finDeBusqueda() {
+		escribirLog("Fin Verificación " + now());
+		escribirLog("************************************************");
 	}
 }
