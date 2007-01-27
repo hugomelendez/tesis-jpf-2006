@@ -4,23 +4,25 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
-import org.dom4j.Attribute;
 import org.dom4j.Element;
 
 public class XMLContextoBusquedaReader extends XMLReader {
-	final String SEARCH_CONTEXT_TAG = "//SearchContext";
+	private static final String SEARCH_CONTEXT_TAG = "//SearchContext";
+	private static final String SEARCHCONTEXT_MODE_ATT = "mode";
+	private static final String SEARCHCONTEXT_MODE_CONTEXT = "contexto";
+	private static final String SEARCHCONTEXT_MODE_PREAMBLE = "preambulo";
 
-	final String STATES_TAG = SEARCH_CONTEXT_TAG + "/states";
-	final String STATE_TAG = STATES_TAG + "/state";
-	final String STATE_TAG_LABEL_ATT = "label";
-	final String STATE_TAG_START_ATT = "start";
-	final String STATE_TAG_FINAL_ATT = "final";
+	private static final String STATES_TAG = SEARCH_CONTEXT_TAG + "/states";
+	private static final String STATE_TAG = STATES_TAG + "/state";
+	private static final String STATE_TAG_LABEL_ATT = "label";
+	private static final String STATE_TAG_START_ATT = STATE_TAG + "[@start]";
+	private static final String STATE_TAG_FINAL_ATT = STATE_TAG + "[@final]";
 	
-	final String TRANSITIONS_TAG = SEARCH_CONTEXT_TAG + "/transitions";
-	final String TRANSITION_TAG = TRANSITIONS_TAG + "/transition";
-	final String TRANSITION_TAG_FROM_ATT = "from";
-	final String TRANSITION_TAG_TO_ATT = "to";
-	final String TRANSITION_TAG_LABEL_ATT = "labelEvent";
+	private static final String TRANSITIONS_TAG = SEARCH_CONTEXT_TAG + "/transitions";
+	private static final String TRANSITION_TAG = TRANSITIONS_TAG + "/transition";
+	private static final String TRANSITION_TAG_FROM_ATT = "from";
+	private static final String TRANSITION_TAG_TO_ATT = "to";
+	private static final String TRANSITION_TAG_LABEL_ATT = "labelEvent";
 
 	EventBuilder eventBuilder;
 
@@ -35,10 +37,8 @@ public class XMLContextoBusquedaReader extends XMLReader {
 
 	public int estadoInicial() {
 		// Buscamos el estado inicial
-		Element estado = (Element)document.selectSingleNode(STATE_TAG + "[@"+ STATE_TAG_START_ATT +"]");
-		String label = ((Attribute)estado.attribute(STATE_TAG_LABEL_ATT)).getValue();
-		Integer i = new Integer(label);
-		return i;
+		Element estado = (Element)document.selectSingleNode(STATE_TAG_START_ATT);
+		return intAttFromElem(estado, STATE_TAG_LABEL_ATT);
 	}
 
 	public HashSet<Transicion> transiciones() {
@@ -46,11 +46,11 @@ public class XMLContextoBusquedaReader extends XMLReader {
 
 		List lt = document.selectNodes(TRANSITION_TAG);
 		for (Iterator i = lt.iterator(); i.hasNext();) {
-			Element foo = (Element) i.next();
+			Element trans = (Element) i.next();
 
-			int desde = new Integer(((Attribute)foo.attribute(TRANSITION_TAG_FROM_ATT)).getValue());
-			int hasta = new Integer(((Attribute)foo.attribute(TRANSITION_TAG_TO_ATT)).getValue());
-			Evento e = eventBuilder.eventFrom(((Attribute)foo.attribute(TRANSITION_TAG_LABEL_ATT)).getValue());
+			int desde = intAttFromElem(trans, TRANSITION_TAG_FROM_ATT);
+			int hasta = intAttFromElem(trans, TRANSITION_TAG_TO_ATT);
+			Evento e = eventBuilder.eventFrom(attFromElem(trans, TRANSITION_TAG_LABEL_ATT));
 
 			Transicion t = new Transicion(desde, hasta, e);
 
@@ -66,10 +66,21 @@ public class XMLContextoBusquedaReader extends XMLReader {
 	 */
 	public Integer estadoFinal() {
 		// Buscamos los estados finales
-		Element estado = (Element)document.selectSingleNode(STATE_TAG + "[@"+ STATE_TAG_FINAL_ATT +"]");
-		String label = ((Attribute)estado.attribute(STATE_TAG_LABEL_ATT)).getValue();
-		Integer i = new Integer(label);
-		return i;
+		Element estado = (Element)document.selectSingleNode(STATE_TAG_FINAL_ATT);
+		return intAttFromElem(estado, STATE_TAG_LABEL_ATT);
 	}
 
+	/**
+	 * Determina si el SearchContext se usara en modo Contexto o Preambulo
+	 * Default: Contexto
+	 * @return
+	 */
+	public boolean modoContexto() {
+		Element estado = (Element)document.selectSingleNode(SEARCH_CONTEXT_TAG);
+		System.out.println(estado);
+		if (estado != null)
+			return (attFromElem(estado, SEARCHCONTEXT_MODE_ATT) == SEARCHCONTEXT_MODE_CONTEXT);
+		else
+			return true;
+	}
 }

@@ -4,40 +4,34 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.xml.xpath.XPathExpression;
-
-import org.dom4j.Attribute;
-import org.dom4j.DocumentException;
 import org.dom4j.Element;
 
 //TODO: reusar los metodos con y sin type
 public class XMLAFDReader extends XMLReader {
-	final String TYPE_STATE_PROP_TAG = "//TypeStateProperty";
-	final String TYPE_STATE_PROP_TAG_CLASS_ATT = "class";
+	private static final String STATES_LABEL = "/states";
+	private static final String STATE_LABEL = "/state";
+	private static final String STATE_TAG_LABEL_ATT = "label";
+	private static final String STATE_TAG_START_ATT = "[@start]";
+	private static final String STATE_TAG_FINAL_ATT = "[@final]";
 
-	final String GLOBAL_PROP_TAG = "//GlobalProperty";
+	private static final String TRANSITIONS_LABEL = "/transitions";
+	private static final String TRANSITION_LABEL = "/transition";
+	private static final String TRANSITION_TAG_FROM_ATT = "from";
+	private static final String TRANSITION_TAG_TO_ATT = "to";
+	private static final String TRANSITION_TAG_LABEL_ATT = "labelEvent";
 
-	final String STATES_LABEL = "/states";
-	final String STATE_LABEL = "/state";
-	final String STATE_TAG_LABEL_ATT = "label";
-	final String STATE_TAG_START_ATT = "[@start]";
-	final String STATE_TAG_FINAL_ATT = "[@final]";
+	private static final String TYPE_STATE_PROP_TAG = "//TypeStateProperty";
+	private static final String TYPE_STATE_PROP_TAG_CLASS_ATT = "class";
+	private static final String TP_STATES_TAG = TYPE_STATE_PROP_TAG + STATES_LABEL;
+	private static final String TP_STATE_TAG = TP_STATES_TAG + STATE_LABEL;
+	private static final String TP_TRANSITIONS_TAG = TYPE_STATE_PROP_TAG + TRANSITIONS_LABEL;
+	private static final String TP_TRANSITION_TAG = TP_TRANSITIONS_TAG + TRANSITION_LABEL;
 
-	final String TP_STATES_TAG = TYPE_STATE_PROP_TAG + STATES_LABEL;
-	final String TP_STATE_TAG = TP_STATES_TAG + STATE_LABEL;
-	final String GP_STATES_TAG = GLOBAL_PROP_TAG + STATES_LABEL;
-	final String GP_STATE_TAG = GP_STATES_TAG + STATE_LABEL;
-	
-	final String TRANSITIONS_LABEL = "/transitions";
-	final String TRANSITION_LABEL = "/transition";
-	final String TRANSITION_TAG_FROM_ATT = "from";
-	final String TRANSITION_TAG_TO_ATT = "to";
-	final String TRANSITION_TAG_LABEL_ATT = "labelEvent";
-
-	final String TP_TRANSITIONS_TAG = TYPE_STATE_PROP_TAG + TRANSITIONS_LABEL;
-	final String TP_TRANSITION_TAG = TP_TRANSITIONS_TAG + TRANSITION_LABEL;
-	final String GP_TRANSITIONS_TAG = GLOBAL_PROP_TAG + TRANSITIONS_LABEL;
-	final String GP_TRANSITION_TAG = GP_TRANSITIONS_TAG + TRANSITION_LABEL;
+	private static final String GLOBAL_PROP_TAG = "//GlobalProperty";
+	private static final String GP_STATES_TAG = GLOBAL_PROP_TAG + STATES_LABEL;
+	private static final String GP_STATE_TAG = GP_STATES_TAG + STATE_LABEL;
+	private static final String GP_TRANSITIONS_TAG = GLOBAL_PROP_TAG + TRANSITIONS_LABEL;
+	private static final String GP_TRANSITION_TAG = GP_TRANSITIONS_TAG + TRANSITION_LABEL;
 
 	EventBuilder eventBuilder;
 
@@ -52,26 +46,6 @@ public class XMLAFDReader extends XMLReader {
 
 	private String typeTag(String type) {
 		return "[@"+ TYPE_STATE_PROP_TAG_CLASS_ATT +"='"+type+"']";
-	}
-	
-	/**
-	 * Devuelve el valor del attributo del elemento
-	 * @param elem
-	 * @param attTag
-	 * @return
-	 */
-	private String attFromElem(Element elem, String attTag) {
-		return ((Attribute)elem.attribute(attTag)).getValue();
-	}
-
-	/**
-	 * Devuelve el valor Integer del attributo del elemento
-	 * @param elem
-	 * @param attTag
-	 * @return
-	 */
-	private Integer intAttFromElem(Element elem, String attTag) {
-		return new Integer(attFromElem(elem, attTag));
 	}
 
 	/**
