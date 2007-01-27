@@ -15,6 +15,7 @@ import java.util.Iterator;
 public class ContextoBusqueda {
 	private XMLContextoBusquedaReader xml;
 	private static final int ESTADO_INVALIDO = -9999;
+	protected int estadoAnterior;
 	private int estadoActual;
 	private int estadoFinal;
 	private HashSet<Transicion> setTransiciones;
@@ -29,7 +30,7 @@ public class ContextoBusqueda {
 
 	public ContextoBusqueda (XMLContextoBusquedaReader xml) {
 		this.xml = xml;
-		estadoActual = xml.estadoInicial();
+		setEstadoActual(xml.estadoInicial());
 		estadoFinal = xml.estadoFinal();
 		setTransiciones = xml.transiciones();
 	}
@@ -62,23 +63,32 @@ public class ContextoBusqueda {
 				tran = it.next();
 	
 				if (tran.estadoDesde() == estadoActual && tran.evento().equals(e)) {
-					estadoActual = tran.estadoHacia();
+					setEstadoActual(tran.estadoHacia());
 					transicionValida = true;
 				}
 			}
 
-			if (!transicionValida)
-				estadoActual = ESTADO_INVALIDO;
+			if (!transicionValida) {
+				setEstadoActual(ESTADO_INVALIDO);
+			}
 		}
 	}
 
 	public void irAEstado(Integer est) {
-		System.out.println("ContextoBusqueda BACKTRACK al estado " + est);
-		estadoActual = est;
+		setEstadoActual(est);
 	}
 
 	public int getEstadoActual() {
 		return estadoActual;
+	}
+
+	public int getEstadoAnterior() {
+		return estadoAnterior;
+	}
+
+	private void setEstadoActual(int estado) {
+		estadoAnterior = estadoActual;
+		estadoActual = estado;
 	}
 
 }

@@ -83,9 +83,9 @@ public class Listener extends PropertyListenerAdapter implements JPFListener {
 		coord.objetoCreado(vm);
 		
 		//DEBUG
-		if (vm.getLastElementInfo().getClassInfo().getName().contains("Ejemplo")) {
-			System.out.println("OBJETO CREADO DE TIPO " + vm.getLastElementInfo().getClassInfo().getName() + ", OID=" + vm.getLastElementInfo().getIndex());
-		}
+		//if (vm.getLastElementInfo().getClassInfo().getName().contains("Ejemplo")) {
+		//	System.out.println("OBJETO CREADO DE TIPO " + vm.getLastElementInfo().getClassInfo().getName() + ", OID=" + vm.getLastElementInfo().getIndex());
+		//}
 	}
 
 	@Override
@@ -93,9 +93,9 @@ public class Listener extends PropertyListenerAdapter implements JPFListener {
 		coord.objetoLiberado(vm);
 		
 		//DEBUG
-		if (vm.getLastElementInfo().getClassInfo().getName().contains("Ejemplo")) {
-			System.out.println("OBJETO LIBERADO DE TIPO " + vm.getLastElementInfo().getClassInfo().getName() + ", OID=" + vm.getLastElementInfo().getIndex());
-		}
+		//if (vm.getLastElementInfo().getClassInfo().getName().contains("Ejemplo")) {
+		//	System.out.println("OBJETO LIBERADO DE TIPO " + vm.getLastElementInfo().getClassInfo().getName() + ", OID=" + vm.getLastElementInfo().getIndex());
+		//}
 	}
 
 	@Override

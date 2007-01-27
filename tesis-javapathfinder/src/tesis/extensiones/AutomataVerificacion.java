@@ -28,8 +28,10 @@ import java.util.Iterator;
  */
 public class AutomataVerificacion {
 	private HashSet<Transicion> transiciones;
-	private HashSet<Integer> estadosFinales;  
+	private HashSet<Integer> estadosFinales;
 	protected int estadoActual;
+	protected int estadoAnterior;
+	private String type;
 	//protected boolean blnEstadoFinal = false;
 	
 	public AutomataVerificacion () {
@@ -39,6 +41,7 @@ public class AutomataVerificacion {
 		estadoActual = xmlafd.estadoInicial();
 		transiciones = xmlafd.transiciones();
 		estadosFinales = xmlafd.estadosFinales();
+		type = "GlobalProperty";
 	}
 	
 	/**
@@ -47,13 +50,15 @@ public class AutomataVerificacion {
 	 * @param tpl
 	 */
 	public AutomataVerificacion(TypeStatePropertyTemplate tpl) {
-		estadoActual = tpl.estadoInicial();
+		estadoAnterior = estadoActual = tpl.estadoInicial();
 		transiciones = tpl.transiciones();
 		estadosFinales = tpl.estadosFinales();
+		type = "TypeStatePropery (" + tpl.getType() + ")";
 	}
 
 	public void irAEstado(int est){
 		System.out.println("AFD BACKTRACK al estado " + est);
+		estadoAnterior = estadoActual;
 		estadoActual = est;
 	}
 
@@ -72,15 +77,22 @@ public class AutomataVerificacion {
 		while (it.hasNext() && !transicionValida) {
 			tran = it.next();
 			if (tran.estadoDesde() == estadoActual && tran.evento().equals(e)) {
+				estadoAnterior = estadoActual;
 				estadoActual = tran.estadoHacia();
 				transicionValida = true;
-				//DEBUG
-				System.out.println("AFD avanza: " + tran.estadoDesde() + " -> " + tran.estadoHacia());
 			}
 		}
 	}
 
 	public int getEstadoActual() {
 		return estadoActual;
+	}
+
+	public int getEstadoAnterior() {
+		return estadoAnterior;
+	}
+
+	public String getType() {
+		return type;
 	}
 }

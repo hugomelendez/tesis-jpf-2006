@@ -8,12 +8,16 @@ public class TypeStatePropertyTemplate extends PropertyTemplate {
 	/**
 	 * Tipo asociado a la propiedad
 	 */
-	String type;
+	private String type;
 
 	public TypeStatePropertyTemplate (String type, XMLAFDReader xmlafd) throws XMLException {
 		this.type = type;
 		estadoInicial = xmlafd.estadoInicial(type);
 		transiciones = xmlafd.transiciones(type);
 		estadosFinales = xmlafd.estadosFinales(type);
+	}
+
+	public String getType() {
+		return type;
 	}
 }
