@@ -358,8 +358,11 @@ public class Coordinador {
 		loadConfiguration(eventsFile, propertiesFile);
 
 		this.setContexto(new ContextoBusqueda(new XMLContextoBusquedaReader(searchContextFile, this.evb)));
-		// TODO: esto hay q setearlo en el XML para q sepa si es Preambulo o Contexto
-		this.setModoContexto();
+		if(this.contexto.modoPreambulo()) {
+			this.setModoPreambulo();
+		} else {
+			this.setModoContexto();			
+		}
 		
 		escribirLog("************************************************");
 		escribirLog("Inicio Verificaci�n " + now());

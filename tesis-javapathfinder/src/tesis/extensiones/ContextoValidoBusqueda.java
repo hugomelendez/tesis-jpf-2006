@@ -1,6 +1,5 @@
 package tesis.extensiones;
 
-import java.util.HashSet;
 
 /**
  * Clase generica que implementa la logica de los Contextos de Busqueda vacios o siempre validos
@@ -8,6 +7,7 @@ import java.util.HashSet;
 public class ContextoValidoBusqueda extends ContextoBusqueda {
 	
 	public ContextoValidoBusqueda () {
+		contexto = XMLContextoBusquedaReader.SEARCHCONTEXT_MODE_CONTEXT;
 	}
 	
 	@Override
@@ -32,5 +32,4 @@ public class ContextoValidoBusqueda extends ContextoBusqueda {
 	public int getEstadoActual() {
 		return 0;
 	}
-
 }
