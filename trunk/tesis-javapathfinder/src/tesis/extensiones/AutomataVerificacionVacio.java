@@ -22,7 +22,6 @@ package tesis.extensiones;
 /**
  * Clase generica que implementa la logica de los AFD verificacion 
  * (toma los datos de un XML)
- * 
  */
 public class AutomataVerificacionVacio extends AutomataVerificacion {
 	

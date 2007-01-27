@@ -84,41 +84,26 @@ public class Coordinador {
 	public void ocurrioInstruccion(Instruction i) {
 		Evento e = evb.eventFrom(i);
 
-		//DEBUG
-		if (e.esObservable()) {
-			System.out.println("EVENTO: " + e.label());
-			escribirLog("");
-			escribirLog("EVENTO: " + e.label());
-		}
-		
 		if (!contexto.invalido() && e.esObservable()) {
+			escribirLog(e);
 			if (modo == MODO_PREAMBULO) {
 				//MODO Preambulo
 				//Antes de avanzar el AFD, verifica que se haya cumplido el Contexto (Preambulo)
 				if (!contexto.cumplido()) {
-					int estAnt = contexto.getEstadoActual();
 					contexto.consumir(e);
-					escribirLog("Context " + estAnt + " -> " + contexto.getEstadoActual());
+					escribirLog(contexto);
 				}
 				else {
-					//AFD GLOBALES
+					//Global Property
 					afd.consumir(e);
-					//DEBUG
-					if (afd.estadoFinal()) {
-						System.out.println("Propiedad violada en AFD GLOBAL");
-						escribirLog("Propiedad violada en GlobalProperty");
-					}
+					escribirLog(afd);
 
-					//AFD de INSTANCIA
+					//TypeStateProperty/s
 					if (iOIDUltimaEjecucion != -1) {
 						if (htOIDAFD.containsKey(iOIDUltimaEjecucion)) {
 							AutomataVerificacion afdOID = (AutomataVerificacion) htOIDAFD.get(iOIDUltimaEjecucion);
 							afdOID.consumir(e);
-							//DEBUG
-							if (afdOID.estadoFinal()) {
-								System.out.println("Propiedad violada en AFD de Instancia (OID=" + iOIDUltimaEjecucion + ")");
-								escribirLog("Propiedad violada en TypeStateProperty (OID=" + iOIDUltimaEjecucion + ")");
-							}
+							escribirLog(afdOID);
 						}
 						iOIDUltimaEjecucion = -1;
 					}
@@ -127,28 +112,19 @@ public class Coordinador {
 			else if (modo == MODO_CONTEXTO) {
 				//MODO Contexto Busqueda
 				//Avanza el Contexto y el AFD en paralelo
-				int estAnt = contexto.getEstadoActual();
 				contexto.consumir(e);
-				escribirLog("Context " + estAnt + " -> " + contexto.getEstadoActual());
+				escribirLog(contexto);
 
-				//AFD GLOBALES
+				//Global Property
 				afd.consumir(e);
-				//DEBUG
-				if (afd.estadoFinal()) {
-					System.out.println("Propiedad violada en AFD GLOBAL");
-					escribirLog("Propiedad violada en GlobalProperty");
-				}
+				escribirLog(afd);
 
-				//AFD de INSTANCIA
+				//TypeStateProperty/s
 				if (iOIDUltimaEjecucion != -1) {
 					if (htOIDAFD.containsKey(iOIDUltimaEjecucion)) {
 						AutomataVerificacion afdOID = (AutomataVerificacion) htOIDAFD.get(iOIDUltimaEjecucion);
 						afdOID.consumir(e);
-						//DEBUG
-						if (afdOID.estadoFinal()) {
-							System.out.println("Propiedad violada en AFD de Instancia (OID=" + iOIDUltimaEjecucion + ")");
-							escribirLog("Propiedad violada en TypeStateProperty (OID=" + iOIDUltimaEjecucion + ")");
-						}
+						escribirLog(afdOID);
 					}
 					iOIDUltimaEjecucion = -1;
 				}
@@ -207,8 +183,7 @@ public class Coordinador {
 			}
 		}
 		
-		//TODO Ver si esto se configura con un parametro (property)
-		System.out.println("--------------------------------- STATE-BACKTRACKED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoActual() + "--------------------------------");
+		escribirLog("----- STATE-BACKTRACKED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoActual() + "-----");
 	}
 
 	/**
@@ -233,8 +208,7 @@ public class Coordinador {
 			}
 		}
 		
-		//TODO Ver si esto se configura con un parametro (property)
-		System.out.println("--------------------------------- STATE-ADVANCED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoActual() + "--------------------------------");
+		escribirLog("----- STATE-ADVANCED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoActual() + "-----");
 	}
 
 	public void setAfd(AutomataVerificacion afd) {
@@ -255,6 +229,7 @@ public class Coordinador {
 	public void objetoCreado(JVM vm) {
 		String strClase = vm.getLastElementInfo().getClassInfo().getName();
 		Collection padres = padresDeClase(strClase);
+		int cant=0;
 		
 		for (Iterator iter = padres.iterator(); iter.hasNext();) {
 			strClase = (String) iter.next();
@@ -268,6 +243,11 @@ public class Coordinador {
 				//Se crea su stack de estados (para backtrack) asociados
 				Stack<Object> stkAfdOid = new Stack<Object>();
 				htOIDStack.put(vm.getLastElementInfo().getIndex(), stkAfdOid);
+
+				if (cant<1) {
+					escribirLog("OBJETO CREADO. Type=" + vm.getLastElementInfo().getClassInfo().getName() + ", OID=" + vm.getLastElementInfo().getIndex());
+				}
+				cant++;
 			}
 		}
 	}
@@ -283,7 +263,7 @@ public class Coordinador {
 				
 				/**
 				 * Open ISSUE: no se incluye el tema de Interfaces
-				 * porque no existe el método en la clase Class de JPF 
+				 * porque no existe el mï¿½todo en la clase Class de JPF 
 				 */
 				/*Class[] ints = cl.getInterfaces();
 				for (int i = 0; i < ints.length; i++) {
@@ -352,7 +332,7 @@ public class Coordinador {
 				//TODO: RS, ver si se puede investigar directamente por el objeto mname 
 				//li.mname.toString()
 				int oid = li.getCalleeThis(vm.getLastThreadInfo());
-				System.out.println("OID invocado = " + oid + " de TIPO = " + li.getCalleeClassInfo(vm.getKernelState(), oid).getName());
+				//System.out.println("OID invocado = " + oid + " de TIPO = " + li.getCalleeClassInfo(vm.getKernelState(), oid).getName());
 
 				iOIDUltimaEjecucion = oid; 
 			}
@@ -382,7 +362,12 @@ public class Coordinador {
 		this.setModoContexto();
 		
 		escribirLog("************************************************");
-		escribirLog("Inicio Verificación " + now());
+		escribirLog("Inicio Verificaciï¿½n " + now());
+	}
+
+	public void finDeBusqueda() {
+		escribirLog("Fin Verificaciï¿½n " + now());
+		escribirLog("************************************************");
 	}
 
 	/**
@@ -433,6 +418,9 @@ public class Coordinador {
 	public void escribirLog(String msg) {
 	    FileWriter aWriter;
 		try {
+			//TODO Ver si se parametriza
+			System.out.println(msg);
+
 			aWriter = new FileWriter(nombreLog(), true);
 		    aWriter.write(msg + System.getProperty("line.separator"));
 		    aWriter.flush();
@@ -442,6 +430,24 @@ public class Coordinador {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void escribirLog(Evento e) {
+		escribirLog("EVENTO: " + e.label());
+	}
+
+	public void escribirLog(AutomataVerificacion a) {
+		escribirLog("\t" + a.getType() + ": " + a.getEstadoAnterior() + " -> " + a.getEstadoActual());
+		if (a.estadoFinal()) {
+			escribirLog("Propiedad violada en " + a.getType());
+		}
+	}
+
+	public void escribirLog(ContextoBusqueda c) {
+		escribirLog("\tContextSearch: " + c.getEstadoAnterior() + " -> " + c.getEstadoActual());
+		if (c.invalido()) {
+			escribirLog("Estado invalido invalido en ContextSearch");
+		}
 	}
 
 	private String nombreLog() {
@@ -454,8 +460,4 @@ public class Coordinador {
 		return (dateFormat.format(date));
 	}
 
-	public void finDeBusqueda() {
-		escribirLog("Fin Verificación " + now());
-		escribirLog("************************************************");
-	}
 }
