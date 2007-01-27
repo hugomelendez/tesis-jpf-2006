@@ -13,12 +13,12 @@ import java.util.Iterator;
  * 
  */
 public class ContextoBusqueda {
-	private static final int ESTADO_INVALIDO = -9999;
-	protected int estadoAnterior;
-	private int estadoActual;
-	private int estadoFinal;
+	private static final State ESTADO_INVALIDO = new State(-9999);
+	protected State estadoAnterior;
+	private State estadoActual;
+	private State estadoFinal;
 	protected String contexto;
-	private HashSet<Transicion> setTransiciones;
+	private HashSet<Transicion> transiciones;
 	
 	/**
 	 * Constructor default
@@ -31,12 +31,12 @@ public class ContextoBusqueda {
 	public ContextoBusqueda (XMLContextoBusquedaReader xml) {
 		setEstadoActual(xml.estadoInicial());
 		estadoFinal = xml.estadoFinal();
-		setTransiciones = xml.transiciones();
+		transiciones = xml.transiciones();
 		contexto = xml.modoContexto();
 	}
 	
 	public boolean invalido() {
-		return (estadoActual==ESTADO_INVALIDO);
+		return (estadoActual.equals(ESTADO_INVALIDO));
 	}
 
 	/**
@@ -45,21 +45,19 @@ public class ContextoBusqueda {
 	 * @return
 	 */
 	public boolean cumplido() {
-		return (estadoActual == estadoFinal); 
+		return (estadoActual.equals(estadoFinal)); 
 	}
 
 	public void consumir(Evento e) {
  		//Avanza/Viola el ContextoBusqueda solo si es un evento observable
 		if ( e.esObservable() ) {
-			Transicion tran;
-			Iterator<Transicion> it;
 			boolean transicionValida = false;
 
-			it = setTransiciones.iterator();
+			Iterator<Transicion> it = transiciones.iterator();
 			while (it.hasNext() && !transicionValida) {
-				tran = it.next();
+				Transicion tran = it.next();
 	
-				if (tran.estadoDesde() == estadoActual && tran.evento().equals(e)) {
+				if (tran.estadoDesde().equals(estadoActual) && tran.evento().equals(e)) {
 					setEstadoActual(tran.estadoHacia());
 					transicionValida = true;
 				}
@@ -71,19 +69,19 @@ public class ContextoBusqueda {
 		}
 	}
 
-	public void irAEstado(Integer est) {
+	public void irAEstado(State est) {
 		setEstadoActual(est);
 	}
 
-	public int getEstadoActual() {
+	public State getEstadoActual() {
 		return estadoActual;
 	}
 
-	public int getEstadoAnterior() {
+	public State getEstadoAnterior() {
 		return estadoAnterior;
 	}
 
-	private void setEstadoActual(int estado) {
+	private void setEstadoActual(State estado) {
 		estadoAnterior = estadoActual;
 		estadoActual = estado;
 	}

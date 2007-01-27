@@ -25,11 +25,11 @@ public class ContextoValidoBusqueda extends ContextoBusqueda {
 	}
 
 	@Override
-	public void irAEstado(Integer est) {
+	public void irAEstado(State est) {
 	}
 
 	@Override
-	public int getEstadoActual() {
-		return 0;
+	public State getEstadoActual() {
+		return new State(0);
 	}
 }

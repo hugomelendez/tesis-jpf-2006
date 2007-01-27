@@ -36,10 +36,10 @@ public class XMLContextoBusquedaReader extends XMLReader {
 		super(file);
 	}
 
-	public int estadoInicial() {
+	public State estadoInicial() {
 		// Buscamos el estado inicial
 		Element estado = (Element)document.selectSingleNode(STATE_TAG_START_ATT);
-		return intAttFromElem(estado, STATE_TAG_LABEL_ATT);
+		return stateFromElem(estado, STATE_TAG_LABEL_ATT);
 	}
 
 	public HashSet<Transicion> transiciones() {
@@ -49,8 +49,8 @@ public class XMLContextoBusquedaReader extends XMLReader {
 		for (Iterator i = lt.iterator(); i.hasNext();) {
 			Element trans = (Element) i.next();
 
-			int desde = intAttFromElem(trans, TRANSITION_TAG_FROM_ATT);
-			int hasta = intAttFromElem(trans, TRANSITION_TAG_TO_ATT);
+			State desde = stateFromElem(trans, TRANSITION_TAG_FROM_ATT);
+			State hasta = stateFromElem(trans, TRANSITION_TAG_TO_ATT);
 			Evento e = eventBuilder.eventFrom(attFromElem(trans, TRANSITION_TAG_LABEL_ATT));
 
 			Transicion t = new Transicion(desde, hasta, e);
@@ -65,10 +65,10 @@ public class XMLContextoBusquedaReader extends XMLReader {
 	 * Indica el unico estado final del automata, en caso de haber varios retorna el primero
 	 * @return estado final del automata
 	 */
-	public Integer estadoFinal() {
+	public State estadoFinal() {
 		// Buscamos los estados finales
 		Element estado = (Element)document.selectSingleNode(STATE_TAG_FINAL_ATT);
-		return intAttFromElem(estado, STATE_TAG_LABEL_ATT);
+		return stateFromElem(estado, STATE_TAG_LABEL_ATT);
 	}
 
 	/**

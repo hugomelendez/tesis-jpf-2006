@@ -28,11 +28,10 @@ import java.util.Iterator;
  */
 public class AutomataVerificacion {
 	private HashSet<Transicion> transiciones;
-	private HashSet<Integer> estadosFinales;
-	protected int estadoActual;
-	protected int estadoAnterior;
+	private HashSet<State> estadosFinales;
+	protected State estadoActual;
+	protected State estadoAnterior;
 	private String type;
-	//protected boolean blnEstadoFinal = false;
 	
 	public AutomataVerificacion () {
 	}
@@ -56,27 +55,23 @@ public class AutomataVerificacion {
 		type = "TypeStatePropery (" + tpl.getType() + ")";
 	}
 
-	public void irAEstado(int est){
+	public void irAEstado(State est){
 		System.out.println("AFD BACKTRACK al estado " + est);
 		estadoAnterior = estadoActual;
 		estadoActual = est;
 	}
 
 	public boolean estadoFinal() {
-		return estadosFinales.contains(new Integer(estadoActual));
+		return estadosFinales.contains(estadoActual);
 	}
 
 	public void consumir (Evento e) {
-		Transicion tran;
-		Iterator<Transicion> it;
 		boolean transicionValida = false;
-		
-		it = transiciones.iterator();
-		
-		//System.out.println("EVENTO: " + e.label());
+
+		Iterator<Transicion> it = transiciones.iterator();
 		while (it.hasNext() && !transicionValida) {
-			tran = it.next();
-			if (tran.estadoDesde() == estadoActual && tran.evento().equals(e)) {
+			Transicion tran = it.next();
+			if (tran.estadoDesde().equals(estadoActual) && tran.evento().equals(e)) {
 				estadoAnterior = estadoActual;
 				estadoActual = tran.estadoHacia();
 				transicionValida = true;
@@ -84,11 +79,11 @@ public class AutomataVerificacion {
 		}
 	}
 
-	public int getEstadoActual() {
+	public State getEstadoActual() {
 		return estadoActual;
 	}
 
-	public int getEstadoAnterior() {
+	public State getEstadoAnterior() {
 		return estadoAnterior;
 	}
 

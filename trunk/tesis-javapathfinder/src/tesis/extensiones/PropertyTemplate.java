@@ -7,8 +7,8 @@ import java.util.HashSet;
  */
 public class PropertyTemplate {
 	protected  HashSet<Transicion> transiciones;
-	protected HashSet<Integer> estadosFinales;
-	protected int estadoInicial;
+	protected HashSet<State> estadosFinales;
+	protected State estadoInicial;
 	
 	public PropertyTemplate () {
 	}
@@ -19,10 +19,10 @@ public class PropertyTemplate {
 		estadosFinales = xmlafd.estadosFinales();
 	}
 	
-	public HashSet<Integer> estadosFinales() {
+	public HashSet<State> estadosFinales() {
 		return estadosFinales;
 	}
-	public int estadoInicial() {
+	public State estadoInicial() {
 		return estadoInicial;
 	}
 	public HashSet<Transicion> transiciones() {

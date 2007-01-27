@@ -43,13 +43,23 @@ public abstract class XMLReader {
 	}
 
 	/**
+	 * Devuelve el valor del attributo del elemento
+	 * @param elem
+	 * @param attTag
+	 * @return
+	 */
+	protected State stateFromElem(Element elem, String attTag) {
+		return new State(attFromElem(elem, attTag));
+	}
+
+	/**
 	 * Devuelve el valor Integer del attributo del elemento
 	 * @param elem
 	 * @param attTag
 	 * @return
 	 */
-	protected Integer intAttFromElem(Element elem, String attTag) {
-		return new Integer(attFromElem(elem, attTag));
-	}
+//	protected Integer intAttFromElem(Element elem, String attTag) {
+//		return new Integer(attFromElem(elem, attTag));
+	//}
 
 }
