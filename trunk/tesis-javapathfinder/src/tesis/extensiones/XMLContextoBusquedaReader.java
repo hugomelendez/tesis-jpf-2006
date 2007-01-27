@@ -4,13 +4,14 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import org.dom4j.Attribute;
 import org.dom4j.Element;
 
 public class XMLContextoBusquedaReader extends XMLReader {
 	private static final String SEARCH_CONTEXT_TAG = "//SearchContext";
 	private static final String SEARCHCONTEXT_MODE_ATT = "mode";
-	private static final String SEARCHCONTEXT_MODE_CONTEXT = "contexto";
-	private static final String SEARCHCONTEXT_MODE_PREAMBLE = "preambulo";
+	public static final String SEARCHCONTEXT_MODE_CONTEXT = "contexto";
+	public static final String SEARCHCONTEXT_MODE_PREAMBLE = "preambulo";
 
 	private static final String STATES_TAG = SEARCH_CONTEXT_TAG + "/states";
 	private static final String STATE_TAG = STATES_TAG + "/state";
@@ -75,12 +76,13 @@ public class XMLContextoBusquedaReader extends XMLReader {
 	 * Default: Contexto
 	 * @return
 	 */
-	public boolean modoContexto() {
+	public String modoContexto() {
 		Element estado = (Element)document.selectSingleNode(SEARCH_CONTEXT_TAG);
-		System.out.println(estado);
-		if (estado != null)
-			return (attFromElem(estado, SEARCHCONTEXT_MODE_ATT) == SEARCHCONTEXT_MODE_CONTEXT);
-		else
-			return true;
+		Attribute att = (Attribute) estado.attribute(SEARCHCONTEXT_MODE_ATT);
+		if (att != null)
+			if (att.getValue() == SEARCHCONTEXT_MODE_PREAMBLE)
+				return SEARCHCONTEXT_MODE_PREAMBLE;
+
+		return SEARCHCONTEXT_MODE_CONTEXT;
 	}
 }

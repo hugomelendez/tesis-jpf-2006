@@ -17,6 +17,6 @@ public class TestXMLContextoBusquedaReader {
 		System.out.println("Estado inicial: " + a.estadoInicial());
 		System.out.println("Estados finales: " + a.estadoFinal());
 		System.out.println("Transiciones: " + a.transiciones());
-		
+		System.out.println("Modo c: " + a.modoContexto());
 	}
 }

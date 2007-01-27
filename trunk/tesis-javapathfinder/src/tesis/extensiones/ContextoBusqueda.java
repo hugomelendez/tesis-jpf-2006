@@ -13,26 +13,26 @@ import java.util.Iterator;
  * 
  */
 public class ContextoBusqueda {
-	private XMLContextoBusquedaReader xml;
 	private static final int ESTADO_INVALIDO = -9999;
 	protected int estadoAnterior;
 	private int estadoActual;
 	private int estadoFinal;
+	protected String contexto;
 	private HashSet<Transicion> setTransiciones;
 	
 	/**
 	 * Constructor default
-	 * Sirve para la subclase de siempre valida
+	 * Sirve para la subclase ContextoValidoBusqueda
 	 *
 	 */
 	public ContextoBusqueda () {
 	}
 
 	public ContextoBusqueda (XMLContextoBusquedaReader xml) {
-		this.xml = xml;
 		setEstadoActual(xml.estadoInicial());
 		estadoFinal = xml.estadoFinal();
 		setTransiciones = xml.transiciones();
+		contexto = xml.modoContexto();
 	}
 	
 	public boolean invalido() {
@@ -49,16 +49,13 @@ public class ContextoBusqueda {
 	}
 
 	public void consumir(Evento e) {
-		Transicion tran;
-		Iterator<Transicion> it;
-		boolean transicionValida = false;
-		
-		it = setTransiciones.iterator();
-		
-		//System.out.println("EVENTO: " + e.label());
-		
  		//Avanza/Viola el ContextoBusqueda solo si es un evento observable
 		if ( e.esObservable() ) {
+			Transicion tran;
+			Iterator<Transicion> it;
+			boolean transicionValida = false;
+
+			it = setTransiciones.iterator();
 			while (it.hasNext() && !transicionValida) {
 				tran = it.next();
 	
@@ -91,4 +88,10 @@ public class ContextoBusqueda {
 		estadoActual = estado;
 	}
 
+	public boolean modoContexto() {
+		return contexto == XMLContextoBusquedaReader.SEARCHCONTEXT_MODE_CONTEXT;
+	}
+	public boolean modoPreambulo() {
+		return contexto == XMLContextoBusquedaReader.SEARCHCONTEXT_MODE_PREAMBLE;
+	}
 }
