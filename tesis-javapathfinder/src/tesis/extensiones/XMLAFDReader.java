@@ -74,12 +74,12 @@ public class XMLAFDReader extends XMLReader {
 	 * @param xpathExpression
 	 * @return
 	 */
-	private int _estadoInicial(String xpathExpression) {
+	private State _estadoInicial(String xpathExpression) {
 		Element estado = (Element)document.selectSingleNode(xpathExpression);
-		return intAttFromElem(estado, STATE_TAG_LABEL_ATT);
+		return stateFromElem(estado, STATE_TAG_LABEL_ATT);
 	}
 	
-	public int estadoInicial() throws XMLException {
+	public State estadoInicial() throws XMLException {
 		if (!hasGlobalProperties()) {
 			throw new XMLException();
 		}
@@ -88,7 +88,7 @@ public class XMLAFDReader extends XMLReader {
 		return _estadoInicial(GP_STATE_TAG + STATE_TAG_START_ATT);
 	}
 	
-	public int estadoInicial(String type) throws XMLException {
+	public State estadoInicial(String type) throws XMLException {
 		if (!hasTypeStateProperties()) {
 			throw new XMLException();
 		}
@@ -102,14 +102,14 @@ public class XMLAFDReader extends XMLReader {
 	 * @param xpathExpression 
 	 * @return Conjunto de estados finales del automata
 	 */
-	private HashSet<Integer> _estadosFinales(String xpathExpression) {
-		HashSet<Integer> hs = new HashSet<Integer>();
+	private HashSet<State> _estadosFinales(String xpathExpression) {
+		HashSet<State> hs = new HashSet<State>();
 
 		// Buscamos los estados finales
 		List l = document.selectNodes(xpathExpression);
 		for (Iterator i = l.iterator(); i.hasNext();) {
 			Element estado = (Element) i.next();
-			hs.add(intAttFromElem(estado, STATE_TAG_LABEL_ATT));
+			hs.add(stateFromElem(estado, STATE_TAG_LABEL_ATT));
 		}
 
 		return hs;
@@ -119,7 +119,7 @@ public class XMLAFDReader extends XMLReader {
 	 * Construye el conjunto de estados finales del automata
 	 * @return Conjunto de estados finales del automata
 	 */
-	public HashSet<Integer> estadosFinales() throws XMLException {
+	public HashSet<State> estadosFinales() throws XMLException {
 		if (!hasGlobalProperties()) {
 			throw new XMLException();
 		}
@@ -131,7 +131,7 @@ public class XMLAFDReader extends XMLReader {
 	 * Construye el conjunto de estados finales del automata
 	 * @return Conjunto de estados finales del automata
 	 */
-	public HashSet<Integer> estadosFinales(String type) throws XMLException {
+	public HashSet<State> estadosFinales(String type) throws XMLException {
 		if (!hasTypeStateProperties()) {
 			throw new XMLException();
 		}
@@ -150,8 +150,8 @@ public class XMLAFDReader extends XMLReader {
 		for (Iterator i = lt.iterator(); i.hasNext();) {
 			Element trans = (Element) i.next();
 
-			int desde = intAttFromElem(trans, TRANSITION_TAG_FROM_ATT);
-			int hasta = intAttFromElem(trans, TRANSITION_TAG_TO_ATT);
+			State desde = stateFromElem(trans, TRANSITION_TAG_FROM_ATT);
+			State hasta = stateFromElem(trans, TRANSITION_TAG_TO_ATT);
 			Evento e = eventBuilder.eventFrom(attFromElem(trans, TRANSITION_TAG_LABEL_ATT));
 
 			Transicion t = new Transicion(desde, hasta, e);

@@ -21,29 +21,40 @@ import java.text.*;
  * objects. Knows and maintains its colleagues.
  */
 public class Coordinador {
-	//Contiene los estados visitados hasta el momento
-	//(cada estado es una composici�n de los estados de la VM y los AFDs)
-	private Hashtable<String, Integer> htEstadosVisitados = new Hashtable<String, Integer>();
+	/**
+	 * Contiene los estados visitados hasta el momento
+	 * (cada estado es una composici�n de los estados de la VM y los AFDs)
+	 */
+	private Hashtable<String, Integer> estadosVisitados = new Hashtable<String, Integer>();
 
-	private Stack<Object> stackCaminoPreambulo = new Stack<Object>();
-	private Stack<Object> stackCaminoAFD = new Stack<Object>();
+	private Stack<State> stackCaminoPreambulo = new Stack<State>();
+	private Stack<State> stackCaminoAFD = new Stack<State>();
 
 	//Por ahora no es necesario que conozca al Listener
 	//private Listener lsn;
 
-	//Contiene las asociaciones de Clase con TypeStatePropertyTemplate
+	/**
+	 * Contiene las asociaciones de Clase con TypeStatePropertyTemplate
+	 */
 	private Hashtable<String, TypeStatePropertyTemplate> htClaseAFD = new Hashtable<String, TypeStatePropertyTemplate>();
-	//Contiene las asociaciones de OID con AFD
+	/**
+	 * Contiene las asociaciones de OID con AFD
+	 */
 	private Hashtable<Integer, AutomataVerificacion> htOIDAFD = new Hashtable<Integer, AutomataVerificacion>();
-	//Contiene la colecci�n de caminos (stack) de cada AFD de instancia
-	//(para soportar los backtracks de la JVM)
-	private Hashtable<Integer, Stack<Object>> htOIDStack = new Hashtable<Integer, Stack<Object>>();
-
-	//Contiene los AFDs que est�n VIOLADOS
+	/**
+	 * Contiene la colecci�n de caminos (stack) de cada AFD de instancia
+	 * (para soportar los backtracks de la JVM)
+	 */
+	private Hashtable<Integer, Stack<State>> htOIDStack = new Hashtable<Integer, Stack<State>>();
+	/**
+	 * Contiene los AFDs que est�n VIOLADOS
+	 */
 	private Hashtable<String, AutomataVerificacion> htAFDViolados = new Hashtable<String, AutomataVerificacion>();
 
-	//OID de la �ltima ejecuci�n de un VirtualInvocation de m�todo
-	//TODO Tesis: Mejorar el manejo de este id especial 
+	/**
+	 * OID de la �ltima ejecuci�n de un VirtualInvocation de m�todo
+	 * TODO Tesis: Mejorar el manejo de este id especial
+	 */
 	private int iOIDUltimaEjecucion = -1;
 
 	private AutomataVerificacion afd;
@@ -66,10 +77,9 @@ public class Coordinador {
 		boolean res = false;
 		
 		if (htOIDAFD.size() > 0) {
-			AutomataVerificacion afdOID;
 			Iterator<AutomataVerificacion> it = htOIDAFD.values().iterator();
 			while (it.hasNext() && !res) {
-				afdOID = it.next();
+				AutomataVerificacion afdOID = it.next();
 				res = afdOID.estadoFinal();
 			}
 		}
@@ -137,17 +147,16 @@ public class Coordinador {
 	 * 
 	 * @return String
 	 */
-	public String estadoActual() {
+	public String estadoCompuestoAsString() {
 		String strRes = new String();
 		
 		strRes = search.getVM().getStateId() + ";";
 		strRes += afd.getEstadoActual();
 		
 		if (htOIDAFD.size() > 0) {
-			AutomataVerificacion afdOID;
 			Iterator<AutomataVerificacion> it = htOIDAFD.values().iterator();
 			while (it.hasNext()) {
-				afdOID = it.next();
+				AutomataVerificacion afdOID = it.next();
 				strRes = strRes + ";" + afdOID.getEstadoActual();
 			}
 		}
@@ -163,10 +172,10 @@ public class Coordinador {
 	public void stateBacktracked() {
 		//TODO Hay que ver de backtrackear tambi�n los AFDs de Instancia!!!
 		stackCaminoPreambulo.pop();
-		contexto.irAEstado((Integer) stackCaminoPreambulo.peek());
+		contexto.irAEstado(stackCaminoPreambulo.peek());
 
 		stackCaminoAFD.pop();
-		afd.irAEstado((Integer) stackCaminoAFD.peek());
+		afd.irAEstado(stackCaminoAFD.peek());
 
 		//Se backtrackea desde el stack correspondiente, el estado de c/AFD de instancia 
 		if (htOIDAFD.size() > 0) {
@@ -177,13 +186,13 @@ public class Coordinador {
 				int oid = enume.nextElement();
 
 				afdOID = htOIDAFD.get(oid);
-				Stack<Object> stkAfdOid = htOIDStack.get(oid);
+				Stack<State> stkAfdOid = htOIDStack.get(oid);
 				stkAfdOid.pop();
-				afdOID.irAEstado((Integer) stkAfdOid.peek());
+				afdOID.irAEstado(stkAfdOid.peek());
 			}
 		}
 		
-		escribirLog("----- STATE-BACKTRACKED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoActual() + "-----");
+		escribirLog("----- STATE-BACKTRACKED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoCompuestoAsString() + "-----");
 	}
 
 	/**
@@ -203,12 +212,12 @@ public class Coordinador {
 				int oid = enume.nextElement();
 
 				afdOID = htOIDAFD.get(oid);
-				Stack<Object> stkAfdOid = htOIDStack.get(oid);
+				Stack<State> stkAfdOid = htOIDStack.get(oid);
 				stkAfdOid.push(afdOID.getEstadoActual());
 			}
 		}
 		
-		escribirLog("----- STATE-ADVANCED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoActual() + "-----");
+		escribirLog("----- STATE-ADVANCED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoCompuestoAsString() + "-----");
 	}
 
 	public void setAfd(AutomataVerificacion afd) {
@@ -232,7 +241,7 @@ public class Coordinador {
 		int cant=0;
 		
 		for (Iterator iter = padres.iterator(); iter.hasNext();) {
-			strClase = (String) iter.next();
+			strClase = (String)iter.next();
 			
 			if (htClaseAFD.containsKey(strClase)) {
 				TypeStatePropertyTemplate tpl = (TypeStatePropertyTemplate) htClaseAFD.get(strClase);
@@ -241,7 +250,7 @@ public class Coordinador {
 				htOIDAFD.put(vm.getLastElementInfo().getIndex(), afd);
 				
 				//Se crea su stack de estados (para backtrack) asociados
-				Stack<Object> stkAfdOid = new Stack<Object>();
+				Stack<State> stkAfdOid = new Stack<State>();
 				htOIDStack.put(vm.getLastElementInfo().getIndex(), stkAfdOid);
 
 				if (cant<1) {
@@ -310,7 +319,7 @@ public class Coordinador {
 	 * @return
 	 */
 	public boolean backtrackear() {
-		return ( contexto.invalido() || htEstadosVisitados.containsKey(estadoActual()));
+		return ( contexto.invalido() || estadosVisitados.containsKey(estadoCompuestoAsString()));
 	}
 	
 	public void setModoPreambulo() {
@@ -343,7 +352,7 @@ public class Coordinador {
 	}
 
 	public void registrarEstadoVistado() {
-		htEstadosVisitados.put(estadoActual(), 0);
+		estadosVisitados.put(estadoCompuestoAsString(), 0);
 	}
 
 	/**
@@ -397,14 +406,11 @@ public class Coordinador {
 	 * @throws XMLException 
 	 */
 	private void setProperties(XMLAFDReader reader) throws XMLException {
-		String type;
-		Iterator<String> it;
-
 		// TypeStateProperties
 		if (reader.hasTypeStateProperties()) {
-			it = reader.getClases().iterator();
+			Iterator<String> it = reader.getClases().iterator();
 			while (it.hasNext()) {
-				type = it.next();
+				String type = it.next();
 				TypeStatePropertyTemplate tpl = new TypeStatePropertyTemplate(type, reader);
 				this.agregarTipoAFD(tpl, type);
 			}

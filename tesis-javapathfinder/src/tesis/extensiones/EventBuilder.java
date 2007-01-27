@@ -23,21 +23,17 @@ public class EventBuilder {
 	 * TODO escribir mejor esto
 	 * 
 	 * Construye Eventos partiendo de Instrucciones
-	 * De los eventos definidos, elige el q corresponde segun type, label y name. 
-	 * El primer evento q contenga un match es el elegido 
+	 * De los eventos definidos, elige el que corresponde segun type, label y name. 
+	 * El primer evento que contenga un match es el elegido 
 	 * 
 	 * @param i Instruccion utilizada para determinar el tipo de evento
 	 * @return Evento construido a partir de i
 	 */
 	public Evento eventFrom(Instruction i) {
 		Evento ret = new Evento();
-		Evento e;
-		Iterator<Evento> it;
-		
-		it = eventos.iterator();
-		
+		Iterator<Evento> it = eventos.iterator();
 		while (it.hasNext()) {
-			e = it.next();
+			Evento e = it.next();
 			if ( i.toString().contains(e.type()) && i.toString().contains(e.keyword()) ) {
 				ret = e;
 				break;
@@ -51,21 +47,17 @@ public class EventBuilder {
 	 * TODO escribir mejor esto
 	 * 
 	 * Construye Eventos partiendo de un label
-	 * De los eventos definidos, elige el q corresponde segun el label (debe ser unico) 
-	 * El primer evento q contenga un match es el elegido 
+	 * De los eventos definidos, elige el que corresponde segun el label (debe ser unico) 
+	 * El primer evento que contenga un match es el elegido 
 	 * 
 	 * @param eventLabel String utilizada para determinar el evento
 	 * @return Evento construido a partir de eventLabel
 	 */
 	public Evento eventFrom(String eventLabel) {
 		Evento ret = new Evento();
-		Evento e;
-		Iterator<Evento> it;
-		
-		it = eventos.iterator();
-		
+		Iterator<Evento> it = eventos.iterator();
 		while (it.hasNext()) {
-			e = it.next();
+			Evento e = it.next();
 			if ( e.label().equals(eventLabel)) {
 				ret = e;
 				break;

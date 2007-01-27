@@ -29,7 +29,7 @@ public class AutomataVerificacionVacio extends AutomataVerificacion {
 	}
 
 	@Override
-	public void irAEstado(int est){
+	public void irAEstado(State est){
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class AutomataVerificacionVacio extends AutomataVerificacion {
 	}
 
 	@Override
-	public int getEstadoActual() {
+	public State getEstadoActual() {
 		return estadoActual;
 	}
 }

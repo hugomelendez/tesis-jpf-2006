@@ -1,11 +1,11 @@
 package tesis.extensiones;
 
 public class Transicion {
-	int estadoDesde;
-	int estadoHacia;
+	State estadoDesde;
+	State estadoHacia;
 	Evento evento;
 	
-	public Transicion (int estD, int estH, Evento evt) {
+	public Transicion (State estD, State estH, Evento evt) {
 		estadoDesde = estD;
 		estadoHacia = estH;
 		evento = evt;
@@ -14,14 +14,14 @@ public class Transicion {
 	/**
 	 * @return the estadoDesde
 	 */
-	public int estadoDesde() {
+	public State estadoDesde() {
 		return estadoDesde;
 	}
 
 	/**
 	 * @return the estadoHacia
 	 */
-	public int estadoHacia() {
+	public State estadoHacia() {
 		return estadoHacia;
 	}
 
@@ -37,5 +37,4 @@ public class Transicion {
 		return "Trns: " + estadoDesde + " " + estadoHacia + " " + evento;
 	}
 
-	
 }
