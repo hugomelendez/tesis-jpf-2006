@@ -9,7 +9,7 @@ import org.dom4j.Element;
 //TODO: reusar los metodos con y sin type
 public class XMLAFDReader extends XMLReader {
 	private static final String STATES_LABEL = "/states";
-	private static final String STATE_LABEL = "/state";
+	private static final String STATE_LABEL = STATES_LABEL + "/state";
 	private static final String STATE_TAG_LABEL_ATT = "label";
 	private static final String STATE_TAG_START_ATT = "[@start]";
 	private static final String STATE_TAG_FINAL_ATT = "[@final]";
@@ -22,14 +22,9 @@ public class XMLAFDReader extends XMLReader {
 
 	private static final String TYPE_STATE_PROP_TAG = "//TypeStateProperty";
 	private static final String TYPE_STATE_PROP_TAG_CLASS_ATT = "class";
-	private static final String TP_STATES_TAG = TYPE_STATE_PROP_TAG + STATES_LABEL;
-	private static final String TP_STATE_TAG = TP_STATES_TAG + STATE_LABEL;
-	private static final String TP_TRANSITIONS_TAG = TYPE_STATE_PROP_TAG + TRANSITIONS_LABEL;
-	private static final String TP_TRANSITION_TAG = TP_TRANSITIONS_TAG + TRANSITION_LABEL;
 
 	private static final String GLOBAL_PROP_TAG = "//GlobalProperty";
-	private static final String GP_STATES_TAG = GLOBAL_PROP_TAG + STATES_LABEL;
-	private static final String GP_STATE_TAG = GP_STATES_TAG + STATE_LABEL;
+	private static final String GP_STATE_TAG = GLOBAL_PROP_TAG + STATE_LABEL;
 	private static final String GP_TRANSITIONS_TAG = GLOBAL_PROP_TAG + TRANSITIONS_LABEL;
 	private static final String GP_TRANSITION_TAG = GP_TRANSITIONS_TAG + TRANSITION_LABEL;
 
@@ -94,7 +89,7 @@ public class XMLAFDReader extends XMLReader {
 		}
 
 		// Buscamos el estado inicial de un tipo particular
-		return _estadoInicial(TYPE_STATE_PROP_TAG + typeTag(type) + STATES_LABEL + STATE_LABEL + STATE_TAG_START_ATT);
+		return _estadoInicial(TYPE_STATE_PROP_TAG + typeTag(type) + STATE_LABEL + STATE_TAG_START_ATT);
 	}
 	
 	/**
@@ -136,7 +131,7 @@ public class XMLAFDReader extends XMLReader {
 			throw new XMLException();
 		}
 
-		return _estadosFinales(TYPE_STATE_PROP_TAG + typeTag(type) + STATES_LABEL + STATE_LABEL + STATE_TAG_FINAL_ATT);
+		return _estadosFinales(TYPE_STATE_PROP_TAG + typeTag(type) + STATE_LABEL + STATE_TAG_FINAL_ATT);
 	}
 
 	/**
