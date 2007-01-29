@@ -1,6 +1,4 @@
 ToDo List
 Codigo:
- - ContextSearch parametrizable para q sea Preambulo
- - Parametrizar los outputs que se generan
- - Crear interface para Estado y parametrizar los objetos hashtables, stacks, en el Coordinador
- - Si los labels de los estados son no numéricos, pincha
+ - Si los labels de los estados son no numï¿½ricos, pincha
+ - Revisar de hacer polimorfismo en contextos de tipo Contexto y Preambulo
