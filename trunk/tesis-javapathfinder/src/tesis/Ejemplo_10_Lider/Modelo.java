@@ -82,11 +82,10 @@ class Nodo implements Runnable {
 
 	// algoritmo
 	private void searchLider() throws InterruptedException {
-		String nr;
 
 		while (true) {
 			Mensaje m = chan_in.receive();
-			nr = m.getContenido();
+			String nr = m.getContenido();
 
 			if (m.getTipo() == Mensaje.MSG_WINNER) {
 
@@ -137,19 +136,27 @@ class Nodo implements Runnable {
 	}
 }
 
-public class Modelo {
-	private static final int CANT_NODOS = 10;
+public class Modelo implements Runnable {
+	private static final int CANT_NODOS = 3;
 
-	private static void init() {
+	private void init() {
+		System.out.println("init!");
 	}
-	private static void end() {
+	private void end() {
+		System.out.println("end!");
 	}
 
 	public static void main(String[] args) {
+		Modelo m = new Modelo();
+		Thread t = new Thread(m);
+		t.start();
+	}
+
+	public void run() {
 		Nodo[] nodos  = new Nodo[CANT_NODOS];
 		Canal[] canales = new Canal[CANT_NODOS];
-		Thread t;
-		
+		Thread[] threads = new Thread[CANT_NODOS];;
+
 		for (int i=0; i<CANT_NODOS; i++) {
 			canales[i] = new Canal();
 		}
@@ -159,11 +166,26 @@ public class Modelo {
 
 		for (int i=0; i<CANT_NODOS; i++) {
 			nodos[i] = new Nodo(i, canales[i % CANT_NODOS], canales[(i+1) % CANT_NODOS]);
-			t = new Thread(nodos[i]);
-			t.start();
+			threads[i] = new Thread(nodos[i]);
+			threads[i].start();
 		}
+
+		// Esto no funciona, verificar otras formas ?
+		// wait manual para impedir que el thread cero (Modelo.main) sea el primero en terminar
+//		while (true) {
+//			boolean allDone=true;
+//			for (Thread t : threads) {
+//				if (t.isAlive()) {
+//					allDone=false;
+////					System.out.println(t + " " + t.isAlive());
+//				}
+//			}
+//			if (allDone)
+//				break;
+//		}
 
 		// marcamos el fin de la busqueda
 		end();
 	}
+
 }
