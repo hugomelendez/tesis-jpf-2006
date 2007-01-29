@@ -1,4 +1,3 @@
-ToDo List
+﻿ToDo List
 Codigo:
- - Si los labels de los estados son no num�ricos, pincha
  - Revisar de hacer polimorfismo en contextos de tipo Contexto y Preambulo
