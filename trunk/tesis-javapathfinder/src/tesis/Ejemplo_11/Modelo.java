@@ -17,6 +17,6 @@ public class Modelo {
 		//System.out.println("f2.add "+ f2.getClass().getName());
 		f2.add();
 		
-		//c1.add();
+		c1.add();
 	}
 }

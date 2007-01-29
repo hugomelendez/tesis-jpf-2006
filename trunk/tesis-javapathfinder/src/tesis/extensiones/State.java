@@ -1,6 +1,6 @@
 package tesis.extensiones;
 
-import java.util.Hashtable;
+//import java.util.Hashtable;
 
 public class State {
 	private String id;
