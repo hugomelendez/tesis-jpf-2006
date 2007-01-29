@@ -7,9 +7,6 @@ import tesis.extensiones.*;
 public class ejecutarEjemplo {
 	public static void main (String[] args) throws XMLException {
 		// Path para acceder a este ejemplo, es el prefijo usado para leer los xmls
-		// WinXP
-//		String path = ".\\src\\tesis\\Ejemplo_09\\";
-		// Linux
 		String path = "./src/tesis/Ejemplo_09/";
 
 		Coordinador c = new Coordinador();
