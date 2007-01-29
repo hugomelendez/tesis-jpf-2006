@@ -80,7 +80,7 @@ public class XMLContextoBusquedaReader extends XMLReader {
 		Element estado = (Element)document.selectSingleNode(SEARCH_CONTEXT_TAG);
 		Attribute att = (Attribute) estado.attribute(SEARCHCONTEXT_MODE_ATT);
 		if (att != null)
-			if (att.getValue() == SEARCHCONTEXT_MODE_PREAMBLE)
+			if (att.getValue().equals(SEARCHCONTEXT_MODE_PREAMBLE))
 				return SEARCHCONTEXT_MODE_PREAMBLE;
 
 		return SEARCHCONTEXT_MODE_CONTEXT;

@@ -173,7 +173,7 @@ public class Coordinador {
 		//TODO Hay que ver de backtrackear tambi�n los AFDs de Instancia!!!
 		stackCaminoPreambulo.pop();
 		contexto.irAEstado(stackCaminoPreambulo.peek());
-
+ 
 		stackCaminoAFD.pop();
 		afd.irAEstado(stackCaminoAFD.peek());
 
