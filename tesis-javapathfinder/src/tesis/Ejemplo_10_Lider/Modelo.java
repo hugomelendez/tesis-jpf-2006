@@ -137,7 +137,7 @@ class Nodo implements Runnable {
 }
 
 public class Modelo implements Runnable {
-	private static final int CANT_NODOS = 3;
+	private static final int CANT_NODOS = 0;
 
 	private void init() {
 		System.out.println("init!");
@@ -169,7 +169,7 @@ public class Modelo implements Runnable {
 			threads[i] = new Thread(nodos[i]);
 			threads[i].start();
 		}
-
+		
 		// Esto no funciona, verificar otras formas ?
 		// wait manual para impedir que el thread cero (Modelo.main) sea el primero en terminar
 //		while (true) {
@@ -183,9 +183,17 @@ public class Modelo implements Runnable {
 //			if (allDone)
 //				break;
 //		}
-
+		
+		for (int i=0;i<10000;i++);
+//		while (true) {
+//			int i=1/0;
+//			try {
+//				this.wait(10);
+//			} catch (InterruptedException e) {
+//				if (threads.length > 1) break;
+//			}
+//		}
 		// marcamos el fin de la busqueda
 		end();
 	}
-
 }

@@ -49,7 +49,7 @@ public class Coordinador {
 	/**
 	 * Contiene los AFDs que est�n VIOLADOS
 	 */
-	private Hashtable<String, AutomataVerificacion> htAFDViolados = new Hashtable<String, AutomataVerificacion>();
+	//private Hashtable<String, AutomataVerificacion> htAFDViolados = new Hashtable<String, AutomataVerificacion>();
 
 	/**
 	 * OID de la �ltima ejecuci�n de un VirtualInvocation de m�todo
@@ -372,12 +372,14 @@ public class Coordinador {
 		} else {
 			this.setModoContexto();			
 		}
-		
+	}
+
+	public void busquedaIniciada() {
 		escribirLog("************************************************");
 		escribirLog("Inicio Verificaci�n " + now());
 	}
-
-	public void finDeBusqueda() {
+	
+	public void busquedaFinalizada() {
 		escribirLog("Fin Verificaci�n " + now());
 		escribirLog("************************************************");
 	}

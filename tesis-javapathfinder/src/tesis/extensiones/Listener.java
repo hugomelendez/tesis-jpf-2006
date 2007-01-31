@@ -3,10 +3,6 @@ package tesis.extensiones;
 import gov.nasa.jpf.JPFListener;
 import gov.nasa.jpf.PropertyListenerAdapter;
 import gov.nasa.jpf.jvm.JVM;
-import gov.nasa.jpf.jvm.bytecode.INVOKEVIRTUAL;
-import gov.nasa.jpf.jvm.bytecode.Instruction;
-import gov.nasa.jpf.jvm.bytecode.InvokeInstruction;
-import gov.nasa.jpf.jvm.bytecode.VirtualInvocation;
 import gov.nasa.jpf.search.Search;
 
 /**
@@ -104,9 +100,12 @@ public class Listener extends PropertyListenerAdapter implements JPFListener {
 	}
 
 	@Override
-	public void searchFinished(Search search) {
-		coord.finDeBusqueda();
+	public void searchStarted(Search search) {
+		coord.busquedaIniciada();
 	}
 
-
+	@Override
+	public void searchFinished(Search search) {
+		coord.busquedaFinalizada();
+	}
 }
