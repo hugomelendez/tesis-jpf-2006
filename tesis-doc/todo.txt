@@ -1,3 +1,31 @@
 ﻿ToDo List
 Codigo:
  - Revisar de hacer polimorfismo en contextos de tipo Contexto y Preambulo
+ 
+Documento:
+
+ - Introducción: Ya está casi cerrado. 
+     - (RS) Hay que completar algunos comentarios, pero lo más importante es leer un poco sobre Blast para poder citarlo (ver comentarios MK)
+     - (HM) Buscar chamuyo de timeline editor
+ 
+ - Modelo de Verificación de propiedades: Esta medio verde
+     - (MK)Hay que completarlo con ejemplos y una redacción más facil de seguir.
+     - (HM)Conseguir gráfico de explicación de model checking
+     
+ - Propiedades basadas en Escenarios de Eventos: Esta muy verde
+     - (MK)Completarlo con Ejemplos
+ - SPIN
+     - (HM)Hacer listado de features necesarios para herramienta de model checking
+     - (HM)Hacer listado de problemas encontrados y porque SPIN no sirve
+ - Java Path Finder: Muy incompleto
+     - (RS) Repasar lo que esta escrito porque hay que actualizarlo según lo último implementado y según la nueva estructura del documento
+ - Casos de estudio: Completar
+ - Documentación del framework: Completar
+ - Conclusiones: Completar
+     
+     
+          
+                 
+             
+ 
+ 
