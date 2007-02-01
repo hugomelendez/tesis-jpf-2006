@@ -22,10 +22,5 @@ Documento:
  - Casos de estudio: Completar
  - Documentación del framework: Completar
  - Conclusiones: Completar
-     
-     
-          
-                 
-             
- 
- 
+ - (MK) Eliminar capitulo 4 
+ - (MK Y HM) En el actual capitulo 5, describir todo nuestro trabajo de SPIN, la herramienta se explica antes
