@@ -1,4 +1,7 @@
 ﻿ToDo List
+Repositorio:
+ - backupear repo SVN cada 5 dias en la compu de Vlado
+
 Codigo:
  - Revisar de hacer polimorfismo en contextos de tipo Contexto y Preambulo
  
