@@ -1,0 +1,1512 @@
+Starting S with pid 0
+  0:	proc  - (:root:) creates proc  0 (S)
+Starting R with pid 1
+  0:	proc  - (:root:) creates proc  1 (R)
+  1:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+  1:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+  2:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+  2:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+  3:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+  3:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+  4:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+  4:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+  5:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+  5:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+  6:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+  6:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+  7:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+  7:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+  8:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+  8:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+  9:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+  9:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 10:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 10:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 11:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 11:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 12:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 12:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 13:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 13:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 14:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 14:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 15:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 15:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 16:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 16:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 17:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 17:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 18:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 18:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 19:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 19:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 20:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 20:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 21:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 21:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 22:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 22:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 23:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 23:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 24:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 24:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 25:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 25:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 26:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 26:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 27:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 27:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 28:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 28:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 29:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 29:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 30:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 30:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 31:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 31:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 32:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 32:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 33:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 33:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 34:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 34:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 35:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 35:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 36:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 36:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 37:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 37:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 38:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 38:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 39:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 39:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 40:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 40:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 41:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 41:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 42:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 42:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 43:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 43:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 44:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 44:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 45:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 45:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 46:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 46:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 47:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 47:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 48:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 48:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 49:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 49:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 50:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 50:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 51:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 51:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 52:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 52:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 53:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 53:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 54:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 54:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 55:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 55:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 56:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 56:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 57:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 57:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 58:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 58:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 59:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 59:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 60:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 60:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 61:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 61:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 62:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 62:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 63:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 63:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 64:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 64:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 65:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 65:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 66:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 66:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 67:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 67:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 68:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 68:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 69:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 69:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 70:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 70:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 71:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 71:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 72:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 72:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 73:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 73:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 74:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 74:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 75:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 75:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 76:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 76:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 77:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 77:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 78:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 78:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 79:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 79:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 80:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 80:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 81:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 81:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 82:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 82:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 83:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 83:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 84:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 84:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 85:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 85:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 86:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 86:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 87:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 87:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 88:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 88:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 89:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 89:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 90:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 90:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 91:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 91:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 92:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 92:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 93:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 93:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 94:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 94:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 95:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 95:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 96:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 96:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 97:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 97:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 98:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 98:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+ 99:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+ 99:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+100:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+100:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+101:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+101:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+102:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+102:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+103:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+103:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+104:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+104:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+105:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+105:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+106:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+106:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+107:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+107:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+108:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+108:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+109:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+109:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+110:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+110:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+111:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+111:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+112:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+112:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+113:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+113:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+114:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+114:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+115:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+115:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+116:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+116:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+117:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+117:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+118:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+118:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+119:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+119:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+120:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+120:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+121:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+121:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+122:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+122:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+123:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+123:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+124:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+124:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+125:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+125:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+126:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+126:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+127:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+127:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+128:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+128:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+129:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+129:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+130:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+130:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+131:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+131:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+132:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+132:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+133:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+133:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+134:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+134:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+135:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+135:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+136:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+136:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+137:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+137:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+138:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+138:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+139:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+139:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+140:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+140:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+141:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+141:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+142:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+142:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+143:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+143:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+144:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+144:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+145:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+145:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+146:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+146:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+147:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+147:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+148:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+148:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+149:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+149:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+150:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+150:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+151:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+151:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+152:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+152:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+153:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+153:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+154:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+154:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+155:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+155:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+156:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+156:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+157:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+157:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+158:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+158:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+159:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+159:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+160:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+160:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+161:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+161:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+162:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+162:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+163:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+163:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+164:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+164:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+165:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+165:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+166:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+166:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+167:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+167:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+168:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+168:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+169:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+169:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+170:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+170:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+171:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+171:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+172:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+172:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+173:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+173:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+174:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+174:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+175:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+175:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+176:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+176:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+177:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+177:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+178:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+178:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+179:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+179:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+180:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+180:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+181:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+181:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+182:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+182:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+183:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+183:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+184:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+184:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+185:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+185:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+186:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+186:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+187:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+187:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+188:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+188:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+189:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+189:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+190:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+190:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+191:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+191:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+192:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+192:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+193:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+193:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+194:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+194:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+195:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+195:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+196:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+196:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+197:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+197:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+198:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+198:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+199:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+199:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+200:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+200:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+201:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+201:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+202:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+202:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+203:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+203:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+204:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+204:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+205:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+205:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+206:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+206:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+207:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+207:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+208:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+208:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+209:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+209:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+210:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+210:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+211:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+211:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+212:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+212:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+213:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+213:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+214:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+214:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+215:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+215:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+216:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+216:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+217:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+217:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+218:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+218:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+219:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+219:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+220:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+220:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+221:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+221:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+222:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+222:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+223:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+223:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+224:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+224:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+225:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+225:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+226:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+226:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+227:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+227:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+228:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+228:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+229:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+229:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+230:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+230:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+231:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+231:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+232:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+232:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+233:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+233:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+234:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+234:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+235:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+235:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+236:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+236:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+237:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+237:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+238:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+238:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+239:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+239:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+240:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+240:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+241:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+241:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+242:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+242:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+243:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+243:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+244:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+244:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+245:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+245:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+246:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+246:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+247:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+247:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+248:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+248:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+249:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+249:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+250:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+250:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+251:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+251:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+252:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+252:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+253:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+253:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+254:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+254:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+255:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+255:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+256:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+256:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+257:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+257:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+258:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+258:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+259:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+259:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+260:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+260:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+261:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+261:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+262:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+262:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+263:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+263:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+264:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+264:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+265:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+265:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+266:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+266:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+267:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+267:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+268:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+268:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+269:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+269:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+270:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+270:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+271:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+271:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+272:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+272:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+273:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+273:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+274:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+274:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+275:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+275:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+276:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+276:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+277:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+277:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+278:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+278:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+279:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+279:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+280:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+280:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+281:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+281:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+282:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+282:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+283:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+283:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+284:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+284:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+285:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+285:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+286:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+286:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+287:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+287:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+288:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+288:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+289:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+289:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+290:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+290:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+291:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+291:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+292:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+292:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+293:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+293:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+294:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+294:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+295:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+295:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+296:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+296:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+297:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+297:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+298:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+298:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+299:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+299:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+300:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+300:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+301:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+301:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+302:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+302:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+303:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+303:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+304:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+304:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+305:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+305:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+306:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+306:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+307:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+307:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+308:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+308:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+309:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+309:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+310:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+310:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+311:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+311:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+312:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+312:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+313:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+313:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+314:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+314:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+315:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+315:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+316:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+316:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+317:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+317:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+318:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+318:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+319:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+319:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+320:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+320:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+321:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+321:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+322:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+322:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+323:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+323:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+324:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+324:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+325:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+325:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+326:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+326:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+327:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+327:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+328:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+328:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+329:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+329:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+330:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+330:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+331:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+331:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+332:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+332:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+333:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+333:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+334:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+334:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+335:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+335:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+336:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+336:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+337:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+337:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+338:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+338:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+339:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+339:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+340:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+340:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+341:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+341:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+342:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+342:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+343:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+343:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+344:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+344:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+345:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+345:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+346:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+346:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+347:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+347:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+348:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+348:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+349:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+349:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+350:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+350:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+351:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+351:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+352:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+352:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+353:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+353:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+354:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+354:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+355:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+355:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+356:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+356:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+357:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+357:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+358:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+358:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+359:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+359:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+360:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+360:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+361:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+361:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+362:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+362:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+363:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+363:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+364:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+364:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+365:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+365:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+366:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+366:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+367:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+367:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+368:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+368:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+369:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+369:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+370:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+370:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+371:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+371:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+372:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+372:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+373:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+373:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+374:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+374:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+375:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+375:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+376:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+376:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+377:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+377:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+378:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+378:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+379:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+379:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+380:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+380:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+381:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+381:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+382:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+382:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+383:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+383:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+384:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+384:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+385:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+385:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+386:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+386:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+387:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+387:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+388:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+388:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+389:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+389:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+390:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+390:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+391:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+391:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+392:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+392:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+393:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+393:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+394:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+394:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+395:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+395:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+396:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+396:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+397:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+397:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+398:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+398:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+399:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+399:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+400:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+400:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+401:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+401:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+402:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+402:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+403:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+403:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+404:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+404:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+405:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+405:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+406:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+406:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+407:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+407:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+408:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+408:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+409:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+409:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+410:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+410:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+411:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+411:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+412:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+412:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+413:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+413:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+414:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+414:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+415:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+415:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+416:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+416:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+417:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+417:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+418:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+418:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+419:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+419:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+420:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+420:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+421:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+421:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+422:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+422:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+423:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+423:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+424:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+424:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+425:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+425:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+426:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+426:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+427:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+427:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+428:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+428:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+429:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+429:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+430:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+430:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+431:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+431:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+432:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+432:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+433:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+433:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+434:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+434:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+435:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+435:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+436:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+436:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+437:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+437:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+438:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+438:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+439:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+439:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+440:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+440:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+441:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+441:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+442:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+442:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+443:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+443:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+444:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+444:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+445:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+445:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+446:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+446:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+447:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+447:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+448:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+448:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+449:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+449:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+450:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+450:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+451:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+451:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+452:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+452:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+453:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+453:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+454:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+454:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+455:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+455:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+456:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+456:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+457:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+457:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+458:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+458:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+459:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+459:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+460:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+460:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+461:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+461:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+462:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+462:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+463:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+463:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+464:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+464:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+465:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+465:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+466:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+466:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+467:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+467:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+468:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+468:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+469:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+469:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+470:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+470:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+471:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+471:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+472:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+472:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+473:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+473:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+474:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+474:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+475:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+475:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+476:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+476:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+477:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+477:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+478:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+478:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+479:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+479:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+480:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+480:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+481:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+481:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+482:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+482:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+483:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+483:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+484:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+484:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+485:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+485:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+486:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+486:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+487:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+487:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+488:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+488:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+489:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+489:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+490:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+490:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+491:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+491:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+492:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+492:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+493:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+493:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+494:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+494:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+495:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+495:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+496:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+496:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+497:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+497:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+498:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+498:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+499:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+499:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+500:	proc  0 (S) line   6 "channels2.pml" (state 1)	[a!3]
+500:	proc  1 (R) line  12 "channels2.pml" (state 1)	[a?3]
+
+-------------
+depth-limit (-u500 steps) reached
+#processes: 2
+		x = 0
+500:	proc  1 (R) line  11 "channels2.pml" (state 2)
+500:	proc  0 (S) line   5 "channels2.pml" (state 2)
+2 processes created
+null

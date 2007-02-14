@@ -1,0 +1,64 @@
+#define accepto	1
+
+	/*
+	 * Formula As Typed: []accepto
+	 * The Never Claim Below Corresponds
+	 * To The Negated Formula !([]accepto)
+	 * (formalizing violations of the original)
+	 */
+
+never {    /* !([]accepto) */
+T0_init:
+	if
+	:: (! ((accepto))) -> goto accept_all
+	:: (1) -> goto T0_init
+	fi;
+accept_all:
+	skip
+}
+
+#ifdef NOTES
+Use Load to open a file or a template.
+#endif
+#ifdef RESULT
+warning: for p.o. reduction to be valid the never claim must be stutter-invariant
+(never claims generated from LTL formulae are stutter-invariant)
+(Spin Version 4.2.5 -- 2 April 2005)
+	+ Partial Order Reduction
+
+Full statespace search for:
+	never claim         	+
+	assertion violations	+ (if within scope of claim)
+	acceptance   cycles 	+ (fairness disabled)
+	invalid end states	- (disabled by never claim)
+
+State-vector 436 byte, depth reached 19, errors: 0
+      10 states, stored
+       1 states, matched
+      11 transitions (= stored+matched)
+       0 atomic steps
+hash conflicts: 0 (resolved)
+
+Stats on memory usage (in Megabytes):
+0.004 	equivalent memory usage for states (stored*(State-vector + overhead))
+0.304 	actual memory usage for states (unsuccessful compression: 6855.45%)
+	State-vector as stored = 30430 byte + 8 byte overhead
+2.097 	memory used for hash table (-w19)
+0.320 	memory used for DFS stack (-m10000)
+0.120 	other (proc and chan stacks)
+0.100 	memory lost to fragmentation
+2.622 	total actual memory usage
+
+unreached in proctype dador
+	(0 of 2 states)
+unreached in proctype rezibidor
+	(0 of 12 states)
+unreached in proctype :init:
+	(0 of 3 states)
+unreached in proctype :never:
+	line 50, "pan.___", state 8, "-end-"
+	(1 of 8 states)
+0.00user 0.00system 0:00.00elapsed 100%CPU (0avgtext+0avgdata 0maxresident)k
+0inputs+0outputs (0major+743minor)pagefaults 0swaps
+
+#endif
