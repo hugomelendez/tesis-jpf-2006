@@ -8,12 +8,7 @@ Codigo:
 Documento:
 
  - Introducción: Ya está casi cerrado. 
-     - (RS) Hay que completar algunos comentarios, pero lo más importante es leer un poco sobre Blast para poder citarlo (ver comentarios MK)
 
-ANTES
-La posibilidad de definir propiedades de manera intuitiva y simple, es hoy en día un tema de amplia investigación. Herramientas como Blast, o JPF permiten definir observadores de  determinados eventos. Si bien estas mejoras son un gran paso, no permiten definir propiedades typestate o dirigir la búsqueda para minimizar el uso de recursos.      
-DESPUES
-La posibilidad de definir propiedades de manera intuitiva y simple, es hoy en día un tema de amplia investigación. Herramientas como JPF permiten definir observadores de determinados eventos; Blast permite ademas realizar consultas sobre observadores type-state para obtener informacion de variables de objetos individuales. Si bien estas mejoras son un gran paso, no permite, por ejemplo, dirigir la búsqueda para minimizar el uso de recursos. 
 
      - (HM) Buscar chamuyo de timeline editor
  
@@ -24,31 +19,9 @@ La posibilidad de definir propiedades de manera intuitiva y simple, es hoy en d�
      
  - Propiedades basadas en Escenarios de Eventos: Esta muy verde
      - (MK)Completarlo con Ejemplos
- - SPIN
-     - (HM)Hacer listado de features necesarios para herramienta de model checking
-		ver la hoja de ruta para mayor detalle, tambien los mails
-		INDICE de la seccion
-		- ejemplo basico mutex.pml, muestra de como labura spin
-		- escribir un ltl
-			[] accept2
-			Con el xspin pudimos escribir un ltl usando el ejemplo mutex2.pml. Lo que hubo que hacer es usar "#define accept2	(mutex != 2)". Con esto el xspin genera un programa promela que despues usa para sincronizar.  
-		- escribir un never claim
-		    Al sincronizar, lo que hace es por cada linea que ejecuta del programa, chequea contra el never claim definido en ltl (que en realidad es otro programa en promela). Lo que resta sobre este punto, es entender la diferencia entre el "all executions" y el "No Executions" (opciones de la verificacion).
-		- ejemplo de leader
-			- adornar el codigo para que el never claim funcione
-				+ Inicio Ejecución
-				+ Mensajes <> winner
-				+ Mensaje winer
-		- ejemplo del runout de estados
-			esto esta en los mails, se habla de la observacion mediante labels, armamos el algoritmo "a mano", el runout se daba pq el NC modifica el estado del programa y debe ser un simple observador
-		- conclusion de limitaciones
-			entre otras, q no se puede cortar la busqueda ni hacer observaciones concretas sobre un proctype
-
-     - (HM)Hacer listado de problemas encontrados y porque SPIN no sirve
  - Java Path Finder: Muy incompleto
      - (RS) Repasar lo que esta escrito porque hay que actualizarlo según lo último implementado y según la nueva estructura del documento
  - Casos de estudio: Completar
  - Documentación del framework: Completar
  - Conclusiones: Completar
- - (MK) Eliminar capitulo 4 
- - (MK Y HM) En el actual capitulo 5, describir todo nuestro trabajo de SPIN, la herramienta se explica antes
+ - (MK Y HM) En el capitulo 4, describir todo nuestro trabajo de SPIN, la herramienta se explica antes
