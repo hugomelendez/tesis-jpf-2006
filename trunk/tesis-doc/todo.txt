@@ -8,9 +8,6 @@ Codigo:
 Documento:
 
  - Introducción: Ya está casi cerrado. 
-
-
-     - (HM) Buscar chamuyo de timeline editor
  
  - Modelo de Verificación de propiedades: Esta medio verde
      - (MK)Hay que completarlo con ejemplos y una redacción más facil de seguir.
