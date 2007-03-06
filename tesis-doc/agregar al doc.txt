@@ -1,0 +1,84 @@
+﻿Capitulo 4
+
+Funcionamiento del never claim
+
+<HM: Pegar tipo, en un parrafo mas angosto y en italica>
+	Un never claim es utilizado para especificar comportamientos infinitos o finitos del sistema que nunca deberian ocurrir
+	[...] 
+	Un never claim nos da la capacidad de verificar propiedades del sistema inmediatamente antes e inmediatamente despues de la ejecucion de cada sentencia o instruccion, sin importar que proceso la realiza.
+	Un never claim define precisamente que propiedades querremos verificar en cada paso.
+	[...] 
+	Originalmente, el never claim fue pensado para encontrar comportamiento que no debia ocurrir. Esto es, el sistema de verificacion podia establecerlo como un error
+	si el total comportamiento especificado en el never claim podia ser relacionado con alguna posible ejecucion del sistema.
+	<HM: Original>
+	a never claim is normally used to specify either finite or infinite system behavior that should never occur.>
+	[...] 
+	  A never claim gives us the capability to check system properties just before and just after each statement
+	execution, no matter which process performs them. A never claim can define precisely which properties we
+	would like to check at each step.
+	[...] 
+	Originally, a never claim was only meant to match behavior that should never occur. That is, the verification system could flag it as an error
+	if the full behavior specified in the claim could be matched by any feasible system execution. 
+	</HM: Original>
+</HM: Pegar tipo, en un parrafo mas angosto y en italica>
+
+Que es LTL
+<HM: Pegar tipo, en un parrafo mas angosto y en italica>
+	La rama de la logica que le permite a uno razonar acerca de las relaciones causales y temporales entre propiedades es llamada logica temporal.
+	[...]
+	La logica temporal nos permite formalizar las propiedades de una ejecucion de forma concisa y desambiguadamente, 
+	con la ayuda de un peque~no numero de operadores temporales especiales.
+	Lo mas relevante a una verificacion de un sistema de procesos asincronicos es la rama especifica de la logica temporal que se conoce como Linear Temporal Logic o LTL.
+
+	<HM: Original>
+	The branch of logic that allows one to reason about both causal and temporal relations of properties is called
+	temporal logic.
+	[...]
+	  Temporal logic allows us to formalize the properties of a run unambiguously and concisely with the help of a
+	small number of special temporal operators. Most relevant to the verification of asynchronous process systems
+	is a specific branch of temporal logic that is known as linear temporal logic, commonly abbreviated as LTL.
+	</HM: Original>
+</HM: Pegar tipo, en un parrafo mas angosto y en italica>
+
+Convertir un LTL a un NC
+
+<HM: Pegar tipo, en un parrafo mas angosto y en italica>
+	Esta demostrado que para cualquier formula de logica temporal existe un automata de Buchi que acepta precisamente aquellas ejecuciones que satisfacen la formula.
+	[...]
+	SPIN tiene un algoritmo de conversion que traduce formulas LTL en never claims, 
+	y automaticamente ubica accepts labels dentro del never claim para caputar la semantica de las propiedades expresadas en LTL
+	<HM: Original>
+	It was shown in the mid eighties that for every temporal logic formula there exists a Büchi automaton that
+	accepts precisely those runs that satisfy the formula. 
+	[...]
+	SPIN's conversion algorithm translates LTL formulae into never claims, and it automatically places accept labels within the claim to
+	capture the semantics of the ω−regular property that is expressed in LTL.
+	</HM: Original>
+<HM: Pegar tipo, en un parrafo mas angosto y en italica>
+
+
+Chequeo de propiedades basadas en eventos sobre SPIN
+
+Para poder definir estas props hay que establecer que eventos se pueden verificar y como?
+
+Evento en SPIN
+Nuestra definicion seguia los principios de VTS
+"Un Evento es cualquier cambio observable durante la ejecución de un sistema que pueda ser relevante para la verificación de su correcto comportamiento."
+
+La forma de representar eventos observables en SPIN fue construir never claims intentando representar la ocurrencia de eventos
+
+En el ejemplo de leader, buscamos la ocurrencia del evento "se eligio lider" y tambien la no ocurrencia de eventos como "2 lideres elegidos" y "finalizo sin lider".
+
+Dado que SPIN verifica propiedades del sistema antes y despues de la ejecucion de una instruccion, nos propusimos la tarea de encontrar un mapeo entre los eventos q queriamos observar y las propiedades que SPIN podia verificar
+
+SPIN verifica automaticamente propiedades como aserciones, estados no alcanzados (deadlocks), ciclos infinitos, etc... Tambien verifica propiedades escritas en never claims.
+Los never claims estan construidos en lenguaje Promela y representan un automata que, al combinar con el automata del modelo, verifica la propiedad.
+
+Como representamos el evento 'se eligio lider' como una propiedad ?
+Podemos agregar en el modelo una variable global (nr_leader) que representa la cantidad de lideres elegidos y asignarle un valor True en el momento que un proceso Nodo elige ser el lider de la red.
+Luego, podemos decir que el evento 'se eligio lider' ocurre cuando "nr_leader == 1" y que la propiedad a verificar sea "evemtualmente se elige un lider" o <>(nr_leader==1)
+De la formula LTL construimos el never claim y realizamos la verificacion
+
+Luego de esto, tomar como ejemplo el leader para mostrar explicitamente como se construye una propiedad
+Hablar de que se verifican todos los caminos de ejecucion
+y finalmente... limitaciones
