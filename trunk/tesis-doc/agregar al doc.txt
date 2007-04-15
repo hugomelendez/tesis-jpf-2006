@@ -1,9 +1,38 @@
-﻿
+4.1 Introduccion
+El objetivo del presente trabajo es analizar y extender una herramienta de model checking para permitir que la misma pueda realizar la verificacion de sistemas mediante patrones de eventos. Asimismo, las extensiones deben resolver algunas limitaciones de este tipo de aplicaciones al incorporarle, por ejemplo, funcionalidades de direccionamiento de busqueda de estos eventos para impedir el extenso uso de recursos.
+
+A continuacion, desarrollaremos nuestro trabajo sobre la herramienta SPIN.
+
+4.2 Verificacion
+SPIN es una herramienta de model checking que utiliza el lenguaje Promela para la definicion de modelos. Los modelos escritos en Promela estan representados por procesos que al ser activados comienzan a ejecutar de manera concurrente. La verificacion que provee SPIN se realiza utilizando aserciones, mediante la instruccion assert y el Never Claim que es un proceso particular escrito en Promela, con la particularidad que el scheduler interno de SPIN intercala cada instruccion del modelo ejecutada con una instruccion del Never Claim, permitiendo de esta manera realizar verificaciones del modelo en cada paso de la ejecucion.
+
+4.2.1
+Agregar la tabla representada por el excel para mostrar un camino erronea elegido por el SPIN.
+
+
+HM: en
+Como puede verse en el grafico <HM meter referencia al grafico de ejecucion>, para determinado camino en la ejecución, el intento de verificar usando un proceso monitor no cumple con los requerimientos que nos planteamos. De todos los posibles caminos de ejecución existen varios caminos a elegir que invalidan la exclusión mutua necesaria por todas las instancias de P.
+
+agregar
+
+Aun con la posibilidad de programar el monitor para que, mediante un ciclo infinito, no verifique una unica vez el estado de mutex, las ejecuciones del proceso P y del Monitor se pueden intercalar de muchas formas tales que no cumplan con el requisito del ejercicio.
+
+4.2.2 al 4.2.4 eliminar las notas de texto original
+
+4.2.2
+Con el conocimiento del Never Claim, podemos entonces facilmente construir un proceso que verifique luego de cada ejecucion del modelo que la zona compartida de memoria se acceda por un unico proceso a la vez.
+
+HM: poner codigo de ejemplo para el problema de mutex
+
+HM: falta el pie de NC a LTL, no lo veo y no se si esto significa que estan las secciones explicadas en un orden inverso
+
+4.2.3 Que es LTL
+
+Esta misma propiedad SPIN nos permite escribirla en LTL de la siguiente manera
+ [] (mutex != 2)
+Que significa, "en todo momento, mutex debe tener un valor distinto de 2"
+
+
 4.2.5
 agregar ej de lider para ejemplificar chekeo de propiedades
-
-cambiar ¿ Cómo representamos el evento "se eligió líder" como una propiedad ?
-por Representación de eventos en SPIN
-
-
 

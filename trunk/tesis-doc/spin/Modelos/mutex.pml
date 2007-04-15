@@ -5,7 +5,7 @@ proctype P (bit i) {
 	flag1 != 1;
 	flag1 = 1;
 	mutex++;
-	printf("p (%d) entro !", i);
+	printf("p (%d) entro !\n", i);
 	mutex--;
 	flag1 = 0;
 }

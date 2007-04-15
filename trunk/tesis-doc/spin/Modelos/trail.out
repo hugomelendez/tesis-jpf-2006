@@ -1,0 +1,46 @@
+Starting A with pid 0
+Starting B with pid 1
+Starting monitor with pid 2
+Starting :init: with pid 3
+spin: couldn't find claim (ignored)
+  2:	proc  3 (:init:) line  25 "pan_in" (state 1)	[((mutex!=2))]
+
+  4:	proc  2 (monitor) line  21 "pan_in" (state 1)	[assert((mutex!=2))]
+
+  6:	proc  1 (B) line  13 "pan_in" (state 1)	[((x==0))]
+
+  8:	proc  1 (B) line  14 "pan_in" (state 2)	[y = 1]
+		y = 1
+
+ 10:	proc  3 (:init:) line  26 "pan_in" (state 2)	[((((x==1)&&(y==0))||((x==0)&&(y==1))))]
+
+ 12: proc 3 terminates
+ 14: proc 2 terminates
+ 16:	proc  1 (B) line  15 "pan_in" (state 3)	[mutex = (mutex+1)]
+		mutex = 1
+
+ 18:	proc  1 (B) line  16 "pan_in" (state 4)	[mutex = (mutex-1)]
+		mutex = 0
+
+ 20:	proc  1 (B) line  17 "pan_in" (state 5)	[y = 0]
+		y = 0
+
+ 22: proc 1 terminates
+ 24:	proc  0 (A) line   5 "pan_in" (state 1)	[((y==0))]
+
+ 26:	proc  0 (A) line   6 "pan_in" (state 2)	[x = 1]
+		x = 1
+
+ 28:	proc  0 (A) line   7 "pan_in" (state 3)	[mutex = (mutex+1)]
+		mutex = 1
+
+ 30:	proc  0 (A) line   8 "pan_in" (state 4)	[mutex = (mutex-1)]
+		mutex = 0
+
+ 32:	proc  0 (A) line   9 "pan_in" (state 5)	[x = 0]
+		x = 0
+
+ 34: proc 0 terminates
+spin: trail ends after 36 steps
+4 processes created
+Exit-Status 0
