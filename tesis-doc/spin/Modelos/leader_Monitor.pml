@@ -95,17 +95,14 @@ accept_all:
 
 init {
 	byte proc;
-//	atomic {
+	atomic {
 		proc = 1;
-
+		do
+		:: proc <= N ->
 			run node (q[proc-1], q[proc%N], (N+I-proc)%N+1);
-			proc++;
-			run node (q[proc-1], q[proc%N], (N+I-proc)%N+1);
-			proc++;
-			run node (q[proc-1], q[proc%N], (N+I-proc)%N+1);
-			proc++;
-			run node (q[proc-1], q[proc%N], (N+I-proc)%N+1);
-			proc++;
-			run node (q[proc-1], q[proc%N], (N+I-proc)%N+1);
-//	}
+			proc++
+		:: proc > N ->
+			break
+		od
+	}
 }
