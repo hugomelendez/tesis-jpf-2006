@@ -36,6 +36,7 @@ proctype node (chan in, out; byte mynumber)
 skip;
 end:	do
 	:: in?winner, nr ->
+		states(0,0,1);
 		out!winner, nr;
 		break;
 	:: in?one(nr) ->
@@ -45,25 +46,26 @@ end:	do
 			:: nr > mynumber ->
 				printf("MSC: LOST\n");
 				Active = 0;
+				states(0,1,0);
 				out!one, nr;
 			:: nr == mynumber ->
 				assert(nr == N);
+				states(0,0,1);
 				out!winner, mynumber;
-
 				printf("MSC: LEADER\n");
 				break;
 			:: nr < mynumber ->
+				states(0,1,0);
 				out!one, mynumber;
 			fi
 		:: else ->
+			states(0,1,0);
 			out!one, nr;
 		fi
 	od
 }
 
 active proctype monitor (){
-
-//Esto funciona con Liveness y non progress cycles
 T0_init:
     if
     :: ie -> goto L_NW_INICIADO
@@ -72,7 +74,7 @@ T0_init:
 
 L_NW_INICIADO:
     if
-    :: (w) -> goto pincha
+    :: (w) -> goto trampa
     :: (nw) -> goto L_NW1
     :: goto L_NW_INICIADO
     fi;
@@ -82,10 +84,9 @@ L_NW1:
     :: goto L_NW1
     fi;
 
-pincha:
+trampa:
     do
-    :: 1 -> skip
-    :: 0 -> skip
+    :: true -> skip
     od;
 
 L_WIN:
@@ -95,6 +96,7 @@ accept_all:
 
 init {
 	byte proc;
+	states(1,0,0);
 	atomic {
 		proc = 1;
 		do
