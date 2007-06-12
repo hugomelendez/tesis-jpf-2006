@@ -60,7 +60,7 @@ public class Coordinador {
 	private AutomataVerificacion afd;
 	private DFSearchTesis search;
 	private ContextoBusqueda contexto;
-	private EventBuilder evb;
+	private EventBuilder evb;  //  @jve:decl-index=0:
 
 	private static final int MODO_PREAMBULO = 0; 
 	private static final int MODO_CONTEXTO = 1;
@@ -298,6 +298,8 @@ public class Coordinador {
 			//Se elimina el AFD de la colecci�n y su stack de estados asociado
 			htOIDAFD.remove(iOID);
 			htOIDStack.remove(iOID);
+
+			escribirLog("OBJETO LIBERADO. OID=" + iOID);
 		}
 	}
 
