@@ -26,6 +26,9 @@ public class ejecutarEjemplo {
 	    jpf.addSearchListener(listener);
 	    jpf.addVMListener(listener);
 	    
+	    //MAGIA
+	    jpf.addSearchProperty(listener);
+
 	    ((DFSearchTesis)jpf.search).setCoordinador(c);
 	    
 	    System.out.println("---------------- JPF started");

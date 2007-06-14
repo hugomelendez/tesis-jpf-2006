@@ -59,7 +59,7 @@ public class Coordinador {
 
 	private AutomataVerificacion afd;
 	private DFSearchTesis search;
-	private ContextoBusqueda contexto;
+	private ContextoBusqueda contexto;  //  @jve:decl-index=0:
 	private EventBuilder evb;  //  @jve:decl-index=0:
 
 	private static final int MODO_PREAMBULO = 0; 
@@ -94,20 +94,43 @@ public class Coordinador {
 	public void ocurrioInstruccion(Instruction i) {
 		Evento e = evb.eventFrom(i);
 
-		if (!contexto.invalido() && e.esObservable()) {
-			escribirLog(e);
-			if (modo == MODO_PREAMBULO) {
-				//MODO Preambulo
-				//Antes de avanzar el AFD, verifica que se haya cumplido el Contexto (Preambulo)
-				if (!contexto.cumplido()) {
+		//Se evalúan los eventos, SI y SÓLO SI no está violada ninguna propiedad
+		if (!propiedadViolada()) {
+			if (!contexto.invalido() && e.esObservable()) {
+				escribirLog(e);
+				if (modo == MODO_PREAMBULO) {
+					//MODO Preambulo
+					//Antes de avanzar el AFD, verifica que se haya cumplido el Contexto (Preambulo)
+					if (!contexto.cumplido()) {
+						contexto.consumir(e);
+						escribirLog(contexto);
+					}
+					else {
+						//Global Property
+						afd.consumir(e);
+						escribirLog(afd);
+	
+						//TypeStateProperty/s
+						if (iOIDUltimaEjecucion != -1) {
+							if (htOIDAFD.containsKey(iOIDUltimaEjecucion)) {
+								AutomataVerificacion afdOID = (AutomataVerificacion) htOIDAFD.get(iOIDUltimaEjecucion);
+								afdOID.consumir(e);
+								escribirLog(afdOID);
+							}
+							iOIDUltimaEjecucion = -1;
+						}
+					}
+				}
+				else if (modo == MODO_CONTEXTO) {
+					//MODO Contexto Busqueda
+					//Avanza el Contexto y el AFD en paralelo
 					contexto.consumir(e);
 					escribirLog(contexto);
-				}
-				else {
+	
 					//Global Property
 					afd.consumir(e);
 					escribirLog(afd);
-
+	
 					//TypeStateProperty/s
 					if (iOIDUltimaEjecucion != -1) {
 						if (htOIDAFD.containsKey(iOIDUltimaEjecucion)) {
@@ -117,26 +140,6 @@ public class Coordinador {
 						}
 						iOIDUltimaEjecucion = -1;
 					}
-				}
-			}
-			else if (modo == MODO_CONTEXTO) {
-				//MODO Contexto Busqueda
-				//Avanza el Contexto y el AFD en paralelo
-				contexto.consumir(e);
-				escribirLog(contexto);
-
-				//Global Property
-				afd.consumir(e);
-				escribirLog(afd);
-
-				//TypeStateProperty/s
-				if (iOIDUltimaEjecucion != -1) {
-					if (htOIDAFD.containsKey(iOIDUltimaEjecucion)) {
-						AutomataVerificacion afdOID = (AutomataVerificacion) htOIDAFD.get(iOIDUltimaEjecucion);
-						afdOID.consumir(e);
-						escribirLog(afdOID);
-					}
-					iOIDUltimaEjecucion = -1;
 				}
 			}
 		}
