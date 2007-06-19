@@ -70,8 +70,8 @@ public class DFSearchTesis extends gov.nasa.jpf.search.Search {
 			// || estado VM es final
 			// || el coordinador lo indica (ContextoBusqueda no se cumplio)
 			// --> backtrack
-			if ( !isNewState
-					|| isEndState
+			//if ( !isNewState
+			if ( isEndState
 					|| coord.backtrackear() ) {
 
 				if (!backtrack()) { // backtrack not possible, done
