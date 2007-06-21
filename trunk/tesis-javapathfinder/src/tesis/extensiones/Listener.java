@@ -101,6 +101,7 @@ public class Listener extends PropertyListenerAdapter implements JPFListener {
 
 	@Override
 	public void searchStarted(Search search) {
+		super.searchStarted(search);
 		coord.busquedaIniciada();
 	}
 
