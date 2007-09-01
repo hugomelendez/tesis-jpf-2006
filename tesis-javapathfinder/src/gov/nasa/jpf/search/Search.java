@@ -35,8 +35,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import com.sun.java_cup.internal.production;
-
 /**
  * the mother of all search classes. Mostly takes care of listeners, keeping
  * track of state attributes and errors. This class mainly keeps the
