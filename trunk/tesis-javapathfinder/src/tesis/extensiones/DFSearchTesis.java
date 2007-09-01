@@ -22,8 +22,6 @@ import gov.nasa.jpf.Config;
 import gov.nasa.jpf.jvm.JVM;
 import gov.nasa.jpf.util.Debug;
 
-import java.util.Hashtable;
-
 /**
  * standard depth first model checking (but can be bounded by search depth
  * and/or explicit Verify.ignoreIf)
