@@ -2,7 +2,7 @@ package tesis.Doc_Ejemplo_01;
 
 public class ModeloVacio {
 
-	private static int MetodoDePrueba(){
+	private static int MetodoDePrueba() {
 		return 0;
 	}
 
