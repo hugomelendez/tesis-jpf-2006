@@ -7,7 +7,6 @@ enum Direccion {arriba, abajo};
 enum Puerta {abierta, cerrada}
 enum Estado {parado, bajando, subiendo}
 
-
 class Ascensor implements Runnable {
 	int piso;
 	private Direccion direccion;
@@ -21,11 +20,15 @@ class Ascensor implements Runnable {
 		qSolicitudes = new Queue();
 	}
 
-	public void run() {
+	public synchronized void run() {
 		while (true) {
 			try {
+				if (qSolicitudes.isEmpty()) 
+					wait();
+				
 				int i = ((Integer)qSolicitudes.dequeue()).intValue();
 				irA(i);
+				
 			} catch (InterruptedException e) {
 				//e.printStackTrace();
 			}
@@ -68,9 +71,10 @@ class Ascensor implements Runnable {
 		}
 	}
 
-	public void solicitudA (int p) {
+	public synchronized void solicitudA (int p) {
 		System.out.println("Solicitud NUEVA");
 		qSolicitudes.enqueue(p);
+		this.notify();
 	}
 	
 	private void irA (int p) {
@@ -111,11 +115,12 @@ class Ascensor implements Runnable {
 	public void apretarBoton(int i) {
 		solicitudA(i);
 		
-/*		System.out.println("INICIA apretarBoton");
+		System.out.println("INICIA apretarBoton");
 		for (int x=0; x<=100000;x++){
-			
+			x++;
+			x--;
 		}
-		System.out.println("TERMINA apretarBoton");*/
+		System.out.println("TERMINA apretarBoton");
 	}
 }
 
@@ -155,9 +160,8 @@ class Persona implements Runnable {
 		Ascensor a = controlA.solicitudSubir(0);
 		
 		a.apretarBoton(10);
-		
-		System.out.println("APRETE BOTON");
 		//while (a.piso != 10);
+		System.out.println("APRETE BOTON");
 	}
 }
 
@@ -175,10 +179,5 @@ public class Modelo {
 		//p.run();
 		Thread t3 = new Thread(p); 
 		t3.start();
-
-		Persona p2 = new Persona(ca);
-		//p.run();
-		Thread t4 = new Thread(p2); 
-		t4.start();
-}
+	}
 }
