@@ -8,7 +8,8 @@ enum Puerta {abierta, cerrada}
 enum Estado {parado, bajando, subiendo}
 
 class Ascensor implements Runnable {
-	private static final int ALTURA = 10;
+	//Se considera la PB como piso 0, por ende el piso más alto es ALTURA-1
+	private static final int ALTURA = 11;
 	int piso;
 	private Direccion direccion;
 	private Puerta puerta;
@@ -19,7 +20,26 @@ class Ascensor implements Runnable {
 		piso = 2;
 		puerta = Puerta.abierta;
 		direccion = Direccion.arriba;
-		solicitudes = new Vector<Boolean>(ALTURA+1);
+		inicializarSolicitudes();
+	}
+
+	private void inicializarSolicitudes() {
+		solicitudes = new Vector<Boolean>(ALTURA);
+		for (int i=0; i<ALTURA; i++)
+			//OJO, acá no se puede llamar a limpiarSolicitudEn
+			solicitudes.add(i, false);
+	}
+	
+	private void limpiarSolicitudEn(int p) {
+		 solicitudes.set(p, false);
+	}
+
+	private void asignarSolicitudEn(int p) {
+		 solicitudes.set(p, true);
+	}
+
+	private Boolean haySolicitudEn(int p) {
+		 return (solicitudes.get(p));
 	}
 
 	public synchronized void run() {
@@ -29,7 +49,6 @@ class Ascensor implements Runnable {
 					wait();
 				
 				int i = proximaSolicitud();
-				solicitudes.add(i, false);
 				irA(i);
 				
 			} catch (InterruptedException e) {
@@ -40,20 +59,36 @@ class Ascensor implements Runnable {
 
 	private boolean solicitudesPendientes() {
 		Boolean ret = false;
-		for (int i = 0; i<=ALTURA && !ret; i++) {
-			ret = solicitudes.elementAt(i);
+		for (int i = 0; i<ALTURA && !ret; i++) {
+			ret = haySolicitudEn(i);
 		}
 		return ret;
 	}
 
-	// devuelve la proxima solicitud a atender
+	// Devuelve la proxima solicitud a atender
+	// La precondición es que haya una solicitud pendiente
 	private int proximaSolicitud() {
 		int ret;
+
 		if (direccion == Direccion.arriba) {
-			for (ret = piso; ret<=ALTURA && !solicitudes.elementAt(ret); ret++);
+			for (ret = piso; ret<ALTURA && !haySolicitudEn(ret); ret++);
+
+			//Si no encontró una próxima solicitud para arriba, busca para abajo
+			if (ret >= ALTURA) {
+				for (ret = piso; ret>=0 && !haySolicitudEn(ret); ret--);
+			}
 		} else {
-			for (ret = piso; ret>=0 && !solicitudes.elementAt(ret); ret--);
+			for (ret = piso; ret>=0 && !haySolicitudEn(ret); ret--);
+			
+			//Si no encontró una próxima solicitud para abajo, busca para arriba
+			if (ret < 0) {
+				for (ret = piso; ret<ALTURA && !haySolicitudEn(ret); ret++);
+			}
 		}
+
+		//Por la precondición
+		assert(ret>=0 && ret<ALTURA);
+		
 		return ret;
 	}
 	
@@ -68,34 +103,32 @@ class Ascensor implements Runnable {
 	}
 
 	private void pasarPor(int p){
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		System.out.println("Pasa por " + p);
+		esperar(1);
 		piso = p;		
 	}
 
 	private void subir(int p){
-		int x = 0;
-
-		for (x = piso; x <= p; x++){
-			pasarPor(x);
+		for (int i = piso; i <= p; i++){
+			pasarPor(i);
+			if (haySolicitudEn(i)) {
+				atenderSolicitud(i);
+			}
 		}
 	}
 
 	private void bajar(int p){
-		int x = 0;
-		for (x = piso; x >= p; x--){
-			pasarPor(x);
+		for (int i = piso; i >= p; i--){
+			pasarPor(i);
+			if (haySolicitudEn(i)) {
+				atenderSolicitud(i);
+			}
 		}
 	}
 
 	public synchronized void solicitudA (int p) {
 		System.out.println("Solicitud NUEVA, piso " + p);
-		solicitudes.add(p, true);
+		asignarSolicitudEn(p);
 		this.notify();
 	}
 	
@@ -103,39 +136,41 @@ class Ascensor implements Runnable {
 		if (p > piso){
 			arrancar (Direccion.arriba);
 			subir(p);
-			llegar();
 		} else if (p < piso) {
 			arrancar (Direccion.abajo);
 			bajar(p);
-			llegar();
-		}else{ //La tiene que ir al mismo piso en el que esta
-			//no debería hacer nada no?
+		}else{
+			atenderSolicitud(p);
 		}
 	}
 
 	private void arrancar (Direccion d) {
+		if (direccion != d) {
+			direccion = d;
+			System.out.println("Cambio direccion "+direccion);
+		}
+
 		cerrarPuertas();
 		if (direccion == Direccion.arriba){
 			estado = Estado.subiendo;
 		} else {
 			estado = Estado.bajando;
 		}
-
-		if (direccion != d) {
-			direccion = d;
-			System.out.println("Cambio direccion "+direccion);
-		}
 	}
 
-	private void llegar () {
+	private void atenderSolicitud (int p) {
 		estado = Estado.parado;
 		abrirPuertas();
-		esperar();
-		//Acá no debería esperar. Es posible que necesite seguir
+		esperar(1);
+		limpiarSolicitudEn(p);
 	}
 
-	private void esperar () {
-		estado = Estado.parado;
+	private void esperar (int seg) {
+		try {
+			Thread.sleep(seg*1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void apretarBoton(int i) {
@@ -193,14 +228,15 @@ public class Modelo {
 	public static void main(String[] args) {
 		Ascensor a = new Ascensor();
 		Thread t1 = new Thread(a);
-		t1.start();
 
 		ControladorAscensor ca = new ControladorAscensor(a);
 		Thread t2 = new Thread(ca);
-		t2.start();
 		
 		Persona p = new Persona(ca);
 		Thread t3 = new Thread(p); 
+
+		t1.start();
+		t2.start();
 		t3.start();
 	}
 }
