@@ -3,13 +3,33 @@
 	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
 	<GlobalProperty>
 	    <states>
-	        <state label="s0" start="true" />
-	        <state label="sWrite1" />
-	        <state label="sWrite2" />
+	        <state label="E0" start="true" />
+	        <state label="E1" />
 	        <state label="ERROR" final="true" />
 	    </states>
 	    <transitions>
-	        <transition from="s0" to="sWrite1" labelEvent="WRITE" />
+	        <transition from="E0" to="E0" labelEvent="CP" />
+	        <transition from="E0" to="E0" labelEvent="PP" />
+	        <transition from="E0" to="E0" labelEvent="S" />
+	        <transition from="E0" to="E0" labelEvent="B" />
+	        <transition from="E0" to="E0" labelEvent="IA" />
+	        <transition from="E0" to="E0" labelEvent="A" />
+	        <transition from="E0" to="E0" labelEvent="AS" />
+	        <transition from="E0" to="E0" labelEvent="E" />
+	        <transition from="E0" to="E0" labelEvent="AB" />
+
+	        <transition from="E0" to="E1" labelEvent="AP" />
+
+	        <transition from="E1" to="E0" labelEvent="CP" />
+	        <transition from="E1" to="E1" labelEvent="PP" />
+	        <transition from="E1" to="E1" labelEvent="S" />
+	        <transition from="E1" to="E1" labelEvent="B" />
+	        <transition from="E1" to="E1" labelEvent="IA" />
+	        <transition from="E1" to="E1" labelEvent="AS" />
+	        <transition from="E1" to="E1" labelEvent="E" />
+	        <transition from="E1" to="E1" labelEvent="AB" />
+
+	        <transition from="E1" to="ERROR" labelEvent="A" />
 	    </transitions>
 	</GlobalProperty>
 </ProblemDefinition>
