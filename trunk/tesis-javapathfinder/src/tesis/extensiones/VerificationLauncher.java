@@ -5,15 +5,24 @@ import gov.nasa.jpf.JPF;
 
 public class VerificationLauncher {
 
+	public static void execute(String pathXML, String modelo) throws XMLException {
+		execute(pathXML, modelo, true);
+	}
+	
 	/**
 	 * 
 	 * @param path: ruta donde se encuentran los xmls 
 	 * @param modelo: clase principal de la aplicación a verificar
 	 * @throws XMLException
 	 */
-	public static void execute(String pathXML, String modelo) throws XMLException {
+	public static void execute(String pathXML, String modelo, Boolean usarContexto) throws XMLException {
 		Coordinador c = new Coordinador();
-		c.loadConfiguration(pathXML + "Events.xml", pathXML + "ProblemProperty.xml", pathXML + "ProblemContext.xml");
+
+		if (usarContexto) {
+			c.loadConfiguration(pathXML + "Events.xml", pathXML + "ProblemProperty.xml", pathXML + "ProblemContext.xml");
+		} else {
+			c.loadConfiguration(pathXML + "Events.xml", pathXML + "ProblemProperty.xml");
+		}
 
 		Listener listener = new Listener(c);
 		
