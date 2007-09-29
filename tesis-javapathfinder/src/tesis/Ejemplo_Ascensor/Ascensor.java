@@ -15,6 +15,7 @@ class Ascensor implements Runnable {
 	private Puerta puerta;
 	private Estado estado;
 	private Vector<Boolean> solicitudes;
+	private String tabifier;
 
 	Ascensor () {
 		piso = 2;
@@ -111,23 +112,23 @@ class Ascensor implements Runnable {
 	}
 
 	public void abrirPuertas () {
-		System.out.println("abrirPuertas");
+		msgs("abrirPuertas");
 		puerta = Puerta.abierta;
 	}
 
 	public void cerrarPuertas () {
-		System.out.println("cerrarPuertas");
+		msgs("cerrarPuertas");
 		puerta = Puerta.cerrada;
 	}
 
 	private void pasarPor(int p){
-		System.out.println("Pasa por " + p);
+		msgs("Pasa por " + p);
 		esperar(1);
 		piso = p;
 	}
 
 	private void subir(int p){
-		for (int i = piso; i <= p; i++){
+		for (int i = piso+1; i <= p; i++){
 			pasarPor(i);
 			if (haySolicitudEn(i)) {
 				atenderSolicitud(i);
@@ -136,7 +137,7 @@ class Ascensor implements Runnable {
 	}
 
 	private void bajar(int p){
-		for (int i = piso; i >= p; i--){
+		for (int i = piso-1; i >= p; i--){
 			pasarPor(i);
 			if (haySolicitudEn(i)) {
 				atenderSolicitud(i);
@@ -145,7 +146,7 @@ class Ascensor implements Runnable {
 	}
 
 	public synchronized void solicitudA (int p) {
-		System.out.println("Solicitud NUEVA, piso " + p);
+		msgs("Solicitud NUEVA, piso " + p);
 		asignarSolicitudEn(p);
 		this.notify();
 	}
@@ -165,10 +166,9 @@ class Ascensor implements Runnable {
 	private void arrancar (Direccion d) {
 		if (direccion != d) {
 			direccion = d;
-			System.out.println("Cambio direccion "+direccion);
+			msgs("Cambio direccion "+direccion);
 		}
 
-		cerrarPuertas();
 		if (direccion == Direccion.arriba){
 			estado = Estado.subiendo;
 		} else {
@@ -181,6 +181,9 @@ class Ascensor implements Runnable {
 		abrirPuertas();
 		esperar(1);
 		limpiarSolicitudEn(p);
+
+		// este cerrar estaba antes en arrancar lo cual generaba un problema en la propiead "no arranques con las puertas abiertas"
+		cerrarPuertas();
 	}
 
 	private void esperar (int seg) {
@@ -192,10 +195,20 @@ class Ascensor implements Runnable {
 	}
 
 	public void apretarBoton(int i) {
+		msgs("Boton presionado: "+ i);
 		solicitudA(i);
 	}
 
 	public boolean enPiso(int p) {
 		return (piso==p);
+	}
+
+	// Helper
+	private void msgs(String s) {
+		System.out.println(tabifier+"Ascensor -> " + s);
+	}
+
+	public void setTab(String s) {
+		tabifier = s;
 	}
 }
