@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
-	<SearchContext mode="contexto">
+<!-- MODO PREAMBULO -->
+<!--
+	<SearchContext mode="preambulo">
 	    <states>
-	        <state label="s0" start="true" />
-	        <state label="sFinal" final="true" />
+	        <state label="0" start="true" />
+	        <state label="1" />
+	        <state label="2" final="true" />
 	    </states>
 	    <transitions>
-			//No importan los eventos OPEN y WRITE, sólo los CLOSE
-	        <transition from="s0" to="s0" labelEvent="OPEN" />
-	        <transition from="s0" to="s0" labelEvent="WRITE" />
-	        <transition from="s0" to="s0" labelEvent="CLOSE" />
+	        <transition from="0" to="2" labelEvent="add" />
+	    </transitions>
+	</SearchContext>
+-->
+
+<!-- MODO CONTEXTO -->
+	<SearchContext mode="contexto">
+	    <states>
+	        <state label="0" start="true" />
+	    </states>
+	    <transitions>
+	        <transition from="0" to="0" labelEvent="AP" />
+	        <transition from="0" to="0" labelEvent="CP" />
+	        <transition from="0" to="0" labelEvent="PP" />
+	        <transition from="0" to="0" labelEvent="S" />
+	        <transition from="0" to="0" labelEvent="B" />
+	        <transition from="0" to="0" labelEvent="IA" />
+	        <transition from="0" to="0" labelEvent="A" />
+	        <transition from="0" to="0" labelEvent="AS" />
+	        <transition from="0" to="0" labelEvent="E" />
+	        <transition from="0" to="0" labelEvent="AB" />
 	    </transitions>
 	</SearchContext>
 </ProblemDefinition>

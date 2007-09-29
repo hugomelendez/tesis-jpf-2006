@@ -2,8 +2,15 @@
 <ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
 	<events>
-	    <event type="invoke" name="open" label="OPEN" />
-	    <event type="invoke" name="write" label="WRITE" />
-	    <event type="invoke" name="close" label="CLOSE" />
+	    <event type="invoke" name="abrirPuertas" label="AP" />
+	    <event type="invoke" name="cerrarPuertas" label="CP" />
+	    <event type="invoke" name="pasarPor" label="PP" />
+	    <event type="invoke" name="subir" label="S" />
+	    <event type="invoke" name="bajar" label="B" />
+	    <event type="invoke" name="irA" label="IA" />
+	    <event type="invoke" name="arrancar" label="A" />
+	    <event type="invoke" name="atenderSolicitud" label="AS" />
+	    <event type="invoke" name="esperar" label="E" />
+	    <event type="invoke" name="apretarBoton" label="AB" />
 	</events>
 </ProblemDefinition>
