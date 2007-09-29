@@ -17,7 +17,7 @@ class Ascensor implements Runnable {
 	private Vector<Boolean> solicitudes;
 	
 	Ascensor () {
-		piso = 2;
+		piso = 0;
 		puerta = Puerta.abierta;
 		direccion = Direccion.arriba;
 		inicializarSolicitudes();
