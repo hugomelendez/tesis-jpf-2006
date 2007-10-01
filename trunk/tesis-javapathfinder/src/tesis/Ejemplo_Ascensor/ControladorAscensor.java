@@ -1,7 +1,6 @@
 package tesis.Ejemplo_Ascensor;
 
-
-class ControladorAscensor implements Runnable{
+class ControladorAscensor {
 	private Ascensor ascensor;
 	private String tabifier;
 
@@ -47,8 +46,4 @@ class ControladorAscensor implements Runnable{
 	public void setTab(String s) {
 		tabifier = s;
 	}
-
-	public void run() {
-	}
-
 }

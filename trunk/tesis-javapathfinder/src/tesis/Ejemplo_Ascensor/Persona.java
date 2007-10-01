@@ -11,7 +11,7 @@ class Persona implements Runnable {
 	
 	Persona (Integer i, ControladorAscensor c) {
 		pisoActual = 0;
-		pisoDestino = Ascensor.ALTURA-1;
+		pisoDestino = pisoActual;
 		controlA = c;
 		id = i;
 	}
