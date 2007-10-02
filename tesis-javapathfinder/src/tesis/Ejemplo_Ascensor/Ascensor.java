@@ -24,7 +24,7 @@ class Ascensor implements Runnable {
 		inicializarSolicitudes();
 	}
 
-	private void inicializarSolicitudes() {
+	private synchronized void inicializarSolicitudes() {
 		solicitudes = new Vector<Boolean>(ALTURA);
 		for (int i=0; i<ALTURA; i++) {
 			//OJO, ac� no se puede llamar a limpiarSolicitudEn
@@ -32,15 +32,15 @@ class Ascensor implements Runnable {
 		}
 	}
 
-	private void limpiarSolicitudEn(int p) {
+	private synchronized void limpiarSolicitudEn(int p) {
 		 solicitudes.set(p, false);
 	}
 
-	private void asignarSolicitudEn(int p) {
+	private synchronized void asignarSolicitudEn(int p) {
 		 solicitudes.set(p, true);
 	}
 
-	private Boolean haySolicitudEn(int p) {
+	private synchronized Boolean haySolicitudEn(int p) {
 		 return (solicitudes.get(p));
 	}
 
