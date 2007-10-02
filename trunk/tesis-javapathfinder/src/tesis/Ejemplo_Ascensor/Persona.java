@@ -36,37 +36,42 @@ class Persona implements Runnable {
 		//Esperamos a q el ascensor llegue
 		while (!a.enPiso(pisoActual));
 
-		msgs("Desde p: " + pisoActual + " aprete boton p: " + pisoDestino);
+//		msgs("Desde p: " + pisoActual + " aprete boton p: " + pisoDestino);
 		a.apretarBoton(pisoDestino);
 
 		// cuando llegamos al destino nos cambiamos de piso
 		while (!a.enPiso(pisoDestino));
 		pisoActual = pisoDestino;
-		msgs("Llegue al piso: " + pisoActual);
+//		msgs("Llegue al piso: " + pisoActual);
 	}
 
 	/**
 	 * Elegimos un nuevo piso al azar para visitar
 	 */
 	private void nuevoPiso() {
-		Random r = new Random();
-		while (pisoActual == pisoDestino) {
-			pisoDestino(r.nextInt(Ascensor.ALTURA-1));
+//		Random r = new Random();
+//		pisoDestino(r.nextInt(Ascensor.ALTURA-1));
+//		if (pisoActual == pisoDestino) {
+//			pisoDestino = (pisoDestino+1) % Ascensor.ALTURA-1;
+//		}
+
+		//pisoDestino = (pisoDestino*2+1) % (Ascensor.ALTURA-1);
+		pisoDestino = (pisoDestino+1) % (Ascensor.ALTURA);
+//		msgs("Nuevo destino: "+ pisoDestino);
+	}
+
+	public synchronized void run() {
+		// lo hacemos cambiar 3 veces de piso
+//		for (int i=0; i++ < 4; ) {
+		while (true) {
+			nuevoPiso();
+			moverse();
 		}
-		msgs("Nuevo destino: "+ pisoDestino);
 	}
 
 	// Helper
 	private void msgs(String s) {
-		System.out.println(tabifier+"Persona "+id+" -> " + s);
-	}
-
-	public void run() {
-		// lo hacemos cambiar 3 veces de piso
-		for (int i=0; i++ < 3; ) {
-			nuevoPiso();
-			moverse();
-		}
+//		System.out.println(tabifier+"Persona "+id+" -> " + s);
 	}
 
 	public void setTab(String s) {

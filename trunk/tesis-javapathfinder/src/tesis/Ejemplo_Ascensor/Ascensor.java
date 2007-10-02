@@ -8,9 +8,9 @@ enum Puerta {abierta, cerrada}
 enum Estado {parado, bajando, subiendo}
 
 class Ascensor implements Runnable {
-	//Se considera la PB como piso 0, por ende el piso más alto es ALTURA-1
-	public static final int ALTURA = 11;
-	int piso;
+	//Se considera la PB como piso 0, por ende el piso mï¿½s alto es ALTURA-1
+	public static final int ALTURA = 3;
+	private int piso;
 	private Direccion direccion;
 	private Puerta puerta;
 	private Estado estado;
@@ -26,9 +26,10 @@ class Ascensor implements Runnable {
 
 	private void inicializarSolicitudes() {
 		solicitudes = new Vector<Boolean>(ALTURA);
-		for (int i=0; i<ALTURA; i++)
-			//OJO, acá no se puede llamar a limpiarSolicitudEn
+		for (int i=0; i<ALTURA; i++) {
+			//OJO, acï¿½ no se puede llamar a limpiarSolicitudEn
 			solicitudes.add(i, false);
+		}
 	}
 
 	private void limpiarSolicitudEn(int p) {
@@ -85,44 +86,44 @@ class Ascensor implements Runnable {
 	}
 
 	// Devuelve la proxima solicitud a atender
-	// La precondición es que haya una solicitud pendiente
+	// La precondiciï¿½n es que haya una solicitud pendiente
 	private int proximaSolicitud() {
 		int ret;
 
 		if (direccion == Direccion.arriba) {
 			ret = proximaSolicitudArriba();
 
-			//Si no encontró una próxima solicitud para arriba, busca para abajo
+			//Si no encontrï¿½ una prï¿½xima solicitud para arriba, busca para abajo
 			if (ret >= ALTURA) {
 				ret = proximaSolicitudAbajo();
 			}
 		} else {
 			ret = proximaSolicitudAbajo();
 
-			//Si no encontró una próxima solicitud para abajo, busca para arriba
+			//Si no encontrï¿½ una prï¿½xima solicitud para abajo, busca para arriba
 			if (ret < 0) {
 				ret = proximaSolicitudArriba();
 			}
 		}
 
-		//Por la precondición
+		//Por la precondiciï¿½n
 		assert(ret>=0 && ret<ALTURA);
 
 		return ret;
 	}
 
 	public void abrirPuertas () {
-		msgs("abrirPuertas");
+//		msgs("abrirPuertas");
 		puerta = Puerta.abierta;
 	}
 
 	public void cerrarPuertas () {
-		msgs("cerrarPuertas");
+//		msgs("cerrarPuertas");
 		puerta = Puerta.cerrada;
 	}
 
 	private void pasarPor(int p){
-		msgs("Pasa por " + p);
+//		msgs("Pasa por " + p);
 		esperar(1);
 		piso = p;
 	}
@@ -146,7 +147,7 @@ class Ascensor implements Runnable {
 	}
 
 	public synchronized void solicitudA (int p) {
-		msgs("Solicitud NUEVA, piso " + p);
+//		msgs("Solicitud NUEVA, piso " + p);
 		asignarSolicitudEn(p);
 		this.notify();
 	}
@@ -166,7 +167,7 @@ class Ascensor implements Runnable {
 	private void arrancar (Direccion d) {
 		if (direccion != d) {
 			direccion = d;
-			msgs("Cambio direccion "+direccion);
+//			msgs("Cambio direccion "+direccion);
 		}
 
 		if (direccion == Direccion.arriba){
@@ -205,7 +206,7 @@ class Ascensor implements Runnable {
 
 	// Helper
 	private void msgs(String s) {
-		System.out.println(tabifier+"Ascensor -> " + s);
+//		System.out.println(tabifier+"Ascensor -> " + s);
 	}
 
 	public void setTab(String s) {
