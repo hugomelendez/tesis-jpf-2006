@@ -23,7 +23,7 @@ class ControladorAscensor {
 	 * Helper para poder capturar el evento
 	 */
 	public Ascensor solicitudBajar (int p){
-		msgs("Solicitud bajar desde: " + p);
+//		msgs("Solicitud bajar desde: " + p);
 		return solicitud(p);
 	}
 
@@ -33,13 +33,13 @@ class ControladorAscensor {
 	 * Helper para poder capturar el evento
 	 */
 	public Ascensor solicitudSubir(int p){
-		msgs("Solicitud subir desde: " + p);
+//		msgs("Solicitud subir desde: " + p);
 		return solicitud(p);
 	}
 
 	// Helper
 	private void msgs(String s) {
-		System.out.println(tabifier+"Controlador -> " + s);
+//		System.out.println(tabifier+"Controlador -> " + s);
 	}
 
 	// Helper
