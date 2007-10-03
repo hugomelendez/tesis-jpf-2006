@@ -24,7 +24,8 @@ class Ascensor implements Runnable {
 		inicializarSolicitudes();
 	}
 
-	private synchronized void inicializarSolicitudes() {
+	synchronized
+	private void inicializarSolicitudes() {
 		solicitudes = new Vector<Boolean>(ALTURA);
 		for (int i=0; i<ALTURA; i++) {
 			//OJO, ac� no se puede llamar a limpiarSolicitudEn
@@ -32,19 +33,23 @@ class Ascensor implements Runnable {
 		}
 	}
 
-	private synchronized void limpiarSolicitudEn(int p) {
-		 solicitudes.set(p, false);
+	synchronized 
+	private void limpiarSolicitudEn(int p) {
+		solicitudes.set(p, false);
 	}
 
-	private synchronized void asignarSolicitudEn(int p) {
-		 solicitudes.set(p, true);
+	synchronized 
+	private void asignarSolicitudEn(int p) {
+		solicitudes.set(p, true);
 	}
 
-	private synchronized Boolean haySolicitudEn(int p) {
-		 return (solicitudes.get(p));
+	synchronized 
+	private Boolean haySolicitudEn(int p) {
+		return (solicitudes.get(p));
 	}
 
-	public synchronized void run() {
+	synchronized
+	public void run() {
 		while (true) {
 			try {
 				if (!solicitudesPendientes())
@@ -59,6 +64,7 @@ class Ascensor implements Runnable {
 		}
 	}
 
+	synchronized
 	private boolean solicitudesPendientes() {
 		Boolean ret = false;
 		for (int i = 0; i<ALTURA && !ret; i++) {
@@ -79,14 +85,18 @@ class Ascensor implements Runnable {
 	/**
 	 * Busca la proxima solicitud del piso actual hacia abajo, sino hay, retorna -1
 	 */
+	synchronized
 	private int proximaSolicitudAbajo() {
 		int ret;
 		for (ret = piso; ret>=0 && !haySolicitudEn(ret); ret--);
 		return ret;
 	}
 
-	// Devuelve la proxima solicitud a atender
-	// La precondici�n es que haya una solicitud pendiente
+	/**
+	 * Devuelve la proxima solicitud a atender
+	 * La precondici�n es que haya una solicitud pendiente
+	 */ 
+	synchronized
 	private int proximaSolicitud() {
 		int ret;
 
@@ -112,22 +122,26 @@ class Ascensor implements Runnable {
 		return ret;
 	}
 
-	public void abrirPuertas () {
+	synchronized
+	private void abrirPuertas () {
 //		msgs("abrirPuertas");
 		puerta = Puerta.abierta;
 	}
 
-	public void cerrarPuertas () {
+	synchronized
+	private void cerrarPuertas () {
 //		msgs("cerrarPuertas");
 		puerta = Puerta.cerrada;
 	}
 
+	synchronized
 	private void pasarPor(int p){
 //		msgs("Pasa por " + p);
 		esperar(1);
 		piso = p;
 	}
 
+	synchronized
 	private void subir(int p){
 		for (int i = piso+1; i <= p; i++){
 			pasarPor(i);
@@ -137,6 +151,7 @@ class Ascensor implements Runnable {
 		}
 	}
 
+	synchronized
 	private void bajar(int p){
 		for (int i = piso-1; i >= p; i--){
 			pasarPor(i);
@@ -146,12 +161,14 @@ class Ascensor implements Runnable {
 		}
 	}
 
-	public synchronized void solicitudA (int p) {
+	synchronized
+	public void solicitudA (int p) {
 //		msgs("Solicitud NUEVA, piso " + p);
 		asignarSolicitudEn(p);
-		this.notify();
+		notify();
 	}
 
+	synchronized
 	private void irA (int p) {
 		if (p > piso){
 			arrancar (Direccion.arriba);
@@ -159,11 +176,12 @@ class Ascensor implements Runnable {
 		} else if (p < piso) {
 			arrancar (Direccion.abajo);
 			bajar(p);
-		}else{
+		} else {
 			atenderSolicitud(p);
 		}
 	}
 
+	synchronized
 	private void arrancar (Direccion d) {
 		if (direccion != d) {
 			direccion = d;
@@ -171,14 +189,15 @@ class Ascensor implements Runnable {
 		}
 
 		if (direccion == Direccion.arriba){
-			estado = Estado.subiendo;
+			subiendo();
 		} else {
-			estado = Estado.bajando;
+			bajando();
 		}
 	}
 
+	synchronized
 	private void atenderSolicitud (int p) {
-		estado = Estado.parado;
+		parado();
 		abrirPuertas();
 		esperar(1);
 		limpiarSolicitudEn(p);
@@ -187,6 +206,7 @@ class Ascensor implements Runnable {
 		cerrarPuertas();
 	}
 
+	synchronized
 	private void esperar (int seg) {
 		try {
 			Thread.sleep(seg*1000);
@@ -195,20 +215,38 @@ class Ascensor implements Runnable {
 		}
 	}
 
+	synchronized
 	public void apretarBoton(int i) {
 		msgs("Boton presionado: "+ i);
 		solicitudA(i);
 	}
 
+	synchronized
 	public boolean enPiso(int p) {
 		return (piso==p);
 	}
 
+	synchronized
+	private void parado() {
+		estado = Estado.parado;
+	}
+
+	synchronized
+	private void subiendo() {
+		estado = Estado.subiendo;
+	}
+
+	synchronized
+	private void bajando() {
+		estado = Estado.bajando;
+	}
+	
 	// Helper
 	private void msgs(String s) {
 //		System.out.println(tabifier+"Ascensor -> " + s);
 	}
 
+	synchronized
 	public void setTab(String s) {
 		tabifier = s;
 	}
