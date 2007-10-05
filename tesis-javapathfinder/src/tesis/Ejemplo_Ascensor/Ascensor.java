@@ -240,7 +240,7 @@ class Ascensor implements Runnable {
 	private void bajando() {
 		estado = Estado.bajando;
 	}
-	
+
 	// Helper
 	private void msgs(String s) {
 //		System.out.println(tabifier+"Ascensor -> " + s);

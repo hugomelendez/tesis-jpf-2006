@@ -37,6 +37,15 @@ class ControladorAscensor {
 		return solicitud(p);
 	}
 
+	/**
+	 * Presiona el boton dentro del ascensor para ir al piso 
+	 * @param p piso
+	 */
+	public void apretarBoton(int p) {
+		msgs("Boton presionado: "+ p);
+//		solicitudA(p);
+	}
+
 	// Helper
 	private void msgs(String s) {
 //		System.out.println(tabifier+"Controlador -> " + s);

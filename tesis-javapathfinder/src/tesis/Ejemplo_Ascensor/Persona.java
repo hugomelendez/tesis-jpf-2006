@@ -63,10 +63,11 @@ class Persona implements Runnable {
 	public synchronized void run() {
 		// lo hacemos cambiar 3 veces de piso
 //		for (int i=0; i++ < 4; ) {
-//		int cont = 0;
+		int cont = 0;
 		
 		while (true) {
-//			System.out.println("************************************ CONT " + (cont++));
+			//System.out.println("************************************ CONT " + (cont++));
+			cont++;
 			nuevoPiso();
 			moverse();
 		}
