@@ -7,7 +7,7 @@ enum Puerta {abierta, cerrada}
 enum Estado {detenido, enMovimiento}
 
 class Ascensor implements Runnable {
-	ControladorAscensor controlAscensor;
+	ControladorAscensor controladorAscensor;
 	String id;
 	private Direccion direccion;
 	private Puerta puerta;
@@ -15,8 +15,11 @@ class Ascensor implements Runnable {
 	private String tabifier;
 	private int piso; 
 	
-	Ascensor (ControladorAscensor ca, String id) {
-		controlAscensor = ca;
+	public int piso() {
+		return piso;
+	}
+
+	Ascensor (String id) {
 		this.id = id;
 		puerta = Puerta.abierta;
 		direccion = Direccion.arriba;
@@ -75,8 +78,7 @@ class Ascensor implements Runnable {
 			esperar(1);
 			piso += (direccion==Direccion.arriba?1:-1);
 		
-			controlAscensor.estoyEn(this, piso);
-			msgs("estoyEn " + piso);
+			controladorAscensor.estoyEn(this, piso);
 		}
 	}
 	
@@ -98,7 +100,19 @@ class Ascensor implements Runnable {
 		tabifier = s;
 	}
 
-	public Direccion getDireccion() {
+	public Direccion direccion() {
 		return direccion;
+	}
+	
+	public String toString() {
+		return "Ascensor " + id;
+	}
+
+	public Estado estado() {
+		return estado;
+	}
+
+	public void controladorAscensor(ControladorAscensor ca) {
+		controladorAscensor = ca;
 	}
 }
