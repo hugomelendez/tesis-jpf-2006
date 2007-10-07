@@ -20,10 +20,10 @@ public class Modelo {
 		p.controlador(ca);
 		Thread t3 = new Thread(p);
 		t3.start();
-		Persona p2 = new Persona("p2");
-		p2.setTab("\t");
-		p2.controlador(ca);
-		Thread t4 = new Thread(p2);
-		t4.start();
+//		Persona p2 = new Persona("p2");
+//		p2.setTab("\t");
+//		p2.controlador(ca);
+//		Thread t4 = new Thread(p2);
+//		t4.start();
 	}
 }

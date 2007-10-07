@@ -57,10 +57,10 @@ class ControladorAscensor implements Runnable {
 	public void solicitudAscensor(Ascensor a, int pisoDestino) {
 		msgs("solicitudAscensor " + a + " a piso " + pisoDestino);
 		setSolicitud(a, pisoDestino, true);
-		a.cerrarPuertas();
 		
 		msgs("notify@solicitudAscensor");
-		notify();
+
+			notify();
 	}
 	
 	private void atenderSolicitudPiso(Ascensor a, int piso) {
@@ -150,17 +150,13 @@ class ControladorAscensor implements Runnable {
 	synchronized
 	public void run() {
 		while (true) {
-//			if (!haySolicitudes()) {
-				try {
-					msgs("wait()");
-					wait();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-//			}
-//			else		
-				atenderSolicitudes();
+			try {
+				msgs("wait()");
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			atenderSolicitudes();
 		}
 	}
 	
@@ -175,7 +171,7 @@ class ControladorAscensor implements Runnable {
 	
 	/**
 	 * Revisa las colas de pedidos de cada ascensor y:
-	 *  si existe alguno Y si el ascensor está detenido, lo arranca en la dirección correspondiente 
+	 *  si existe alguno Y si el ascensor estï¿½ detenido, lo arranca en la direcciï¿½n correspondiente 
 	 */
 	private void atenderSolicitudes() {
 		for (int i=0;i<ascensores.length;i++) {
