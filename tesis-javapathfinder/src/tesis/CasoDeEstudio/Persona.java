@@ -18,9 +18,9 @@ class Persona implements Runnable {
 
 		if (id == "p1") {
 			controlador.solicitudAscensor(as[0], 5);
-			esperar(1);
+			esperar(4);
 			controlador.solicitudAscensor(as[0], 2);
-			esperar(1);
+			esperar(3);
 			controlador.solicitudAscensor(as[0], 6);
 		}
 
