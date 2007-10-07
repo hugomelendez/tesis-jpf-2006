@@ -31,6 +31,13 @@ class Persona implements Runnable {
 			esperar(1);
 			controlador.solicitudAscensor(as[1], 9);
 		}
+		if (id == "pMatrix") {
+			controlador.solicitudPisoAbajo(10);
+			esperar(2);
+			controlador.solicitudPisoArriba(3);
+			esperar(2);
+			controlador.solicitudPisoArriba(0);
+		}
 	}
 
 	// Helper
