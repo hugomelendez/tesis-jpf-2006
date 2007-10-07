@@ -32,5 +32,11 @@ public class Modelo {
 		p2.controlador(ca);
 		Thread t5 = new Thread(p2);
 		t5.start();
+
+		Persona pMatrix = new Persona("pMatrix");
+		pMatrix.setTab("\t\t\t\t\t");
+		pMatrix.controlador(ca);
+		Thread tMatrix = new Thread(pMatrix);
+		tMatrix.start();
 	}
 }

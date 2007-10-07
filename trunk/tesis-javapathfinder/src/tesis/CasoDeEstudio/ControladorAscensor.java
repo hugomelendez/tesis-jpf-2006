@@ -6,11 +6,6 @@ class ControladorAscensor implements Runnable {
 	private final static int ALTURA = 10;
 	private Ascensor[] ascensores;
 	
-	//Solicitudes de los botones Subir y Bajar en cada piso del edificio
-	//Cada posicion corresponde a un piso
-	private Boolean[] solicitudesSubir;
-	private Boolean[] solicitudesBajar;
-	
 	//Botones dentro de un ascensor
 	private Hashtable<Ascensor, Boolean[]> solicitudesPorAscensor;
 
@@ -19,13 +14,6 @@ class ControladorAscensor implements Runnable {
 	public ControladorAscensor(Ascensor[] a){
 		ascensores = a;
 		
-		solicitudesBajar = new Boolean[ALTURA+1];
-		solicitudesSubir = new Boolean[ALTURA+1];
-		for (int i=0;i<ALTURA;i++) {
-			solicitudesBajar[i] = false;
-			solicitudesSubir[i] = false;
-		}
-
 		solicitudesPorAscensor = new Hashtable<Ascensor, Boolean[]>();
 		for (int i=0;i<ascensores.length;i++) {
 			Boolean[] b = new Boolean[ALTURA+1];
@@ -38,19 +26,45 @@ class ControladorAscensor implements Runnable {
 	}
 
 	synchronized
-	private void solicitudPisoArriba(int pisoDesde) {
+	public void solicitudPisoArriba(int pisoDesde) {
 		msgs("solicitudPisoArriba desde piso " + pisoDesde);
-		solicitudesSubir[pisoDesde] = true;
-		msgs("notify@solicitudPisoArriba");
-		notify();
+		
+		Ascensor ascensorDesignado = null;
+		for (int i=0;i<ascensores.length && ascensorDesignado==null;i++) {
+			Ascensor a = ascensores[i];
+			
+			if (a.piso() <= pisoDesde && a.direccion()==Direccion.arriba) {
+				ascensorDesignado = a;
+			}
+		}
+		
+		if (ascensorDesignado==null) {
+			ascensorDesignado = ascensores[0];
+		}
+		
+		msgs("solicitudPisoArriba ASIGNADO " + ascensorDesignado + " a piso " + pisoDesde);
+		solicitudAscensor(ascensorDesignado, pisoDesde);
 	}
 	
 	synchronized
-	private void solicitudPisoAbajo(int pisoDesde) {
+	public void solicitudPisoAbajo(int pisoDesde) {
 		msgs("solicitudPisoAbajo desde piso " + pisoDesde);
-		solicitudesBajar[pisoDesde] = true;
-		msgs("notify@solicitudPisoAbajo");
-		notify();
+
+		Ascensor ascensorDesignado = null;
+		for (int i=0;i<ascensores.length && ascensorDesignado==null;i++) {
+			Ascensor a = ascensores[i];
+			
+			if (a.piso() >= pisoDesde && a.direccion()==Direccion.abajo) {
+				ascensorDesignado = a;
+			}
+		}
+		
+		if (ascensorDesignado==null) {
+			ascensorDesignado = ascensores[0];
+		}
+		
+		msgs("solicitudPisoAbajo ASIGNADO " + ascensorDesignado + " a piso " + pisoDesde);
+		solicitudAscensor(ascensorDesignado, pisoDesde);
 	}
 	
 	synchronized
@@ -83,16 +97,16 @@ class ControladorAscensor implements Runnable {
 					a.subir();
 				} else if (haySolicitudAbajo(a, piso)) { 
 					a.bajar();
-				} else {
-					a.detenerse();
+//				} else {
+//					a.detenerse();
 				}
 			} else {
 				if (haySolicitudAbajo(a, piso)) { 
 					a.bajar();
 				} else if (haySolicitudArriba(a, piso)) {
 					a.subir();
-				} else {
-					a.detenerse();
+//				} else {
+//					a.detenerse();
 				}
 			}
 		}
@@ -100,13 +114,13 @@ class ControladorAscensor implements Runnable {
 		if (piso==0) {
 			if (haySolicitudArriba(a, piso))
 				a.subir();
-			else
+			else if (a.estado()!=Estado.detenido)
 				a.detenerse();
 		}
 		else if (piso==ALTURA) {
 			if (haySolicitudAbajo(a, piso))
 				a.bajar();
-			else
+			else if (a.estado()!=Estado.detenido)
 				a.detenerse();
 		}
 	}
