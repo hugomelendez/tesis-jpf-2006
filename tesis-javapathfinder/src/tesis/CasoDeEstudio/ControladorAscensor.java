@@ -57,7 +57,6 @@ class ControladorAscensor implements Runnable {
 	public void solicitudAscensor(Ascensor a, int pisoDestino) {
 		msgs("solicitudAscensor " + a + " a piso " + pisoDestino);
 		setSolicitud(a, pisoDestino, true);
-		msgs("solicitudes de " +a+ ": "+ printSolicitudes(a));
 		a.cerrarPuertas();
 		
 		msgs("notify@solicitudAscensor");
@@ -70,7 +69,6 @@ class ControladorAscensor implements Runnable {
 		a.abrirPuertas();
 		esperar(2);
 		setSolicitud(a, piso, false);
-		msgs("solicitudes de " +a+ ": "+ printSolicitudes(a));
 		a.cerrarPuertas();
 	}
 	
@@ -133,6 +131,7 @@ class ControladorAscensor implements Runnable {
 	private void setSolicitud(Ascensor a, int piso, Boolean b) {
 		Boolean[] s = solicitudesPorAscensor.get(a);
 		s[piso] = b;
+		msgs("solicitudes de " +a+ ": "+ printSolicitudes(s));
 	}
 	
 	private Boolean haySolicitudEn(Ascensor a, int piso) {
@@ -209,13 +208,11 @@ class ControladorAscensor implements Runnable {
 	/**
 	 * Imprime las solicitudes de un ascensor
 	 */
-	private String printSolicitudes(Ascensor a) {
+	private String printSolicitudes(Boolean[] s) {
 		String ret = "[";
-		Boolean[] s = solicitudesPorAscensor.get(a);
 		for (int i=0; i<=ALTURA;i++) {
 			ret += (s[i] ? i : "") + ",";
 		}
 		return ret+"]";
 	}
-
 }
