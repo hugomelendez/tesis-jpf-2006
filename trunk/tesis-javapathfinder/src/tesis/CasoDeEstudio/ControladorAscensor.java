@@ -56,11 +56,12 @@ class ControladorAscensor implements Runnable {
 	synchronized
 	public void solicitudAscensor(Ascensor a, int pisoDestino) {
 		msgs("solicitudAscensor " + a + " a piso " + pisoDestino);
-		setSolicitud(a, pisoDestino, true);
 		
+		Boolean notificar = (!haySolicitudes(a));
+		setSolicitud(a, pisoDestino, true);
 		msgs("notify@solicitudAscensor");
-
-			notify();
+		
+		if (notificar) notify();
 	}
 	
 	private void atenderSolicitudPiso(Ascensor a, int piso) {
@@ -169,6 +170,11 @@ class ControladorAscensor implements Runnable {
 //		return ret;
 //	}
 	
+
+	private Boolean haySolicitudes(Ascensor a) {
+		return (haySolicitudArriba(a, 0));
+	}
+
 	/**
 	 * Revisa las colas de pedidos de cada ascensor y:
 	 *  si existe alguno Y si el ascensor est� detenido, lo arranca en la direcci�n correspondiente 
