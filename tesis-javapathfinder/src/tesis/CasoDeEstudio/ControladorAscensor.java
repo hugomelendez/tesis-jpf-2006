@@ -164,27 +164,26 @@ class ControladorAscensor implements Runnable {
 
 	synchronized
 	public void run() {
-		while (true) {
-			try {
+		try {
+			while (true) {
 				msgs("wait()");
 				wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+				atenderSolicitudes();
 			}
-			atenderSolicitudes();
+		} catch (InterruptedException e) {
+			msgs("Interrupted");
 		}
 	}
 	
-//	private Boolean haySolicitudes() {
-//		Boolean ret = false;
-//	
-//		for (int i=0;i<ascensores.length && !ret;i++) {
-//			ret = haySolicitudArriba(ascensores[i], 0);
-//		}
-//		return ret;
-//	}
+	public Boolean haySolicitudes() {
+		Boolean ret = false;
 	
-
+		for (int i=0;i<ascensores.length && !ret;i++) {
+			ret = haySolicitudArriba(ascensores[i], 0);
+		}
+		return ret;
+	}
+	
 	private Boolean haySolicitudes(Ascensor a) {
 		return (haySolicitudArriba(a, 0));
 	}

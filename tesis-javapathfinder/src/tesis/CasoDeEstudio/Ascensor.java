@@ -62,14 +62,13 @@ class Ascensor implements Runnable {
 	}
 
 	synchronized public void run() {
-		while (true) {
-			try {
+		try {
+			while (true) {
 				wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				moverse();
 			}
-			moverse();
+		} catch (InterruptedException e) {
+			msgs("Interrupted");
 		}
 	}
 
