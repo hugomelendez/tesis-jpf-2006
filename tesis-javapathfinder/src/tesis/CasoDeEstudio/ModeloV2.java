@@ -13,6 +13,7 @@ class ModeloV2 {
 		//En teoria, debería esperar a que c/persona haga notify cuando termina
 		for (int cantPersonas=1;cantPersonas<=3;cantPersonas++) {
 			try {
+				System.out.println("ModeloV2.wait()");
 				this.wait();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
