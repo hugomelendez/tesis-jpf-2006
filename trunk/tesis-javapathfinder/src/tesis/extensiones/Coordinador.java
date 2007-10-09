@@ -109,7 +109,7 @@ public class Coordinador {
 						//Global Property
 						afd.consumir(e);
 						escribirLog(afd);
-	
+
 						//TypeStateProperty/s
 						if (iOIDUltimaEjecucion != -1) {
 							if (htOIDAFD.containsKey(iOIDUltimaEjecucion)) {
@@ -173,7 +173,6 @@ public class Coordinador {
 	 * al estado (JVM) al que se backtrackeo
 	 */
 	public void stateBacktracked() {
-		//TODO Hay que ver de backtrackear tambi�n los AFDs de Instancia!!!
 		stackCaminoPreambulo.pop();
 		contexto.irAEstado(stackCaminoPreambulo.peek());
  

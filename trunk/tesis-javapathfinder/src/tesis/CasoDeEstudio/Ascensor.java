@@ -14,12 +14,14 @@ class Ascensor implements Runnable {
 	private Estado estado;
 	private String tabifier;
 	private int piso; 
+	private Boolean terminar;
 	
 	public int piso() {
 		return piso;
 	}
 
 	Ascensor (String id) {
+		terminar = false;
 		this.id = id;
 		puerta = Puerta.abierta;
 		direccion = Direccion.arriba;
@@ -63,9 +65,11 @@ class Ascensor implements Runnable {
 
 	synchronized public void run() {
 		try {
-			while (true) {
+			while (!terminar) {
+				msgs("wait()");
 				wait();
-				moverse();
+				if (!terminar)
+					moverse();
 			}
 		} catch (InterruptedException e) {
 			msgs("Interrupted");
@@ -113,5 +117,12 @@ class Ascensor implements Runnable {
 
 	public void controladorAscensor(ControladorAscensor ca) {
 		controladorAscensor = ca;
+	}
+
+	synchronized 
+	public void terminar() {
+		terminar = true;
+		msgs("terminar");
+		this.notify();
 	}
 }

@@ -4,7 +4,8 @@ class Persona implements Runnable {
 	private String id;
 	private String tabifier;
 	private ControladorAscensor controlador;
-
+	private ModeloV2 modelo;
+	
 	Persona (String id) {
 		this.id = id;
 	}
@@ -13,33 +14,46 @@ class Persona implements Runnable {
 		controlador = c;
 	}
 
+	public void modelo(ModeloV2 modelo) {
+		this.modelo = modelo;
+	}
+
 	public synchronized void run() {
 		Ascensor[] as = controlador.ascensores();
 
-//		while (true) {
-			if (id == "p1") {
-				controlador.solicitudAscensor(as[0], 5);
-				esperar(4);
-				controlador.solicitudAscensor(as[0], 2);
-				esperar(3);
-				controlador.solicitudAscensor(as[0], 6);
-			}
-	
-			if (id == "p2") {
-				controlador.solicitudAscensor(as[1], 1);
-				esperar(8);
-				controlador.solicitudAscensor(as[1], 3);
+		if (id == "p1") {
+			controlador.solicitudAscensor(as[0], 3);
+			while (as[0].piso()!=3) {
 				esperar(1);
-				controlador.solicitudAscensor(as[1], 9);
 			}
-			if (id == "pMatrix") {
-				controlador.solicitudPisoAbajo(10);
-				esperar(2);
-				controlador.solicitudPisoArriba(3);
-				esperar(2);
-				controlador.solicitudPisoArriba(0);
+/*			esperar(4);
+			controlador.solicitudAscensor(as[0], 2);
+			esperar(3);
+			controlador.solicitudAscensor(as[0], 6);*/
+		}
+
+		if (id == "p2") {
+			controlador.solicitudAscensor(as[1], 1);
+			while (as[1].piso()!=1) {
+				esperar(1);
 			}
-//		}
+/*			esperar(8);
+			controlador.solicitudAscensor(as[1], 3);
+			esperar(1);
+			controlador.solicitudAscensor(as[1], 9);*/
+		}
+		if (id == "pMatrix") {
+/*			controlador.solicitudPisoAbajo(10);
+			esperar(2);
+			controlador.solicitudPisoArriba(3);
+			esperar(2);
+			controlador.solicitudPisoArriba(0);*/
+		}
+
+		synchronized(modelo) {
+			msgs("modelo.notify()");
+			modelo.notify();
+		}
 	}
 
 	// Helper

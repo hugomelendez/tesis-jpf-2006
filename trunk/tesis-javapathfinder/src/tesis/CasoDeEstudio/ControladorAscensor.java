@@ -3,15 +3,17 @@ package tesis.CasoDeEstudio;
 import java.util.Hashtable;
 
 class ControladorAscensor implements Runnable {
-	private final static int ALTURA = 10;
+	private final static int ALTURA = 3;
 	private Ascensor[] ascensores;
 	
 	//Botones dentro de un ascensor
 	private Hashtable<Ascensor, Boolean[]> solicitudesPorAscensor;
 
 	private String tabifier;
+	private boolean terminar;
 
 	public ControladorAscensor(Ascensor[] a){
+		terminar = false;
 		ascensores = a;
 		
 		solicitudesPorAscensor = new Hashtable<Ascensor, Boolean[]>();
@@ -165,10 +167,11 @@ class ControladorAscensor implements Runnable {
 	synchronized
 	public void run() {
 		try {
-			while (true) {
+			while (!terminar) {
 				msgs("wait()");
 				wait();
-				atenderSolicitudes();
+				if (!terminar)
+					atenderSolicitudes();
 			}
 		} catch (InterruptedException e) {
 			msgs("Interrupted");
@@ -229,5 +232,12 @@ class ControladorAscensor implements Runnable {
 			ret += (s[i] ? i : "") + ",";
 		}
 		return ret+"]";
+	}
+
+	synchronized 
+	public void terminar() {
+		terminar = true;
+		msgs("terminar");
+		this.notify();
 	}
 }
