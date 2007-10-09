@@ -27,7 +27,7 @@ class ControladorAscensor implements Runnable {
 		}
 	}
 
-	synchronized
+//	synchronized
 	public void solicitudPisoArriba(int pisoDesde) {
 		msgs("solicitudPisoArriba desde piso " + pisoDesde);
 		
@@ -39,16 +39,16 @@ class ControladorAscensor implements Runnable {
 				ascensorDesignado = a;
 			}
 		}
-		
+
 		if (ascensorDesignado==null) {
 			ascensorDesignado = ascensores[0];
 		}
-		
+
 		msgs("solicitudPisoArriba ASIGNADO " + ascensorDesignado + " a piso " + pisoDesde);
 		solicitudAscensor(ascensorDesignado, pisoDesde);
 	}
 	
-	synchronized
+	//synchronized
 	public void solicitudPisoAbajo(int pisoDesde) {
 		msgs("solicitudPisoAbajo desde piso " + pisoDesde);
 
@@ -77,7 +77,7 @@ class ControladorAscensor implements Runnable {
 		setSolicitud(a, pisoDestino, true);
 		msgs("notify@solicitudAscensor");
 		
-		if (notificar) notify();
+		if (notificar) this.notify();
 	}
 	
 	private void atenderSolicitudPiso(Ascensor a, int piso) {
