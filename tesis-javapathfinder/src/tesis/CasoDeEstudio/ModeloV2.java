@@ -4,19 +4,21 @@ class ModeloV2 {
 	Ascensor a1;
 	Ascensor a2;
 	ControladorAscensor ca;
-
+	int cantPersonasVivas;
+	
 	public ModeloV2() {
+		cantPersonasVivas = 3;
 	}
 	
+	synchronized
 	public void coordinarFinEjecución() {
-		//En teoria, debería esperar a que c/persona haga notify cuando termina
-		for (int cantPersonas=1;cantPersonas<=3;cantPersonas++) {
+		while (cantPersonasVivas>0) {
 			try {
-				synchronized(this) {
+				//synchronized(this) {
 					System.out.println("ModeloV2.wait() IN");
 					this.wait();
 					System.out.println("ModeloV2.wait() OUT");
-				}
+				//}
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -28,10 +30,10 @@ class ModeloV2 {
 		ca.terminar();
 	}
 	
+	synchronized
 	public void terminoPersona() {
-		synchronized(this) {
-			this.notify();
-		}
+		this.notify();
+		cantPersonasVivas--;
 	}
 
 	private void controlador(ControladorAscensor ca) {
@@ -82,14 +84,12 @@ class ModeloV2 {
 		p2.modelo(m);
 		pMatrix.modelo(m);
 
-		
 		t1.start();
 		t2.start();
 		t3.start();
 		t4.start();
 		t5.start();
 		tMatrix.start();
-		
 		
 		m.coordinarFinEjecución();
 	}

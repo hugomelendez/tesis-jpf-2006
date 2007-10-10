@@ -60,12 +60,4 @@ class Persona implements Runnable {
 	public void setTab(String s) {
 		tabifier = s;
 	}
-
-	private void esperar (int seg) {
-		try {
-			Thread.sleep(seg*1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
 }

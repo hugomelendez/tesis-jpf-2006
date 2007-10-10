@@ -67,6 +67,7 @@ class ControladorAscensor implements Runnable {
 		solicitudAscensor(ascensorDesignado, pisoDesde);
 	}
 	
+	synchronized
 	public void solicitudAscensor(Ascensor a, int pisoDestino) {
 		msgs("solicitudAscensor " + a + " a piso " + pisoDestino);
 
@@ -77,11 +78,9 @@ class ControladorAscensor implements Runnable {
 		setSolicitud(a, pisoDestino, true);
 
 		msgs("notify@solicitudAscensor");
-		
+
 		if (notificar) {
-			synchronized(this) {
-				this.notify();
-			}
+			this.notify();
 		}
 	}
 	
@@ -89,7 +88,7 @@ class ControladorAscensor implements Runnable {
 		msgs("atenderSolicitudPiso " + a + " en piso " + piso);
 		a.detenerse();
 		a.abrirPuertas();
-		esperar(2);
+		Helper.esperar(2);
 		setSolicitud(a, piso, false);
 		a.cerrarPuertas();
 	}
@@ -164,21 +163,14 @@ class ControladorAscensor implements Runnable {
 		return (solicitudesPorAscensor.get(a))[piso];
 	}
 
-	private void esperar (int seg) {
-		try {
-			Thread.sleep(seg*1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
+	synchronized
 	public void run() {
 		try {
 			while (!terminar) {
 				msgs("wait()");
-				synchronized (this){
+//				synchronized (this){
 					wait();
-				}
+//				}
 				if (!terminar)
 					atenderSolicitudes();
 			}
@@ -243,7 +235,7 @@ class ControladorAscensor implements Runnable {
 		return ret+"]";
 	}
 
-	synchronized 
+	synchronized
 	public void terminar() {
 		terminar = true;
 		msgs("terminar");

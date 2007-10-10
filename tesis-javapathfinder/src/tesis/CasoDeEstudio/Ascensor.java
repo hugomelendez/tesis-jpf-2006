@@ -32,7 +32,6 @@ class Ascensor implements Runnable {
 		estado = Estado.detenido;
 	}
 
-	
 	/**
 	 * No nos interesa sincronizar los accesos a estado y direccion, porque en nuestro modelo
 	 * existe un unico thread que ejecuta estos metodos, ya que existe un unico controlador que
@@ -69,13 +68,14 @@ class Ascensor implements Runnable {
 		puerta = Puerta.cerrada;
 	}
 
+	synchronized
 	public void run() {
 		try {
 			while (!terminar) {
 				msgs("wait()");
-				synchronized(this) {
+//				synchronized(this) {
 					wait();
-				}
+//				}
 				if (!terminar)
 					moverse();
 			}
@@ -86,21 +86,13 @@ class Ascensor implements Runnable {
 
 	private void moverse() {
 		while (estado==Estado.enMovimiento) {
-			esperar(1);
+			Helper.esperar(1);
 			piso += (direccion==Direccion.arriba?1:-1);
 		
 			controladorAscensor.estoyEn(this, piso);
 		}
 	}
 	
-	private void esperar (int seg) {
-		try {
-			Thread.sleep(seg*1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
 	// Helper
 	private void msgs(String s) {
 		System.out.println("Thread " + Thread.currentThread() + tabifier+"Ascensor " + id + " -> " + s);
