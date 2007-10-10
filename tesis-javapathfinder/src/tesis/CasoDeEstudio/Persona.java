@@ -48,15 +48,13 @@ class Persona implements Runnable {
 			controlador.solicitudPisoArriba(0);*/
 		}
 
-		synchronized(modelo) {
-			msgs("modelo.notify()");
-			modelo.notify();
-		}
+		msgs("modelo.terminoPersona()");
+		modelo.terminoPersona();	
 	}
 
 	// Helper
 	private void msgs(String s) {
-		System.out.println(tabifier+"Persona "+id+" -> " + s);
+		System.out.println("Thread " + Thread.currentThread() + tabifier+"Persona "+id+" -> " + s);
 	}
 
 	public void setTab(String s) {

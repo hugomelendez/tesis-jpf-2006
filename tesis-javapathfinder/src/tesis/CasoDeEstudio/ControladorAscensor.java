@@ -27,7 +27,6 @@ class ControladorAscensor implements Runnable {
 		}
 	}
 
-//	synchronized
 	public void solicitudPisoArriba(int pisoDesde) {
 		msgs("solicitudPisoArriba desde piso " + pisoDesde);
 		
@@ -48,7 +47,6 @@ class ControladorAscensor implements Runnable {
 		solicitudAscensor(ascensorDesignado, pisoDesde);
 	}
 	
-	//synchronized
 	public void solicitudPisoAbajo(int pisoDesde) {
 		msgs("solicitudPisoAbajo desde piso " + pisoDesde);
 
@@ -69,15 +67,22 @@ class ControladorAscensor implements Runnable {
 		solicitudAscensor(ascensorDesignado, pisoDesde);
 	}
 	
-	synchronized
 	public void solicitudAscensor(Ascensor a, int pisoDestino) {
 		msgs("solicitudAscensor " + a + " a piso " + pisoDestino);
-		
+
+		//Es probable que, al no estar synchronized el notificar
+		//2 threads lean la version incorrecta de notificar
+		//y generen cant. innecesaria de this.notify() 	
 		Boolean notificar = (!haySolicitudes(a));
 		setSolicitud(a, pisoDestino, true);
+
 		msgs("notify@solicitudAscensor");
 		
-		if (notificar) this.notify();
+		if (notificar) {
+			synchronized(this) {
+				this.notify();
+			}
+		}
 	}
 	
 	private void atenderSolicitudPiso(Ascensor a, int piso) {
@@ -146,16 +151,19 @@ class ControladorAscensor implements Runnable {
 	}
 
 	private void setSolicitud(Ascensor a, int piso, Boolean b) {
-		Boolean[] s = solicitudesPorAscensor.get(a);
-		s[piso] = b;
-		msgs("solicitudes de " +a+ ": "+ printSolicitudes(s));
+		//Esto es para que 2 solicitudes que llegan en el mismo instante
+		//sincronicen sus modificaciones al array individualmente
+		synchronized(this) {
+			Boolean[] s = solicitudesPorAscensor.get(a);
+			s[piso] = b;
+			msgs("solicitudes de " +a+ ": "+ printSolicitudes(s));
+		}
 	}
 	
 	private Boolean haySolicitudEn(Ascensor a, int piso) {
 		return (solicitudesPorAscensor.get(a))[piso];
 	}
 
-//	synchronized
 	private void esperar (int seg) {
 		try {
 			Thread.sleep(seg*1000);
@@ -164,12 +172,13 @@ class ControladorAscensor implements Runnable {
 		}
 	}
 
-	synchronized
 	public void run() {
 		try {
 			while (!terminar) {
 				msgs("wait()");
-				wait();
+				synchronized (this){
+					wait();
+				}
 				if (!terminar)
 					atenderSolicitudes();
 			}
@@ -209,7 +218,7 @@ class ControladorAscensor implements Runnable {
 
 	// Helper
 	private void msgs(String s) {
-		System.out.println(tabifier+"Controlador -> " + s);
+		System.out.println("Thread " + Thread.currentThread() + tabifier+"Controlador -> " + s);
 	}
 
 	// Helper
