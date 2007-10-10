@@ -1,7 +1,5 @@
 package tesis.CasoDeEstudio;
 
-import java.util.Vector;
-
 enum Direccion {arriba, abajo};
 enum Puerta {abierta, cerrada}
 enum Estado {detenido, enMovimiento}
@@ -29,45 +27,55 @@ class Ascensor implements Runnable {
 		piso = 0;
 	}
 
-//	synchronized
 	public void detenerse() {
 		msgs("detenerse");
 		estado = Estado.detenido;
 	}
 
-	synchronized
+	
+	/**
+	 * No nos interesa sincronizar los accesos a estado y direccion, porque en nuestro modelo
+	 * existe un unico thread que ejecuta estos metodos, ya que existe un unico controlador que
+	 * comanda todos los ascensores
+	 */
 	public void subir() {
 		msgs("subir");
 		estado = Estado.enMovimiento;
 		direccion = Direccion.arriba;
-		notify();
+		synchronized(this) {
+			notify();
+		}
 	}
 
-	synchronized
+	/**
+	 * idem subir
+	 */
 	public void bajar() {
 		msgs("bajar");
 		estado = Estado.enMovimiento;
 		direccion = Direccion.abajo;
-		notify();
+		synchronized(this) {
+			notify();
+		}
 	}
 
-//	synchronized
 	public void abrirPuertas () {
 		msgs("abrirPuertas");
 		puerta = Puerta.abierta;
 	}
 
-//	synchronized
 	public void cerrarPuertas () {
 		msgs("cerrarPuertas");
 		puerta = Puerta.cerrada;
 	}
 
-	synchronized public void run() {
+	public void run() {
 		try {
 			while (!terminar) {
 				msgs("wait()");
-				wait();
+				synchronized(this) {
+					wait();
+				}
 				if (!terminar)
 					moverse();
 			}
@@ -85,7 +93,6 @@ class Ascensor implements Runnable {
 		}
 	}
 	
-//	synchronized
 	private void esperar (int seg) {
 		try {
 			Thread.sleep(seg*1000);
@@ -96,7 +103,7 @@ class Ascensor implements Runnable {
 
 	// Helper
 	private void msgs(String s) {
-		System.out.println(tabifier+"Ascensor " + id + " -> " + s);
+		System.out.println("Thread " + Thread.currentThread() + tabifier+"Ascensor " + id + " -> " + s);
 	}
 
 	public void setTab(String s) {

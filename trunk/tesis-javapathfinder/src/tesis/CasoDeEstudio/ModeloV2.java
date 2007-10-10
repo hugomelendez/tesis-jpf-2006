@@ -8,24 +8,32 @@ class ModeloV2 {
 	public ModeloV2() {
 	}
 	
-	synchronized
 	public void coordinarFinEjecución() {
 		//En teoria, debería esperar a que c/persona haga notify cuando termina
 		for (int cantPersonas=1;cantPersonas<=3;cantPersonas++) {
 			try {
-				System.out.println("ModeloV2.wait()");
-				this.wait();
+				synchronized(this) {
+					System.out.println("ModeloV2.wait() IN");
+					this.wait();
+					System.out.println("ModeloV2.wait() OUT");
+				}
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		
+
 		a1.terminar();
 		a2.terminar();
 		ca.terminar();
 	}
 	
+	public void terminoPersona() {
+		synchronized(this) {
+			this.notify();
+		}
+	}
+
 	private void controlador(ControladorAscensor ca) {
 		this.ca = ca;
 	}
