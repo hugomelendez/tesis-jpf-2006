@@ -1,7 +1,7 @@
 package tesis.CasoDeEstudio;
 
 class ModeloV2 {
-	private final static int CANT_PERSONAS = 1;
+	private final static int CANT_PERSONAS = 3;
 	private final static int CANT_ASCENSORES = 1;
 	
 	Ascensor[] ascensores;
@@ -68,19 +68,19 @@ class ModeloV2 {
 		p1.controlador(ca);
 		Thread tP1 = new Thread(p1);
 
-//		Persona p2 = new Persona("p2");
-//		p2.controlador(ca);
-//		Thread tP2 = new Thread(p2);
-//
-//		Persona pMatrix = new Persona("pMatrix");
-//		pMatrix.controlador(ca);
-//		Thread tPMatrix = new Thread(pMatrix);
+		Persona p2 = new Persona("p2");
+		p2.controlador(ca);
+		Thread tP2 = new Thread(p2);
+
+		Persona pMatrix = new Persona("pMatrix");
+		pMatrix.controlador(ca);
+		Thread tPMatrix = new Thread(pMatrix);
 
 		m.ascensores(ascensores);
 		m.controlador(ca);
 		p1.modelo(m);
-//		p2.modelo(m);
-//		pMatrix.modelo(m);
+		p2.modelo(m);
+		pMatrix.modelo(m);
 
 		//synchronized (m) {
 			tA1.start();
@@ -90,8 +90,8 @@ class ModeloV2 {
 		//tA2.start();
 		tCA.start();
 		tP1.start();
-//		tP2.start();
-//		tPMatrix.start();
+		tP2.start();
+		tPMatrix.start();
 		
 		m.coordinarFinEjecución();
 	}

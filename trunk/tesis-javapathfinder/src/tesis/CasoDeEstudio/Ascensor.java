@@ -95,11 +95,13 @@ class Ascensor implements Runnable {
 	}
 
 	private void moverse() {
-		while (estado==Estado.enMovimiento) {
-			Helper.esperar(1);
-			piso += (direccion==Direccion.arriba?1:-1);
-		
-			controladorAscensor.estoyEn(this, piso);
+		synchronized (this) {
+			while (estado==Estado.enMovimiento) {
+				Helper.esperar(1);
+				piso += (direccion==Direccion.arriba?1:-1);
+			
+				controladorAscensor.estoyEn(this, piso);
+			}
 		}
 	}
 
@@ -112,16 +114,22 @@ class Ascensor implements Runnable {
 		tabifier = s;
 	}
 
+	/**
+	 * Debe ser sincronizado para que no haya conflictos con el moverse (si hay más de 1 a un ascensor)
+	 */
 	public Direccion direccion() {
-		return direccion;
+		synchronized (this) {
+			return direccion;
+		}
 	}
-	
-	public String toString() {
-		return "Ascensor " + id;
+	public Estado estado() {
+		synchronized (this) {
+			return estado;
+		}
 	}
 
-	public Estado estado() {
-		return estado;
+	public String toString() {
+		return "Ascensor " + id;
 	}
 
 	public void controladorAscensor(ControladorAscensor ca) {
