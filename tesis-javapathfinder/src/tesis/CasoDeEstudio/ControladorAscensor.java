@@ -3,7 +3,9 @@ package tesis.CasoDeEstudio;
 import java.util.Hashtable;
 
 class ControladorAscensor implements Runnable {
-	private final static int ALTURA = 3;
+	Object miMonitor;
+	
+	private final static int ALTURA = 4;
 	private Ascensor[] ascensores;
 	
 	//Botones dentro de un ascensor
@@ -13,6 +15,8 @@ class ControladorAscensor implements Runnable {
 	private boolean terminar;
 
 	public ControladorAscensor(Ascensor[] a){
+		miMonitor = new Object();
+		
 		terminar = false;
 		ascensores = a;
 		
@@ -67,7 +71,7 @@ class ControladorAscensor implements Runnable {
 		solicitudAscensor(ascensorDesignado, pisoDesde);
 	}
 	
-	synchronized
+	//synchronized
 	public void solicitudAscensor(Ascensor a, int pisoDestino) {
 		//msgs("solicitudAscensor " + a + " a piso " + pisoDestino);
 
@@ -81,7 +85,9 @@ class ControladorAscensor implements Runnable {
 		//msgs("notify@solicitudAscensor");
 
 //		if (notificar) {
-			this.notify();
+			synchronized (miMonitor) {
+				miMonitor.notify();
+			}
 //		}
 	}
 	
@@ -150,7 +156,7 @@ class ControladorAscensor implements Runnable {
 		return ret;
 	}
 
-	synchronized
+	//synchronized
 	private void setSolicitud(Ascensor a, int piso, Boolean b) {
 		//Esto es para que 2 solicitudes que llegan en el mismo instante
 		//sincronicen sus modificaciones al array individualmente
@@ -163,12 +169,15 @@ class ControladorAscensor implements Runnable {
 		return (solicitudesPorAscensor.get(a))[piso];
 	}
 
-	synchronized
+	//synchronized
 	public void run() {
 		try {
 			while (!terminar) {
 				//msgs("wait()");
-				this.wait();
+				synchronized (miMonitor) {
+					if (!terminar)
+						miMonitor.wait();
+				}
 				if (!terminar)
 					atenderSolicitudes();
 			}
@@ -181,7 +190,7 @@ class ControladorAscensor implements Runnable {
 		Boolean ret = false;
 	
 		for (int i=0;i<ascensores.length && !ret;i++) {
-			ret = haySolicitudArriba(ascensores[i], 0);
+			ret = haySolicitudes(ascensores[i]);
 		}
 		return ret;
 	}
@@ -233,10 +242,12 @@ class ControladorAscensor implements Runnable {
 		return ret+"]";
 	}
 
-	synchronized
+	//synchronized
 	public void terminar() {
 		terminar = true;
 		//msgs("terminar");
-		this.notify();
+		synchronized (miMonitor) {
+			miMonitor.notify();
+		}
 	}
 }

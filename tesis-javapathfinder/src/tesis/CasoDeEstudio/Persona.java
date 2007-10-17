@@ -24,10 +24,11 @@ class Persona implements Runnable {
 		if (id == "p1") {
 			controlador.solicitudAscensor(as[0], 1);
 
-/*			esperar(4);
+			Helper.esperar(1);
 			controlador.solicitudAscensor(as[0], 4);
-			esperar(3);
-			controlador.solicitudAscensor(as[0], 6);*/
+
+			Helper.esperar(2);
+			controlador.solicitudAscensor(as[0], 2);
 		}
 
 		if (id == "p2") {
@@ -35,20 +36,20 @@ class Persona implements Runnable {
 			while (as[1].piso()!=1) {
 				esperar(1);
 			}
-			esperar(8);
+			Helper.esperar(8);
 			controlador.solicitudAscensor(as[1], 3);
-			esperar(1);
+			Helper.esperar(1);
 			controlador.solicitudAscensor(as[1], 9);*/
 		}
 		if (id == "pMatrix") {
 /*			controlador.solicitudPisoAbajo(10);
-			esperar(2);
+			Helper.esperar(2);
 			controlador.solicitudPisoArriba(3);
-			esperar(2);
+			Helper.esperar(2);
 			controlador.solicitudPisoArriba(0);*/
 		}
 
-		msgs("modelo.terminoPersona()");
+		//msgs("modelo.terminoPersona()");
 		modelo.terminoPersona();
 	}
 
