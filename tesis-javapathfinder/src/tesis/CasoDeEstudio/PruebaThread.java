@@ -1,4 +1,4 @@
-package pruebas.threads;
+package tesis.CasoDeEstudio;
 
 import java.util.LinkedList;
 import java.util.Queue;
