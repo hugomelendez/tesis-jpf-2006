@@ -49,12 +49,12 @@ class Persona implements Runnable {
 		}
 
 		msgs("modelo.terminoPersona()");
-		modelo.terminoPersona();	
+		modelo.terminoPersona();
 	}
 
 	// Helper
 	private void msgs(String s) {
-		System.out.println("Thread " + Thread.currentThread() + tabifier+"Persona "+id+" -> " + s);
+		//System.out.println("Thread " + Thread.currentThread() + tabifier+"Persona "+id+" -> " + s);
 	}
 
 	public void setTab(String s) {

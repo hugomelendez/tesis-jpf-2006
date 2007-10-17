@@ -28,7 +28,7 @@ class ControladorAscensor implements Runnable {
 	}
 
 	public void solicitudPisoArriba(int pisoDesde) {
-		msgs("solicitudPisoArriba desde piso " + pisoDesde);
+		//msgs("solicitudPisoArriba desde piso " + pisoDesde);
 		
 		Ascensor ascensorDesignado = null;
 		for (int i=0;i<ascensores.length && ascensorDesignado==null;i++) {
@@ -43,12 +43,12 @@ class ControladorAscensor implements Runnable {
 			ascensorDesignado = ascensores[0];
 		}
 
-		msgs("solicitudPisoArriba ASIGNADO " + ascensorDesignado + " a piso " + pisoDesde);
+		//msgs("solicitudPisoArriba ASIGNADO " + ascensorDesignado + " a piso " + pisoDesde);
 		solicitudAscensor(ascensorDesignado, pisoDesde);
 	}
 	
 	public void solicitudPisoAbajo(int pisoDesde) {
-		msgs("solicitudPisoAbajo desde piso " + pisoDesde);
+		//msgs("solicitudPisoAbajo desde piso " + pisoDesde);
 
 		Ascensor ascensorDesignado = null;
 		for (int i=0;i<ascensores.length && ascensorDesignado==null;i++) {
@@ -63,29 +63,30 @@ class ControladorAscensor implements Runnable {
 			ascensorDesignado = ascensores[0];
 		}
 		
-		msgs("solicitudPisoAbajo ASIGNADO " + ascensorDesignado + " a piso " + pisoDesde);
+		//msgs("solicitudPisoAbajo ASIGNADO " + ascensorDesignado + " a piso " + pisoDesde);
 		solicitudAscensor(ascensorDesignado, pisoDesde);
 	}
 	
 	synchronized
 	public void solicitudAscensor(Ascensor a, int pisoDestino) {
-		msgs("solicitudAscensor " + a + " a piso " + pisoDestino);
+		//msgs("solicitudAscensor " + a + " a piso " + pisoDestino);
 
 		//Es probable que, al no estar synchronized el notificar
 		//2 threads lean la version incorrecta de notificar
 		//y generen cant. innecesaria de this.notify() 	
-		Boolean notificar = (!haySolicitudes(a));
-		setSolicitud(a, pisoDestino, true);
+//		Boolean notificar = (!haySolicitudes(a));
 
-		msgs("notify@solicitudAscensor");
+				setSolicitud(a, pisoDestino, true);
 
-		if (notificar) {
+		//msgs("notify@solicitudAscensor");
+
+//		if (notificar) {
 			this.notify();
-		}
+//		}
 	}
 	
 	private void atenderSolicitudPiso(Ascensor a, int piso) {
-		msgs("atenderSolicitudPiso " + a + " en piso " + piso);
+		//msgs("atenderSolicitudPiso " + a + " en piso " + piso);
 		a.detenerse();
 		a.abrirPuertas();
 		Helper.esperar(2);
@@ -94,7 +95,7 @@ class ControladorAscensor implements Runnable {
 	}
 	
 	public void estoyEn(Ascensor a, int piso) {
-		msgs(a + " estoyEn " + piso);
+		//msgs(a + " estoyEn " + piso);
 		if (haySolicitudEn(a, piso)) {
 			atenderSolicitudPiso(a, piso);
 
@@ -149,14 +150,13 @@ class ControladorAscensor implements Runnable {
 		return ret;
 	}
 
+	synchronized
 	private void setSolicitud(Ascensor a, int piso, Boolean b) {
 		//Esto es para que 2 solicitudes que llegan en el mismo instante
 		//sincronicen sus modificaciones al array individualmente
-		synchronized(this) {
-			Boolean[] s = solicitudesPorAscensor.get(a);
-			s[piso] = b;
-			msgs("solicitudes de " +a+ ": "+ printSolicitudes(s));
-		}
+		Boolean[] s = solicitudesPorAscensor.get(a);
+		s[piso] = b;
+		//msgs("solicitudes de " +a+ ": "+ printSolicitudes(s));
 	}
 	
 	private Boolean haySolicitudEn(Ascensor a, int piso) {
@@ -167,15 +167,13 @@ class ControladorAscensor implements Runnable {
 	public void run() {
 		try {
 			while (!terminar) {
-				msgs("wait()");
-//				synchronized (this){
-					wait();
-//				}
+				//msgs("wait()");
+				this.wait();
 				if (!terminar)
 					atenderSolicitudes();
 			}
 		} catch (InterruptedException e) {
-			msgs("Interrupted");
+			//msgs("Interrupted");
 		}
 	}
 	
@@ -210,7 +208,7 @@ class ControladorAscensor implements Runnable {
 
 	// Helper
 	private void msgs(String s) {
-		System.out.println("Thread " + Thread.currentThread() + tabifier+"Controlador -> " + s);
+		//System.out.println("Thread " + Thread.currentThread() + tabifier+"Controlador -> " + s);
 	}
 
 	// Helper
@@ -238,7 +236,7 @@ class ControladorAscensor implements Runnable {
 	synchronized
 	public void terminar() {
 		terminar = true;
-		msgs("terminar");
+		//msgs("terminar");
 		this.notify();
 	}
 }

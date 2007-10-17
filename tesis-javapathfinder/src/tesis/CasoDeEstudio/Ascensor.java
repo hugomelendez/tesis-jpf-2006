@@ -6,7 +6,7 @@ enum Estado {detenido, enMovimiento}
 
 class Ascensor implements Runnable {
 	ControladorAscensor controladorAscensor;
-	String id;
+	private String id;
 	private Direccion direccion;
 	private Puerta puerta;
 	private Estado estado;
@@ -36,26 +36,30 @@ class Ascensor implements Runnable {
 	 * No nos interesa sincronizar los accesos a estado y direccion, porque en nuestro modelo
 	 * existe un unico thread que ejecuta estos metodos, ya que existe un unico controlador que
 	 * comanda todos los ascensores
+	 * 
+	 * Por ahora, volvemos a poner synch en todo el metodo
 	 */
+	synchronized
 	public void subir() {
 		msgs("subir");
 		estado = Estado.enMovimiento;
 		direccion = Direccion.arriba;
-		synchronized(this) {
-			notify();
-		}
+//		synchronized(this) {
+			this.notify();
+//		}
 	}
 
 	/**
 	 * idem subir
 	 */
+	synchronized
 	public void bajar() {
 		msgs("bajar");
 		estado = Estado.enMovimiento;
 		direccion = Direccion.abajo;
-		synchronized(this) {
-			notify();
-		}
+//		synchronized(this) {
+			this.notify();
+//		}
 	}
 
 	public void abrirPuertas () {
@@ -73,9 +77,7 @@ class Ascensor implements Runnable {
 		try {
 			while (!terminar) {
 				msgs("wait()");
-//				synchronized(this) {
-					wait();
-//				}
+				this.wait();
 				if (!terminar)
 					moverse();
 			}
@@ -92,10 +94,10 @@ class Ascensor implements Runnable {
 			controladorAscensor.estoyEn(this, piso);
 		}
 	}
-	
+
 	// Helper
 	private void msgs(String s) {
-		System.out.println("Thread " + Thread.currentThread() + tabifier+"Ascensor " + id + " -> " + s);
+		//System.out.println("Thread " + Thread.currentThread() + tabifier + "Ascensor " + id + " -> " + s);
 	}
 
 	public void setTab(String s) {

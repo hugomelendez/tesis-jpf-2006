@@ -1,95 +1,98 @@
 package tesis.CasoDeEstudio;
 
 class ModeloV2 {
-	Ascensor a1;
-	Ascensor a2;
+	private final static int CANT_PERSONAS = 1;
+	private final static int CANT_ASCENSORES = 1;
+	
+	Ascensor[] ascensores;
 	ControladorAscensor ca;
 	int cantPersonasVivas;
 	
 	public ModeloV2() {
-		cantPersonasVivas = 3;
+		cantPersonasVivas = CANT_PERSONAS;
 	}
 	
 	synchronized
 	public void coordinarFinEjecución() {
-		while (cantPersonasVivas>0) {
+		if (cantPersonasVivas > 0) {
 			try {
-				//synchronized(this) {
-					System.out.println("ModeloV2.wait() IN");
-					this.wait();
-					System.out.println("ModeloV2.wait() OUT");
-				//}
+//				System.out.println("ModeloV2.wait() IN");
+				this.wait();
+//				System.out.println("ModeloV2.wait() OUT");
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 
-		a1.terminar();
-		a2.terminar();
+		for (int i = 0; i < ascensores.length; i++) {
+			ascensores[i].terminar();
+			
+		}
 		ca.terminar();
 	}
 	
 	synchronized
 	public void terminoPersona() {
-		this.notify();
 		cantPersonasVivas--;
+		if (cantPersonasVivas==0) {
+			this.notify();
+		}
 	}
 
 	private void controlador(ControladorAscensor ca) {
 		this.ca = ca;
 	}
 
-	private void ascensores(Ascensor a1, Ascensor a2) {
-		this.a1 = a1;
-		this.a2 = a2;
+	private void ascensores(Ascensor[] a) {
+		ascensores = a;
 	}
 
 	public static void main(String[] args) {
 		Ascensor a1 = new Ascensor("a1");
 		a1.setTab("\t");
-		Thread t1 = new Thread(a1);
+		Thread tA1 = new Thread(a1);
 
-		Ascensor a2 = new Ascensor("a2");
-		a2.setTab("\t\t");
-		Thread t2 = new Thread(a2);
+//		Ascensor a2 = new Ascensor("a2");
+//		a2.setTab("\t\t");
+//		Thread tA2 = new Thread(a2);
 
-		Ascensor[] ascensores = new Ascensor[2];
+		Ascensor[] ascensores = new Ascensor[CANT_ASCENSORES];
 		ascensores[0] = a1;
-		ascensores[1] = a2;
+//		ascensores[1] = a2;
 
 		ControladorAscensor ca = new ControladorAscensor(ascensores);
 		ca.setTab("");
-		Thread t3 = new Thread(ca);
+		Thread tCA = new Thread(ca);
 
 		Persona p1 = new Persona("p1");
 		p1.setTab("\t\t\t");
 		p1.controlador(ca);
-		Thread t4 = new Thread(p1);
+		Thread tP1 = new Thread(p1);
 
-		Persona p2 = new Persona("p2");
-		p2.setTab("\t\t\t\t");
-		p2.controlador(ca);
-		Thread t5 = new Thread(p2);
-
-		Persona pMatrix = new Persona("pMatrix");
-		pMatrix.setTab("\t\t\t\t\t");
-		pMatrix.controlador(ca);
-		Thread tMatrix = new Thread(pMatrix);
+//		Persona p2 = new Persona("p2");
+//		p2.setTab("\t\t\t\t");
+//		p2.controlador(ca);
+//		Thread tP2 = new Thread(p2);
+//
+//		Persona pMatrix = new Persona("pMatrix");
+//		pMatrix.setTab("\t\t\t\t\t");
+//		pMatrix.controlador(ca);
+//		Thread tPMatrix = new Thread(pMatrix);
 
 		ModeloV2 m = new ModeloV2();
-		m.ascensores(a1, a2);
+		m.ascensores(ascensores);
 		m.controlador(ca);
 		p1.modelo(m);
-		p2.modelo(m);
-		pMatrix.modelo(m);
+//		p2.modelo(m);
+//		pMatrix.modelo(m);
 
-		t1.start();
-		t2.start();
-		t3.start();
-		t4.start();
-		t5.start();
-		tMatrix.start();
+		tA1.start();
+//		tA2.start();
+		tCA.start();
+		tP1.start();
+//		tP2.start();
+//		tPMatrix.start();
 		
 		m.coordinarFinEjecución();
 	}
