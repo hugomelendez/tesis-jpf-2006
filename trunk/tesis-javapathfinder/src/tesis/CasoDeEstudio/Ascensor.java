@@ -5,6 +5,7 @@ enum Puerta {abierta, cerrada}
 enum Estado {detenido, enMovimiento}
 
 class Ascensor implements Runnable {
+	Object monitor;
 	ControladorAscensor controladorAscensor;
 	private String id;
 	private Direccion direccion;
@@ -18,7 +19,8 @@ class Ascensor implements Runnable {
 		return piso;
 	}
 
-	Ascensor (String id) {
+	Ascensor (String id, Object mon) {
+		monitor = mon;
 		terminar = false;
 		this.id = id;
 		puerta = Puerta.abierta;
@@ -28,7 +30,7 @@ class Ascensor implements Runnable {
 	}
 
 	public void detenerse() {
-		msgs("detenerse");
+		//msgs("detenerse");
 		estado = Estado.detenido;
 	}
 
@@ -39,51 +41,57 @@ class Ascensor implements Runnable {
 	 * 
 	 * Por ahora, volvemos a poner synch en todo el metodo
 	 */
-	synchronized
+//	synchronized
 	public void subir() {
-		msgs("subir");
-		estado = Estado.enMovimiento;
-		direccion = Direccion.arriba;
-//		synchronized(this) {
+		//msgs("subir");
+		synchronized(this) {
+			estado = Estado.enMovimiento;
+			direccion = Direccion.arriba;
 			this.notify();
-//		}
+		}
 	}
 
 	/**
 	 * idem subir
 	 */
-	synchronized
+//	synchronized
 	public void bajar() {
-		msgs("bajar");
-		estado = Estado.enMovimiento;
-		direccion = Direccion.abajo;
-//		synchronized(this) {
+		//msgs("bajar");
+		synchronized(this) {
+			estado = Estado.enMovimiento;
+			direccion = Direccion.abajo;
 			this.notify();
-//		}
+		}
 	}
 
 	public void abrirPuertas () {
-		msgs("abrirPuertas");
+		//msgs("abrirPuertas");
 		puerta = Puerta.abierta;
 	}
 
 	public void cerrarPuertas () {
-		msgs("cerrarPuertas");
+		//msgs("cerrarPuertas");
 		puerta = Puerta.cerrada;
 	}
 
-	synchronized
+	//synchronized
 	public void run() {
-		try {
+//		synchronized (monitor) {
 			while (!terminar) {
-				msgs("wait()");
-				this.wait();
+				//msgs("wait()");
+				synchronized (this) {
+					try {
+						if (!terminar)
+							this.wait();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 				if (!terminar)
 					moverse();
 			}
-		} catch (InterruptedException e) {
-			msgs("Interrupted");
-		}
+//		}
 	}
 
 	private void moverse() {
@@ -120,10 +128,12 @@ class Ascensor implements Runnable {
 		controladorAscensor = ca;
 	}
 
-	synchronized 
+//	synchronized 
 	public void terminar() {
 		terminar = true;
-		msgs("terminar");
-		this.notify();
+		//msgs("terminar");
+		synchronized (this) {
+			this.notify();
+		}
 	}
 }
