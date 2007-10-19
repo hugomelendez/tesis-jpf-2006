@@ -1,0 +1,85 @@
+1 persona, 1 request, 1 ascensor
+	8116
+3 personas, 1 request, 1 ascensor
+	>11mil
+
+1 persona, 1 request, 1 ascensor, sin ENum Estado
+	7400
+
+1 persona, 1 request, 1 ascensor, sin Enums
+	6770
+
+----- STATE-ADVANCED (CTX;JVM;AFDs) 0;6770;null-----
+----- STATE-ADVANCED (CTX;JVM;AFDs) 0;4357;null-----
+----- STATE-BACKTRACKED (CTX;JVM;AFDs) 0;6770;null-----
+----- STATE-ADVANCED (CTX;JVM;AFDs) 0;6630;null-----
+----- STATE-BACKTRACKED (CTX;JVM;AFDs) 0;6770;null-----
+----- STATE-ADVANCED (CTX;JVM;AFDs) 0;6758;null-----
+----- STATE-BACKTRACKED (CTX;JVM;AFDs) 0;6770;null-----
+----- STATE-BACKTRACKED (CTX;JVM;AFDs) 0;6769;null-----
+----- STATE-BACKTRACKED (CTX;JVM;AFDs) 0;6768;null-----
+----- STATE-BACKTRACKED (CTX;JVM;AFDs) 0;6767;null-----
+----- STATE-BACKTRACKED (CTX;JVM;AFDs) 0;6766;null-----
+----- STATE-BACKTRACKED (CTX;JVM;AFDs) 0;6765;null-----
+----- STATE-BACKTRACKED (CTX;JVM;AFDs) 0;6764;null-----
+----- STATE-BACKTRACKED (CTX;JVM;AFDs) 0;6763;null-----
+----- STATE-BACKTRACKED (CTX;JVM;AFDs) 0;6762;null-----
+----- STATE-BACKTRACKED (CTX;JVM;AFDs) 0;6761;null-----
+----- STATE-BACKTRACKED (CTX;JVM;AFDs) 0;6760;null-----
+----- STATE-BACKTRACKED (CTX;JVM;AFDs) 0;6759;null-----
+----- STATE-BACKTRACKED (CTX;JVM;AFDs) 0;0;null-----
+
+
+1 persona, 1 request, 1 ascensor, sin Enums, usamos el getter para acceder a la direccion del ascensor
+	private void moverse() {
+		synchronized (this) {
+			while (estado==1) {
+				Helper.esperar(1);
+				piso += (direccion()==1?1:-1); <--------------------------
+			
+				controladorAscensor.estoyEn(this, piso);
+			}
+		}
+	}
+
+	6770
+
+
+1 persona, 1 request, 1 ascensor, sin Enums, getters para todas las internas del ascensor
+	6770
+
+1 persona, 1 request, 1 ascensor, sin Enums, 
+	getters para todas las internas del ascensor, 
+	synch(this) para todos los accesos a internas del ascensor
+	4071
+
+
+1 persona, 1 request, 1 ascensor, sin Enums, 
+	getters para todas las internas del ascensor, 
+	synch(this) para todos los accesos a internas del ascensor
+	en Controlador, dejo el method terminar() con el atrib terminar fuera del sync
+
+	//synchronized
+	public void terminar() {
+		terminar = true;
+		//msgs("terminar");
+		synchronized (miMonitor) {
+			miMonitor.notify();
+		}
+	}
+
+	4129
+
+
+1 persona, 1 request, 1 ascensor, sin Enums, 
+	Ascensor, getters para todas las internas del ascensor, 
+		synch(this) para todos los accesos a internas del ascensor
+	Controlador, dejo el method terminar() con el atrib terminar fuera del sync
+		armamos un getter para las solicitudes de un ascensor
+	
+	private Boolean[] solicitudesPorAscensor (Ascensor a) {
+		Boolean[] s;
+		s = solicitudesPorAscensor.get(a);
+		return s;
+	}
+
