@@ -1,0 +1,280 @@
+package tesis.CasoDeEstudio_simple;
+
+import java.util.Hashtable;
+
+class ControladorAscensor implements Runnable {
+	Object miMonitor;
+	
+	private final static int ALTURA = 4;
+	private Ascensor[] ascensores;
+	
+	//Botones dentro de un ascensor
+	private Hashtable<Ascensor, Boolean[]> solicitudesPorAscensor;
+
+//	private String tabifier;
+	private boolean terminar;
+
+	public ControladorAscensor(Ascensor[] a){
+		miMonitor = new Object();
+		
+		terminar = false;
+		ascensores = a;
+		
+		solicitudesPorAscensor = new Hashtable<Ascensor, Boolean[]>();
+		for (int i=0;i<ascensores.length;i++) {
+			Boolean[] b = new Boolean[ALTURA+1];
+			for (int j=0; j<b.length; j++) {
+				b[j] = false;
+			}
+			solicitudesPorAscensor.put(ascensores[i], b);
+			ascensores[i].controladorAscensor(this);
+		}
+	}
+
+	public void solicitudPisoArriba(int pisoDesde) {
+		//msgs("solicitudPisoArriba desde piso " + pisoDesde);
+		
+		Ascensor ascensorDesignado = null;
+		for (int i=0;i<ascensores.length && ascensorDesignado==null;i++) {
+			Ascensor a = ascensores[i];
+			
+//			if (a.piso() <= pisoDesde && a.direccion()==Direccion.arriba) {
+//			if (a.piso() <= pisoDesde && a.direccion()==1) {
+			if (a.piso() <= pisoDesde && a.estaSubiendo()) {
+				ascensorDesignado = a;
+			}
+		}
+
+		if (ascensorDesignado==null) {
+			ascensorDesignado = ascensores[0];
+		}
+
+		//msgs("solicitudPisoArriba ASIGNADO " + ascensorDesignado + " a piso " + pisoDesde);
+		solicitudAscensor(ascensorDesignado, pisoDesde);
+	}
+	
+	public void solicitudPisoAbajo(int pisoDesde) {
+		//msgs("solicitudPisoAbajo desde piso " + pisoDesde);
+
+		Ascensor ascensorDesignado = null;
+		for (int i=0;i<ascensores.length && ascensorDesignado==null;i++) {
+			Ascensor a = ascensores[i];
+			
+//			if (a.piso() >= pisoDesde && a.direccion()==Direccion.abajo) {
+//			if (a.piso() >= pisoDesde && a.direccion()==0) {
+			if (a.piso() >= pisoDesde && a.estaBajando()) {
+				ascensorDesignado = a;
+			}
+		}
+		
+		if (ascensorDesignado==null) {
+			ascensorDesignado = ascensores[0];
+		}
+		
+		//msgs("solicitudPisoAbajo ASIGNADO " + ascensorDesignado + " a piso " + pisoDesde);
+		solicitudAscensor(ascensorDesignado, pisoDesde);
+	}
+	
+	//synchronized
+	public void solicitudAscensor(Ascensor a, int pisoDestino) {
+		//msgs("solicitudAscensor " + a + " a piso " + pisoDestino);
+
+		//Es probable que, al no estar synchronized el notificar
+		//2 threads lean la version incorrecta de notificar
+		//y generen cant. innecesaria de this.notify() 	
+//		Boolean notificar = (!haySolicitudes(a));
+
+				setSolicitud(a, pisoDestino, true);
+
+		//msgs("notify@solicitudAscensor");
+
+//		if (notificar) {
+			synchronized (miMonitor) {
+				miMonitor.notify();
+			}
+//		}
+	}
+	
+	private void atenderSolicitudPiso(Ascensor a, int piso) {
+		//msgs("atenderSolicitudPiso " + a + " en piso " + piso);
+		a.detenerse();
+		a.abrirPuertas();
+		Helper.esperar(2);
+		setSolicitud(a, piso, false);
+		a.cerrarPuertas();
+	}
+	
+	public void estoyEn(Ascensor a, int piso) {
+		//msgs(a + " estoyEn " + piso);
+		if (haySolicitudEn(a, piso)) {
+			atenderSolicitudPiso(a, piso);
+
+//			if (a.direccion()==Direccion.arriba) {
+//			if (a.direccion()==0) {
+			if (a.estaBajando()) {
+				if (haySolicitudArriba(a, piso)) {
+					a.subir();
+				} else if (haySolicitudAbajo(a, piso)) { 
+					a.bajar();
+//				} else {
+//					a.detenerse();
+				}
+			} else {
+				if (haySolicitudAbajo(a, piso)) { 
+					a.bajar();
+				} else if (haySolicitudArriba(a, piso)) {
+					a.subir();
+//				} else {
+//					a.detenerse();
+				}
+			}
+		}
+
+		if (piso==0) {
+			if (haySolicitudArriba(a, piso))
+				a.subir();
+//			else if (a.estado()!=Estado.detenido)
+//			else if (a.estado()!=0)
+			else if (!a.estaParado())
+				a.detenerse();
+		}
+		else if (piso==ALTURA) {
+			if (haySolicitudAbajo(a, piso))
+				a.bajar();
+//			else if (a.estado()!=Estado.detenido)
+//			else if (a.estado()!=0)
+			else if (!a.estaParado())
+				a.detenerse();
+		}
+	}
+	
+	private boolean haySolicitudAbajo(Ascensor a, int piso) {
+//		Boolean[] s = solicitudesPorAscensor.get(a);
+		Boolean[] s = solicitudesPorAscensor(a);
+		Boolean ret = false;
+		for (int i=piso; i>=0 && !ret;i--) {
+			ret = s[i];
+		}
+		return ret;
+	}
+
+	private boolean haySolicitudArriba(Ascensor a, int piso) {
+//		Boolean[] s = solicitudesPorAscensor.get(a);
+		Boolean[] s = solicitudesPorAscensor(a);
+		Boolean ret = false;
+		for (int i=piso; i<=ALTURA && !ret;i++) {
+			ret = s[i];
+		}
+		return ret;
+	}
+
+	//synchronized
+	private void setSolicitud(Ascensor a, int piso, Boolean b) {
+		//Esto es para que 2 solicitudes que llegan en el mismo instante
+		//sincronicen sus modificaciones al array individualmente
+//		Boolean[] s = solicitudesPorAscensor.get(a);
+		Boolean[] s = solicitudesPorAscensor(a);
+		s[piso] = b;
+		//msgs("solicitudes de " +a+ ": "+ printSolicitudes(s));
+	}
+	
+	private Boolean haySolicitudEn(Ascensor a, int piso) {
+//		return (solicitudesPorAscensor.get(a))[piso];
+		return (solicitudesPorAscensor(a))[piso];
+	}
+
+	//synchronized
+	public void run() {
+		try {
+			synchronized (miMonitor) {
+			while (!terminar) {
+				//msgs("wait()");
+//				synchronized (miMonitor) {
+					if (!terminar)
+						miMonitor.wait();
+//				}
+				if (!terminar)
+					atenderSolicitudes();
+			}
+			}
+		} catch (InterruptedException e) {
+			//msgs("Interrupted");
+		}
+	}
+	
+	public Boolean haySolicitudes() {
+		Boolean ret = false;
+	
+		for (int i=0;i<ascensores.length && !ret;i++) {
+			ret = haySolicitudes(ascensores[i]);
+		}
+		return ret;
+	}
+	
+	private Boolean haySolicitudes(Ascensor a) {
+		return (haySolicitudArriba(a, 0));
+	}
+
+	/**
+	 * Revisa las colas de pedidos de cada ascensor y:
+	 *  si existe alguno Y si el ascensor est� detenido, lo arranca en la direcci�n correspondiente 
+	 */
+	private void atenderSolicitudes() {
+		for (int i=0;i<ascensores.length;i++) {
+			Ascensor a = ascensores[i];
+//			if (a.estado()==Estado.detenido) {
+//			if (a.estado()==0) {
+			if (a.estaParado()) {
+				if (haySolicitudArriba(a, a.piso()))
+					a.subir();
+				else if (haySolicitudAbajo(a, a.piso()))
+					a.bajar();
+			}
+		}
+	}
+
+//	// Helper
+//	private void msgs(String s) {
+//		//System.out.println("Thread " + Thread.currentThread() + tabifier+"Controlador -> " + s);
+//	}
+//
+//	// Helper
+//	public void setTab(String s) {
+//		tabifier = s;
+//	}
+
+	// Helper
+	public Ascensor[] ascensores() {
+//		synchronized (miMonitor) {
+			return ascensores;
+//		}
+	}
+
+	//Helper
+	private Boolean[] solicitudesPorAscensor (Ascensor a) {
+		Boolean[] s;
+		s = solicitudesPorAscensor.get(a);
+		return s;
+	}
+	
+	//Helper
+	/**
+	 * Imprime las solicitudes de un ascensor
+	 */
+//	private String printSolicitudes(Boolean[] s) {
+//		String ret = "[";
+//		for (int i=0; i<=ALTURA;i++) {
+//			ret += (s[i] ? i : "") + ",";
+//		}
+//		return ret+"]";
+//	}
+
+	//synchronized
+	public void terminar() {
+		//msgs("terminar");
+		synchronized (miMonitor) {
+			terminar = true;
+			miMonitor.notify();
+		}
+	}
+}
