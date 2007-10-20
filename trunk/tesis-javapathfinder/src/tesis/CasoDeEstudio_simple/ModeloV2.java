@@ -51,7 +51,7 @@ class ModeloV2 {
 	public static void main(String[] args) throws InterruptedException {
 		ModeloV2 m = new ModeloV2();
 
-		Ascensor a1 = new Ascensor("a1", m);
+		Ascensor a1 = new Ascensor("a1");
 		Thread tA1 = new Thread(a1);
 
 //		Ascensor a2 = new Ascensor("a2");
@@ -68,13 +68,13 @@ class ModeloV2 {
 		p1.controlador(ca);
 		Thread tP1 = new Thread(p1);
 
-//		Persona p2 = new Persona("p2");
-//		p2.controlador(ca);
-//		Thread tP2 = new Thread(p2);
-//
-//		Persona pMatrix = new Persona("pMatrix");
-//		pMatrix.controlador(ca);
-//		Thread tPMatrix = new Thread(pMatrix);
+		Persona p2 = new Persona("p2");
+		p2.controlador(ca);
+		Thread tP2 = new Thread(p2);
+
+		Persona pMatrix = new Persona("pMatrix");
+		pMatrix.controlador(ca);
+		Thread tPMatrix = new Thread(pMatrix);
 
 		m.ascensores(ascensores);
 		m.controlador(ca);
