@@ -2,10 +2,16 @@
 <ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
 	<events>
+	    <event type="invoke" name="runPersona" label="runPersona" />
+	    <event type="invoke" name="runAscensor" label="runAscensor" />
+	    <event type="invoke" name="runControlador" label="runControlador" />
 	    <event type="invoke" name="abrirPuertas" label="abrirPuertas" />
 	    <event type="invoke" name="cerrarPuertas" label="cerrarPuertas" />
-	    <event type="invoke" name="estoyEn" label="estoyEn" />
 	    <event type="invoke" name="subir" label="subir" />
 	    <event type="invoke" name="bajar" label="bajar" />
+	    <event type="invoke" name="terminoPersona" label="terminoPersona" />
+	    <event type="invoke" name="detenerse" label="detenerse" />
+	    
+	    
 	</events>
 </ProblemDefinition>
