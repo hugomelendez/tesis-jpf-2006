@@ -83,3 +83,18 @@
 		return s;
 	}
 
+--------------------------------------------------------------------------------------------------
+RS (20071019)
+- 1 persona, 1 request, 1 ascensor
+2031 (30 seg)
+2024 (25 seg, con el synchronized en ControladorAscensor.ascensores)
+2088 (27 seg, con el synchronized en ControladorAscensor.setSolicitud)
+3896 (al cambiar this por miMonitor en todos los synchronized, notify y wait en Ascensor)
+2008 (al volver a this como Monitor de Ascensor y agregar el sync en el getter de piso)
+
+- 1 persona, 3 requests, 1 ascensor
+20644 (tardó 2 min aprox)
+
+
+- 3 personas, 3 requests (de P1), 1 ascensor
+inicio 11:42:20 ...
