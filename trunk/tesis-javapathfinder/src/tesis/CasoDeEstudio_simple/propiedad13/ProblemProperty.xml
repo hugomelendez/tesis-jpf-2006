@@ -6,23 +6,20 @@
 	        <state label="preambulo" start="true" />
 	        <state label="inicial" />
 	        <state label="enPiso1" />
+	        <state label="atendiendoPiso1" />
 	        <state label="ERROR" final="true" />
 	    </states>
 	    <transitions>
-	        <transition from="preambulo" to="inicial" labelEvent="solicitudPiso1" />
+	        <transition from="preambulo" to="inicial" labelEvent="solicitudAscensorPiso1" />
 	        <transition from="inicial" to="enPiso1" labelEvent="estoyEnPiso1" />
 
-	        <transition from="enPiso1" to="atendiendoPiso1" labelEvent="atenderSolicitud" />
+	        <transition from="enPiso1" to="atendiendoPiso1" labelEvent="atenderSolicitudPiso" />
+	        <transition from="enPiso1" to="ERROR" labelEvent="termineEstadiaPiso1" />
 
 	        <transition from="atendiendoPiso1" to="preambulo" labelEvent="continuarSubir" />
 	        <transition from="atendiendoPiso1" to="preambulo" labelEvent="continuarBajar" />
 	        <transition from="atendiendoPiso1" to="preambulo" labelEvent="subir" />
 	        <transition from="atendiendoPiso1" to="preambulo" labelEvent="bajar" />
-
-	        <transition from="enPiso1" to="ERROR" labelEvent="continuarSubir" />
-	        <transition from="enPiso1" to="ERROR" labelEvent="continuarBajar" />
-	        <transition from="enPiso1" to="ERROR" labelEvent="subir" />
-	        <transition from="enPiso1" to="ERROR" labelEvent="bajar" />
 
 	    </transitions>
 	</GlobalProperty>
