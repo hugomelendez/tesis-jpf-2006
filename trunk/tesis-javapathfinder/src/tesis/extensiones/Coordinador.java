@@ -384,7 +384,8 @@ public class Coordinador {
 	}
 	
 	public void busquedaFinalizada() {
-		escribirLog("Fin Verificaci�n " + now());
+		escribirLog("# estados: " + search.getVM().getStateSet().size());
+		escribirLog("Fin Verificacion " + now());
 		escribirLog("************************************************");
 	}
 
@@ -430,12 +431,9 @@ public class Coordinador {
 		}
 	}
 
-	public void escribirLog(String msg) {
+	private void escribirFilelog(String msg) {
 	    FileWriter aWriter;
 		try {
-			//TODO Ver si se parametriza
-			System.out.println(msg);
-
 			aWriter = new FileWriter(nombreLog(), true);
 		    aWriter.write(msg + System.getProperty("line.separator"));
 		    aWriter.flush();
@@ -444,7 +442,12 @@ public class Coordinador {
 			System.out.println("No se puede escribir en el log");
 			e.printStackTrace();
 		}
+	}
 
+	public void escribirLog(String msg) {
+		//TODO Ver si se parametriza
+		System.out.println(msg);
+//		escribirFilelog(msg);
 	}
 
 	public void escribirLog(Evento e) {
