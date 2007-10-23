@@ -76,6 +76,10 @@ public class AutomataVerificacion {
 				estadoActual = tran.estadoHacia();
 				transicionValida = true;
 			}
+			//El evento se mantiene en el estado (no hubo transición, se asume como un rulo)
+			if (!transicionValida) {
+				estadoAnterior = estadoActual;
+			}
 		}
 	}
 
