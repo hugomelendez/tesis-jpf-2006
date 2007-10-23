@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
+	<SearchContext mode="contexto">
+	    <states>
+	        <state label="0" start="true" />
+	        <state label="1" />
+	        <state label="2" />
+	        <state label="preambulo" />
+	        <state label="error" final="true"/>	        
+	    </states>
+	    <transitions>
+			<!-- 
+			el contexto va a buscar la secuencia exacta de eventos q necesitamos para verificar la propiedad
+			-->
+	        <transition from="0" to="1" labelEvent="runAscensor" />
+	        <transition from="1" to="2" labelEvent="runControlador" />
+	        <transition from="2" to="preambulo" labelEvent="runPersona" />
+			<!-- 
+			una vez que esten todas los threads arrancados nos quedamos en un rulo
+			salimos solo por solicitudAscensorPiso1
+			-->
+	        <transition from="preambulo" to="preambulo" labelEvent="subir" />
+	        <transition from="preambulo" to="preambulo" labelEvent="bajar" />
+		    <transition from="preambulo" to="preambulo" labelEvent="continuarSubir" />
+		    <transition from="preambulo" to="preambulo" labelEvent="continuarBajar" />
+		    <transition from="preambulo" to="preambulo" labelEvent="termineEstadiaPiso1" />
+		    <transition from="preambulo" to="preambulo" labelEvent="estoyEnPiso1" />
+		    <transition from="preambulo" to="preambulo" labelEvent="atenderSolicitudPiso" />
+			<!-- 
+			nos movemos al proximo estado
+			-->
+	        <transition from="preambulo" to="inicial" labelEvent="solicitudAscensorPiso1" />
+			<!-- 
+			una vez que llega la solicitud, me quedo en ese estado hasta que 
+			el ascensor indique q llego al piso 1
+			-->
+	        <transition from="inicial" to="inicial" labelEvent="subir" />
+	        <transition from="inicial" to="inicial" labelEvent="bajar" />
+		    <transition from="inicial" to="inicial" labelEvent="continuarSubir" />
+		    <transition from="inicial" to="inicial" labelEvent="continuarBajar" />
+		    <transition from="inicial" to="inicial" labelEvent="termineEstadiaPiso1" />
+		    <transition from="inicial" to="inicial" labelEvent="atenderSolicitudPiso" />
+			<!-- 
+			nos movemos al proximo estado
+			-->
+	        <transition from="inicial" to="enPiso1" labelEvent="estoyEnPiso1" />
+			<!-- 
+			cuando el ascensor llega al piso 1 estamos en el contexto de ehecucion q nos interesa
+			y solo debemos irnos cuando venga el terminoPersona
+			-->
+	        <transition from="enPiso1" to="enPiso1" labelEvent="subir" />
+	        <transition from="enPiso1" to="enPiso1" labelEvent="bajar" />
+		    <transition from="enPiso1" to="enPiso1" labelEvent="continuarSubir" />
+		    <transition from="enPiso1" to="enPiso1" labelEvent="continuarBajar" />
+		    <transition from="enPiso1" to="enPiso1" labelEvent="termineEstadiaPiso1" />
+		    <transition from="enPiso1" to="enPiso1" labelEvent="atenderSolicitudPiso" />
+
+	    </transitions>
+	</SearchContext>
+</ProblemDefinition>
