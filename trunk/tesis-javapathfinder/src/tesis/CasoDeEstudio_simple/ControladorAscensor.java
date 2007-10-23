@@ -41,6 +41,10 @@ class ControladorAscensor implements Runnable {
 	}
 
 	public void run() {
+		runControlador();
+	}
+
+	private void runControlador() {
 		try {
 			while (!terminar) {
 				//msgs("wait()");
@@ -319,7 +323,7 @@ class ControladorAscensor implements Runnable {
 	 * Impresion de mensajes internos
 	 * Nota: comentar las llamadas en verificacion pq genera muchos estados
 	 */
-	private void msgs(String s) {
+	protected void msgs (String s) {
 		System.out.println("Thread " + Thread.currentThread() /*+ tabifier*/+"Controlador -> " + s);
 	}
 

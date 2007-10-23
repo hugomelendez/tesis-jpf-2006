@@ -1,21 +1,30 @@
 <?xml version="1.0" ?>
 <ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
-	<GlobalProperty >
+	<GlobalProperty>
 	    <states>
-	        <state label="inicial" start="true" />
-	        <state label="detenido" />
+	        <state label="preambulo" start="true" />
+	        <state label="inicial" />
+	        <state label="enPiso1" />
+	        <state label="atendiendoPiso1" />
 	        <state label="ERROR" final="true" />
 	    </states>
 	    <transitions>
-	        <transition from="inicial" to="detenido" labelEvent="detenerse" />
+	        <transition from="preambulo" to="inicial" labelEvent="solicitudPiso1" />
+	        <transition from="inicial" to="enPiso1" labelEvent="estoyEnPiso1" />
 
-	        <transition from="detenido" to="inicial" labelEvent="abrirPuertas" />
+	        <transition from="enPiso1" to="atendiendoPiso1" labelEvent="atenderSolicitud" />
 
-	        <transition from="detenido" to="ERROR" labelEvent="cerrarPuertas" />
-	        <transition from="detenido" to="ERROR" labelEvent="subir" />
-	        <transition from="detenido" to="ERROR" labelEvent="bajar" />
-	        <transition from="detenido" to="ERROR" labelEvent="detenerse" />
+	        <transition from="atendiendoPiso1" to="preambulo" labelEvent="continuarSubir" />
+	        <transition from="atendiendoPiso1" to="preambulo" labelEvent="continuarBajar" />
+	        <transition from="atendiendoPiso1" to="preambulo" labelEvent="subir" />
+	        <transition from="atendiendoPiso1" to="preambulo" labelEvent="bajar" />
+
+	        <transition from="enPiso1" to="ERROR" labelEvent="continuarSubir" />
+	        <transition from="enPiso1" to="ERROR" labelEvent="continuarBajar" />
+	        <transition from="enPiso1" to="ERROR" labelEvent="subir" />
+	        <transition from="enPiso1" to="ERROR" labelEvent="bajar" />
+
 	    </transitions>
 	</GlobalProperty>
 </ProblemDefinition>

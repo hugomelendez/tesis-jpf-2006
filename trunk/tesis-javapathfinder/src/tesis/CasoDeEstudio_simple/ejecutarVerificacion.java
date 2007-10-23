@@ -4,6 +4,6 @@ import tesis.extensiones.*;
 
 public class ejecutarVerificacion {
 	public static void main (String[] args) throws XMLException {
-		VerificationLauncher.execute("./src/tesis/CasoDeEstudio_simple/", "tesis.CasoDeEstudio_simple.ModeloV2", false);
+		VerificationLauncher.execute("./src/tesis/CasoDeEstudio_simple/", "tesis.CasoDeEstudio_simple.ModeloV2", true);
 	}
 }

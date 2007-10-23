@@ -5,13 +5,21 @@
 	    <event type="invoke" name="runPersona" label="runPersona" />
 	    <event type="invoke" name="runAscensor" label="runAscensor" />
 	    <event type="invoke" name="runControlador" label="runControlador" />
-	    <event type="invoke" name="abrirPuertas" label="abrirPuertas" />
-	    <event type="invoke" name="cerrarPuertas" label="cerrarPuertas" />
+
+	    <!--event type="invoke" name="abrirPuertas" label="abrirPuertas" />
+	    <event type="invoke" name="cerrarPuertas" label="cerrarPuertas" /-->
 	    <event type="invoke" name="subir" label="subir" />
 	    <event type="invoke" name="bajar" label="bajar" />
+	    <event type="invoke" name="continuarSubir" label="continuarSubir" />
+	    <event type="invoke" name="continuarBajar" label="continuarBajar" />
+
+	    <!--event type="invoke" name="detenerse" label="detenerse" /-->
+
+		<!-- para quedar fuera del ctx -->
 	    <event type="invoke" name="terminoPersona" label="terminoPersona" />
-	    <event type="invoke" name="detenerse" label="detenerse" />
-	    
-	    
+
+	    <event type="invoke" name="estoyEnPiso1" label="estoyEnPiso1" />
+	    <event type="invoke" name="solicitudPiso1" label="solicitudPiso1" />
+	    <event type="invoke" name="atenderSolicitud" label="atenderSolicitud" />
 	</events>
 </ProblemDefinition>

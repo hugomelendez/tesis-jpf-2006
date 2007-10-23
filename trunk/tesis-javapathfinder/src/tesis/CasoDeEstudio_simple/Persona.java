@@ -23,6 +23,10 @@ class Persona implements Runnable {
 	}
 
 	public void run() {
+		runPersona();
+	}
+
+	private void runPersona() {
 		Ascensor[] as = controlador.ascensores();
 
 		if (id == "p1") {

@@ -29,6 +29,11 @@ class Ascensor implements Runnable {
 	}
 
 	public void run() {
+		// para poder capturar el evento
+		runAscensor();
+	}
+
+	private void runAscensor() {
 		try {
 			/*
 			 * Se sincroniza esta seccion pq
@@ -213,7 +218,7 @@ class Ascensor implements Runnable {
 	 * Impresion de mensajes internos
 	 * Nota: comentar las llamadas en verificacion pq genera muchos estados
 	 */
-	private void msgs(String s) {
+	private void msgs (String s) {
 		System.out.println("Thread " + Thread.currentThread() + tabifier + "Ascensor " + id + " -> " + s);
 	}
 

@@ -2,7 +2,7 @@ package tesis.CasoDeEstudio_simple;
 
 class ModeloV2 {
 	private final static int CANT_PERSONAS = 1;
-	private final static int CANT_ASCENSORES = 1;
+	public final static int CANT_ASCENSORES = 1;
 	
 	Ascensor[] ascensores;
 	ControladorAscensor ca;
@@ -40,11 +40,11 @@ class ModeloV2 {
 		}
 	}
 
-	private void controlador(ControladorAscensor ca) {
+	protected void controlador(ControladorAscensor ca) {
 		this.ca = ca;
 	}
 
-	private void ascensores(Ascensor[] a) {
+	protected void ascensores(Ascensor[] a) {
 		ascensores = a;
 	}
 
