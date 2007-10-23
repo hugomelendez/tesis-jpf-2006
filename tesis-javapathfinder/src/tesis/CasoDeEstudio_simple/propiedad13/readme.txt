@@ -1,4 +1,4 @@
-Llega una solicitud a piso 1 para el unico ascensor
+Llega una solicitud a piso 1 para el unico ascensor, mientras el ascensor está pasando por el piso 1 (por otro pedido anterior)
 El contexto debe ser que exista una "solicitud a piso 1"
 
 La propiedad esta representada por el sgte AFD

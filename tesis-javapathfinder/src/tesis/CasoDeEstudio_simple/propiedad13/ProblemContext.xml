@@ -13,7 +13,7 @@
 	        <transition from="1" to="2" labelEvent="runControlador" />
 	        <transition from="2" to="3" labelEvent="runPersona" />
 			<!-- una vez que esten todas los threads arrancados nos quedamos en un rulo
-			salimos solo por terminarPersona -->
+			salimos solo por terminoPersona -->
 <!--
 	        <transition from="3" to="3" labelEvent="detenerse" />
 	        <transition from="3" to="3" labelEvent="abrirPuertas" />
@@ -23,9 +23,10 @@
 	        <transition from="3" to="3" labelEvent="bajar" />
 		    <transition from="3" to="3" labelEvent="continuarSubir" />
 		    <transition from="3" to="3" labelEvent="continuarBajar" />
+		    <transition from="3" to="3" labelEvent="termineEstadiaPiso1" />
 		    <transition from="3" to="3" labelEvent="estoyEnPiso1" />
-		    <transition from="3" to="3" labelEvent="solicitudPiso1" />
-		    <transition from="3" to="3" labelEvent="atenderSolicitud" />
+		    <transition from="3" to="3" labelEvent="solicitudAscensorPiso1" />
+		    <transition from="3" to="3" labelEvent="atenderSolicitudPiso" />
 	    </transitions>
 	</SearchContext>
 </ProblemDefinition>

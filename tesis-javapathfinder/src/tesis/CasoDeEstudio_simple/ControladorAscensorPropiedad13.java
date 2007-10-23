@@ -43,9 +43,20 @@ class ControladorAscensorPropiedad13 extends ControladorAscensor {
 	 */
 	@Override
 	public void estoyEn(Ascensor a, int piso) {
-		switch (piso) {
-			case 1: estoyEnPiso1(); break;
+		if (piso==1) {
+			estoyEnPiso1();
+			super.estoyEn(a, piso);
+			termineEstadiaPiso1();
 		}
-		super.estoyEn(a, piso);
+		else {
+			super.estoyEn(a, piso);
+		}
+	}
+
+	/**
+	 * Método sólo para detectar, en la GlobalProperty si al terminar la estadía en el piso 1
+	 * no se atendió el pedido solicitado para ese piso
+	 */
+	private void termineEstadiaPiso1() {
 	}
 }
