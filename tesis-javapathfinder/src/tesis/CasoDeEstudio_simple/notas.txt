@@ -98,3 +98,23 @@ RS (20071019)
 
 - 3 personas, 3 requests (de P1), 1 ascensor
 inicio 11:42:20 ...
+
+
+
+- Solicitud A0 piso 1
+ solicitud a piso 1...
+ 
+ estoyEnPiso1 -> estoyEnPiso2 -> ERR
+ (lo correcto seria estoyEnPiso1 -> atendersolicitud -> detenerse -> AP -> CP etc...)
+
+- Solicitud A0 piso 1 y luego piso 4
+ solicitud a piso 1...
+ (debemos escribir un ctx q permita q las dos llamadas se hagan consecutivas (ie sin nada en el medio))
+ solicitud a piso 4...
+
+ 
+ estoyEnPiso1 -> estoyEnPiso2 -> ERR
+ (lo correcto seria estoyEnPiso1 -> atendersolicitud -> detenerse -> AP -> CP etc...)
+
+ estoyEnPiso4 -> detenerse -> ERR
+ (lo correcto seria estoyEnPiso4 -> atenderSolicitud -> AP -> CP etc...)
