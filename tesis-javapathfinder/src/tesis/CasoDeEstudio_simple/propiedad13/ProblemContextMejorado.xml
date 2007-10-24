@@ -16,8 +16,10 @@
 	        <transition from="1" to="2" labelEvent="runControlador" />
 	        <transition from="2" to="preambulo" labelEvent="runPersona" />
 			<!-- 
-			una vez que esten todas los threads arrancados nos quedamos en un rulo
-			salimos solo por solicitudAscensorPiso1
+			Una vez que esten todas los threads arrancados nos quedamos en un rulo, 
+			el unico evento q nos interesa q se quede en el rulo es subir pq es el caso q nos 
+			interesa revisar (desde PB esta subiendo al 4to piso cuando le llega la solic del 1ro).
+			Salimos solo por solicitudAscensorPiso1
 			-->
 	        <transition from="preambulo" to="preambulo" labelEvent="subir" />
 			<!-- 
