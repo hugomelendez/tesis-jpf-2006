@@ -12,7 +12,10 @@
 	        <transition from="0" to="1" labelEvent="runAscensor" />
 	        <transition from="1" to="2" labelEvent="runControlador" />
 	        <transition from="2" to="3" labelEvent="runPersona" />
-			<!-- una vez que esten todas los threads arrancados -->
+			<!-- 
+			una vez que esten todas los threads arrancados 
+			no interesa podar excepto por terminoPersona
+			-->
 	        <transition from="3" to="3" labelEvent="detenerse" />
 	        <transition from="3" to="3" labelEvent="abrirPuertas" />
 	        <transition from="3" to="3" labelEvent="cerrarPuertas" />
