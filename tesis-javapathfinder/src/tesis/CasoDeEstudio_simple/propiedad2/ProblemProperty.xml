@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
+	<GlobalProperty >
+	    <states>
+	        <state label="enPiso" start="true" />
+	        <state label="dejandoPiso" />
+	        <state label="ERROR" final="true" />
+	    </states>
+	    <transitions>
+	        <transition from="enPiso" to="dejandoPiso" labelEvent="saliDePiso" />
+	        <transition from="dejandoPiso" to="enPiso" labelEvent="estoyEn" />
+	        <transition from="dejandoPiso" to="ERROR" labelEvent="abrirPuertas" />
+	        <!--<transition from="enPiso" to="ERROR" labelEvent="abrirPuertas" />-->
+	    </transitions>
+	</GlobalProperty>
+</ProblemDefinition>
