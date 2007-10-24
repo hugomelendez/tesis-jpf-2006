@@ -65,12 +65,20 @@ class Ascensor implements Runnable {
 	 */
 	private void moverse() {
 		while (estaEnMovimiento()) {
+			saliDePiso();
 			Helper.esperar(1);
 			synchronized (this) {
 				piso += (estaSubiendo()?1:-1);
 				controladorAscensor.estoyEn(this, piso);
 			}
 		}
+	}
+
+	/**
+	 * Agregado solo para detectar cuando se sale de un piso (relevante para la propiedad 2)
+	 *
+	 */
+	private void saliDePiso() {
 	}
 
 	// Setters
