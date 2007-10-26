@@ -11,11 +11,5 @@
 	    <event type="invoke" name="bajar" label="bajar" />
 	    <event type="invoke" name="terminoPersona" label="terminoPersona" />
 	    <event type="invoke" name="detenerse" label="detenerse" />
-
-	    <event type="invoke" name="atenderSolicitudPiso" label="atenderSolicitudPiso" />
-	    <event type="invoke" name="solicitudAscensorPiso1" label="solicitudAscensorPiso1" />
-	    <event type="invoke" name="estoyEnPiso1" label="estoyEnPiso1" />
-
-
 	</events>
 </ProblemDefinition>
