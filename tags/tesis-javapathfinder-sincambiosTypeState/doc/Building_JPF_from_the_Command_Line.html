@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type"
+        content="text/html; charset=us-ascii" />
+
+  <title>Building JPF from the Command Line</title>
+  <link rel="stylesheet"
+        type="text/css"
+        media="screen"
+        href="JPF_files/JPF-mod.css" />
+  <base target="_blank" />
+</head>
+
+<body>
+  <h1>Building JPF from the Command Line</h1>
+
+  <p>The apache.org Ant system is used to manually
+  build JPF. The toplevel JPF directory contains a build.xml file
+  with all required configuration. The Ant included with JPF is
+  recommended because (at the time of writing) support for the
+  latest JUnit tests requires an unversioned latest snapshot of
+  Ant.</p>
+  <p>The included Ant+JUnit can be accessed either with the
+  shell script "<tt>build-tools/bin/ant</tt>" or with the top-level
+  class "<tt>RunAnt</tt>" (more portable).  In some examples we shall
+  use one and some the other, but the two are usually interchangeable.</p>
+  <p>First, to list supported targets, type</p>
+
+  <p class="code">
+&gt; build-tools/bin/ant -projecthelp
+Buildfile: build.xml
+Main targets:
+  compile              compile JPF and its specific (modeled) environment libraries
+  compile-env-jpf      compile MJI model classes
+  compile-env-jvm      compile MJI native peer classes
+  compile-examples     compile examples
+  compile-ext          compile optional extension classes
+  compile-jpf          compile JPF core classes
+  compile-tests        compile all the tests for JPF
+  dist                 generate the compressed distribution tar files
+  docs-javadoc         create javadoc documentation
+  init              common task/target initialization
+  jar                  create jar archives for JPF, its JVM and their
+                       environment models
+  run-tests            run all JPF tests
+Default target: compile</p>
+
+  <p>This target set might change in the future. To erase the
+  jpf/build directory, and start from a clean directory structure,
+  type</p>
+
+  <p class="code">&gt; build-tools/bin/ant clean</p>
+
+  <p>If junit is installed, the preferred way to build from scratch is</p>
+
+  <p class="code">&gt; java RunAnt run-tests
+Buildfile: build.xml
+
+init:
+     [echo] ****************** JPF build system ********************
+     [echo] current dir:      /home/peterd/javapathfinder-trunk
+     [echo] user home dir:    /home/peterd
+     [echo] classpath:        .:/home/peterd/javapathfinder-trunk/build-tools/lib/ant-swing.jar:... ...
+     [echo]           
+     [echo] java version:     1.5.0_06
+     [echo] ant version:      Apache Ant version 1.7alpha compiled on June 16 2006
+     [echo] OS:               Linux-i386-2.4.21-40.ELsmp
+     [echo]     
+...
+
+     [echo] --- checking for external libraries..
+     [echo] JUnit found with Ant.
+     [echo] JUnit available for build.
+
+compile-jpf:
+    [javac] Compiling 344 source files to /home/peterd/javapathfinder-trunk/build/jpf
+
+...
+
+compile-tests:
+    [javac] Compiling 55 source files to /home/peterd/javapathfinder-trunk/build/test
+
+run-tests:
+     [echo] --- running Junit tests from build/test..
+    [junit] Running gov.nasa.jpf.jvm.TestArrayJPF
+    [junit] Tests run: 6, Failures: 0, Errors: 0, Time elapsed: 3.518 sec
+
+...
+
+    [junit] Running gov.nasa.jpf.mc.TestVMDeadlockJPF
+    [junit] Tests run: 4, Failures: 0, Errors: 0, Time elapsed: 3.141 sec
+
+BUILD SUCCESSFUL
+Total time: 1 minute 25 seconds</p>
+
+
+  <p>This should compile all sources (without
+  examples) and then run the regression test suite.</p>
+</body>
+</html>

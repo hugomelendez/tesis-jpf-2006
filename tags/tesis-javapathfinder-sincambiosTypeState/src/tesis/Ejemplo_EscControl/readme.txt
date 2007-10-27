@@ -1,0 +1,1 @@
+RS: Modelo utilizado para ejemplificar en la monografía, la aplicación de Escenarios de Control

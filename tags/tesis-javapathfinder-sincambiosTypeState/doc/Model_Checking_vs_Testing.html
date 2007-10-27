@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type"
+        content="text/html; charset=us-ascii" />
+
+  <title>Model Checking vs. Testing</title>
+  <link rel="stylesheet"
+        type="text/css"
+        media="screen"
+        href="JPF_files/JPF-mod.css" />
+  <base target="_blank" />
+</head>
+
+<body>
+  <h1>Model Checking vs. Testing</h1>
+
+  <p>What can JPF do that cannot be achieved with
+  normal testing? JPF can simulate non-determinism. Certain aspects
+  like scheduling sequences cannot be controlled by a test driver,
+  and require help from the execution environment (VM). Other
+  sources of non-determinism like random input data are supported
+  with special APIs which can significantly ease the creation of
+  test drivers. Simulating non-determinism requires more than just
+  the systematic generation of all non-deterministic choices. Two
+  capabilities come into play to make this work: backtracking and
+  state matching.</p>
+
+  <p><b>(1) Backtracking</b> means that JPF can restore previous
+  execution states, to see if there are unexplored choices left.
+  For instance, if JPF reaches a program end state, it can walk
+  backwards to find different possible scheduling sequences that
+  have not been executed yet. While this theoretically can be
+  achieved by re-executing the program from the beginning,
+  backtracking is a much more efficient mechanism if state storage
+  is optimized</p>
+
+  <p><b>(2) State Matching</b> is another key mechanism to avoid
+  unnecessary work. The execution state of a program mainly
+  consists of heap and thread-stack snapshots. While JPF executes,
+  it checks every new state if it already has seen an equal one, in
+  which case there is no use to continue along the current
+  execution path, and JPF can backtrack to the nearest non-explored
+  non-deterministic choice</p>
+
+  <p>In theory, explicit state model checking is a
+  rigorous method - all choices are explored, if there is any
+  defect, it will be found. Unfortunately, software model checking
+  can only provide this rigor for reasonably small programs
+  (usually &lt;10,000 loc), since the number of states rapidly
+  exceeds computational limits for complex programs. This problem
+  is known as state space explosion, and can be easily illustrated
+  by the number of possible scheduling sequences for a given number
+  of processes consisting of atomic sections.</p>
+  
+  <p class="big_diagram"><img src="JPF_files/interleavings.png"/><br>
+      Figure 1: state space explosion due to threat interleavings</p>
+
+  <p>JPF addresses this scalability problem in three
+  ways: (1) configurable search strategies, (2) reducing the number
+  of states, and (3) reducing state storage costs.</p>
+
+  <p><b>(1) Configurable search strategies</b> try to solve the problem that the
+  whole state space cannot be searched by directing the search so
+  that defects are found quicker, i.e. with less computational
+  resources. This basically means to use the model checker not as a
+  'proof-', but as a 'debugging-' tool, which is mostly achieved by
+  using heuristics to order and filter the set of potential
+  follow-on states according to some property related relevance.
+  Computation of heuristic values is delegated to a user configured
+  class, i.e. is not hardcoded in the JPF core</p>
+
+  <p><b>(2) Reducing the number of states</b> that have to be stored is the
+  preferred way to improve scalability, and is supported by a
+  number of mechanisms</p>
+
+  <ul>
+    <li><b>Heuristic Choice Generators</b> means the set of choices in a
+    certain state does not have to be complete. Consider a
+    non-deterministic input float value with a threshold behavior.
+    The float type makes it impossible to generate all possible
+    values anyways, but in terms of checking the system behavior it
+    might be sufficient to try only three choices: less than,
+    equal, and greater than the threshold. The important capability
+    is to make these heuristics configurable so that they can be
+    easily extended or adapted to specific application
+    needs.</li>
+
+    <li><b>Partial Order Reduction</b> is the most important mechanism
+    to reduce the state space in concurrent programs. The goal is to only
+    consider context switches at operations that can have effects across
+    thread boundaries, like PUTFIELD instructions on objects that are
+    accessible from different threads. The challenge is to do this
+    on-the-fly, without requiring error-prone user instrumentation.
+    JPFs partial order reduction makes use of the Java bytecodes,
+    and reachability information obtained from the garbage
+    collector, to achieve this</li>
+
+    <li><b>Host VM Execution</b> - JPF is a JVM that is written in Java,
+    i.e. it runs on top of a host VM. For components that are not
+    property-relevant, it makes sense to delegate the execution from the
+    state-tracked JPF into the non-state tracked host VM. The corresponding
+    Model Java Interface (MJI) mechanism is especially suitable to handle
+    IO simulaion and other standard library
+    functionality.</li>
+
+    <li><b>State Abstraction</b> - per default, JPF stores all heap,
+    stack and thread changes, which is sometimes a huge overhead if it
+    comes to deciding whether two execution states differ from the
+    perspective of a certain application. For example, state matching
+    based on shape analysis of data structures can yield significant state
+    reduction, and has been successfully used in recent JPF
+    applications</li>
+  </ul>
+
+  <p><b>(3) Reducing state storage</b> costs refers mainly to
+  implementation features of the JPF core. While not being the
+  primary measure to deal with state space explosion, efficient
+  state storage is mandatory for a software model checker. Since
+  state transitions usually result in a small amount of changes
+  (e.g. a single stack frame), JPF uses a technique called state
+  collapsing to bring down the per-state memory requirements by
+  storing indexes into state-component specific pools (hash tables)
+  instead of directly storing changed values</p>
+
+  <p>To compare states, JPF extends the state
+  collapsing mechanism by hashing the resulting pool-index vectors,
+  using a single, consecutive number as a unique state-id, thus
+  reducing state equality checks to single integer comparisons. The
+  hash mechanism (state set implementation instead of hash table)
+  is configurable, using MD5 as default. The 128 bit hash values
+  make it much more likely to run out of state memory before ever
+  encountering a hash collision.</p>
+</body>
+</html>

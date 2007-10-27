@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type"
+        content="text/html; charset=us-ascii" />
+
+  <title>Coding Conventions</title>
+  <link rel="stylesheet"
+        type="text/css"
+        media="screen"
+        href="JPF_files/JPF-mod.css" />
+  <base target="_blank" />
+</head>
+
+<body>
+  <h1>Coding Conventions</h1>
+
+  <p>JPF is an open system. In order to keep the
+  source format reasonably consistent, we strive to keep the
+  following minimal set of conventions</p>
+
+  <ul>
+    <li>2 space indentation (no tabs)</li>
+    <li>opening brackets in same line (class
+    declaration, method declaration, control statements)</li>
+    <li>no spaces after opening '(', or before closing ')'</li>
+    <li>method declaration parameters indent on column</li>
+    <li>all files start with copyright and license information</li>
+    <li>all public class and method declarations
+    have preceding Javadoc comments</li>
+  </ul>
+
+  <p>The following code snippet illustrates these rules.</p>
+
+  <p class="code">
+/* &lt;copyright notice goes here&gt;
+ * &lt;license referral goes here&gt;
+ */
+
+/**
+ * this is my class declaration example
+ */
+    
+public class MyClass {
+   
+  /**
+   * this is my public method example
+   */
+  public void foo (int arg1, int arg2,
+                   int arg3) {
+    if (bar) {
+      ..
+    } else {
+      ..
+    }
+  }
+   ..
+}</p>
+
+  <p>For convenience reasons, we include a jalopy.xml configuration
+  file to format sources, but do not support it as a separate Ant
+  target, to avoid accidental reformatting of a huge amount of CVS
+  sources, and minimize dependencies for libraries required by the
+  build process.</p>
+
+  <p>We consider modularity to be of greater
+  importance than source format. With its new configuration scheme,
+  there is no need to introduce dependencies of core classes
+  towards optional extensions anymore. If you add something that is
+  optional, and does not seamlessly fit into an existing directory,
+  keep it separate by adding new directories. The core JPF classes
+  should not contain any additional dependencies to external
+  code.</p>
+</body>
+</html>

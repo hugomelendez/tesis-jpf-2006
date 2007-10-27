@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
+	<TypeStateProperty class="tesis.Ejemplo_11.AbstractFather">
+	    <states>
+	        <state label="AF0" start="true" />
+	        <state label="AF1" />
+	        <state label="AF999" final="true" />
+	    </states>
+	    <transitions> 
+	        <transition from="AF0" to="AF1" labelEvent="add" />
+	        <transition from="AF1" to="AF999" labelEvent="add" />
+	    </transitions>
+	</TypeStateProperty>
+	<TypeStateProperty class="tesis.Ejemplo_11.ConcreteFather">
+	    <states>
+	        <state label="CF20" start="true" />
+	        <state label="CF21" />
+	        <state label="CF2999" final="true" />
+	    </states>
+	    <transitions> 
+	        <transition from="CF20" to="CF21" labelEvent="add" />
+	        <transition from="CF21" to="CF2999" labelEvent="add" />
+	    </transitions>
+	</TypeStateProperty><GlobalProperty>
+	    <states>
+	        <state label="0ADD (INI)" start="true" />
+	        <state label="1ADD" />
+	        <state label="2ADD (FIN)" final="true" />
+	    </states>
+	    <transitions> 
+	        <transition from="0ADD (INI)" to="1ADD" labelEvent="add" />
+	        <transition from="1ADD" to="2ADD (FIN)" labelEvent="add" />
+	    </transitions>
+	</GlobalProperty>
+</ProblemDefinition>

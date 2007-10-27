@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type"
+        content="text/html; charset=us-ascii" />
+
+  <title>The State of Affairs</title>
+  <link rel="stylesheet"
+        type="text/css"
+        media="screen"
+        href="JPF_files/JPF-mod.css" />
+  <base target="_blank" />
+</head>
+
+<body>
+  <h1>The State of Affairs</h1>
+
+  <p>JPF is now in its fifth year of active
+  development, but is still a moving target. There are a number of
+  ongoing and planned areas of work:</p>
+
+  <p><b>(1) Structural cleanup</b> - JPF started as a
+  research tool, and has seen many contributors with different
+  goals over time. As a result, its internal structure still needs
+  to be re-factored, especially with respect to encapsulation of
+  core classes that are related to state management. There are
+  still too many remaining direct field accesses.</p>
+
+  <p><b>(2) Enhanced extensibility</b> - while three major
+  extension mechanisms (Listeners, MJI and ChoiceGenerators) are already in
+  place, application- and property- specific state abstractions still need
+  to be done.</p>
+  <p>In many cases, state hashing based on complete heap and thread
+  information is too expensive or not even suitable
+  (over-approximation) to identify property relevant execution
+  paths. The complete state is only required for backtracking
+  purposes, but not to prune "visited" parts of the state graph.
+  Implementing a suitable interface to generate state abstractions
+  (e.g. based on data structure shapes) still remains to be done.</p>
+
+  <p><b>(3) Library abstractions</b> - JPF executes bytecode,
+  i.e. analyses not only the application under test, but also all
+  library code used by it, which often significantly exceeds the
+  application size. For many properties, library code is not of
+  interest, and should not be state tracked. The Model Java
+  Interface (MJI) provides a suitable mechanism to replace real
+  library code with abstractions that can be executed outside of
+  the JPF VM, e.g. to model IO operations. Using MJI to abstract
+  standard Java libraries is a major step towards applying JPF to
+  real Java production code.</p>
+
+  <p><b>(4) Execution cost and time model</b> - in its
+  current state, JPF does not model time, which is a prerequisite
+  to adapt JPF to Realtime Java. In order to introduce time,
+  execution costs need to be approximated. This can be done in
+  various degrees of fidelity (interpreter, JIT, AOT), and needs to
+  be adaptable to different target platforms (architectures, OSes),
+  and hence should be kept outside of the JPF kernel, using VM
+  listeners that monitor bytecode execution to compute and store
+  time as a state-extension. First prototypes of corresponding
+  listeners have already been implemented.</p>
+</body>
+</html>

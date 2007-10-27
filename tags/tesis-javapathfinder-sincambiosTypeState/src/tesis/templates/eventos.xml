@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
+	<TypeStateProperty class="tesis.Ejemplo.Canal">
+	    <estados>
+	        <estado label="0" start="true" />
+	        <estado label="1" />
+	        <estado label="999" final="true" />
+	    </estados>
+	    <transiciones>
+	        <transicion from="0" to="1" labelEvent="C" />
+	        <transicion from="1" to="0" labelEvent="O" />
+	        <transicion from="1" to="1" labelEvent="C" />
+	        <transicion from="1" to="999" labelEvent="W" />
+	    </transiciones>
+	</TypeStateProperty>
+</ProblemDefinition>

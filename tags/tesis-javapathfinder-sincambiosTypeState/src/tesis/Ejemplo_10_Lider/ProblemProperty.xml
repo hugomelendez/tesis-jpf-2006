@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
+	<!-- No puede haber 2 winners -->
+	<!--
+	<GlobalProperty>
+	    <states>
+	        <state label="0" start="true" />
+	        <state label="1" />
+	        <state label="999" final="true" />
+	    </states>
+	    <transitions>
+	        <transition from="0" to="1" labelEvent="W" />
+	        <transition from="1" to="999" labelEvent="W" />
+	    </transitions>
+	</GlobalProperty>
+	-->
+	<!-- 
+	Debe haber al menos 1 winner 
+	0: INIT	-> 1
+	1: END	-> 999
+	   W	-> 2
+	2: rulo
+	-->
+	<GlobalProperty>
+	    <states>
+	        <state label="0" start="true" />
+	        <state label="1" />
+	        <state label="2" />
+	        <state label="999" final="true" />
+	    </states>
+	    <transitions>
+	        <transition from="0" to="1" labelEvent="INIT" />
+	        <transition from="1" to="2" labelEvent="W" />
+	        <transition from="1" to="999" labelEvent="END" />
+	    </transitions>
+	</GlobalProperty>
+</ProblemDefinition>

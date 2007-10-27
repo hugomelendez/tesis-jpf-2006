@@ -1,0 +1,21 @@
+<ProblemDefinition>
+	<GlobalProperty>
+	    <states>
+	        <state label="0" start="true" />
+	    </states>
+	    <transitions>
+	    </transitions>
+	</GlobalProperty>
+	<TypeStateProperty class="tesis.Ejemplo_zzRS_ERRORJPF.Canal">
+	    <states>
+	        <state label="cerrado" start="true" />
+	        <state label="abierto" />
+	        <state label="ERROR" final="true" />
+	    </states>
+	    <transitions>
+	        <transition from="cerrado" to="abierto" labelEvent="OPEN" />
+	        <transition from="abierto" to="cerrado" labelEvent="CLOSE" />
+	        <transition from="cerrado" to="ERROR" labelEvent="WRITE" />
+	    </transitions>
+	</TypeStateProperty>
+</ProblemDefinition>

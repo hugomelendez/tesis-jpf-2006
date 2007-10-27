@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
+	<events>
+	    <event type="invoke" name="connect" label="CONN" />
+	    <event type="invoke" name="getInputStream" label="IN" />
+	    <event type="invoke" name="getOutputStream" label="OUT" />
+	    <event type="invoke" name="close" label="CLOSE" />
+	</events>
+</ProblemDefinition>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
+	<SearchContext mode="contexto">
+	    <states>
+	        <state label="s0" start="true" />
+	        <state label="sFinal" final="true" />
+	    </states>
+	    <transitions>
+			//No importa ningun evento
+	        <transition from="s0" to="s0" labelEvent="OPEN" />
+	        <transition from="s0" to="s0" labelEvent="WRITE" />
+	        <transition from="s0" to="s0" labelEvent="CLOSE" />
+	    </transitions>
+	</SearchContext>
+</ProblemDefinition>
