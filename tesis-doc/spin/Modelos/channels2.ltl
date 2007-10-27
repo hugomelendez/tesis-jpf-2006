@@ -1,9 +1,0 @@
-never {    /*  !([]accept1)  */
-T0_init:
-	if
-	:: (! ((accept1))) -> goto accept_all
-	:: (1) -> goto T0_init
-	fi;
-accept_all:
-	skip
-}
