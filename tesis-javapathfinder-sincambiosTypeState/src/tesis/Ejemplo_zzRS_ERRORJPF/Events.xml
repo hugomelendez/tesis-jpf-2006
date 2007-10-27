@@ -1,0 +1,7 @@
+<ProblemDefinition>
+	<events>
+	    <event type="invoke" name="open" label="OPEN" />
+	    <event type="invoke" name="write" label="WRITE" />
+	    <event type="invoke" name="close" label="CLOSE" />
+	</events>
+</ProblemDefinition>

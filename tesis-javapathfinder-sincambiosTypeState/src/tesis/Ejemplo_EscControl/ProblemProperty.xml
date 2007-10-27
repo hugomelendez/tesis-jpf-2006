@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
+	<GlobalProperty>
+	    <states>
+	        <state label="s0" start="true" />
+	        <state label="sWrite1" />
+	        <state label="sWrite2" />
+	        <state label="ERROR" final="true" />
+	    </states>
+	    <transitions>
+	        <transition from="s0" to="sWrite1" labelEvent="WRITE" />
+
+	        <transition from="sWrite1" to="s0" labelEvent="CLOSE" />
+	        <transition from="sWrite1" to="sWrite2" labelEvent="WRITE" />
+
+	        <transition from="sWrite2" to="sWrite1" labelEvent="CLOSE" />
+	        <transition from="sWrite2" to="ERROR" labelEvent="WRITE" />
+	    </transitions>
+	</GlobalProperty>
+</ProblemDefinition>
