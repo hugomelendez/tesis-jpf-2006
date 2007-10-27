@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>JPF News</title>
+    <link rel="stylesheet" type="text/css" media="screen"
+          href="JPF_files/JPF-mod.css" />
+    <base target="_blank">
+</head>
+<body>
+
+<h1>JPF News</h1>
+
+<ul>
+
+<li>06/30/06: JPF v4, finally! After a long period of silence due to
+other assignments, we finally pulled all the pieces together to get
+JPF4 out of the door. The major achievements are 
+<a href="ChoiceGenerators.html" target="content">ChoiceGenerators</a> and
+Java 5.0 compatibility, but there are many others (numerous bug fixes,
+reflection support, instruction interception etc.). Configurable state
+management (esp. matching) is now also in the works - the last missing extension
+mechanism. And while we were at it, a lot of the sources have been converted to
+use Java 5.0. Great work by our summer interns, esp. Peter Dillinger.</li>
+
+<li>24/02/06: Join the JPF community on Frappr:
+http://www.frappr.com/jpfusers</li>
+
+<li>10/21/05: the documentation is now readable HTML + CSS, which is
+not so nice for printing, but everybody can edit and add. The whole
+website (w/o experimental Wiki) is now in CVS, only the graphics
+sources (which are OmniGraffle *.graffle files) are not. Maybe we
+add them as SVGs at some point (but OminiGraffle doesn't load them
+yet).</li>
+
+<li>10/08/05: switched from MD5StateSet to Peter Dillinger's
+JenkinsStateSet, which is up to 25% faster on some (large) examples.
+Great contribution</li>
+
+<li>09/08/05: the data choice generators make their first appearance.
+Drop Verify.randomX(..) now</li>
+  
+<li>08/29/05: JPF should now be Java 1.5 compatible. There might be a
+few surprises left in the libraries, but the regression test suite
+builds and runs on J2SDK 1.5</li>
+
+<li>08/24/05: The JPF tutorial at <a
+href="http://cm.bell-labs.com/cm/cs/what/spin2005/">Spin 2005</a> drew
+quite a crowd, despite the late hour on the last conference day</li>
+
+<li>04/26/2005: Alast - JPF becomes the first NASA software opensource
+project that is hosted on SourceForge! External interest had grown
+enough that open sourcing just seemed to be the right step. JPF is still
+a moving target, there are exciting ideas to extend it, and so NASA took
+the bold step to not just open the sources, but to make further
+development a collaborative effort. We have a first! Read the <a
+href="http://www.nasa.gov/centers/ames/news/releases/2005/05_28AR.html">
+official press announcement</a>. May JavaPathFinder boldly explore from
+where no program has ever returned</li>
+
+<li>03/2005: The move to the new configuration and initialization scheme
+has been completed. Now everything is configured via a hierarchy of Java
+property files that can be overridden from the command line, eliminating
+the need to update a central option registry every time a new option is
+added in a remote part of the system. Read the <a
+href="$Configuring_JPF_Runtime_Options.html">online docu</a> to find out
+more.</li>
+
+<li>01/2005: The JPF Team will present a tool tutorial at the 12th
+International SPIN Software Model Checking workshop in San Francisco
+(August 2005). More details can be found <a
+href="http://cm.bell-labs.com/cm/cs/what/spin2005/">here</a></li>
+
+<li>11/2004: Fujitsu Labs of America successfully uses JPF to locate
+subtle concurrency errors in parts of their enterprise software</li>
+
+<li>08/2004: JPF Team receives a Certificate of Recognition for
+"creative development of technically significant software" from NASA's
+Inventions and Contributions board</li>
+
+<li>09/2003: <a href="$Search-_and_VMListeners.html">Search- and
+VMListeners</a> are added to the extension repertoire of JPF. Hopefully,
+this will put an end to ever extending JPF's core classes. Now you can
+add your own hyper-search algorithms and most favorite properties
+outside the critical core</li>
+
+<li>07/2003: The <a href="$The_Model_Java_Interface.html">Model Java
+Interface</a> (MJI - blame Peter for the bad name) is added to the code
+base. Now we can use the same mechanism for core class JPF interaction
+and library abstractions (saving states on the way). Mind-twisted things
+become possible with this</li>
+
+<li>06/2003: Here comes another award - NASA Office of Aerospace
+Technology awards JPF its "Turning Goals Into Reality" (TGIR)
+Engineering Innovation Award. <a
+href="http://itsr.cict.nasa.gov/ts_tgir-jpf.html" >Read on</a> </li>
+
+<li>04/2003: First <a
+href="http://sdg.lcs.mit.edu/pubs/2003/GSE.pdf">publication</a> on the
+introduction of symbolic execution on top of JPF</li>
+
+<li>04/2002: JPF tutorial at ETAPS 2002 in Grenoble, France</li>
+
+<li>02/2001: JPF is released by NASA for beta-testing and project
+collaborators</li>
+
+<li>09/2000: Main conference paper on JPF published at International
+Automated Software Engineering Conference ("Model Checking Programs").
+It was considered for the best paper award, but narrowly lost out - it
+has since become one of the most cited papers (>100) from the ASE
+conference series according to <a
+href="http://citeseer.ist.psu.edu/">citeseer</a>. Journal version of
+this <a
+href="http://csdl.computer.org/comp/proceedings/ase/2000/0710/00/07100003abs.htm">
+paper</a> is now available in the ASE journal</li>
+
+<li>07/2000: First JPF paper published at "Advances in Verification"
+workshop</li>
+
+<li>12/1999: JPF gets it first outing in public during a presentation at
+the LUACTS workshop in Johannesburg, South Africa</li>
+
+</ul>
+
+</body>
+</html>

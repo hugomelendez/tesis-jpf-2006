@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type"
+        content="text/html; charset=us-ascii" />
+
+  <title>History and Credits</title>
+  <link rel="stylesheet"
+        type="text/css"
+        media="screen"
+        href="JPF_files/JPF-mod.css" />
+  <base target="_blank" />
+</head>
+
+<body>
+  <h1>History and Credits</h1>
+
+  <p>JPF has come a long way from it's beginnings in 1999. Five major
+  phases stand out</p>
+
+  <ol>
+    <li>1999 Java-to-Promela translator (using</span> <a href=
+      "http://spinroot.com/spin/whatispin.html">Spin</a> as the 
+      model checker)</li>
+      
+    <li>2000 JVM / standalone checker</li>
+
+    <li>2003 design and implementation of extension structure</li>
+    
+    <li>2005 open sourcing of JPF</li>
+    
+    <li>2006 JPF4 with unified ChoiceGenerators and new execution engine</li>
+  </ol>
+
+  <p>During this time, many people and institutions
+  have worked on and with JPF. The majority of work is still done
+  by the Robust Software Engineering (RSE) group at the NASA Ames
+  Research Center. The incomplete list of key contributors (in
+  random order) includes:</p>
+
+  <p><a href="http://ase.arc.nasa.gov/people/havelund">Klaus Havelund</a>, who
+  had the original idea to create a software model checker based on
+  Java.</p>
+
+  <p><a href="http://ase.arc.nasa.gov/people/visser">Willem Visser</a> is
+  (together with Corina) the driving force behind the research part
+  of JPF. He continues to drive it into exciting new places like
+  symbolic model checking and test case generation.</p>
+
+  <p><a href="http://www-2.cs.cmu.edu/~flerda">Flavio Lerda</a> did
+  most of the work for phase 2, turning JPF from a translator into
+  a VM</p>
+
+  <p><a href="http://ase.arc.nasa.gov/people/pcorina">Corina Pasareanu</a>
+  continues to tweak JPF as a testbed for symbiosis of symbolic and explicit
+  state model checking</p>
+
+  <p><a href="http://ase.arc.nasa.gov/people/jpenix">John Penix</a>
+  fought through the NASA ranks to make the JPF open sourcing happen,
+  not at least succeeding based on his reputation as one of the few
+  people who actually have been able to find real defects with
+  software model checking</p>
+
+  <p><a href="http://ase.arc.nasa.gov/people/masoud">Masoud Mansouri-Samani</a>
+  shielded the developers from configuration and distribution management in
+  the dark ages of closed JPF sources</p>
+
+  <p><a href="http://www.schwartz-omalley.com/people/owen">Owen O'Malley</a>
+  showed his programming skills by implementing the MD5 based state hashing
+  (with an interesting red-black tree), a huge win in terms of state storage.
+  Owen also added some java.io library support based on MJI.</p>
+
+  <p><a href="http://ase.arc.nasa.gov/people/dimitra">Dimitra Giannakopoulou</a>
+  happily uses JPF to distribute her famous <i>LTL2Buechi</i> - automaton
+  translator (e.g. used in the LTSA system), which is so good that it remains
+  in the JPF distribution even while JPF's LTL search is currently
+  defunct. The translator can be built and used independently from
+  the rest of JPF.</p>
+
+  <p><a href="http://ase.arc.nasa.gov/people/mehlitz">Peter Mehlitz</a>
+  - the "refactorator", trying to fill the Java holes, coming up with
+  extension mechanisms, and getting all this into a manageable
+  package</p>
+
+  <p><a href="http://www.cc.gatech.edu/~peterd/">Peter Dillinger</a>
+  is a hacker (the good kind) who has made numerous random
+  simplifications, optimizations, bug fixes, code clean-ups and
+  migrations for JPF4.  Currently building new, flexible
+  infrastructure for matching visited states.</p>
+</body>
+</html>

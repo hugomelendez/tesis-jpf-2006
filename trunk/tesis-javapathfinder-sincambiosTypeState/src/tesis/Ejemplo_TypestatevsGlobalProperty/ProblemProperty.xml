@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
+	<TypeStateProperty class="tesis.Ejemplo_TypestatevsGlobalProperty.Canal">
+	    <states>
+	        <state label="closed" start="true" />
+	        <state label="opened" />
+	        <state label="ERROR" final="true" />
+	    </states>
+	    <transitions>
+	        <transition from="closed" to="opened" labelEvent="OPEN" />
+	        <transition from="closed" to="ERROR" labelEvent="CLOSE" />
+	        <transition from="closed" to="ERROR" labelEvent="WRITE" />
+
+	        <transition from="opened" to="closed" labelEvent="CLOSE" />
+	        <transition from="opened" to="opened" labelEvent="WRITE" />
+	        <transition from="opened" to="ERROR" labelEvent="OPEN" />
+	    </transitions>
+	</TypeStateProperty>
+</ProblemDefinition>

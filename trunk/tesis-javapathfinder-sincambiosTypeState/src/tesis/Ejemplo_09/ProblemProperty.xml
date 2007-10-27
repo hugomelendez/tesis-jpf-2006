@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
+	<TypeStateProperty class="java.util.Iterator">
+	    <states>
+	        <state label="0" start="true" />
+	        <state label="1" />
+	        <state label="999" final="true" />
+	    </states>
+	    <transitions> 
+	        <transition from="0" to="1" labelEvent="hasNext" />
+	        <transition from="1" to="0" labelEvent="next" />
+	        <transition from="0" to="999" labelEvent="next" />
+	    </transitions>
+	</TypeStateProperty>
+</ProblemDefinition>

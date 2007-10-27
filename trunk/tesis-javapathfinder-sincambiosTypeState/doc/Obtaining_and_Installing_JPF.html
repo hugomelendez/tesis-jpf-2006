@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type"
+        content="text/html; charset=us-ascii" />
+
+  <title>Obtaining and Installing JPF</title>
+  <link rel="stylesheet"
+        type="text/css"
+        media="screen"
+        href="JPF_files/JPF-mod.css" />
+  <base target="_blank" />
+</head>
+
+<body>
+  <h1>Obtaining and Installing JPF</h1>
+
+  <p>We are proud that JPF is now hosted on SourceForge - showing it's
+  true open source colors. To obtain it, please visit
+  <a href="http://sourceforge.net/projects/javapathfinder">
+  http://sourceforge.net/projects/javapathfinder</a>. Since JPF is work in
+  progress, we prefer distribution and update via the Subversion repository.
+  Detailed instructions for developer and anonymous access can be found
+  on<a href="http://sourceforge.net/svn/?group_id=136825">
+  http://sourceforge.net/svn/?group_id=136825</a></p>
+
+  <p>To checkout the project, use</p>
+  <p class="code">&gt;svn checkout https://svn.sourceforge.net/svnroot/javapathfinder/trunk</p>
+  
+  <p>To update, enter from within one of the javapathfinder directories</p>
+  <p class="code">&gt;svn update</p>
+  
+  <p>To commit (in case you are in the developer list and have a sourceforge account), use</p>
+  <p class="code">&gt;svn commit -m "<i>commit message</i>" </p>
+  
+  
+  <p>In order to build and test JPF, you need <a href="http://ant.apache.org/"><i>Ant</i></a>
+  and <a href="http://www.junit.org"><i>JUnit</i></a>. If you do not want to use the
+  scripts and versions that are provided with JPF, make sure you have set up your CLASSPATH
+  to contain both tools. As of Ant 1.6.5 and JUnit 4.1, this involves the following
+  environment settings:</p>
+
+  <p class="code">&gt;export PATH=$PATH:&lt;your-ant-dir&gt;/bin</p>
+
+  <p class="code">&gt;export CLASSPATH=&lt;your-ant-dir&gt;/lib/ant.jar:&lt;your-junit-dir&gt;/junit-4.1.jar</p>
+
+  <p><b>Please note</b> - for your convenience, we have added all required external
+  libraries and scripts to the <tt>build-tools</tt> directory, so you do not have to
+  install any of the external components.</p>
+
+  <p>Now you can proceed as described in section 
+  <a href="Building_JPF_from_the_Command_Line.html">
+  Building JPF from a Command Line</a>. 
+  For the impatient reader, this is mainly one command</p>
+
+  <p class="code">&gt;build-tools/bin/ant run-tests</p>
+
+  <p>or (especially for non-Unix folk)</p>
+
+  <p class="code">&gt;java RunAnt run-tests</p>
+
+  <p>which should compile the whole system and runs the regression
+  test suite with the provided Ant and JUnit versions.</p>
+</body>
+</html>
