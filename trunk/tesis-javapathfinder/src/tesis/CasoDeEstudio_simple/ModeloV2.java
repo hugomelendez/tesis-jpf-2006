@@ -1,8 +1,8 @@
 package tesis.CasoDeEstudio_simple;
 
 class ModeloV2 {
-	private final static int CANT_PERSONAS = 1;
-	public final static int CANT_ASCENSORES = 1;
+	private final static int CANT_PERSONAS = 3;
+	public final static int CANT_ASCENSORES = 2;
 	
 	Ascensor[] ascensores;
 	ControladorAscensor ca;
@@ -54,12 +54,12 @@ class ModeloV2 {
 		Ascensor a1 = new Ascensor("a1");
 		Thread tA1 = new Thread(a1);
 
-//		Ascensor a2 = new Ascensor("a2");
-//		Thread tA2 = new Thread(a2);
+		Ascensor a2 = new Ascensor("a2");
+		Thread tA2 = new Thread(a2);
 
 		Ascensor[] ascensores = new Ascensor[CANT_ASCENSORES];
 		ascensores[0] = a1;
-//		ascensores[1] = a2;
+		ascensores[1] = a2;
 
 		ControladorAscensor ca = new ControladorAscensor(ascensores);
 		Thread tCA = new Thread(ca);
@@ -79,19 +79,15 @@ class ModeloV2 {
 		m.ascensores(ascensores);
 		m.controlador(ca);
 		p1.modelo(m);
-//		p2.modelo(m);
-//		pMatrix.modelo(m);
+		p2.modelo(m);
+		pMatrix.modelo(m);
 
-		//synchronized (m) {
-			tA1.start();
-//			m.wait();
-//		}
-
-		//tA2.start();
+		tA1.start();
+		tA2.start();
 		tCA.start();
 		tP1.start();
-//		tP2.start();
-//		tPMatrix.start();
+		tP2.start();
+		tPMatrix.start();
 		
 		m.coordinarFinEjecución();
 	}

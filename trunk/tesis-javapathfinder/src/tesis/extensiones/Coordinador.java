@@ -15,6 +15,87 @@ import java.io.IOException;
 import java.text.*;
 
 /**
+ * Contiene la tupla de objetos necesarios para la adminitración de los AFD TypeState
+ * Es decir, para cada AFD se le asocia la RAMA (estadoDesde-estadoHacia) en que se creó
+ * y en que se liberó, debido al ciclo de vida de su objeto OID asociado en la verificación
+ * 
+ * @author Roberto
+ */
+class AFDTrack {
+	private AutomataVerificacion afd;
+	private Integer oid;
+	private Integer creadoEstadoDesde;
+	private Integer creadoEstadoHacia;
+	private Integer liberadoEstadoDesde;
+	private Integer liberadoEstadoHacia;
+	private boolean activo;
+	private Stack<State> stackEstados; 
+	
+	public AFDTrack(AutomataVerificacion a, Integer o, Integer estadoDesde, Stack<State> st) {
+		afd = a;
+		oid = o;
+		creadoEstadoDesde = estadoDesde;
+		stackEstados = st;
+		activar();
+		
+		//TODO: mejorar esto
+		//parche para que no se rompa el Coordinador en el Advanced al preguntar por esto
+		liberadoEstadoDesde = -10; 
+	}
+
+	public Integer creadoEstadoHacia() {
+		return creadoEstadoHacia;
+	}
+
+	public void creadoEstadoHacia(Integer creadoEstadoHacia) {
+		this.creadoEstadoHacia = creadoEstadoHacia;
+	}
+
+	public Integer liberadoEstadoDesde() {
+		return liberadoEstadoDesde;
+	}
+
+	public void liberadoEstadoDesde(Integer liberadoEstadoDesde) {
+		this.liberadoEstadoDesde = liberadoEstadoDesde;
+	}
+
+	public Integer liberadoEstadoHacia() {
+		return liberadoEstadoHacia;
+	}
+
+	public void liberadoEstadoHacia(Integer liberadoEstadoHacia) {
+		this.liberadoEstadoHacia = liberadoEstadoHacia;
+	}
+
+	public boolean activo() {
+		return activo;
+	}
+
+	public void activar() {
+		activo = true;
+	}
+	public void desactivar() {
+		activo = false;
+	}
+
+	public AutomataVerificacion afd() {
+		return afd;
+	}
+
+	public Integer oid() {
+		return oid;
+	}
+
+	public Integer creadoEstadoDesde() {
+		return creadoEstadoDesde;
+	}
+
+	public Stack<State> stackEstados() {
+		return stackEstados;
+	}
+}
+
+/**
  * Coordinador entre todos los objetos
  * 
  * ConcreteMediator Implements cooperative behavior by coordinating Colleague
@@ -23,48 +104,49 @@ import java.text.*;
 public class Coordinador {
 	/**
 	 * Contiene los estados visitados hasta el momento
-	 * (cada estado es una composiciï¿½n de los estados de la VM y los AFDs)
+	 * (cada estado es una composición de los estados de la VM y los AFDs)
 	 */
-	private Hashtable<String, Integer> estadosVisitados = new Hashtable<String, Integer>();
+	private Hashtable<String, Integer> estadosVisitados;
 
-	private Stack<State> stackCaminoPreambulo = new Stack<State>();
-	private Stack<State> stackCaminoAFD = new Stack<State>();
-
-	//Por ahora no es necesario que conozca al Listener
-	//private Listener lsn;
+	private Stack<State> stackCaminoPreambulo;
+	private Stack<State> stackCaminoAFD;
 
 	/**
-	 * Contiene las asociaciones de Clase con TypeStatePropertyTemplate
-	 */
-	private Hashtable<String, TypeStatePropertyTemplate> htClaseAFD = new Hashtable<String, TypeStatePropertyTemplate>();
-	/**
-	 * Contiene las asociaciones de OID con AFD
-	 */
-	private Hashtable<Integer, AutomataVerificacion> htOIDAFD = new Hashtable<Integer, AutomataVerificacion>();
-	/**
-	 * Contiene la colecciï¿½n de caminos (stack) de cada AFD de instancia
-	 * (para soportar los backtracks de la JVM)
-	 */
-	private Hashtable<Integer, Stack<State>> htOIDStack = new Hashtable<Integer, Stack<State>>();
-	/**
-	 * Contiene los AFDs que estï¿½n VIOLADOS
-	 */
-	//private Hashtable<String, AutomataVerificacion> htAFDViolados = new Hashtable<String, AutomataVerificacion>();
-
-	/**
-	 * OID de la ï¿½ltima ejecuciï¿½n de un VirtualInvocation de mï¿½todo
+	 * OID de la última ejecución de un VirtualInvocation de método
 	 * TODO Tesis: Mejorar el manejo de este id especial
 	 */
 	private int iOIDUltimaEjecucion = -1;
 
-	private AutomataVerificacion afd;
+	//GlobalProperty
+	private AutomataVerificacion afdGlobalProperty;
+	/**
+	 * Contiene la lista de todos los AFD TypeState con sus datos de tracking
+	 */
+	private LinkedList<AFDTrack> listaAFDTrack;
+
 	private DFSearchTesis search;
 	private ContextoBusqueda contexto;  //  @jve:decl-index=0:
 	private EventBuilder evb;  //  @jve:decl-index=0:
-
 	private static final int MODO_PREAMBULO = 0; 
 	private static final int MODO_CONTEXTO = 1;
 	private int modo = MODO_PREAMBULO;
+
+	private int estadoAnteriorJPF;
+	
+	/**
+	 * Contiene las asociaciones de Clase con TypeStatePropertyTemplate
+	 */
+	private Hashtable<String, TypeStatePropertyTemplate> htClaseAFD;
+
+	public Coordinador() {
+		estadosVisitados = new Hashtable<String, Integer>();
+		stackCaminoPreambulo = new Stack<State>();
+		stackCaminoAFD = new Stack<State>();
+		listaAFDTrack = new LinkedList<AFDTrack>();
+		htClaseAFD = new Hashtable<String, TypeStatePropertyTemplate>();
+		estadoAnteriorJPF = -1;
+	}
+	
 	
 	/**
 	 * Verifica si el automata GLOBAL o los AFDs x Instancia
@@ -76,15 +158,14 @@ public class Coordinador {
 	public boolean propiedadViolada() {
 		boolean res = false;
 		
-		if (htOIDAFD.size() > 0) {
-			Iterator<AutomataVerificacion> it = htOIDAFD.values().iterator();
-			while (it.hasNext() && !res) {
-				AutomataVerificacion afdOID = it.next();
-				res = afdOID.estadoFinal();
-			}
+		//Se recorren todos los AFDs para ver si hay alguno violado (no importa si está activo o no,
+		//porque hay que mostrar la VIOLACION por más que se haya eliminado el objeto asociado)
+		for (Iterator<AFDTrack> iterator = listaAFDTrack.iterator(); iterator.hasNext() && !res;) {
+			AFDTrack afdTrack = (AFDTrack) iterator.next();
+			res = afdTrack.afd().estadoFinal();
 		}
 		
-		return afd.estadoFinal() || res;
+		return afdGlobalProperty.estadoFinal() || res;
 	}
 
 	/**
@@ -107,15 +188,18 @@ public class Coordinador {
 					}
 					else {
 						//Global Property
-						afd.consumir(e);
-						escribirLog(afd);
+						afdGlobalProperty.consumir(e);
+						escribirLog(afdGlobalProperty);
 
 						//TypeStateProperty/s
 						if (iOIDUltimaEjecucion != -1) {
-							if (htOIDAFD.containsKey(iOIDUltimaEjecucion)) {
-								AutomataVerificacion afdOID = (AutomataVerificacion) htOIDAFD.get(iOIDUltimaEjecucion);
-								afdOID.consumir(e);
-								escribirLog(afdOID);
+							//Se recorren todos los AFDs para ver si hay alguno activo que aplique al evento
+							for (Iterator<AFDTrack> iterator = listaAFDTrack.iterator(); iterator.hasNext();) {
+								AFDTrack afdTrack = (AFDTrack) iterator.next();
+								if (afdTrack.activo() && afdTrack.oid()==iOIDUltimaEjecucion) {
+									afdTrack.afd().consumir(e);
+									escribirLog(afdTrack.afd());
+								}
 							}
 							iOIDUltimaEjecucion = -1;
 						}
@@ -128,21 +212,42 @@ public class Coordinador {
 					escribirLog(contexto);
 	
 					//Global Property
-					afd.consumir(e);
-					escribirLog(afd);
+					afdGlobalProperty.consumir(e);
+					escribirLog(afdGlobalProperty);
 	
 					//TypeStateProperty/s
 					if (iOIDUltimaEjecucion != -1) {
-						if (htOIDAFD.containsKey(iOIDUltimaEjecucion)) {
-							AutomataVerificacion afdOID = (AutomataVerificacion) htOIDAFD.get(iOIDUltimaEjecucion);
-							afdOID.consumir(e);
-							escribirLog(afdOID);
+						//Se recorren todos los AFDs para ver si hay alguno activo que aplique al evento
+						for (Iterator<AFDTrack> iterator = listaAFDTrack.iterator(); iterator.hasNext();) {
+							AFDTrack afdTrack = (AFDTrack) iterator.next();
+							if (afdTrack.activo() && afdTrack.oid()==iOIDUltimaEjecucion) {
+								afdTrack.afd().consumir(e);
+								escribirLog(afdTrack.afd());
+							}
 						}
 						iOIDUltimaEjecucion = -1;
 					}
 				}
 			}
 		}
+	}
+
+	/**
+	 * Devuelve el estado actual JPF (sería el Desde de la rama procesada)
+	 * 
+	 * @return int
+	 */
+	private int estadoActualJPF() {
+		return search.getStateNumber();
+	}
+
+	/**
+	 * Devuelve el estado anterior JPF (usado para saber desde dónde se backtrackeó)
+	 * 
+	 * @return int
+	 */
+	private int estadoAnteriorJPF() {
+		return estadoAnteriorJPF;
 	}
 
 	/**
@@ -153,15 +258,12 @@ public class Coordinador {
 	public String estadoCompuestoAsString() {
 		String strRes = new String();
 		
-		strRes = search.getVM().getStateId() + ";";
-		strRes += afd.getEstadoActual();
+		strRes = estadoActualJPF() + ";";
+		strRes += afdGlobalProperty.getEstadoActual();
 		
-		if (htOIDAFD.size() > 0) {
-			Iterator<AutomataVerificacion> it = htOIDAFD.values().iterator();
-			while (it.hasNext()) {
-				AutomataVerificacion afdOID = it.next();
-				strRes = strRes + ";" + afdOID.getEstadoActual();
-			}
+		for (Iterator<AFDTrack> iterator = listaAFDTrack.iterator(); iterator.hasNext();) {
+			AFDTrack afdTrack = (AFDTrack) iterator.next();
+			strRes = strRes + ";" + afdTrack.afd().getEstadoActual() + "/activo=" + afdTrack.activo();
 		}
 		
 		return strRes;
@@ -169,31 +271,43 @@ public class Coordinador {
 
 	/**
 	 * El Search notifica al coordinador que se backtrackeo el arbol.
-	 * Backtrackea todos los AFDs (global y los de instancia) para que regresen al estado corresp.
+	 * Backtrackea todos los AFDs (global y TypeState) para que regresen al estado corresp.
 	 * al estado (JVM) al que se backtrackeo
+	 * Además, si haya algún AFD TypeState que se creó en la rama backtrackeada, se elimina físicamente
 	 */
 	public void stateBacktracked() {
 		stackCaminoPreambulo.pop();
 		contexto.irAEstado(stackCaminoPreambulo.peek());
  
 		stackCaminoAFD.pop();
-		afd.irAEstado(stackCaminoAFD.peek());
+		afdGlobalProperty.irAEstado(stackCaminoAFD.peek());
 
-		//Se backtrackea desde el stack correspondiente, el estado de c/AFD de instancia 
-		if (htOIDAFD.size() > 0) {
-			AutomataVerificacion afdOID;
-
-			Enumeration<Integer> enume = htOIDAFD.keys();
-			while (enume.hasMoreElements()) {
-				int oid = enume.nextElement();
-
-				afdOID = htOIDAFD.get(oid);
-				Stack<State> stkAfdOid = htOIDStack.get(oid);
-				stkAfdOid.pop();
-				afdOID.irAEstado(stkAfdOid.peek());
+		//Se recorren todos los AFDs para ver si hay alguno creado/liberado en la rama anterior
+		//y se le asigna tanto los estados Hacia, como el stack correspondiente
+		//si está activo, se lo backtrackea
+		for (Iterator<AFDTrack> iterator = listaAFDTrack.iterator(); iterator.hasNext();) {
+			AFDTrack afdTrack = (AFDTrack) iterator.next();
+		
+			//Todos los AFDs que se crearon en la rama que se acaba de backtrackear
+			//se eliminan físicamente
+			if (afdTrack.creadoEstadoDesde()==estadoActualJPF() && afdTrack.creadoEstadoHacia()==estadoAnteriorJPF()) {
+				listaAFDTrack.remove(afdTrack);
 			}
+			//Pongo else por optimización, ya se si se eliminó de la lista ya no importa 
+			else if (!afdTrack.activo() &&
+					afdTrack.liberadoEstadoDesde()==estadoActualJPF() && afdTrack.liberadoEstadoHacia()==estadoAnteriorJPF()) {
+				afdTrack.activar();
+			}
+
+			//Si está activo, se backtrackea a su estado correspondiente 
+			//Por ahora, no estamos discriminando si están inactivos o no
+//			if (afdTrack.activo()) {
+				afdTrack.stackEstados().pop();
+				afdTrack.afd().irAEstado(afdTrack.stackEstados().peek());
+//			}
 		}
 		
+		estadoAnteriorJPF = estadoActualJPF();
 		escribirLog("----- STATE-BACKTRACKED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoCompuestoAsString() + "-----");
 	}
 
@@ -203,27 +317,33 @@ public class Coordinador {
 	 */
 	public void stateAdvanced() {
 		stackCaminoPreambulo.push(contexto.getEstadoActual());
-		stackCaminoAFD.push(afd.getEstadoActual());
+		stackCaminoAFD.push(afdGlobalProperty.getEstadoActual());
 
-		//Se registran en el stack correspondiente, el estado de c/AFD de instancia 
-		if (htOIDAFD.size() > 0) {
-			AutomataVerificacion afdOID;
-
-			Enumeration<Integer> enume = htOIDAFD.keys();
-			while (enume.hasMoreElements()) {
-				int oid = enume.nextElement();
-
-				afdOID = htOIDAFD.get(oid);
-				Stack<State> stkAfdOid = htOIDStack.get(oid);
-				stkAfdOid.push(afdOID.getEstadoActual());
+		//Se recorren todos los AFDs para ver si hay alguno creado/liberado en la rama anterior
+		//y se le asigna tanto los estados Hacia, como el stack correspondiente
+		for (Iterator<AFDTrack> iterator = listaAFDTrack.iterator(); iterator.hasNext();) {
+			AFDTrack afdTrack = (AFDTrack) iterator.next();
+			
+			//La 2da guarda de estos IFs debería se siempre true, pero se agrega por consistencia
+			if (afdTrack.creadoEstadoHacia()==null && afdTrack.creadoEstadoDesde()==estadoAnteriorJPF()) {
+				afdTrack.creadoEstadoHacia(estadoActualJPF());
 			}
+			if (afdTrack.liberadoEstadoHacia()==null && afdTrack.liberadoEstadoDesde()==estadoAnteriorJPF()) {
+				afdTrack.liberadoEstadoHacia(estadoActualJPF());
+			}
+
+			//Se registran en el stack correspondiente, el estado de c/AFD de instancia
+			//Por ahora, no estamos discriminando si están inactivos o no
+			Stack<State> stkAfd = afdTrack.stackEstados();
+			stkAfd.push(afdTrack.afd().getEstadoActual());
 		}
+		estadoAnteriorJPF = estadoActualJPF();
 		
 		escribirLog("----- STATE-ADVANCED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoCompuestoAsString() + "-----");
 	}
 
 	public void setAfd(AutomataVerificacion afd) {
-		this.afd = afd;
+		this.afdGlobalProperty = afd;
 	}
 
 	/**
@@ -239,24 +359,28 @@ public class Coordinador {
 	 */
 	public void objetoCreado(JVM vm) {
 		String strClase = vm.getLastElementInfo().getClassInfo().getName();
-		Collection padres = padresDeClase(strClase);
+		Collection<String> padres = padresDeClase(strClase);
 		int cant=0;
 		
-		for (Iterator iter = padres.iterator(); iter.hasNext();) {
+		for (Iterator<String> iter = padres.iterator(); iter.hasNext();) {
 			strClase = (String)iter.next();
 			
 			if (htClaseAFD.containsKey(strClase)) {
 				TypeStatePropertyTemplate tpl = (TypeStatePropertyTemplate) htClaseAFD.get(strClase);
+				//OID asociado
+				Integer oid = vm.getLastElementInfo().getIndex();
+				
 				//Se crea el AFD correspondiente
 				AutomataVerificacion afd = new AutomataVerificacion(tpl);
-				htOIDAFD.put(vm.getLastElementInfo().getIndex(), afd);
-				
 				//Se crea su stack de estados (para backtrack) asociados
-				Stack<State> stkAfdOid = new Stack<State>();
-				htOIDStack.put(vm.getLastElementInfo().getIndex(), stkAfdOid);
+				Stack<State> stkAfd = new Stack<State>();
+				
+				AFDTrack afdTrack = new AFDTrack(afd, oid, estadoActualJPF(), stkAfd);
+				
+				listaAFDTrack.add(afdTrack);
 
 				if (cant<1) {
-					escribirLog("OBJETO CREADO. Type=" + vm.getLastElementInfo().getClassInfo().getName() + ", OID=" + vm.getLastElementInfo().getIndex());
+					escribirLog("OBJETO CREADO. Type=" + vm.getLastElementInfo().getClassInfo().getName() + ", OID=" + oid);
 				}
 				cant++;
 			}
@@ -291,17 +415,22 @@ public class Coordinador {
 	}
 	
 	/**
-	 * Determina si debe destruir un AFD asociado al objeto
+	 * Determina si debe desactivar un AFD asociado al objeto
 	 */
 	public void objetoLiberado(JVM vm) {
 		int iOID = vm.getLastElementInfo().getIndex();
 
-		if (htOIDAFD.containsKey(iOID)) {
-			//Se elimina el AFD de la colecciï¿½n y su stack de estados asociado
-			htOIDAFD.remove(iOID);
-			htOIDStack.remove(iOID);
+		//Se recorre toda la lista de AFDs
+		for (Iterator<AFDTrack> iterator = listaAFDTrack.iterator(); iterator.hasNext();) {
+			AFDTrack afdTrack = (AFDTrack) iterator.next();
 
-			escribirLog("OBJETO LIBERADO. OID=" + iOID);
+			//Si el AFD está asociado al objeto liberado y además está activo
+			//, se desactiva y se le marca el desde de la rama actual de JPF
+			if (afdTrack.oid()==iOID && afdTrack.activo()) {
+				afdTrack.desactivar();
+				afdTrack.liberadoEstadoDesde(estadoActualJPF());
+				escribirLog("OBJETO LIBERADO. OID=" + iOID);
+			}
 		}
 	}
 
@@ -318,8 +447,8 @@ public class Coordinador {
 	}
 
 	/**
-	 * Decide si hay que backtrackear la rama actual de la bï¿½squeda
-	 * en funciï¿½n de si se invalidï¿½ el contexto o si es estado actual ya es conocido  
+	 * Decide si hay que backtrackear la rama actual de la búsqueda
+	 * en funciï¿½n de si se invalidó el contexto o si es estado actual ya es conocido  
 	 * @return
 	 */
 	public boolean backtrackear() {

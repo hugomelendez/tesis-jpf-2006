@@ -5,22 +5,16 @@
 	    <event type="invoke" name="runPersona" label="runPersona" />
 	    <event type="invoke" name="runAscensor" label="runAscensor" />
 	    <event type="invoke" name="runControlador" label="runControlador" />
-
-	    <!--event type="invoke" name="abrirPuertas" label="abrirPuertas" />
-	    <event type="invoke" name="cerrarPuertas" label="cerrarPuertas" /-->
+	    <event type="invoke" name="abrirPuertas" label="abrirPuertas" />
+	    <event type="invoke" name="cerrarPuertas" label="cerrarPuertas" />
 	    <event type="invoke" name="subir" label="subir" />
 	    <event type="invoke" name="bajar" label="bajar" />
-	    <event type="invoke" name="continuarSubir" label="continuarSubir" />
-	    <event type="invoke" name="continuarBajar" label="continuarBajar" />
-
-	    <!--event type="invoke" name="detenerse" label="detenerse" /-->
-
-		<!-- para quedar fuera del ctx -->
+	    
+	    <!-- Para ver cómo no se destruye la TypeStateProperty, cuando se libera el ascensor
+	    	es necesario comentar el evento terminoPersona
+	    -->
 	    <event type="invoke" name="terminoPersona" label="terminoPersona" />
-
-	    <event type="invoke" name="estoyEnPiso1" label="estoyEnPiso1" />
-	    <event type="invoke" name="termineEstadiaPiso1" label="termineEstadiaPiso1" />
-	    <event type="invoke" name="solicitudAscensorPiso1" label="solicitudAscensorPiso1" />
-	    <event type="invoke" name="atenderSolicitudPiso" label="atenderSolicitudPiso" />
+	    
+	    <event type="invoke" name="detenerse" label="detenerse" />
 	</events>
 </ProblemDefinition>
