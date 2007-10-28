@@ -1,26 +1,19 @@
 <?xml version="1.0" ?>
 <ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
-	<GlobalProperty>
+  <TypeStateProperty class="tesis.CasoDeEstudio_simple.Ascensor" >
+<!--  <GlobalProperty>-->
 	    <states>
-	        <state label="preambulo" start="true" />
-	        <state label="inicial" />
-	        <state label="enPiso1" />
-	        <state label="atendiendoPiso1" />
+	        <state label="inicial" start="true" />
+	        <state label="puertasAbiertas" />
 	        <state label="ERROR" final="true" />
 	    </states>
 	    <transitions>
-	        <transition from="preambulo" to="inicial" labelEvent="solicitudAscensorPiso1" />
-	        <transition from="inicial" to="enPiso1" labelEvent="estoyEnPiso1" />
-
-	        <transition from="enPiso1" to="atendiendoPiso1" labelEvent="atenderSolicitudPiso" />
-	        <transition from="enPiso1" to="ERROR" labelEvent="termineEstadiaPiso1" />
-
-	        <transition from="atendiendoPiso1" to="preambulo" labelEvent="continuarSubir" />
-	        <transition from="atendiendoPiso1" to="preambulo" labelEvent="continuarBajar" />
-	        <transition from="atendiendoPiso1" to="preambulo" labelEvent="subir" />
-	        <transition from="atendiendoPiso1" to="preambulo" labelEvent="bajar" />
-
+	        <transition from="inicial" to="puertasAbiertas" labelEvent="abrirPuertas" />
+	        <transition from="puertasAbiertas" to="inicial" labelEvent="cerrarPuertas" />
+	        <transition from="puertasAbiertas" to="ERROR" labelEvent="subir" />
+	        <transition from="puertasAbiertas" to="ERROR" labelEvent="bajar" />
 	    </transitions>
-	</GlobalProperty>
+	</TypeStateProperty>
+<!--  </GlobalProperty>-->
 </ProblemDefinition>
