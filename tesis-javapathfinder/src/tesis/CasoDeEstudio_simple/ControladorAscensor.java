@@ -10,7 +10,7 @@ import java.util.Hashtable;
  *  
  * @author Roberto
  */
-class ControladorAscensor implements Runnable {
+public class ControladorAscensor implements Runnable {
 	private Object miMonitor;
 	
 	// Altura del "edificio"
