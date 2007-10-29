@@ -9,6 +9,10 @@
 	        <state label="atendiendoPiso1" />
 	        <state label="ERROR" final="true" />
 	    </states>
+		<!--
+		Esta propiedad global, contiene metodos de Ascensor y Controlador, por ende se puede verificar solo 
+		para modelos con un Ascensor
+		-->
 	    <transitions>
 	        <transition from="preambulo" to="inicial" labelEvent="solicitudAscensorPiso1" />
 	        <transition from="inicial" to="enPiso1" labelEvent="estoyEnPiso1" />
