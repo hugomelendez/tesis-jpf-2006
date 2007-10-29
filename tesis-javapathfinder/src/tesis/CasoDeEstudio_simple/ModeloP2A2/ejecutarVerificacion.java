@@ -15,5 +15,8 @@ public class ejecutarVerificacion {
 
 		//Propiedad 13
 		//Esta propiedad sólo funciona para 1 ASCENSOR!
+
+		// Verificacion solo JPF
+		VerificationLauncher.execute("tesis.CasoDeEstudio_simple.ModeloP2A2.Modelo");
 	}
 }
