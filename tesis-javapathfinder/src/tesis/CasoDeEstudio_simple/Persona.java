@@ -37,16 +37,18 @@ public class Persona implements Runnable {
 			controlador.solicitudAscensor(as[0], 2);
 		}
 		if (id == "p2") {
-			controlador.solicitudAscensor(as[1], 1);
+			//Parche para que funcione en modelos con 1 y más ascensores
+			Ascensor a;
+			if (as.length > 1)
+				a = as[1];
+			else
+				a = as[0];
+			
+			controlador.solicitudAscensor(a, 1);
 			Helper.esperar(5);
-			controlador.solicitudAscensor(as[1], 3);
+			controlador.solicitudAscensor(a, 3);
 			Helper.esperar(1);
-			controlador.solicitudAscensor(as[1], 2);
-//			controlador.solicitudAscensor(as[0], 1);
-//			Helper.esperar(8);
-//			controlador.solicitudAscensor(as[0], 3);
-//			Helper.esperar(1);
-//			controlador.solicitudAscensor(as[0], 2);
+			controlador.solicitudAscensor(a, 2);
 		}
 		if (id == "pMatrix") {
 			controlador.solicitudPisoAbajo(2);
