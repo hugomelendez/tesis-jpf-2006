@@ -107,7 +107,8 @@ public class Coordinador {
 	 * (cada estado es una composición de los estados de la VM y los AFDs)
 	 */
 	private Hashtable<String, Integer> estadosVisitados;
-
+	private int cantidadRegistrosEstado;
+	
 	private Stack<State> stackCaminoPreambulo;
 	private Stack<State> stackCaminoAFD;
 
@@ -145,6 +146,7 @@ public class Coordinador {
 		listaAFDTrack = new LinkedList<AFDTrack>();
 		htClaseAFD = new Hashtable<String, TypeStatePropertyTemplate>();
 		estadoAnteriorJPF = -1;
+		cantidadRegistrosEstado = 0;
 	}
 	
 	
@@ -340,6 +342,9 @@ public class Coordinador {
 		estadoAnteriorJPF = estadoActualJPF();
 		
 //		escribirLog("----- STATE-ADVANCED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoCompuestoAsString() + "-----");
+		
+		//TODO: ver dónde conviene setear esto, es para ver realmente la cantidad de estados explorados
+		cantidadRegistrosEstado++;
 	}
 
 	public void setAfd(AutomataVerificacion afd) {
@@ -513,7 +518,8 @@ public class Coordinador {
 	}
 	
 	public void busquedaFinalizada() {
-		escribirLog("# estados: " + search.getVM().getStateSet().size());
+		escribirLog("# estados JVM: " + search.getVM().getStateSet().size());
+		escribirLog("# estados explorados (producción JVM*FWK): " + cantidadRegistrosEstado/*estadosVisitados.size()*/);
 		escribirLog("Fin Verificacion " + now());
 		escribirLog("************************************************");
 	}
