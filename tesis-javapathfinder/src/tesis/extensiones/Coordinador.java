@@ -178,18 +178,18 @@ public class Coordinador {
 		//Se evalúan los eventos, SI y SÓLO SI no está violada ninguna propiedad
 		if (!propiedadViolada()) {
 			if (!contexto.invalido() && e.esObservable()) {
-				escribirLog(e);
+//				escribirLog(e);
 				if (modo == MODO_PREAMBULO) {
 					//MODO Preambulo
 					//Antes de avanzar el AFD, verifica que se haya cumplido el Contexto (Preambulo)
 					if (!contexto.cumplido()) {
 						contexto.consumir(e);
-						escribirLog(contexto);
+//						escribirLog(contexto);
 					}
 					else {
 						//Global Property
 						afdGlobalProperty.consumir(e);
-						escribirLog(afdGlobalProperty);
+//						escribirLog(afdGlobalProperty);
 
 						//TypeStateProperty/s
 						if (iOIDUltimaEjecucion != -1) {
@@ -198,7 +198,7 @@ public class Coordinador {
 								AFDTrack afdTrack = (AFDTrack) iterator.next();
 								if (afdTrack.activo() && afdTrack.oid()==iOIDUltimaEjecucion) {
 									afdTrack.afd().consumir(e);
-									escribirLog(afdTrack.afd());
+//									escribirLog(afdTrack.afd());
 								}
 							}
 							iOIDUltimaEjecucion = -1;
@@ -209,11 +209,11 @@ public class Coordinador {
 					//MODO Contexto Busqueda
 					//Avanza el Contexto y el AFD en paralelo
 					contexto.consumir(e);
-					escribirLog(contexto);
+//					escribirLog(contexto);
 	
 					//Global Property
 					afdGlobalProperty.consumir(e);
-					escribirLog(afdGlobalProperty);
+//					escribirLog(afdGlobalProperty);
 	
 					//TypeStateProperty/s
 					if (iOIDUltimaEjecucion != -1) {
@@ -222,7 +222,7 @@ public class Coordinador {
 							AFDTrack afdTrack = (AFDTrack) iterator.next();
 							if (afdTrack.activo() && afdTrack.oid()==iOIDUltimaEjecucion) {
 								afdTrack.afd().consumir(e);
-								escribirLog(afdTrack.afd());
+//								escribirLog(afdTrack.afd());
 							}
 						}
 						iOIDUltimaEjecucion = -1;
@@ -308,7 +308,7 @@ public class Coordinador {
 		}
 		
 		estadoAnteriorJPF = estadoActualJPF();
-		escribirLog("----- STATE-BACKTRACKED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoCompuestoAsString() + "-----");
+//		escribirLog("----- STATE-BACKTRACKED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoCompuestoAsString() + "-----");
 	}
 
 	/**
@@ -339,7 +339,7 @@ public class Coordinador {
 		}
 		estadoAnteriorJPF = estadoActualJPF();
 		
-		escribirLog("----- STATE-ADVANCED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoCompuestoAsString() + "-----");
+//		escribirLog("----- STATE-ADVANCED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoCompuestoAsString() + "-----");
 	}
 
 	public void setAfd(AutomataVerificacion afd) {
@@ -380,7 +380,7 @@ public class Coordinador {
 				listaAFDTrack.add(afdTrack);
 
 				if (cant<1) {
-					escribirLog("OBJETO CREADO. Type=" + vm.getLastElementInfo().getClassInfo().getName() + ", OID=" + oid);
+//					escribirLog("OBJETO CREADO. Type=" + vm.getLastElementInfo().getClassInfo().getName() + ", OID=" + oid);
 				}
 				cant++;
 			}
@@ -429,7 +429,7 @@ public class Coordinador {
 			if (afdTrack.oid()==iOID && afdTrack.activo()) {
 				afdTrack.desactivar();
 				afdTrack.liberadoEstadoDesde(estadoActualJPF());
-				escribirLog("OBJETO LIBERADO. OID=" + iOID);
+//				escribirLog("OBJETO LIBERADO. OID=" + iOID);
 			}
 		}
 	}
@@ -580,20 +580,20 @@ public class Coordinador {
 	}
 
 	public void escribirLog(Evento e) {
-		escribirLog("EVENTO: " + e.label());
+//		escribirLog("EVENTO: " + e.label());
 	}
 
 	public void escribirLog(AutomataVerificacion a) {
-		escribirLog("\t" + a.getType() + ": " + a.getEstadoAnterior() + " -> " + a.getEstadoActual());
+//		escribirLog("\t" + a.getType() + ": " + a.getEstadoAnterior() + " -> " + a.getEstadoActual());
 		if (a.estadoFinal()) {
-			escribirLog("Propiedad violada en " + a.getType());
+//			escribirLog("Propiedad violada en " + a.getType());
 		}
 	}
 
 	public void escribirLog(ContextoBusqueda c) {
-		escribirLog("\tContextSearch: " + c.getEstadoAnterior() + " -> " + c.getEstadoActual());
+//		escribirLog("\tContextSearch: " + c.getEstadoAnterior() + " -> " + c.getEstadoActual());
 		if (c.invalido()) {
-			escribirLog("Estado invalido invalido en ContextSearch");
+//			escribirLog("Estado invalido invalido en ContextSearch");
 		}
 	}
 
