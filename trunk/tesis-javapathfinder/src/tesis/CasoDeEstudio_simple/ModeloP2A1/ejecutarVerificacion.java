@@ -15,5 +15,8 @@ public class ejecutarVerificacion {
 
 		//Propiedad 13
 //		VerificationLauncher.execute("./src/tesis/CasoDeEstudio_simple/propiedad13/", "tesis.CasoDeEstudio_simple.ModeloP2A1.ModeloPropiedad13", true);
+
+		//Verificacion solo JPF
+		VerificationLauncher.execute("tesis.CasoDeEstudio_simple.ModeloP2A1.Modelo");
 	}
 }
