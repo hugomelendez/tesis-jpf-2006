@@ -1,12 +1,12 @@
 package tesis.CasoDeEstudio_simple;
 
-class Persona implements Runnable {
+public class Persona implements Runnable {
 	private String id;
 	private String tabifier;
 	private ControladorAscensor controlador;
-	private ModeloV2 modelo;
+	private Modelo modelo;
 	
-	Persona (String id) {
+	public Persona (String id) {
 		this.id = id;
 	}
 
@@ -18,7 +18,7 @@ class Persona implements Runnable {
 	 * Vinculamos el monitor a la persona para sincronizar la finalizacion de la ejecucion
 	 * @param modelo
 	 */
-	public void modelo(ModeloV2 modelo) {
+	public void modelo(Modelo modelo) {
 		this.modelo = modelo;
 	}
 

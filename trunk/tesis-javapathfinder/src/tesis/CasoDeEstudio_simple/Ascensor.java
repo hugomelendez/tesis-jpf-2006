@@ -9,7 +9,7 @@ package tesis.CasoDeEstudio_simple;
  * 
  * @author Roberto
  */
-class Ascensor implements Runnable {
+public class Ascensor implements Runnable {
 	ControladorAscensor controladorAscensor;
 	private String id;
 	private int direccion;
@@ -19,7 +19,7 @@ class Ascensor implements Runnable {
 	private int piso; 
 	private Boolean terminar;
 	
-	Ascensor (String id) {
+	public Ascensor (String id) {
 		terminar = false;
 		this.id = id;
 		puerta = 1;

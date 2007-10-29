@@ -5,7 +5,7 @@ package tesis.CasoDeEstudio_simple;
  *  
  * @author Roberto
  */
-class ControladorAscensorPropiedad13 extends ControladorAscensor {
+public class ControladorAscensorPropiedad13 extends ControladorAscensor {
 	public ControladorAscensorPropiedad13(Ascensor[] a) {
 		super(a);
 	}
