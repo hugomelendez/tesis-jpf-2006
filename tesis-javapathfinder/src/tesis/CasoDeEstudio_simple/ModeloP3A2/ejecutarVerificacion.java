@@ -13,7 +13,7 @@ public class ejecutarVerificacion {
 		//Propiedad 3
 //		VerificationLauncher.execute("./src/tesis/CasoDeEstudio_simple/propiedad3/", "tesis.CasoDeEstudio_simple.ModeloP3A2.Modelo", true);
 
-		//Propiedad 13
+		//Propiedad 4
 		//Esta propiedad sólo funciona para 1 ASCENSOR!
 
 		// Verificacion solo JPF

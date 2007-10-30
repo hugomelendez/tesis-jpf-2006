@@ -13,10 +13,13 @@ public class ejecutarVerificacion {
 		//Propiedad 3
 //		VerificationLauncher.execute("./src/tesis/CasoDeEstudio_simple/propiedad3/", "tesis.CasoDeEstudio_simple.ModeloP1A1.Modelo", true);
 
-		//Propiedad 13
-//		VerificationLauncher.execute("./src/tesis/CasoDeEstudio_simple/propiedad13/", "tesis.CasoDeEstudio_simple.ModeloP1A1.ModeloPropiedad13", true);
+		//Propiedad 4
+//		VerificationLauncher.execute("./src/tesis/CasoDeEstudio_simple/propiedad4/", "tesis.CasoDeEstudio_simple.ModeloP1A1.ModeloPropiedad4", true);
+
+		//Propiedad 5
+		VerificationLauncher.execute("./src/tesis/CasoDeEstudio_simple/propiedad5/", "tesis.CasoDeEstudio_simple.ModeloP1A1.ModeloPropiedad5", true);
 
 		//Verificacion solo JPF
-		VerificationLauncher.execute("tesis.CasoDeEstudio_simple.ModeloP1A1.Modelo");
+//		VerificationLauncher.execute("tesis.CasoDeEstudio_simple.ModeloP1A1.Modelo");
 	}
 }

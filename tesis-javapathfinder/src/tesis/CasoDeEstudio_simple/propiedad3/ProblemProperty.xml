@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
-	<GlobalProperty >
+	<TypeStateProperty class="tesis.CasoDeEstudio_simple.Ascensor">
 	    <states>
 	        <state label="inicial" start="true" />
 	        <state label="detenido" />
@@ -17,5 +17,5 @@
 	        <transition from="detenido" to="ERROR" labelEvent="bajar" />
 	        <transition from="detenido" to="ERROR" labelEvent="detenerse" />
 	    </transitions>
-	</GlobalProperty>
+	</TypeStateProperty>
 </ProblemDefinition>

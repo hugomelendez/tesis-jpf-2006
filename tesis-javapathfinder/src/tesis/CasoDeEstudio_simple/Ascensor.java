@@ -69,9 +69,17 @@ public class Ascensor implements Runnable {
 			Helper.esperar(1);
 			synchronized (this) {
 				piso += (estaSubiendo()?1:-1);
-				controladorAscensor.estoyEn(this, piso);
+				estoyEn(piso);
 			}
 		}
+	}
+
+	/**
+	 * Helper para wrapear el aviso de que cambie de piso al controlador y de paso lo puedo capturar como evento propio 
+	 * @param piso
+	 */
+	private void estoyEn (int piso) {
+		controladorAscensor.estoyEn(this, piso);
 	}
 
 	/**
