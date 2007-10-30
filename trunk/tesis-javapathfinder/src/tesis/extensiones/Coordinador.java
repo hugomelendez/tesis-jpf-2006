@@ -4,15 +4,15 @@ import gov.nasa.jpf.jvm.JVM;
 import gov.nasa.jpf.jvm.bytecode.INVOKEVIRTUAL;
 import gov.nasa.jpf.jvm.bytecode.Instruction;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Stack;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.*;
 
 /**
  * Contiene la tupla de objetos necesarios para la adminitración de los AFD TypeState
@@ -159,14 +159,14 @@ public class Coordinador {
 	 */
 	public boolean propiedadViolada() {
 		boolean res = false;
-		
+
 		//Se recorren todos los AFDs para ver si hay alguno violado (no importa si está activo o no,
 		//porque hay que mostrar la VIOLACION por más que se haya eliminado el objeto asociado)
 		for (Iterator<AFDTrack> iterator = listaAFDTrack.iterator(); iterator.hasNext() && !res;) {
 			AFDTrack afdTrack = (AFDTrack) iterator.next();
 			res = afdTrack.afd().estadoFinal();
 		}
-		
+
 		return afdGlobalProperty.estadoFinal() || res;
 	}
 
@@ -340,11 +340,14 @@ public class Coordinador {
 			stkAfd.push(afdTrack.afd().getEstadoActual());
 		}
 		estadoAnteriorJPF = estadoActualJPF();
-		
+
 //		escribirLog("----- STATE-ADVANCED (CTX;JVM;AFDs) " + contexto.getEstadoActual() +  ";" + this.estadoCompuestoAsString() + "-----");
-		
+
 		//TODO: ver dónde conviene setear esto, es para ver realmente la cantidad de estados explorados
 		cantidadRegistrosEstado++;
+
+		// imprimimos el progreso
+		progressBar();
 	}
 
 	public void setAfd(AutomataVerificacion afd) {
@@ -514,7 +517,7 @@ public class Coordinador {
 
 	public void busquedaIniciada() {
 		escribirLog("************************************************");
-		escribirLog("Inicio Verificaciï¿½n " + now());
+		escribirLog("Inicio Verificación " + now());
 	}
 	
 	public void busquedaFinalizada() {
@@ -586,20 +589,20 @@ public class Coordinador {
 	}
 
 	public void escribirLog(Evento e) {
-//		escribirLog("EVENTO: " + e.label());
+		escribirLog("EVENTO: " + e.label());
 	}
 
 	public void escribirLog(AutomataVerificacion a) {
-//		escribirLog("\t" + a.getType() + ": " + a.getEstadoAnterior() + " -> " + a.getEstadoActual());
+		escribirLog("\t" + a.getType() + ": " + a.getEstadoAnterior() + " -> " + a.getEstadoActual());
 		if (a.estadoFinal()) {
-//			escribirLog("Propiedad violada en " + a.getType());
+			escribirLog("Propiedad violada en " + a.getType());
 		}
 	}
 
 	public void escribirLog(ContextoBusqueda c) {
-//		escribirLog("\tContextSearch: " + c.getEstadoAnterior() + " -> " + c.getEstadoActual());
+		escribirLog("\tContextSearch: " + c.getEstadoAnterior() + " -> " + c.getEstadoActual());
 		if (c.invalido()) {
-//			escribirLog("Estado invalido invalido en ContextSearch");
+			escribirLog("Estado invalido invalido en ContextSearch");
 		}
 	}
 
@@ -613,4 +616,12 @@ public class Coordinador {
 		return (dateFormat.format(date));
 	}
 
+	/**
+	 * imprimimos cada cierta cantidad de estados como vamos
+	 *
+	 */
+	private void progressBar() {
+		if (search.getVM().getStateSet().size() % 1000 == 0)
+			escribirLog("Progress: #estados " + search.getVM().getStateSet().size());
+	}
 }
