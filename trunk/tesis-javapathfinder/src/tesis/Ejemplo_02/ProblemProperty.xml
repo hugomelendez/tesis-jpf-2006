@@ -12,6 +12,29 @@
 	        <transition from="1" to="2" labelEvent="A" />
 	        <transition from="2" to="3" labelEvent="C" />
 	        <transition from="3" to="ERROR" labelEvent="B" />
+<!--			<transition from="1" to="A" labelEvent="A" />
+	        <transition from="A" to="AB" labelEvent="B" />
+	        <transition from="AB" to="ABC" labelEvent="C" />
+
+			<transition from="1" to="A" labelEvent="A" />
+	        <transition from="A" to="AC" labelEvent="C" />
+	        <transition from="AC" to="ACB" labelEvent="B" />
+
+			<transition from="1" to="B" labelEvent="B" />
+	        <transition from="B" to="BA" labelEvent="A" />
+	        <transition from="BA" to="BAC" labelEvent="C" />
+
+			<transition from="1" to="B" labelEvent="B" />
+	        <transition from="B" to="BC" labelEvent="C" />
+	        <transition from="BC" to="BCA" labelEvent="A" />
+
+			<transition from="1" to="C" labelEvent="C" />
+	        <transition from="C" to="CA" labelEvent="A" />
+	        <transition from="CA" to="CAB" labelEvent="B" />
+
+			<transition from="1" to="C" labelEvent="C" />
+	        <transition from="C" to="CB" labelEvent="B" />
+	        <transition from="CB" to="CBA" labelEvent="A" />-->
 	    </transitions>
 	</GlobalProperty>
 </ProblemDefinition>
