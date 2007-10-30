@@ -14,21 +14,21 @@
 	        <transition from="2" to="3" labelEvent="runPersona" />
 			<!-- una vez que esten todas los threads arrancados nos quedamos en un rulo
 			salimos solo por terminoPersona -->
-
-		    <transition from="3" to="4" labelEvent="solicitudAscensorPiso4" />
-	        <transition from="4" to="5" labelEvent="subir" />
-
-	        <transition from="5" to="5" labelEvent="bajar" />
-		    <transition from="5" to="5" labelEvent="continuarBajar" />
-
-<!--
 		    <transition from="3" to="3" labelEvent="subir" />
 		    <transition from="3" to="3" labelEvent="bajar" />
 		    <transition from="3" to="3" labelEvent="continuarSubir" />
 		    <transition from="3" to="3" labelEvent="continuarBajar" />
 		    <transition from="3" to="3" labelEvent="solicitudAscensorPiso4" />
 		    <transition from="3" to="3" labelEvent="atenderSolicitudPiso4" />
--->	
+
+<!-- Los eventos a continuación, se utilizan como versión mejorada del contexto
+(para detectar muy rápido la propiedad)  -->
+<!-- 	    
+			<transition from="3" to="4" labelEvent="solicitudAscensorPiso4" />
+	        <transition from="4" to="5" labelEvent="subir" />
+	        <transition from="5" to="5" labelEvent="bajar" />
+		    <transition from="5" to="5" labelEvent="continuarBajar" />
+-->
 	    </transitions>
 	</SearchContext>
 </ProblemDefinition>
