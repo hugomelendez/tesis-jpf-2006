@@ -2,10 +2,10 @@ package tesis.CasoDeEstudio_simple.ModeloP1A1;
 
 import tesis.CasoDeEstudio_simple.*;
 
-class ModeloPropiedad13 extends Modelo {
+class ModeloPropiedad5 extends Modelo {
 
 	public static void main(String[] args) {
-		ModeloPropiedad13 m = new ModeloPropiedad13();
+		ModeloPropiedad5 m = new ModeloPropiedad5();
 
 		Ascensor a1 = new Ascensor("a1");
 		Thread tA1 = new Thread(a1);
@@ -13,7 +13,7 @@ class ModeloPropiedad13 extends Modelo {
 		Ascensor[] ascensores = new Ascensor[Modelo.CANT_ASCENSORES];
 		ascensores[0] = a1;
 
-		ControladorAscensorPropiedad13 ca = new ControladorAscensorPropiedad13(ascensores);
+		ControladorAscensorPropiedad5 ca = new ControladorAscensorPropiedad5(ascensores);
 		Thread tCA = new Thread(ca);
 
 		Persona p1 = new Persona("p1");

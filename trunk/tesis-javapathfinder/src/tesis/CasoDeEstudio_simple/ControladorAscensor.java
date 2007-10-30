@@ -14,7 +14,7 @@ public class ControladorAscensor implements Runnable {
 	private Object miMonitor;
 	
 	// Altura del "edificio"
-	private final static int ALTURA = 4;
+	protected final static int ALTURA = 4;
 	private Ascensor[] ascensores;
 
 	// Solicitudes de un ascensor
@@ -183,7 +183,7 @@ public class ControladorAscensor implements Runnable {
 	 * @param a
 	 * @param piso
 	 */
-	private void atenderSolicitudPiso(Ascensor a, int piso) {
+	protected void atenderSolicitudPiso(Ascensor a, int piso) {
 		//msgs("atenderSolicitudPiso " + a + " en piso " + piso);
 		a.detenerse();
 		a.abrirPuertas();
@@ -213,7 +213,7 @@ public class ControladorAscensor implements Runnable {
 			atenderSolicitudPiso(a, piso);
 
 			/**
-			 * Finalizado el atender solicitudes, se revisa si el ascensor debe continuar su viaje
+			 * Finalizado el atender solicitud, se revisa si el ascensor debe continuar su viaje
 			 * Si no existen solicitudes en la direccion que tenia o la contraria, 
 			 * no es necesario <code>detener</code> al Ascensor pq ya esta parado
 			 */
@@ -253,7 +253,7 @@ public class ControladorAscensor implements Runnable {
 	 * @param piso desde donde empezamos a revisar
 	 * @return
 	 */
-	private boolean haySolicitudAbajo(Ascensor a, int piso) {
+	protected boolean haySolicitudAbajo(Ascensor a, int piso) {
 		Boolean[] s = solicitudesPorAscensor(a);
 		Boolean ret = false;
 		for (int i=piso; i>=0 && !ret;i--) {
@@ -268,7 +268,7 @@ public class ControladorAscensor implements Runnable {
 	 * @param piso desde donde empezamos a revisar
 	 * @return
 	 */
-	private boolean haySolicitudArriba(Ascensor a, int piso) {
+	protected boolean haySolicitudArriba(Ascensor a, int piso) {
 		Boolean[] s = solicitudesPorAscensor(a);
 		Boolean ret = false;
 		for (int i=piso; i<=ALTURA && !ret;i++) {
@@ -276,7 +276,7 @@ public class ControladorAscensor implements Runnable {
 		}
 		return ret;
 	}
-	private Boolean haySolicitudEn(Ascensor a, int piso) {
+	protected Boolean haySolicitudEn(Ascensor a, int piso) {
 		return (solicitudesPorAscensor(a))[piso];
 	}
 

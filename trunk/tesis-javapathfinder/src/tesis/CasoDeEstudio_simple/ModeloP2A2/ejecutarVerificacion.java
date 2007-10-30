@@ -8,15 +8,15 @@ public class ejecutarVerificacion {
 //		VerificationLauncher.execute("./src/tesis/CasoDeEstudio_simple/propiedad1/", "tesis.CasoDeEstudio_simple.ModeloP2A2.Modelo", true);
 
 		//Propiedad 2
-//		VerificationLauncher.execute("./src/tesis/CasoDeEstudio_simple/propiedad2/", "tesis.CasoDeEstudio_simple.ModeloP2A2.Modelo", true);
+		VerificationLauncher.execute("./src/tesis/CasoDeEstudio_simple/propiedad2/", "tesis.CasoDeEstudio_simple.ModeloP2A2.Modelo", true);
 
 		//Propiedad 3
 //		VerificationLauncher.execute("./src/tesis/CasoDeEstudio_simple/propiedad3/", "tesis.CasoDeEstudio_simple.ModeloP2A2.Modelo", true);
 
-		//Propiedad 13
+		//Propiedad 4
 		//Esta propiedad sólo funciona para 1 ASCENSOR!
 
 		// Verificacion solo JPF
-		VerificationLauncher.execute("tesis.CasoDeEstudio_simple.ModeloP2A2.Modelo");
+//		VerificationLauncher.execute("tesis.CasoDeEstudio_simple.ModeloP2A2.Modelo");
 	}
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<ProblemDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ProblemDefinition.xsd">
+	<GlobalProperty>
+	    <states>
+	        <state label="1" start="true" />
+	        <state label="2" />
+	        <state label="3" />
+	        <state label="4" />
+	        <state label="NO_FALLO" />
+	        <state label="ERROR" final="true" />
+	    </states>
+		<!--
+		Llegan solicitudes al piso 4 comienza a subir, pasa por el 1 y luego llega solic piso 1
+		llega una solic al piso 2, el ascensor deberia llegar, atender y luego no deberia bajar (para atender 1) sino 
+		seguir hasta el 4to piso, atender, y luego bajar
+		-->
+	    <transitions>
+	        <transition from="1" to="2" labelEvent="solicitudAscensorPiso4" />
+	        <transition from="2" to="3" labelEvent="subir" />
+
+			<!-- si habiendo recibido las 3 solicitudes igual llega al piso 4 primero, no nos interesa seguir investigando este camino -->
+	        <transition from="3" to="NO_FALLO" labelEvent="atenderSolicitudPiso4" />
+
+	        <transition from="3" to="ERROR" labelEvent="continuarBajar" />
+	        <transition from="3" to="ERROR" labelEvent="bajar" />
+	    </transitions>
+	</GlobalProperty>
+</ProblemDefinition>
