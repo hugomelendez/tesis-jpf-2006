@@ -8,13 +8,13 @@ public class ejecutarVerificacion {
 //		VerificationLauncher.execute("./src/tesis/CasoDeEstudio_simple/propiedad1/", "tesis.CasoDeEstudio_simple.ModeloP2A1.Modelo", true);
 
 		//Propiedad 2
-		VerificationLauncher.execute("./src/tesis/CasoDeEstudio_simple/propiedad2/", "tesis.CasoDeEstudio_simple.ModeloP2A1.Modelo", true);
+//		VerificationLauncher.execute("./src/tesis/CasoDeEstudio_simple/propiedad2/", "tesis.CasoDeEstudio_simple.ModeloP2A1.Modelo", true);
 
 		//Propiedad 3
 //		VerificationLauncher.execute("./src/tesis/CasoDeEstudio_simple/propiedad3/", "tesis.CasoDeEstudio_simple.ModeloP2A1.Modelo", true);
 
 		//Propiedad 4
-//		VerificationLauncher.execute("./src/tesis/CasoDeEstudio_simple/propiedad4/", "tesis.CasoDeEstudio_simple.ModeloP2A1.ModeloPropiedad4", true);
+		VerificationLauncher.execute("./src/tesis/CasoDeEstudio_simple/propiedad4/", "tesis.CasoDeEstudio_simple.ModeloP2A1.ModeloPropiedad4", true);
 
 		//Propiedad 5
 //		VerificationLauncher.execute("./src/tesis/CasoDeEstudio_simple/propiedad5/", "tesis.CasoDeEstudio_simple.ModeloP2A1.ModeloPropiedad5", true);

@@ -21,6 +21,11 @@
 	        <transition from="3" to="3" labelEvent="cerrarPuertas" />
 	        <transition from="3" to="3" labelEvent="subir" />
 	        <transition from="3" to="3" labelEvent="bajar" />
+
+			<!-- 
+			RS: agregado para soportar múltiples modelos (con más de 1 persona)
+			-->
+	        <transition from="3" to="3" labelEvent="runPersona" />
 	    </transitions>
 	</SearchContext>
 </ProblemDefinition>
