@@ -13,13 +13,16 @@
 	        <transition from="1" to="2" labelEvent="runControlador" />
 	        <transition from="2" to="3" labelEvent="runPersona" />
 			<!-- una vez que esten todas los threads arrancados nos quedamos en un rulo
-			salimos solo por terminoPersona -->
+			salimos solo por terminoPersona y atenderSolicitudPiso4 -->
 		    <transition from="3" to="3" labelEvent="subir" />
 		    <transition from="3" to="3" labelEvent="bajar" />
 		    <transition from="3" to="3" labelEvent="continuarSubir" />
 		    <transition from="3" to="3" labelEvent="continuarBajar" />
 		    <transition from="3" to="3" labelEvent="solicitudAscensorPiso4" />
-		    <transition from="3" to="3" labelEvent="atenderSolicitudPiso4" />
+			<!-- 
+			RS: agregado para soportar múltiples modelos (con más de 1 persona)
+			-->
+	        <transition from="3" to="3" labelEvent="runPersona" />
 
 <!-- Los eventos a continuación, se utilizan como versión mejorada del contexto
 (para detectar muy rápido la propiedad)  -->
