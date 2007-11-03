@@ -621,7 +621,8 @@ public class Coordinador {
 	 *
 	 */
 	private void progressBar() {
-		if (search.getVM().getStateSet().size() % 1000 == 0)
-			escribirLog("Progress: #estados " + search.getVM().getStateSet().size());
+		if (search.getVM().getStateSet().size() % 5000 == 0) { 
+			escribirLog("Progress: #estados " + search.getVM().getStateSet().size() + ", # estados explorados (producción JVM*FWK): " + cantidadRegistrosEstado);
+		}		
 	}
 }
